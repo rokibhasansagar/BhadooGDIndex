@@ -1,5 +1,16 @@
-# BhadooDriveIndex
+# Google Personal/Shared Drive Index
 
-CDN Source at https://www.jsdelivr.com/package/gh/ParveenBhadooOfficial/BhadooDriveIndex
+* Supports Both My and Team Drives
+* Upload Function
+* Demo at https://googledri.ve.workers.dev
+* Lite Demo at https://litedri.ve.workers.dev
 
-Original Repo at https://github.com/maple3142/GDIndex
+## How to
+
+* Open https://codedri.ve.workers.dev
+* Authenticate
+* For Team Drive Add Folder ID instead of root
+* Copy and Paste Code in Cloudflare Workers.
+* Done
+
+Source: https://github.com/maple3142/GDIndex
