@@ -6,7 +6,6 @@
     width: 100%;
     background: white;
     z-index: 100000;
-    background-color: transparent;
     border-top: 1px solid lightgray;
     padding-top: 5px;
 }
