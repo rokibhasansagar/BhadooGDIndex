@@ -14,4 +14,8 @@
 * Copy and Paste Code in Cloudflare Workers.
 * Done.
 
-Source: https://github.com/maple3142/GDIndex
+## Credits
+
+* Source: [maple3142](https://github.com/maple3142/GDIndex)
+* Search Function: [MakItWeb](https://makitweb.com/jquery-search-text-in-the-element-with-contains-selector/)
+* Search Base: [w3Schools](https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_filter_list)
