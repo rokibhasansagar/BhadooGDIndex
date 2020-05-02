@@ -442,8 +442,7 @@ self.props = {
   }
 
   const gd = new GoogleDrive(self.props);
-  const HTML = `<!DOCTYPE html><html lang=en><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><title>${self.props.title}</title><link href="/~_~_gdindex/resources/css/app.css" rel=stylesheet><link rel="apple-touch-icon" sizes="180x180" href="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/BhadooJS@1.0.9/icons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/BhadooJS@1.0.9/icons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/BhadooJS@1.0.9/icons/favicon-16x16.png"> <link rel="mask-icon" href="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/BhadooJS@1.0.9/icons/safari-pinned-tab.svg" color="#5bbad5"></head><body><script>window.props = { title: '${self.props.title}', default_root_id: '${self.props.default_root_id}', api: location.protocol + '//' + location.host, upload: ${self.props.upload} }<\/script><div id=app></div><script src="/~_~_gdindex/resources/js/app.js"><\/script></body></html>`;
-
+  const HTML = `<!DOCTYPE html><html lang=en><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><title>${self.props.title}</title><link href="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/BhadooDriveIndex/web/src/assets/favicon.ico" rel="icon" type="image/png"><link href="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/BhadooDriveIndex/web/dist/css/app.css" rel=stylesheet><link href="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/BhadooDriveIndex/web/src/search.css"  rel=stylesheet><script src='https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js' type='text/javascript'></script><script>$(document).ready(function(){ $('#search').keyup(function(){ var text = $(this).val(); $('.v-list-item').hide(); $('.v-list-item:contains("'+text+'")').closest('.v-list-item').show(); }); }); $.expr[":"].contains = $.expr.createPseudo(function(arg) { return function( elem ) { return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0; }; });</script></head><body><script>window.props = { title: '${self.props.title}', default_root_id: '${self.props.default_root_id}', api: location.protocol + '//' + location.host, upload: ${self.props.upload} }<\/script><div id=app></div><script src="//cdn.jsdelivr.net/gh/ParveenBhadooOfficial/BhadooDriveIndex/web/dist/js/app.js"><\/script><div class="drive-index-footer"> <center> <div class='container'> <div> <input type='text' id='search' placeholder='Search After Complete Loading'></div></center></div></body></html>`; 
   async function onGet(request) {
     let {
       pathname: path
@@ -645,7 +644,7 @@ self.props = {
       for (const f of files) {
         const isf = f.mimeType === 'application/vnd.google-apps.folder';
         const p = encodePathComponent(path + f.name);
-        fileht += `<li><a href="${p + (isf ? '/' : '')}">${f.name}</a></li>`;
+        fileht += `<li><a href="${p + (isf ? '/' : '')}">${f.name}</a></li><br>`;
       }
 
       const ht = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
@@ -656,7 +655,7 @@ self.props = {
 <body>
 <h1>Index of ${path}</h1>
 <ul>
-<li><a href="${parent}"> Parent Directory</a></li>
+<li><a href="${parent}"> Parent Directory</a></li><br>
 ${fileht}
 </ul>
 </body>
