@@ -4,6 +4,11 @@
     padding-top: 5px;
 }
 
+.drive-inde-footer-close {
+    float: right;
+    padding-right: 5px;
+}
+
 .drive-index-footer {
     position: fixed;
     left: 0px;
