@@ -1,13 +1,17 @@
+.drive-index-footer-desktop {
+    background-color: transparent;
+    border-top: 1px solid lightgray;
+    padding-top: 5px;
+}
+
 .drive-index-footer {
     position: fixed;
     left: 0px;
     bottom: 0px;
-    height: 70px;
+    height: 100px;
     width: 100%;
     background: white;
     z-index: 100000;
-    border-top: 1px solid lightgray;
-    padding-top: 5px;
 }
 
 #search {
