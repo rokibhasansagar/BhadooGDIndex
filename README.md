@@ -9,10 +9,21 @@
 ## How to
 
 * Open https://codedri.ve.workers.dev
-* Authenticate.
-* For Team Drive Add Folder ID instead of root.
-* Copy and Paste Code in Cloudflare Workers.
-* Done.
+* If you want to deploy main drive leave the option ROOT as it is.
+* If you want to deploy your Team Drive/Shared Drive/Folder then copy the ID and replace it with ROOT.
+* Eg. if you open [this shared drive](https://drive.google.com/drive/u/0/folders/0AOM2i7MQiuWIUk9PVA) 0AOM2i7MQiuWIUk9PVA is its ID.
+* Authenticate and copy the code from Google and paste it into Authorization Code Box.
+* Click on Get Code to Generate Code and Copy it for later use.
+* Now Create Cloudflare account and verify email or login with existing account.
+* Find Workers and Open it.
+* Create your sub-domain or continue if already done.
+* Select the Free Plan.
+* Click on Create a Worker.
+* You can rename the workers at top of the page.
+* Now paste the code you copied before.
+* Click on Save and Deploy.
+* Done. (May take time for some users due to new account or cache issues)
+* [Watch Video](https://www.youtube.com/watch?v=8WMddzVX1Dw&feature=youtu.be)
 
 ## Credits
 
