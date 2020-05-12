@@ -6,7 +6,7 @@
 * Demo at https://googledri.ve.workers.dev
 * Lite Demo at https://litedri.ve.workers.dev
 * GoIndex Demo is at https://one.driveindex.ga
-* Code that should be deployed is [here](https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index/tree/master/worker/dist)
+* Code that should be deployed is [here](https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index/tree/master/worker/dist) where `worker.js` can be for small number of items and `goindex.js` is advanced and better.
 
 ## How to
 
@@ -30,5 +30,6 @@
 ## Credits
 
 * Source: [maple3142](https://github.com/maple3142/GDIndex)
+* Source: [yanzai](https://github.com/yanzai/goindex)
 * Search Function: [MakItWeb](https://makitweb.com/jquery-search-text-in-the-element-with-contains-selector/)
 * Search Base: [w3Schools](https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_filter_list)
