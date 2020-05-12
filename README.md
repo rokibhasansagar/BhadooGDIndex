@@ -5,6 +5,8 @@
 * Search Function based on jQuery.
 * Demo at https://googledri.ve.workers.dev
 * Lite Demo at https://litedri.ve.workers.dev
+* GoIndex Demo is at https://one.driveindex.ga
+* Code that should be deployed is [here](https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index/tree/master/worker/dist)
 
 ## How to
 
