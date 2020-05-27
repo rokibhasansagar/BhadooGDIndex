@@ -1,5 +1,5 @@
 const authConfig = {
-  "siteName": "GoIndex", // Website name
+  "siteName": "Bhadoo Cloud GoIndex", // Website name
   "version": "1.1", // Program Version. Users do not modify manually
   /*"client_id": "202264815644.apps.googleusercontent.com",
   "client_secret": "X4Z3ca8xfWDb1Voo-F9a7ZxJ",*/
@@ -131,6 +131,7 @@ function html(current_drive_order = 0, model = {}) {
   </script>
   <script src="//cdn.jsdelivr.net/combine/gh/jquery/jquery@3.2/dist/jquery.min.js,gh/ParveenBhadooOfficial/Bhadoo-Drive-Index@${authConfig.version}/web/dist/js/goindex-app.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/mdui/0.4.3/js/mdui.min.js"></script>
+  <style>.mdui-textfield-input { color: white; }</style>
 </head>
 <body>
 </body>
