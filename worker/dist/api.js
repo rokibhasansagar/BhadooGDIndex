@@ -111,6 +111,7 @@ function html(current_drive_order = 0, model = {}) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
   <title>${authConfig.siteName}</title>
+  <link rel="icon" type="image/x-icon" href="https://www.cloudflare.com/favicon.ico"/>
   <script>
     window.drive_names = JSON.parse('${JSON.stringify(authConfig.roots.map(it => it.name))}');
     window.MODEL = JSON.parse('${JSON.stringify(model)}');
