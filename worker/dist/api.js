@@ -1,11 +1,8 @@
 const authConfig = {
   "siteName": "Bhadoo Cloud GoIndex", // Website name
   "version": "1.1", // Program Version. Users do not modify manually
-  /*"client_id": "202264815644.apps.googleusercontent.com",
-  "client_secret": "X4Z3ca8xfWDb1Voo-F9a7ZxJ",*/
-  // [Note] It is strongly recommended to use your own client_id and client_secret
-  "client_id": "",
-  "client_secret": "",
+  "client_id": "58094879805-4654k2k5nqdid5bavft7fvea5u9po0t1.apps.googleusercontent.com",
+  "client_secret": "ZNPZ-vS6N9Zjsyb_sNMZmXHL",
   "refresh_token": "", // Authorize token
   /**
    * Set up multiple Drives to display; add multiples by format
