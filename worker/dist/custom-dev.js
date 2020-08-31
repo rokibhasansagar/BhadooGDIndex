@@ -1,6 +1,6 @@
 // Load the necessary static in the head and code from https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index
 document.write('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">');
-// markdown支持
+// copying code
 document.write('<script src="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/BhadooJS@1.0.10/js/copy-click-on-button-code.js" integrity="sha256-DN8Abv8u8YT3P4PCX9xXKK9agjfXnh8l96HDJrvfMdw=" crossorigin="anonymous"></script>');
 // add custome theme and darkmode
 if (UI.dark_mode) {
@@ -678,7 +678,7 @@ function file_video(path) {
   const content = `
   <div class="container"><br>
   <div class="card">
-  <div class="card-body">
+  <div class="card-body text-center">
   <video width="100%" height="auto" controls>
     <source src="${url}" type="video/mp4" />
     <source src="${url}" type="video/webm" />
@@ -697,7 +697,7 @@ function file_audio(path) {
   var content = `
   <div class="container"><br>
   <div class="card">
-  <div class="card-body">
+  <div class="card-body text-center">
   <audio controls>
     <source src="${url}" type="audio/ogg">
     <source src="${url}" type="audio/mpeg">
