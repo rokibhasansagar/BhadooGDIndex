@@ -111,7 +111,7 @@ function html(current_drive_order = 0, model = {}) {
     window.current_drive_order = ${current_drive_order};
     window.UI = JSON.parse('${JSON.stringify(uiConfig)}');
   </script>
-  <link rel="stylesheet" href="//raw.githubusercontent.com/ParveenBhadooOfficial/Bhadoo-Drive-Index/master/worker/dist/custom.csss">
+  <link rel="stylesheet" href="//raw.githubusercontent.com/ParveenBhadooOfficial/Bhadoo-Drive-Index/master/worker/dist/custom.css">
   <script src="//cdn.jsdelivr.net/combine/gh/jquery/jquery@3.2/dist/jquery.min.js"></script>
   <script src="//raw.githubusercontent.com/ParveenBhadooOfficial/Bhadoo-Drive-Index/master/worker/dist/custom-dev.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/mdui/0.4.3/js/mdui.min.js"></script>
