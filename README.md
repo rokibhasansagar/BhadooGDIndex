@@ -29,7 +29,6 @@
 * [Custom MDUI css](https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index/blob/master/worker/dist/custom.css) required for Model.
 * [Source of Design](https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index/blob/master/worker/dist/custom-dev.js)
 * Fork and Test and make Pull Request.
-* To be done: after searching something, the buttons aren't using ?a=view for files. (Bug)
 
 ## Credits
 
