@@ -34,5 +34,5 @@
 
 * Source: [maple3142](https://github.com/maple3142/GDIndex)
 * Source: [yanzai](https://github.com/yanzai/goindex)
-* New Design: [Bootstrap](https://get.bootstrap.com)
+* New Design: [Bootstrap](https://getbootstrap.com)
 * Cloudflare: Workers
