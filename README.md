@@ -8,7 +8,7 @@
 
 Select One from Below 3 Generators
 * Old and Obsolete - https://oldindexgenerator.driveindex.ga
-* Aplha Version - https://gdindexgenerator.driveindex.ga
+* Alpha Version - https://gdindexgenerator.driveindex.ga
 * Beta Version (Latest) - https://bhadooindexgenerator.driveindex.ga
 * If you want to deploy main drive leave the option ROOT as it is.
 * If you want to deploy your Team Drive/Shared Drive/Folder then copy the ID and replace it with ROOT.
@@ -35,5 +35,5 @@ Select One from Below 3 Generators
 
 ## Disclaimer
 
-* These Index's are written by someone else, possible by donva and maple3142.
+* These Index's are written by someone else, possibly by donva and maple3142.
 * Beta Version is redesigned using Bootstrap from Alpha Version by @ParveenBhadooOfficial.
