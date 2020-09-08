@@ -23,14 +23,7 @@ const authConfig = {
       user: "",
       pass: "",
       protect_file_link: false
-    }/**,
-        {
-            id: "example-commented",
-            name: "Two",
-			user: "",
-			pass: "",
-			protect_file_link: false
-        }*/
+    }
   ],
   /**
    * The number displayed on each page of the file list page. [Recommended setting value is between 100 and 1000];
