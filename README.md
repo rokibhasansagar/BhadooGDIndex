@@ -2,6 +2,8 @@
 
 * Supports Both My and Team/Shared Drives.
 
+[![](https://raw.githubusercontent.com/ParveenBhadooOfficial/Bhadoo-Drive-Index/master/images/beta-ss.PNG)](Bhadoo Drive Index Beta
+
 ## How to
 
 Select One from Below 3 Generators
