@@ -18,12 +18,18 @@ const authConfig = {
    */
   "roots": [
     {
-      id: "relace-with-current-id",
-      name: "One"
+      id: "root",
+      name: "One",
+      user: "",
+      pass: "",
+      protect_file_link: false
     }/**,
         {
             id: "example-commented",
-            name: "Two"
+            name: "Two",
+			user: "",
+			pass: "",
+			protect_file_link: false
         }*/
   ],
   /**
