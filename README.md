@@ -2,7 +2,7 @@
 
 * Supports Both My and Team/Shared Drives.
 
-[![](https://raw.githubusercontent.com/ParveenBhadooOfficial/Bhadoo-Drive-Index/master/images/beta-ss.PNG)](Bhadoo Drive Index Beta
+[![Screenshot](https://raw.githubusercontent.com/ParveenBhadooOfficial/Bhadoo-Drive-Index/master/images/beta-ss.PNG)](Bhadoo Drive Index Beta)
 
 ## How to
 
