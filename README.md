@@ -5,7 +5,7 @@
 ## How to
 
 Select One from Below 3 Generators
-* Old and Obsolute - https://oldindexgenerator.driveindex.ga
+* Old and Obsolete - https://oldindexgenerator.driveindex.ga
 * Aplha Version - https://gdindexgenerator.driveindex.ga
 * Beta Version (Latest) - https://bhadooindexgenerator.driveindex.ga
 
