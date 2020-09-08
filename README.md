@@ -8,7 +8,6 @@ Select One from Below 3 Generators
 * Old and Obsolete - https://oldindexgenerator.driveindex.ga
 * Aplha Version - https://gdindexgenerator.driveindex.ga
 * Beta Version (Latest) - https://bhadooindexgenerator.driveindex.ga
-
 * If you want to deploy main drive leave the option ROOT as it is.
 * If you want to deploy your Team Drive/Shared Drive/Folder then copy the ID and replace it with ROOT.
 * Eg. if you open [this shared drive](https://drive.google.com/drive/u/0/folders/0AOM2i7MQiuWIUk9PVA) 0AOM2i7MQiuWIUk9PVA is its ID.
@@ -31,3 +30,8 @@ Select One from Below 3 Generators
 * Source: [yanzai](https://github.com/yanzai/goindex)
 * New Design: [Bootstrap](https://getbootstrap.com)
 * Cloudflare: Workers
+
+## Disclaimer
+
+* These Index's are written by someone else, possible by donva and maple3142.
+* Beta Version is redesigned using Bootstrap from Alpha Version by @ParveenBhadooOfficial.
