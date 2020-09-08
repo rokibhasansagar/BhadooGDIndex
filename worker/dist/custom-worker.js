@@ -18,11 +18,11 @@ const authConfig = {
    */
   "roots": [
     {
-      id: "root",
-      name: "One",
-      user: "",
-      pass: "",
-      protect_file_link: false
+      "id": "root",
+      "name": "My Drive",
+      "user": "",
+      "pass": "",
+      "protect_file_link": false
     }
   ],
   /**
