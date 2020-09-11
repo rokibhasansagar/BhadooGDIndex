@@ -8,8 +8,8 @@
 
 Select One from Below 3 Generators
 * Old and Obsolete - https://oldindexgenerator.driveindex.ga
-* Alpha Version - https://gdindexgenerator.driveindex.ga
-* Beta Version (Latest) - https://bhadooindexgenerator.driveindex.ga
+* Alpha Version - https://gdindexgenerator.driveindex.ga (Dark Theme Available)
+* Beta Version (Latest) - https://bhadooindexgenerator.driveindex.ga (Dark Theme is in Testing, Coming soon)
 * If you want to deploy main drive leave the option ROOT as it is.
 * If you want to deploy your Team Drive/Shared Drive/Folder then copy the ID and replace it with ROOT.
 * Eg. if you open [this shared drive](https://drive.google.com/drive/u/0/folders/0AOM2i7MQiuWIUk9PVA) 0AOM2i7MQiuWIUk9PVA is its ID.
