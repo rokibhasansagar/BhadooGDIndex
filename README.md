@@ -1,5 +1,7 @@
 # Google Personal/Shared Drive Index
 
+# This Repo will be extensively updated shortly. Incase your already deployed sites starts showing errors or miss something like css or js, you can just regenerate code and replace your already created credentials.
+
 * Supports Both My and Team/Shared Drives.
 
 [![Screenshot](https://raw.githubusercontent.com/ParveenBhadooOfficial/Bhadoo-Drive-Index/master/images/beta-ss.PNG)](https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index)
