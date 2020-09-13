@@ -25,7 +25,7 @@
 * Done. (May take time for some users due to new account or cache issues)
 * [Watch Video](https://www.youtube.com/watch?v=8WMddzVX1Dw&feature=youtu.be)
 
-## Brand Customization
+## Brand Customization and Dark Mode
 
 * In Latest Release, you can rebrand the Index as per your needs.
 * Line 57 will help you select light or dark theme where false is light and true will be dark theme.
