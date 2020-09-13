@@ -52,7 +52,6 @@ const authConfig = {
  * web ui config
  */
 const uiConfig = {
-	// This version only supports material
 	"theme": "bhadoo_bootstrap", // Change doesn't works
 	"dark_mode": true, // Please select above theme before selecting here true or false
 	"version": "2.0", // don't touch this one. get latest code using generator at https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index
