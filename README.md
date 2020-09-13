@@ -8,6 +8,9 @@
 
 ## How to
 
+* https://light-demo.ve.workers.dev
+* https://dark-demo.ve.workers.dev
+* Current Version `2.0`
 * Beta Version (Latest) - https://generator.driveindex.ga (Dark Theme Available)
 * If you want to deploy main drive leave the option ROOT as it is.
 * If you want to deploy your Team Drive/Shared Drive/Folder then copy the ID and replace it with ROOT.
@@ -31,6 +34,19 @@
 * Line 57 will help you select light or dark theme where false is light and true will be dark theme.
 * After that each line has its own custom feature. Edit as per your needs.
 * You can remove credit option but we request you not to.
+
+## Known Bugs
+
+* Unable to Display Markdown Files (for now avoid MD files)
+* Current Path at File Destination shows / which shouldn't appear.
+
+## Upcoming Changes
+
+* Clear Path to Navigate inside Previous Folders (currenty shows inside menu)
+
+## Staging Site
+
+* https://staging.hashhackers.workers.dev (Changes here are unstable, Testing New Bug Fixes and Development)
 
 ## Credits
 
