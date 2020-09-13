@@ -54,7 +54,7 @@ const authConfig = {
 const uiConfig = {
 	"theme": "bhadoo_bootstrap", // Change doesn't works
 	"dark_mode": true, // switch between light or dark themes
-	"version": "2.0", // don't touch this one. get latest code using generator at https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index
+	"version": "2.0.1", // don't touch this one. get latest code using generator at https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index
 	"logo_image": false, // true if you're using image link in next option.
 	"logo_link_name": "Bhadoo Drive Index", // if logo is true then link otherwise just text for name
 	"contact_link": "https://t.telegram.ind.in/BhadooCloud", // Link to Contact Button on Menu
