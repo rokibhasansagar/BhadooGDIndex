@@ -38,7 +38,7 @@
 ## Known Bugs
 
 * Unable to Display Markdown Files (for now avoid MD files)
-* Current Path at File Destination shows / which shouldn't appear.
+* Current Path at File Destination shows `/`, which shouldn't appear.
 
 ## Upcoming Changes
 
