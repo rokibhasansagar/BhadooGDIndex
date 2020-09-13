@@ -10,7 +10,7 @@
 
 * https://light-demo.ve.workers.dev
 * https://dark-demo.ve.workers.dev
-* Current Version `2.0`
+* Current Version `2.0.1`
 * Beta Version (Latest) - https://generator.driveindex.ga (Dark Theme Available)
 * If you want to deploy main drive leave the option ROOT as it is.
 * If you want to deploy your Team Drive/Shared Drive/Folder then copy the ID and replace it with ROOT.
@@ -52,7 +52,6 @@ const uiConfig = {
 
 ## Known Bugs
 
-* Unable to Display Markdown Files (for now avoid MD files)
 * Current Path at File Destination shows `/`, which shouldn't appear.
 
 ## Upcoming Changes
