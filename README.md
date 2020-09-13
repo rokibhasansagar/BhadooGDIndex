@@ -32,11 +32,6 @@
 * After that each line has its own custom feature. Edit as per your needs.
 * You can remove credit option but we request you not to.
 
-## Alternative Indexes
-
-* Old and Obsolete - https://oldindexgenerator.driveindex.ga
-* Alpha Version - https://gdindexgenerator.driveindex.ga (Dark Theme Available)
-
 ## Credits
 
 * Source: [maple3142](https://github.com/maple3142/GDIndex)
