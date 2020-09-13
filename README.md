@@ -1,17 +1,14 @@
 # Google Personal/Shared Drive Index
 
-# This Repo will be extensively updated shortly. Incase your already deployed sites starts showing errors or miss something like css or js, you can just regenerate code and replace your already created credentials.
+* Supports Both My and Team/Shared Drives with Dark Mode.
 
-* Supports Both My and Team/Shared Drives.
+[![Screenshot](https://raw.githubusercontent.com/ParveenBhadooOfficial/Bhadoo-Drive-Index/master/images/beta-light-screenshot.png)](https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index)
 
-[![Screenshot](https://raw.githubusercontent.com/ParveenBhadooOfficial/Bhadoo-Drive-Index/master/images/beta-ss.PNG)](https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index)
+[![Screenshot](https://raw.githubusercontent.com/ParveenBhadooOfficial/Bhadoo-Drive-Index/master/images/beta-dark-screenshot.png)](https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index)
 
 ## How to
 
-Select One from Below 3 Generators
-* Old and Obsolete - https://oldindexgenerator.driveindex.ga
-* Alpha Version - https://gdindexgenerator.driveindex.ga (Dark Theme Available)
-* Beta Version (Latest) - https://bhadooindexgenerator.driveindex.ga (Dark Theme is in Testing, Coming soon)
+* Beta Version (Latest) - https://bhadooindexgenerator.driveindex.ga (Dark Theme Available)
 * If you want to deploy main drive leave the option ROOT as it is.
 * If you want to deploy your Team Drive/Shared Drive/Folder then copy the ID and replace it with ROOT.
 * Eg. if you open [this shared drive](https://drive.google.com/drive/u/0/folders/0AOM2i7MQiuWIUk9PVA) 0AOM2i7MQiuWIUk9PVA is its ID.
@@ -27,6 +24,18 @@ Select One from Below 3 Generators
 * Click on Save and Deploy.
 * Done. (May take time for some users due to new account or cache issues)
 * [Watch Video](https://www.youtube.com/watch?v=8WMddzVX1Dw&feature=youtu.be)
+
+## Brand Customization
+
+* In Latest Release, you can rebrand the Index as per your needs.
+* Line 57 will help you select light or dark theme where false is light and true will be dark theme.
+* After that each line has its own custom feature. Edit as per your needs.
+* You can remove credit option but we request you not to.
+
+## Alternative Indexes
+
+* Old and Obsolete - https://oldindexgenerator.driveindex.ga
+* Alpha Version - https://gdindexgenerator.driveindex.ga (Dark Theme Available)
 
 ## Credits
 
