@@ -34,6 +34,22 @@
 * Line 57 will help you select light or dark theme where false is light and true will be dark theme.
 * After that each line has its own custom feature. Edit as per your needs.
 * You can remove credit option but we request you not to.
+* See Below code to understand Customization.
+````
+const uiConfig = {
+	// This version only supports material
+	"theme": "bhadoo_bootstrap", // Change doesn't works
+	"dark_mode": true, // Please select above theme before selecting here true or false
+	"version": "2.0", // don't touch this one. get latest code using generator at https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index
+	"logo_image": false, // Site Logo Name, can also be replaced with Image using <img border="0" alt="Alternative Name" src="logo-url" height="30px">
+	"logo_link_name": "Light Demo", // if logo is true then link otherwise just text for name
+	"contact_link": "https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index", //Link to Contact Button on Menu
+	"copyright_year": "2050", // year of copyright, can be anything like 2015 - 2020 or just 2020
+	"company_name": "Search Google Web", // Name next to copyright
+	"company_link": "https://www.google.com/search?q=bhadoo-drive-index", // link of copyright name
+	"credit": true, // Set this to true to give us credit
+};
+````
 
 ## Known Bugs
 
