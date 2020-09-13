@@ -211,8 +211,10 @@ function list(path) {
   <div id="list" class="list-group">
   </div>
   </div>
+  <div class="card">
+  <div id="readme_md" style="display:none; padding: 20px 20px;"></div>
   </div>
-  <div id="readme_md" class="mdui-typo" style="display:none; padding: 20px 0;"></div>
+  </div>
   `;
 	$('#content').html(content);
 
@@ -341,11 +343,13 @@ function append_files_to_list(path, files) {
 			if (is_lastpage_loaded && item.name == "README.md") {
 				get_file(p, item, function (data) {
 					markdown("#readme_md", data);
+          $("img").addClass("img-fluid")
 				});
 			}
 			if (item.name == "HEAD.md") {
 				get_file(p, item, function (data) {
 					markdown("#head_md", data);
+          $("img").addClass("img-fluid")
 				});
 			}
 			var ext = p.split('.').pop().toLowerCase();
@@ -413,8 +417,10 @@ function render_search_result_list() {
   <div id="list" class="list-group">
   </div>
   </div>
+  <div class="card">
+  <div id="readme_md" style="display:none; padding: 20px 20px;"></div>
   </div>
-  <div id="readme_md" class="mdui-typo" style="display:none; padding: 20px 0;"></div>
+  </div>
   `;
 	$('#content').html(content);
 
@@ -653,6 +659,7 @@ function file_code(path) {
 	};
 	var name = path.split('/').pop();
 	var ext = name.split('.').pop().toLowerCase();
+	var href = window.location.origin + path;
 	var content = `
 <div class="container"><br>
 <div class="card">
