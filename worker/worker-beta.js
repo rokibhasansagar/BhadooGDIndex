@@ -53,11 +53,11 @@ const authConfig = {
  */
 const uiConfig = {
 	"theme": "bhadoo_bootstrap", // Change doesn't works
-	"dark_mode": true, // Please select above theme before selecting here true or false
+	"dark_mode": true, // switch between light or dark themes
 	"version": "2.0", // don't touch this one. get latest code using generator at https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index
-	"logo_image": false, // Site Logo Name, can also be replaced with Image using <img border="0" alt="Alternative Name" src="logo-url" height="30px">
+	"logo_image": false, // true if you're using image link in next option.
 	"logo_link_name": "Bhadoo Drive Index", // if logo is true then link otherwise just text for name
-	"contact_link": "https://t.telegram.ind.in/BhadooCloud", //Link to Contact Button on Menu
+	"contact_link": "https://t.telegram.ind.in/BhadooCloud", // Link to Contact Button on Menu
 	"copyright_year": "2050", // year of copyright, can be anything like 2015 - 2020 or just 2020
 	"company_name": "Bhadoo Cloud", // Name next to copyright
 	"company_link": "https://t.telegram.ind.in/BhadooCloud", // link of copyright name
