@@ -59,6 +59,7 @@ const uiConfig = {
 ## Upcoming Changes
 
 * Clear Path to Navigate inside Previous Folders (currenty shows inside menu)
+* 3rd Party Video and Audio Players
 
 ## Staging Site
 
