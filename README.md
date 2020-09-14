@@ -77,6 +77,7 @@ const uiConfig = {
 * 3rd Party Video and Audio Players.
 * Icons from other Index for better view.
 * Custom Switch to Turn Off/On the Size and Modified Date Element.
+* Custom Dimensions for Logo.
 * Adding Links to other Indexes.
 * Adding More Features from other Indexes.
 
