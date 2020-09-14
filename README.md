@@ -70,6 +70,7 @@ const uiConfig = {
 * Current Path at File Destination shows `/`, which shouldn't appear.
 * Light Mode Text Hover Underline needs to be fixed.
 * Size and Modified Date should float on right side.
+* .zip/.rar files on Search doesn't works.
 
 ## Upcoming Changes
 
