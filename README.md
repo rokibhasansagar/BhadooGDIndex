@@ -31,6 +31,18 @@
 * Done. (May take time for some users due to new account or cache issues)
 * [Watch Video](https://www.youtube.com/watch?v=8WMddzVX1Dw&feature=youtu.be)
 
+## Basic Config
+
+````
+	"roots": [{
+		id: "root", // shared drive id or folder id
+		name: "Cloud Zero", // name for drive
+		user: "admin", // username for id pass
+		pass: "admin", // password for id pass (works also if their is no username, keep blank if no auth is needed.
+		protect_file_link: true // protects the direct links when true.
+	}],
+````
+
 ## Brand Customization and Dark Mode
 
 * In Latest Release, you can rebrand the Index as per your needs.
