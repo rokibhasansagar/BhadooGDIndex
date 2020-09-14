@@ -53,11 +53,17 @@ const uiConfig = {
 ## Known Bugs
 
 * Current Path at File Destination shows `/`, which shouldn't appear.
+* Light Mode Text Hover Underline needs to be fixed.
+* Size and Modified Date should float on right side.
 
 ## Upcoming Changes
 
-* Clear Path to Navigate inside Previous Folders (currenty shows inside menu)
-* 3rd Party Video and Audio Players
+* Clear Path to Navigate inside Previous Folders (currenty shows inside menu).
+* 3rd Party Video and Audio Players.
+* Icons from other Index for better view.
+* Custom Switch to Turn Off/On the Size and Modified Date Element.
+* Adding Links to other Indexes.
+* Adding More Features from other Indexes.
 
 ## Staging Site
 
