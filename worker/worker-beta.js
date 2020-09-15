@@ -20,11 +20,11 @@ const authConfig = {
 	 * [Note] For the disk whose id is set to the subfolder id, the search function will not be supported (it does not affect other disks).
 	 */
 	"roots": [{
-		id: "root",
-		name: "Cloud Zero",
-		user: "",
-		pass: "",
-		protect_file_link: false
+		"id": "",
+		"name": "Cloud Zero",
+		"user": "",
+		"pass": "",
+		"protect_file_link": false
 	}],
 	/**
 	 * The number displayed on each page of the file list page. [Recommended setting value is between 100 and 1000];
