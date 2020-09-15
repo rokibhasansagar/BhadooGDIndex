@@ -35,11 +35,11 @@
 
 ````
 	"roots": [{
-		id: "root", // shared drive id or folder id
-		name: "Cloud Zero", // name for drive
-		user: "admin", // username for id pass
-		pass: "admin", // password for id pass (works also if their is no username, keep blank if no auth is needed.
-		protect_file_link: true // protects the direct links when true.
+		"id": "root", // shared drive id or folder id
+		"name": "Cloud Zero", // name for drive
+		"user": "admin", // username for id pass
+		"pass": "admin", // password for id pass (works also if their is no username, keep blank if no auth is needed.
+		"protect_file_link": true // protects the direct links when true.
 	}],
 ````
 
