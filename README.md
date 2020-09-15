@@ -81,6 +81,7 @@ const uiConfig = {
 * Custom Dimensions for Logo.
 * Adding Links to other Indexes.
 * Adding More Features from other Indexes.
+* Click to Copy Download Button
 
 ## Staging Site
 
