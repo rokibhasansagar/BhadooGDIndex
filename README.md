@@ -104,3 +104,7 @@ const uiConfig = {
 * These Index's are written by someone else, possibly by donva and maple3142.
 * Beta Version is redesigned using Bootstrap from Alpha Version by @ParveenBhadooOfficial.
 * This Repo was imported from [yanzai](https://github.com/yanzai/goindex) and then modified for personal use. After requests from many users made compatible with user requirements.
+
+## Support this Project
+
+* [![Support](https://cdn.buymeacoffee.com/buttons/v2/default-white.png)](https://www.buymeacoffee.com/bhadoo)
