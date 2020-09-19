@@ -65,6 +65,11 @@ const uiConfig = {
 };
 ````
 
+## Search Limitations
+
+* Search only works if you use Shared Drive ID or root.
+* Search won't work or the bar won't appear if you're using Folder ID inside from root or Shared Drive.
+
 ## Known Bugs
 
 * Current Path at File Destination shows `/`, which shouldn't appear.
