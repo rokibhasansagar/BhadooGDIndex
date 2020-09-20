@@ -8,13 +8,16 @@
 
 `Note: The Changes in your workers config can effect later due to cache. Use incognito mode everytime to open the worker URL to overcome that issue.`
 
+## Demo Sites
+
+* [light-demo.ve.workers.dev](https://light-demo.ve.workers.dev)
+* [dark-demo.ve.workers.dev](https://dark-demo.ve.workers.dev)
+* [password-demo.ve.workers.dev](https://password-demo.ve.workers.dev) id and password are `admin` and `admin`
+
 ## How to
 
-* https://light-demo.ve.workers.dev
-* https://dark-demo.ve.workers.dev
-* https://password-demo.ve.workers.dev id and password are `admin` and `admin`
 * Current Version `2.0.1`
-* Beta Version (Latest) - https://generator.driveindex.ga (Dark Theme Available)
+* Beta Version (Latest) - [generator.driveindex.ga](https://generator.driveindex.ga) (Dark Theme Available)
 * If you want to deploy main drive leave the option ROOT as it is.
 * If you want to deploy your Team Drive/Shared Drive/Folder then copy the ID and replace it with ROOT.
 * Eg. if you open this shared drive `https://drive.google.com/drive/u/0/folders/0AOM2i7MQiuWIUk9PVA` - `0AOM2i7MQiuWIUk9PVA` is its ID.
@@ -34,13 +37,13 @@
 ## Basic Config
 
 ````
-	"roots": [{
-		"id": "root", // shared drive id or folder id
-		"name": "Cloud Zero", // name for drive
-		"user": "admin", // username for id pass
-		"pass": "admin", // password for id pass (works also if their is no username, keep blank if no auth is needed.
-		"protect_file_link": true // protects the direct links when true.
-	}],
+"roots": [{
+	"id": "root", // shared drive id or folder id
+	"name": "Cloud Zero", // name for drive
+	"user": "admin", // username for id pass
+	"pass": "admin", // password for id pass (works also if their is no username, keep blank if no auth is needed.
+	"protect_file_link": true // protects the direct links when true.
+}],
 ````
 
 ## Brand Customization and Dark Mode
@@ -101,7 +104,7 @@ const uiConfig = {
 
 ## Disclaimer
 
-* These Index's are written by someone else, possibly by donva and maple3142.
+* These Index's are written by someone else, possibly by donva and [maple3142](https://github.com/maple3142/GDIndex).
 * Beta Version is redesigned using Bootstrap from Alpha Version by @ParveenBhadooOfficial.
 * This Repo was imported from [yanzai](https://github.com/yanzai/goindex) and then modified for personal use. After requests from many users made compatible with user requirements.
 
