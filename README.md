@@ -8,6 +8,10 @@
 
 `Note: The Changes in your workers config can effect later due to cache. Use incognito mode everytime to open the worker URL to overcome that issue.`
 
+## Project Website
+
+* [gdi.js.org](https://gdi.js.org) by [js.org](https://js.org)
+
 ## Demo Sites
 
 * [light-demo.ve.workers.dev](https://light-demo.ve.workers.dev)
