@@ -1,6 +1,7 @@
 # Google Personal/Shared Drive Index
 
 * Supports Both My and Team/Shared Drives with Dark Mode.
+* Development Paused due to busy schedule.
 
 [![Screenshot](https://raw.githubusercontent.com/ParveenBhadooOfficial/Bhadoo-Drive-Index/master/images/beta-light-screenshot.png)](https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index)
 
