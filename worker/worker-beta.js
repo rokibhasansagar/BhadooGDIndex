@@ -21,7 +21,7 @@ const authConfig = {
 	 */
 	"roots": [{
 		"id": "",
-		"name": "Cloud Zero",
+		"name": "Drive Index",
 		"user": "",
 		"pass": "",
 		"protect_file_link": false
@@ -57,14 +57,18 @@ const authConfig = {
 const uiConfig = {
 	"theme": "bhadoo_bootstrap", // Change doesn't works
 	"dark_mode": true, // switch between light or dark themes
-	"version": "2.0.1", // don't touch this one. get latest code using generator at https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index
+	"version": "2.0.2", // don't touch this one. get latest code using generator at https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index
 	"logo_image": false, // true if you're using image link in next option.
+	"logo_height": "" // only if logo_image is true
+	"logo_width": "100px" // only if logo_image is true
 	"logo_link_name": "Bhadoo Drive Index", // if logo is true then link otherwise just text for name
 	"contact_link": "https://t.telegram.ind.in/BhadooCloud", // Link to Contact Button on Menu
 	"copyright_year": "2050", // year of copyright, can be anything like 2015 - 2020 or just 2020
 	"company_name": "Bhadoo Cloud", // Name next to copyright
 	"company_link": "https://t.telegram.ind.in/BhadooCloud", // link of copyright name
 	"credit": true, // Set this to true to give us credit
+	"display_size": true, // Set this to false to hide display file size
+	"display_time": true // Set this to false to hide display modified time for folder and files
 };
 
 /**
@@ -121,6 +125,7 @@ function html(current_drive_order = 0, model = {}) {
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Bhadoo-Drive-Index@${uiConfig.version}/css/mdui-style.min.css">
   <script src="https://cdn.jsdelivr.net/combine/gh/jquery/jquery@3.2/dist/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Bhadoo-Drive-Index@${uiConfig.version}/css/bootstrap/${uiConfig.dark_mode ? 'dark' : 'light'}.min.css">
+  <style>${uiConfig.display_size ? '' : '.csize{display:none;}'}${uiConfig.display_time ? '' : '.cmtime{display:none;}'}</style>
   <script src="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Bhadoo-Drive-Index@${uiConfig.version}/js/app.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Bhadoo-Drive-Index@${uiConfig.version}/js/mdui.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/markdown-it@10.0.0/dist/markdown-it.min.js"></script>
