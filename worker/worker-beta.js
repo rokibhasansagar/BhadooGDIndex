@@ -68,7 +68,8 @@ const uiConfig = {
 	"company_link": "https://t.telegram.ind.in/BhadooCloud", // link of copyright name
 	"credit": true, // Set this to true to give us credit
 	"display_size": true, // Set this to false to hide display file size
-	"display_time": true // Set this to false to hide display modified time for folder and files
+	"display_time": true, // Set this to false to hide display modified time for folder and files
+        "disable_player": false // Set this to true to hide audio and video players
 };
 
 /**
@@ -124,6 +125,8 @@ function html(current_drive_order = 0, model = {}) {
   </script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Bhadoo-Drive-Index@${uiConfig.version}/css/mdui-style.min.css">
   <script src="https://cdn.jsdelivr.net/combine/gh/jquery/jquery@3.2/dist/jquery.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/3.2.4/mediaelementplayer.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/3.2.4/mediaelement-and-player.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Bhadoo-Drive-Index@${uiConfig.version}/css/bootstrap/${uiConfig.dark_mode ? 'dark' : 'light'}.min.css">
   <style>${uiConfig.display_size ? '' : '.csize{display:none;}'}${uiConfig.display_time ? '' : '.cmtime{display:none;}'}</style>
   <script src="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Bhadoo-Drive-Index@${uiConfig.version}/js/app.min.js"></script>
