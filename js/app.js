@@ -119,11 +119,14 @@ function nav(path) {
 		var p = '/';
 		if (arr.length > 1) {
 			arr.shift();
-			for (i in arr) {
+			for (var i in arr) {
 				var n = arr[i];
 				n = decodeURI(n);
 				p += n + '/';
-				if (n == '') {
+				if (p.endsWith(".mp3/") === true || p.endsWith(".mp4/") === true || p.endsWith(".mkv/") === true || p.endsWith(".flac/") === true || p.endsWith(".m4a/") === true || p.endsWith(".pdf/") === true || p.endsWith(".jpg/") === true || p.endsWith(".png/") === true || p.endsWith(".jpeg/") === true || p.endsWith(".gif/") === true || p.endsWith(".md/") === true) {
+				    p = p.slice(0, -1);
+				}
+				if (n === '') {
 					break;
 				}
 				html += `<a class="dropdown-item"  href="/${cur}:${p}">> ${n}</a>`;
