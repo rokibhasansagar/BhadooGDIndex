@@ -21,7 +21,7 @@
 
 ## How to
 
-* Current Version `2.0.3`
+* Current Version `2.0.4`
 * Beta Version (Latest) - [generator.driveindex.ga](https://generator.driveindex.ga) (Dark Theme Available)
 * If you want to deploy main drive leave the option ROOT as it is.
 * If you want to deploy your Team Drive/Shared Drive/Folder then copy the ID and replace it with ROOT.
@@ -85,13 +85,11 @@ const uiConfig = {
 ## Known Bugs
 
 * Light Mode Text Hover Underline needs to be fixed.
-* Size and Modified Date should float on right side.
 * .zip/.rar files on Search doesn't works.
 
 ## Upcoming Changes
 
 * Clear Path to Navigate inside Previous Folders (currenty shows inside menu).
-* 3rd Party Video and Audio Players.
 * Icons from other Index for better view.
 * Adding Links to other Indexes.
 * Adding More Features from other Indexes.
