@@ -700,8 +700,9 @@ function file_video(path) {
   <div class="card">
   <div class="card-body text-center">
   <div class="alert alert-danger" id="folderne" role="alert"></div><script>document.getElementById("folderne").innerHTML=decodeURI(this.window.location.href.substring(window.location.href.lastIndexOf('/',window.location.href.lastIndexOf('/')+1))).replace('/','').replace('?a=view','');</script>
-  <video width="100%" height="100%" id="bPlayer" ${UI.disable_player ? 'style="display:none;"' : ''} controls><source type="video/mp4" src="${url}"/></video>
+  <video width="100%" height="100%" id="bPlayer" controls><source type="video/mp4" src="${url}"/></video>
   </div>
+	${UI.disable_player ? '<style>#mep_0{display:none;}</style>' : ''}
   <script type="text/javascript">$('#bPlayer').mediaelementplayer();</script>
   <p class="card-text text-center"><a href="${url}" class="btn btn-primary">Download</a></p><br>
   </div>
@@ -718,12 +719,13 @@ function file_audio(path) {
   <div class="card">
   <div class="card-body text-center">
   <div class="alert alert-danger" id="folderne" role="alert"></div><script>document.getElementById("folderne").innerHTML=decodeURI(this.window.location.href.substring(window.location.href.lastIndexOf('/',window.location.href.lastIndexOf('/')+1))).replace('/','').replace('?a=view','');</script>
-  <audio id="bPlayer" width="100%" controls ${UI.disable_player ? 'style="display:none;"' : ''}>
+  <audio id="bPlayer" width="100%" controls>
     <source src="${url}" type="audio/ogg">
     <source src="${url}" type="audio/mpeg">
   Your browser does not support the audio element.
   </audio>
   </div>
+	${UI.disable_player ? '<style>#mep_0{display:none;}</style>' : ''}
   <script type="text/javascript">$('#bPlayer').mediaelementplayer();</script>
   <p class="card-text text-center"><a href="${url}" class="btn btn-primary">Download</a></p><br>
   </div>
