@@ -95,6 +95,10 @@ const uiConfig = {
 * Adding More Features from other Indexes.
 * Click to Copy Download Button
 
+## Other Indexes
+
+* [Edited Version](https://gist.github.com/ParveenBhadooOfficial/52ffbfcfa24e53f8afad4851618307fc) based on [goindex-theme-acrou](https://github.com/Achrou/goindex-theme-acrou)
+
 ## Credits
 
 * Source: [maple3142](https://github.com/maple3142/GDIndex)
