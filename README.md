@@ -37,7 +37,7 @@
 * Now paste the code you copied before.
 * Click on Save and Deploy.
 * Done. (May take time for some users due to new account or cache issues)
-* [Watch Video](https://www.youtube.com/watch?v=8WMddzVX1Dw&feature=youtu.be)
+* [Watch Video](https://youtu.be/v3qNwHAWVKs)
 
 ## Basic Config
 
