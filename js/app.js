@@ -1,4 +1,4 @@
-// Redesigned by t.me/TheFirstSpeedster from https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index which was written by someone else, credits are given on Source Page.
+// Redesigned by t.me/TheFirstSpeedster from https://github.com/ParveenBhadooOfficial/Google-Drive-Index which was written by someone else, credits are given on Source Page.
 
 // Initialize the page
 function init() {
@@ -12,7 +12,7 @@ function init() {
 <div id="content">
 </div>
 <br>
-<footer class="text-muted"> <div class="container"> <p class="float-right"> <a href="#">Back to top</a> </p> ${UI.credit ? '<p>Redesigned with <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="red" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" /> </svg> by <a href="https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index" target="_blank">TheFirstSpeedster</a>, based on Open Source Softwares.</p>' : ''} <p>© ${UI.copyright_year} - <a href=" ${UI.company_link}" target="_blank"> ${UI.company_name}</a>, All Rights Reserved.</p> </div> </footer>
+<footer class="text-muted"> <div class="container"> <p class="float-right"> <a href="#">Back to top</a> </p> ${UI.credit ? '<p>Redesigned with <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="red" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" /> </svg> by <a href="https://github.com/ParveenBhadooOfficial/Google-Drive-Index" target="_blank">TheFirstSpeedster</a>, based on Open Source Softwares.</p>' : ''} <p>© ${UI.copyright_year} - <a href=" ${UI.company_link}" target="_blank"> ${UI.company_name}</a>, All Rights Reserved.</p> </div> </footer>
   `;
 	$('body').html(html);
 }
@@ -362,7 +362,7 @@ function append_files_to_list(path, files) {
 				pn += "?a=view";
 				c += " view";
 			}
-			html += `<div class="list-group-item ${UI.dark_mode ? 'list-group-item-action' : 'btn-outline-secondary'}"><a class="list-group-item-action" href="${pn}"><svg width="1.5em" height="1.5em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path fill="#50e6ff" d="M39,16v25c0,1.105-0.895,2-2,2H11c-1.105,0-2-0.895-2-2V7c0-1.105,0.895-2,2-2h17L39,16z"></path><linearGradient id="F8F33TU9HxDNWNbQYRyY3a" x1="28.529" x2="33.6" y1="15.472" y2="10.4" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3079d6"></stop><stop offset="1" stop-color="#297cd2"></stop></linearGradient><path fill="url(#F8F33TU9HxDNWNbQYRyY3a)" d="M28,5v9c0,1.105,0.895,2,2,2h9L28,5z"></path></svg> ${item.name}</a><a href="${p}"><img class="float-right" src="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Bhadoo-Drive-Index@2.0.7/images/download-file.svg" width="25px"></a><span class="badge-info badge-pill float-right csize"> ${item['size']}</span><span class="badge-primary badge-pill float-right cmtime">${item['modifiedTime']}</span></div>`;
+			html += `<div class="list-group-item ${UI.dark_mode ? 'list-group-item-action' : 'btn-outline-secondary'}"><a class="list-group-item-action" href="${pn}"><svg width="1.5em" height="1.5em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path fill="#50e6ff" d="M39,16v25c0,1.105-0.895,2-2,2H11c-1.105,0-2-0.895-2-2V7c0-1.105,0.895-2,2-2h17L39,16z"></path><linearGradient id="F8F33TU9HxDNWNbQYRyY3a" x1="28.529" x2="33.6" y1="15.472" y2="10.4" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3079d6"></stop><stop offset="1" stop-color="#297cd2"></stop></linearGradient><path fill="url(#F8F33TU9HxDNWNbQYRyY3a)" d="M28,5v9c0,1.105,0.895,2,2,2h9L28,5z"></path></svg> ${item.name}</a><a href="${p}"><img class="float-right" src="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.7/images/download-file.svg" width="25px"></a><span class="badge-info badge-pill float-right csize"> ${item['size']}</span><span class="badge-primary badge-pill float-right cmtime">${item['modifiedTime']}</span></div>`;
 		}
 	}
 
@@ -643,11 +643,14 @@ function file(path) {
 	if ("|bmp|jpg|jpeg|png|gif|".indexOf(`|${ext}|`) >= 0) {
 		return file_image(path);
 	}
+	
+	if ('pdf' === ext) {
+	    return file_pdf(path);
+    }
+    
 	else {
 		return file_others(path);
 	}
-
-	if ('pdf' === ext) return file_pdf(path);
 }
 
 // Document display |zip|.exe/others direct downloads
@@ -692,9 +695,13 @@ function file_code(path) {
 <div class="card">
 <div class="card-body">
   <div class="alert alert-danger" id="folderne" role="alert"></div><script>document.getElementById("folderne").innerHTML=decodeURI(this.window.location.href.substring(window.location.href.lastIndexOf('/',window.location.href.lastIndexOf('/')+1))).replace('/','').replace('?a=view','');</script>
-<code id="editor" class="card-text"></code>
+<div class="mdui-container">
+<pre id="editor" ></pre>
 </div>
-<p class="card-text text-center"><a href="${href}" class="btn btn-primary">Download</a></p><br>`;
+</div>
+<p class="card-text text-center"><a href="${href}" class="btn btn-primary">Download</a></p><br>
+<script src="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.8/js/ace/1.4.7/ace.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.8/js/ace/1.4.7/ext-language_tools.js"></script>`;
 	$('#content').html(content);
 
 	$.get(path, function (data) {
@@ -756,7 +763,7 @@ function file_audio(path) {
 	$('#content').html(content);
 }
 
-// Document display pdf  pdf
+// Document display pdf
 function file_pdf(path) {
 	const url = window.location.origin + path;
 	const inline_url = `${url}?inline=true`
@@ -772,9 +779,7 @@ function file_pdf(path) {
   </div>
   </div>
   `;
-	$('#content').removeClass('mdui-container').addClass('mdui-container-fluid').css({
-		padding: 0
-	}).html(content);
+	$('#content').html(content);
 }
 
 // image display
