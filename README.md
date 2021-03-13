@@ -21,7 +21,7 @@
 
 ## How to
 
-* Current Version `2.0.7`
+* Current Version `2.0.8`
 * Beta Version (Latest) - [generator.driveindex.ga](https://generator.driveindex.ga) (Dark Theme Available)
 * If you want to deploy main drive leave the option ROOT as it is.
 * If you want to deploy your Team Drive/Shared Drive/Folder then copy the ID and replace it with ROOT.
@@ -82,19 +82,20 @@
 const uiConfig = {
 	"theme": "bhadoo_bootstrap", // Change doesn't works
 	"dark_mode": true, // switch between light or dark themes
-	"version": "2.0.7", // don't touch this one. get latest code using generator at https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index
+	"version": "2.0.8", // don't touch this one. get latest code using generator at https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index
 	"logo_image": true, // true if you're using image link in next option.
 	"logo_height": "", // only if logo_image is true
 	"logo_width": "100px", // only if logo_image is true
 	"logo_link_name": "https://cdn.jsdelivr.net/gh/jscdn/svg@1.0.3/bhadoo-cloud-logo-white.svg", // if logo is true then link otherwise just text for name
-	"contact_link": "https://t.telegram.ind.in/BhadooDiscussion", // Link to Contact Button on Menu
+	"contact_link": "https://t.telegram.ind.in/BhadooCloud", // Link to Contact Button on Menu
 	"copyright_year": "2050", // year of copyright, can be anything like 2015 - 2020 or just 2020
 	"company_name": "Bhadoo Cloud", // Name next to copyright
 	"company_link": "https://t.telegram.ind.in/BhadooCloud", // link of copyright name
 	"credit": true, // Set this to true to give us credit
 	"display_size": true, // Set this to false to hide display file size
 	"display_time": false, // Set this to false to hide display modified time for folder and files
-	"disable_player": false // Set this to true to hide audio and video players
+        "disable_player": false, // Set this to true to hide audio and video players
+	"jsdelivr_cdn_src": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index"
 };
 ````
 
