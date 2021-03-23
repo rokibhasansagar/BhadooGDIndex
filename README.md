@@ -105,6 +105,7 @@ const uiConfig = {
 
 * There are 22 Themes from [bootswatch](https://github.com/thomaspark/bootswatch) where `light` is official [Bootstrap](https://getbootstrap.com) Theme and `dark` is darkly from bootswatch.
 * You can check Theme from [bootswatch.com](https://bootswatch.com) before selecting.
+* To Change theme, first generate the code, paste in Cloudflare Workers and then select one theme code from below and paste it in line 139 of worker script.
 
 | Themes    |         |         |         |        |          |
 |-----------|---------|---------|---------|--------|----------|
