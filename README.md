@@ -21,7 +21,7 @@
 
 ## How to
 
-* Current Version `2.0.8`
+* Current Version `2.0.9`
 * Beta Version (Latest) - [generator.driveindex.ga](https://generator.driveindex.ga) (Dark Theme Available)
 * If you want to deploy main drive leave the option ROOT as it is.
 * If you want to deploy your Team Drive/Shared Drive/Folder then copy the ID and replace it with ROOT.
@@ -78,11 +78,12 @@
 * After that each line has its own custom feature. Edit as per your needs.
 * You can remove credit option but we request you not to.
 * See Below code to understand Customization.
+
+
 ````
 const uiConfig = {
-	"theme": "bhadoo_bootstrap", // Change doesn't works
-	"dark_mode": true, // switch between light or dark themes
-	"version": "2.0.8", // don't touch this one. get latest code using generator at https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index
+	"theme": "dark", // switch between themes, default set to dark
+	"version": "2.0.9", // don't touch this one. get latest code using generator at https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index
 	"logo_image": true, // true if you're using image link in next option.
 	"logo_height": "", // only if logo_image is true
 	"logo_width": "100px", // only if logo_image is true
@@ -95,18 +96,28 @@ const uiConfig = {
 	"display_size": true, // Set this to false to hide display file size
 	"display_time": false, // Set this to false to hide display modified time for folder and files
         "disable_player": false, // Set this to true to hide audio and video players
-	"jsdelivr_cdn_src": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index"
+	"poster": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.9/poster.jpg", // Video poster URL or see Readme to how to load from Drive
+	"jsdelivr_cdn_src": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index" // If Project is Forked, then enter your Github repo
 };
 ````
+
+## Themes
+
+* There are 23 Themes from [bootswatch](https://github.com/thomaspark/bootswatch) where `light` is official [Bootstrap](https://getbootstrap.com) Theme and `dark` is darkly from bootswatch.
+* You can check Theme from [bootswatch.com](https://bootswatch.com) before selecting.
+
+| Themes    |         |         |         |        |          |
+|-----------|---------|---------|---------|--------|----------|
+| cerulean  | cosmo   | cyborg  | dark    | flatly | journal  |
+| litera    | lumen   | lux     | materia | minty  | pulse    |
+| sandstone | simplex | sketchy | slate   | solar  | spacelab |
+| superhero | united  | yeti    | light   |        |          |
+|           |         |         |         |        |          |        
 
 ## Search Limitations
 
 * Search only works if you use Shared Drive ID or root.
 * Search won't work or the bar won't appear if you're using Folder ID inside from root or Shared Drive.
-
-## Known Bugs
-
-* Light Mode Text Hover Underline needs to be fixed.
 
 ## Upcoming Changes
 
