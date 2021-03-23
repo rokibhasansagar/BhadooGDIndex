@@ -1,5 +1,5 @@
 // Redesigned by t.me/TheFirstSpeedster from https://github.com/ParveenBhadooOfficial/Google-Drive-Index which was written by someone else, credits are given on Source Page.
-
+// v2.0.9
 // Initialize the page
 function init() {
 	document.siteName = $('title').html();
@@ -729,10 +729,10 @@ function file_video(path) {
   <div class="card">
   <div class="card-body text-center">
   <div class="alert alert-danger" id="folderne" role="alert"></div><script>document.getElementById("folderne").innerHTML=decodeURI(this.window.location.href.substring(window.location.href.lastIndexOf('/',window.location.href.lastIndexOf('/')+1))).replace('/','').replace('?a=view','');</script>
-  <video width="100%" height="100%" id="bPlayer" controls><source type="video/mp4" src="${url}"/></video>
+  <video width="640" height="360" style="max-width:100%;" id="bPlayer" controls poster="${UI.poster}"><source type="video/mp4" src="${url}"/></video>
   </div>
 	${UI.disable_player ? '<style>#mep_0{display:none;}</style>' : ''}
-  <script type="text/javascript">$('#bPlayer').mediaelementplayer();</script>
+  <script type="text/javascript">$('#bPlayer').mediaelementplayer({features: ['playpause', 'current', 'progress', 'duration', 'volume', 'fullscreen', 'speed']});</script>
   <p class="card-text text-center"><a href="${url}" class="btn btn-primary">Download</a></p><br>
   </div>
   </div>
