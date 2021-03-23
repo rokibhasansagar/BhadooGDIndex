@@ -103,7 +103,7 @@ const uiConfig = {
 
 ## Themes
 
-* There are 23 Themes from [bootswatch](https://github.com/thomaspark/bootswatch) where `light` is official [Bootstrap](https://getbootstrap.com) Theme and `dark` is darkly from bootswatch.
+* There are 22 Themes from [bootswatch](https://github.com/thomaspark/bootswatch) where `light` is official [Bootstrap](https://getbootstrap.com) Theme and `dark` is darkly from bootswatch.
 * You can check Theme from [bootswatch.com](https://bootswatch.com) before selecting.
 
 | Themes    |         |         |         |        |          |
