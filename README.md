@@ -84,7 +84,7 @@
 const uiConfig = {
 	"theme": "dark", // switch between themes, default set to dark
 	"version": "2.0.9", // don't touch this one. get latest code using generator at https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index
-	"logo_image": true, // true if you're using image link in next option.
+	"dark_mode": true, // incase you're viewing wrong colors try switching this
 	"logo_height": "", // only if logo_image is true
 	"logo_width": "100px", // only if logo_image is true
 	"logo_link_name": "https://cdn.jsdelivr.net/gh/jscdn/svg@1.0.3/bhadoo-cloud-logo-white.svg", // if logo is true then link otherwise just text for name
