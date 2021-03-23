@@ -114,6 +114,12 @@ const uiConfig = {
 | superhero | united  | yeti    | light   |        |          |
 |           |         |         |         |        |          |        
 
+## Audio and Video
+
+* Poster for Video is added as default.
+* If you wish to keep one poster add image link in Config.
+* You can also set poster name as eg. poster.jpg or screenshot.png where this file should be inside the same folder as the video file is.
+
 ## Search Limitations
 
 * Search only works if you use Shared Drive ID or root.
