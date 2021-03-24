@@ -78,7 +78,7 @@ const uiConfig = {
 	"display_size": true, // Set this to false to hide display file size
 	"display_time": false, // Set this to false to hide display modified time for folder and files
         "disable_player": false, // Set this to true to hide audio and video players
-	"poster": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.9/poster.jpg", // Video poster URL or see Readme to how to load from Drive
+	"poster": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.9/images/poster.jpg", // Video poster URL or see Readme to how to load from Drive
 	"jsdelivr_cdn_src": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index" // If Project is Forked, then enter your Github repo
 };
 
