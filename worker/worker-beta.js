@@ -65,7 +65,7 @@ const authConfig = {
 const uiConfig = {
 	"theme": "dark", // switch between themes, default set to dark, select from https://github.com/ParveenBhadooOfficial/Google-Drive-Index#themes
 	"dark_mode": true, // incase you're viewing wrong colors try switching this
-	"version": "2.0.9", // don't touch this one. get latest code using generator at https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index
+	"version": "2.0.10", // don't touch this one. get latest code using generator at https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index
 	"logo_image": true, // true if you're using image link in next option.
 	"logo_height": "", // only if logo_image is true
 	"logo_width": "100px", // only if logo_image is true
@@ -78,8 +78,11 @@ const uiConfig = {
 	"display_size": true, // Set this to false to hide display file size
 	"display_time": false, // Set this to false to hide display modified time for folder and files
         "disable_player": false, // Set this to true to hide audio and video players
-	"poster": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.9/images/poster.jpg", // Video poster URL or see Readme to how to load from Drive
-	"jsdelivr_cdn_src": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index" // If Project is Forked, then enter your Github repo
+	"poster": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.10/images/poster.jpg", // Video poster URL or see Readme to how to load from Drive
+	"audioposter": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.10/images/music.jpg", // Video poster URL or see Readme to how to load from Drive
+	"captions": "subtitles.srt", // Subtitles Link or file name which is in the folder same as video.
+	"jsdelivr_cdn_src": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index", // If Project is Forked, then enter your Github repo
+	"plyr_io_version": "3.6.4" // Change plyr.io version in future when needed.
 };
 
 /**
@@ -135,8 +138,7 @@ function html(current_drive_order = 0, model = {}) {
   </script>
   <link rel="stylesheet" href="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/css/mdui-style.min.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.16/mediaelementplayer.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jscdn/mediaelement-plugins@2.5.1/speed/speed.min.css" integrity="sha256-NZbcr+WIjZ0pauwD60hzeL1moP1ti+q9AXMRoxSDNwg=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.plyr.io/${uiConfig.plyr_io_version}/plyr.css" />
   <link rel="stylesheet" href="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/css/bootstrap/${uiConfig.theme}/bootstrap.min.css">
   <style>${uiConfig.display_size ? '' : '.csize{display:none;}'}${uiConfig.display_time ? '' : '.cmtime{display:none;}'}</style>
   <script src="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/js/app.min.js"></script>
@@ -146,8 +148,7 @@ function html(current_drive_order = 0, model = {}) {
 <body>
 </body>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.16/mediaelement-and-player.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/jscdn/mediaelement-plugins@2.5.1/speed/speed.min.js" integrity="sha256-ZTlvyxPcS90+gkrjDwAcuQAxhEt3eUw+8XqNLs4xHXo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.plyr.io/${uiConfig.plyr_io_version}/plyr.polyfilled.js"></script>
 </html>`;
 };
 
