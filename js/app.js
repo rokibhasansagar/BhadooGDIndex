@@ -729,11 +729,17 @@ function file_video(path) {
   <div class="card">
   <div class="card-body text-center">
   <div class="alert alert-danger" id="folderne" role="alert"></div><script>document.getElementById("folderne").innerHTML=decodeURI(this.window.location.href.substring(window.location.href.lastIndexOf('/',window.location.href.lastIndexOf('/')+1))).replace('/','').replace('?a=view','');</script>
-  <video width="640" height="360" style="max-width:100%;" id="bPlayer" controls poster="${UI.poster}"><source type="video/mp4" src="${url}"/></video>
+	<video id="vplayer" width="100%" height="100%" playsinline controls data-poster="${UI.poster}">
+	  <source src="${url}" type="video/mp4" />
+	  <source src="${url}" type="video/webm" />
+	  <track kind="captions" label="English Captions" src="${UI.captions}" srclang="en" default />
+	</video>
   </div>
-	${UI.disable_player ? '<style>#mep_0{display:none;}</style>' : ''}
-  <script type="text/javascript">$('#bPlayer').mediaelementplayer({features: ['playpause', 'current', 'progress', 'duration', 'volume', 'fullscreen', 'speed']});</script>
-  <p class="card-text text-center"><a href="${url}" class="btn btn-primary">Download</a></p><br>
+	${UI.disable_player ? '<style>.plyr{display:none;}</style>' : ''}
+  <script>
+   const player = new Plyr('#vplayer');
+  </script></br>
+	<p class="card-text text-center"><a href="${url}" class="btn btn-primary">Download</a></p><br>
   </div>
   </div>
   `;
@@ -745,17 +751,20 @@ function file_audio(path) {
 	var url = window.location.origin + path;
 	var content = `
   <div class="container"><br>
-  <div class="card">
+  <div class="card" style="background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);">
   <div class="card-body text-center">
   <div class="alert alert-danger" id="folderne" role="alert"></div><script>document.getElementById("folderne").innerHTML=decodeURI(this.window.location.href.substring(window.location.href.lastIndexOf('/',window.location.href.lastIndexOf('/')+1))).replace('/','').replace('?a=view','');</script>
-  <audio id="bPlayer" width="100%" controls>
+  <br><img draggable="false" src="${UI.audioposter}" width="100%" /><br>
+  <audio id="vplayer" width="100%" playsinline controls>
     <source src="${url}" type="audio/ogg">
     <source src="${url}" type="audio/mpeg">
   Your browser does not support the audio element.
   </audio>
   </div>
-	${UI.disable_player ? '<style>#mep_0{display:none;}</style>' : ''}
-  <script type="text/javascript">$('#bPlayer').mediaelementplayer();</script>
+	${UI.disable_player ? '<style>.plyr{display:none;}</style>' : ''}
+  <script>
+   const player = new Plyr('#vplayer');
+  </script></br>
   <p class="card-text text-center"><a href="${url}" class="btn btn-primary">Download</a></p><br>
   </div>
   </div>
