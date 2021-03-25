@@ -727,7 +727,7 @@ function file_video(path) {
 	const content = `
   <div class="container"><br>
   <div class="card">
-  <div class="card-body text-center">
+  <div class="text-center">
   <div class="alert alert-danger" id="folderne" role="alert"></div><script>document.getElementById("folderne").innerHTML=decodeURI(this.window.location.href.substring(window.location.href.lastIndexOf('/',window.location.href.lastIndexOf('/')+1))).replace('/','').replace('?a=view','');</script>
 	<video id="vplayer" width="100%" height="100%" playsinline controls data-poster="${UI.poster}">
 	  <source src="${url}" type="video/mp4" />
