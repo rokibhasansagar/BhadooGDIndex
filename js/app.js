@@ -112,12 +112,6 @@ function nav(path) {
       </li>`;
 	var names = window.drive_names;
 	var drive_name = window.drive_names[cur];
-	/*html += `<button class="mdui-btn mdui-btn-raised" mdui-menu="{target: '#drive-names'}"><i class="mdui-icon mdui-icon-left material-icons">share</i> ${names[cur]}</button>`;
-	html += `<ul class="mdui-menu" id="drive-names" style="transform-origin: 0px 0px; position: fixed;">`;
-	names.forEach((name, idx) => {
-	    html += `<li class="mdui-menu-item ${(idx === cur) ? 'mdui-list-item-active' : ''} "><a href="/${idx}:/" class="mdui-ripple">${name}</a></li>`;
-	});
-	html += `</ul>`;*/
 
 	// Dropdown to select different drive roots.
 	html += `<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${drive_name}</a><div class="dropdown-menu" aria-labelledby="navbarDropdown">`;
@@ -158,7 +152,7 @@ function nav(path) {
 </ul>
 <form class="form-inline my-2 my-lg-0" method="get" action="/${cur}:search">
 <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search" value="${search_text}" required>
-<button class="btn ${UI.dark_mode ? 'btn-secondary' : 'btn-outline-success'} my-2 my-sm-0" onclick="if($('#search_bar').hasClass('mdui-textfield-expanded') && $('#search_bar_form>input').val()) $('#search_bar_form').submit();" type="submit">Search</button>
+<button class="btn ${UI.dark_mode ? 'btn-secondary' : 'btn-outline-success'} my-2 my-sm-0" onclick="if($('#search_bar_form>input').val()) $('#search_bar_form').submit();" type="submit">Search</button>
 </form>
 </div>
 </nav>
@@ -171,8 +165,6 @@ function nav(path) {
 	}
 
 	$('#nav').html(html);
-	mdui.mutation();
-	mdui.updateTextFields();
 }
 
 /**
@@ -231,6 +223,7 @@ function list(path) {
   <div class="card">
   <div id="readme_md" style="display:none; padding: 20px 20px;"></div>
   </div>
+  <div class="alert alert-secondary text-center" role="alert" id="count">Total <span class="number text-center"></span> Items</div>
   </div>
   `;
 	$('#content').html(content);
@@ -285,8 +278,6 @@ function list(path) {
 						// Show a loading spinner
 						$(`<div id="spinner" class="d-flex justify-content-center"><div class="spinner-border m-5 text-primary" role="status"><span class="sr-only">Loading...</span></div></div>`)
 							.insertBefore('#readme_md');
-						mdui.updateSpinners();
-						// mdui.mutation();
 
 						let $list = $('#list');
 						requestListPath(path, {
@@ -420,7 +411,7 @@ function append_files_to_list(path, files) {
 	$list.html(($list.data('curPageIndex') == '0' ? '' : $list.html()) + html);
 	// When it is the last page, count and display the total number of items
 	if (is_lastpage_loaded) {
-		$('#count').removeClass('mdui-hidden').find('.number').text($list.find('li.mdui-list-item').length);
+		$('#count').removeClass('d-none').find('.number').text($list.find('a.list-group-item').length);
 	}
 }
 
@@ -438,6 +429,7 @@ function render_search_result_list() {
   <div class="card">
   <div id="readme_md" style="display:none; padding: 20px 20px;"></div>
   </div>
+  <div class="alert alert-secondary text-center" role="alert" id="count">Total <span class="number text-center"></span> Items</div>
   </div>
   `;
 	$('#content').html(content);
@@ -491,8 +483,6 @@ function render_search_result_list() {
 						// Show a loading spinner
 						$(`<div id="spinner" class="d-flex justify-content-center"><div class="spinner-border m-5 text-primary" role="status"><span class="sr-only">Loading...</span></div></div>`)
 							.insertBefore('#readme_md');
-						mdui.updateSpinners();
-						// mdui.mutation();
 
 						let $list = $('#list');
 						requestSearch({
@@ -561,7 +551,7 @@ function append_search_result_to_list(files) {
 	$list.html(($list.data('curPageIndex') == '0' ? '' : $list.html()) + html);
 	// When it is the last page, count and display the total number of items
 	if (is_lastpage_loaded) {
-		$('#count').removeClass('mdui-hidden').find('.number').text($list.find('li.mdui-list-item').length);
+		$('#count').removeClass('d-none').find('.number').text($list.find('a.list-group-item').length);
 	}
 }
 
@@ -704,7 +694,7 @@ function file_code(path) {
 <div class="card">
 <div class="card-body">
   <div class="alert alert-danger" id="folderne" role="alert"></div><script>document.getElementById("folderne").innerHTML=decodeURI(this.window.location.href.substring(window.location.href.lastIndexOf('/',window.location.href.lastIndexOf('/')+1))).replace('/','').replace('?a=view','');</script>
-<div class="mdui-container">
+<div>
 <pre id="editor" ></pre>
 </div>
 </div>
@@ -815,10 +805,6 @@ function file_image(path) {
 			console.error(e);
 			target_children = [];
 		}
-		// <div id="btns" >
-		//             ${targetObj[path].prev ? `<span id="leftBtn" data-direction="left" data-filepath="${targetObj[path].prev}"><i class="mdui-icon material-icons"></i><span style="margin-left: 10px;">Prev</span></span>` : `<span style="cursor: not-allowed;color: rgba(0,0,0,0.2);margin-bottom:20px;"><i class="mdui-icon material-icons"></i><span style="margin-left: 10px;">Prev</span></span>`}
-		//             ${targetObj[path].next ? `<span id="rightBtn" data-direction="right"  data-filepath="${targetObj[path].next}"><i class="mdui-icon material-icons"></i><span style="margin-left: 10px;">Next</span></span>` : `<span style="cursor: not-allowed;color: rgba(0,0,0,0.2);"><i class="mdui-icon material-icons"></i><span style="margin-left: 10px;">Prev</span></span>`}
-		// </div>
 	}
 	var content = `
   <div class="container"><br>
