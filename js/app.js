@@ -748,8 +748,8 @@ function file_video(path) {
 	const caption = name.slice(0, name.lastIndexOf('.')) + '.srt'
 	const url = window.location.origin + path;
 	const content = `
-  <div class="container"><br>
-  <div class="card">
+  <div class="container text-center"><br>
+  <div class="card text-center">
   <div class="text-center">
   <div class="alert alert-danger" id="folderne" role="alert"></div><script>document.getElementById("folderne").innerHTML=decodeURI(this.window.location.href.substring(window.location.href.lastIndexOf('/',window.location.href.lastIndexOf('/')+1))).replace('/','').replace('?a=view','');</script>
 	<video id="vplayer" width="100%" height="100%" playsinline controls data-poster="${UI.poster}">
@@ -769,7 +769,20 @@ function file_video(path) {
   </div>
   <input type="text" class="form-control" id="dlurl" value="${url}">
 </div>
-	<p class="card-text text-center"><a href="${url}" class="btn btn-primary">Download</a> <button onclick="copyFunction()" class="btn btn-success">Copy</button></p><br>
+<div class="btn-group text-center">
+    <a href="${url}" type="button" class="btn btn-primary">Download</a>
+    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="sr-only"></span>
+    </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="iina://weblink?url=${url}">IINA</a>
+      <a class="dropdown-item" href="potplayer://${url}">PotPlayer</a>
+      <a class="dropdown-item" href="vlc://${url}">VLC</a>
+      <a class="dropdown-item" href="nplayer-${url}">nPlayer</a>
+      <a class="dropdown-item" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=undefined;end">MX Player (Free)</a>
+      <a class="dropdown-item" href="intent:${url}#Intent;package=com.mxtech.videoplayer.pro;S.title=undefined;end">MX Player (Pro)</a>
+    </div>
+</div> <button onclick="copyFunction()" class="btn btn-success">Copy</button><br>
   </div>
   </div>
   </div>
