@@ -223,7 +223,7 @@ function list(path) {
   <div class="card">
   <div id="readme_md" style="display:none; padding: 20px 20px;"></div>
   </div>
-  <div class="alert alert-secondary text-center" role="alert" id="count">Total <span class="number text-center"></span> Items</div>
+	  <div class="alert alert-secondary text-center d-none" role="alert" id="count">Total <span class="number text-center"></span> Items</div>
   </div>
   `;
 	$('#content').html(content);
@@ -411,7 +411,7 @@ function append_files_to_list(path, files) {
 	$list.html(($list.data('curPageIndex') == '0' ? '' : $list.html()) + html);
 	// When it is the last page, count and display the total number of items
 	if (is_lastpage_loaded) {
-		$('#count').removeClass('d-none').find('.number').text($list.find('a.list-group-item').length);
+		$('#count').removeClass('d-none').find('.number').text($list.find('a.list-group-item-action').length);
 	}
 }
 
