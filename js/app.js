@@ -1,16 +1,17 @@
 // Redesigned by t.me/TheFirstSpeedster from https://github.com/ParveenBhadooOfficial/Google-Drive-Index which was written by someone else, credits are given on Source Page.
-// v2.0.10
+// v2.0.11
 // Initialize the page
 function init() {
 	document.siteName = $('title').html();
-	var html = `
-<header >
+	var html = `<header>
    <div id="nav">
    </div>
 </header>
 <div>
-<div aria-live="polite" aria-atomic="true" style="position: relative;">
-  <div class="toast" data-delay="2000" style="width:300px; z-index: 999999; position: absolute; top: 10px; right: 10px;">
+<div id="content">
+</div>
+<div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center fixed-right">
+  <div class="toast" data-delay="2000" style="width:300px; z-index: 999999; position: absolute; top: 50%; right: 10px;">
     <div class="toast-header">
       <strong class="mr-auto"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
   <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
@@ -25,8 +26,6 @@ function init() {
       Hello user, Link has been copied.
     </div>
   </div>
-</div>
-<div id="content">
 </div>
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -685,7 +684,14 @@ function file_others(path) {
 <div class="card-body">
   <div class="alert alert-danger" id="folderne" role="alert"></div><script>document.getElementById("folderne").innerHTML=decodeURI(this.window.location.href.substring(window.location.href.lastIndexOf('/',window.location.href.lastIndexOf('/')+1))).replace('/','').replace('?a=view','');</script>
 </div>
-<p class="card-text text-center"><a href="${href}" class="btn btn-primary">Download</a> <button onclick="copyFunction()" class="btn btn-success">Copy</button></p><br>`;
+<div class="card-body">
+<div class="input-group mb-4">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="">Full URL</span>
+  </div>
+  <input type="text" class="form-control" id="dlurl" value="${href}">
+</div>
+	<p class="card-text text-center"><a href="${href}" class="btn btn-primary">Download</a> <button onclick="copyFunction()" class="btn btn-success">Copy</button></p><br></div>`;
 	$('#content').html(content);
 }
 
@@ -715,13 +721,14 @@ function file_code(path) {
 <pre id="editor" ></pre>
 </div>
 </div>
+<div class="card-body">
 <div class="input-group mb-4">
   <div class="input-group-prepend">
     <span class="input-group-text" id="">Full URL</span>
   </div>
-  <input type="text" class="form-control" id="dlurl" value="${url}">
+  <input type="text" class="form-control" id="dlurl" value="${href}">
 </div>
-	<p class="card-text text-center"><a href="${url}" class="btn btn-primary">Download</a> <button onclick="copyFunction()" class="btn btn-success">Copy</button></p><br>
+	<p class="card-text text-center"><a href="${href}" class="btn btn-primary">Download</a> <button onclick="copyFunction()" class="btn btn-success">Copy</button></p><br></div>
 <script src="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.8/js/ace/1.4.7/ace.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.8/js/ace/1.4.7/ext-language_tools.js"></script>`;
 	$('#content').html(content);
@@ -755,6 +762,7 @@ function file_video(path) {
   <script>
    const player = new Plyr('#vplayer');
   </script></br>
+<div class="card-body">
 <div class="input-group mb-4">
   <div class="input-group-prepend">
     <span class="input-group-text" id="">Full URL</span>
@@ -762,6 +770,7 @@ function file_video(path) {
   <input type="text" class="form-control" id="dlurl" value="${url}">
 </div>
 	<p class="card-text text-center"><a href="${url}" class="btn btn-primary">Download</a> <button onclick="copyFunction()" class="btn btn-success">Copy</button></p><br>
+  </div>
   </div>
   </div>
   `;
@@ -787,6 +796,7 @@ function file_audio(path) {
   <script>
    const player = new Plyr('#vplayer');
   </script></br>
+  <div class="card-body">
   <div class="input-group mb-4">
   <div class="input-group-prepend">
     <span class="input-group-text" id="">Full URL</span>
@@ -794,6 +804,7 @@ function file_audio(path) {
   <input type="text" class="form-control" id="dlurl" value="${url}">
 </div>
 	<p class="card-text text-center"><a href="${url}" class="btn btn-primary">Download</a> <button onclick="copyFunction()" class="btn btn-success">Copy</button></p><br>
+  </div>
   </div>
   </div>
   `;
@@ -812,6 +823,7 @@ function file_pdf(path) {
   <div class="alert alert-danger" id="folderne" role="alert"></div><script>document.getElementById("folderne").innerHTML=decodeURI(this.window.location.href.substring(window.location.href.lastIndexOf('/',window.location.href.lastIndexOf('/')+1))).replace('/','').replace('?a=view','');</script>
   <object data="${inline_url}" type="application/pdf" name="${file_name}" style="width:100%;height:94vh;"><embed src="${inline_url}" type="application/pdf"/></object>
   </div>
+  <div class="card-body">
 <div class="input-group mb-4">
   <div class="input-group-prepend">
     <span class="input-group-text" id="">Full URL</span>
@@ -819,6 +831,7 @@ function file_pdf(path) {
   <input type="text" class="form-control" id="dlurl" value="${url}">
 </div>
 	<p class="card-text text-center"><a href="${url}" class="btn btn-primary">Download</a> <button onclick="copyFunction()" class="btn btn-success">Copy</button></p><br>
+  </div>
   </div>
   </div>
   `;
@@ -856,13 +869,15 @@ function file_image(path) {
   <div class="alert alert-danger" id="folderne" role="alert"></div><script>document.getElementById("folderne").innerHTML=decodeURI(this.window.location.href.substring(window.location.href.lastIndexOf('/',window.location.href.lastIndexOf('/')+1))).replace('/','').replace('?a=view','');</script>
   <img src="${url}" width="50%">
   </div>
-<div class="input-group mb-4">
+  <div class="card-body">
+  <div class="input-group mb-4">
   <div class="input-group-prepend">
     <span class="input-group-text" id="">Full URL</span>
   </div>
   <input type="text" class="form-control" id="dlurl" value="${url}">
 </div>
 	<p class="card-text text-center"><a href="${url}" class="btn btn-primary">Download</a> <button onclick="copyFunction()" class="btn btn-success">Copy</button></p><br>
+  </div>
   </div>
   </div>
     `;
