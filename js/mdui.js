@@ -824,14 +824,14 @@
             lockScreen: function() {
                 var t = g("body"),
                     e = t.width();
-                t.addClass("mdui-locked").width(e);
+                t.addClass("modal-open").width(e);
                 var n = t.data("lockscreen-level") || 0;
                 t.data("lockscreen-level", ++n)
             },
             unlockScreen: function(t) {
                 var e = g("body"),
                     n = t ? 1 : e.data("lockscreen-level");
-                1 < n ? e.data("lockscreen-level", --n) : e.data("lockscreen-level", 0).removeClass("mdui-locked").width("")
+                1 < n ? e.data("lockscreen-level", --n) : e.data("lockscreen-level", 0).removeClass("modal-open").width("")
             },
             throttle: function(n, i) {
                 var o = null;
