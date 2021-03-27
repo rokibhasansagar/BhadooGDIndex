@@ -715,6 +715,8 @@ function file_code(path) {
 
 // Document display video |mp4|webm|avi|
 function file_video(path) {
+	const name = path.split('/').pop();
+	const caption = name.slice(0, name.lastIndexOf('.')) + '.srt'
 	const url = window.location.origin + path;
 	const content = `
   <div class="container"><br>
@@ -724,7 +726,7 @@ function file_video(path) {
 	<video id="vplayer" width="100%" height="100%" playsinline controls data-poster="${UI.poster}">
 	  <source src="${url}" type="video/mp4" />
 	  <source src="${url}" type="video/webm" />
-	  <track kind="captions" label="English Captions" src="${UI.captions}" srclang="en" default />
+	  <track kind="captions" label="English Captions" src="${caption}" srclang="en" default />
 	</video>
   </div>
 	${UI.disable_player ? '<style>.plyr{display:none;}</style>' : ''}
