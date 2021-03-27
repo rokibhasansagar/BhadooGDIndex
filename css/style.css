@@ -15,7 +15,6 @@ body {
   width: 100%;
   /* Set the fixed height of the footer here */
   height: auto;
-  background-color: #f5f5f5;
 }
 
 body > .container {
@@ -30,7 +29,6 @@ body > .container {
   padding-right: 15px;
   padding-left: 15px;
   padding-top: 15px;
-  padding-bottom: 15px;
 }
 
 .toast {
