@@ -379,13 +379,13 @@ function append_files_to_list(path, files) {
             const filepath = path + item.name;
             var c = "file";
             // README is displayed after the last page is loaded, otherwise it will affect the scroll event
-            if (is_lastpage_loaded && item.name == "README.md") {
+            if (is_lastpage_loaded && item.name == "README.md" && UI.render_readme_md ) {
                 get_file(p, item, function(data) {
                     markdown("#readme_md", data);
                     $("img").addClass("img-fluid")
                 });
             }
-            if (item.name == "HEAD.md") {
+            if (item.name == "HEAD.md" && UI.render_head_md ) {
                 get_file(p, item, function(data) {
                     markdown("#head_md", data);
                     $("img").addClass("img-fluid")
