@@ -1,5 +1,5 @@
 // Redesigned by t.me/TheFirstSpeedster from https://github.com/ParveenBhadooOfficial/Google-Drive-Index which was written by someone else, credits are given on Source Page.
-// v2.0.13
+// v2.0.14
 // Initialize the page
 function init() {
     document.siteName = $('title').html();
@@ -136,7 +136,7 @@ function nav(path) {
                 if (n === '') {
                     break;
                 }
-                html += `<a class="dropdown-item"  href="/${cur}:${p}">> ${n}</a>`;
+                html += `<a class="dropdown-item"  href="${p}">> ${n}</a>`;
             }
         }
     }
