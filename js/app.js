@@ -463,7 +463,7 @@ function render_search_result_list() {
   <div class="card">
   <div id="readme_md" style="display:none; padding: 20px 20px;"></div>
   </div>
-  <div class="alert alert-secondary text-center" role="alert" id="count">Total <span class="number text-center"></span> items</div>
+  <div class="alert alert-secondary text-center d-none" role="alert" id="count">Total <span class="number text-center"></span> items</div>
   </div>
   `;
     $('#content').html(content);
@@ -1026,15 +1026,15 @@ $(function() {
 
 // Copy to Clipboard for Direct Links, This will be modified soon with other UI
 function copyFunction() {
-  var copyText = document.getElementById("dlurl");
-  copyText.select();
-  copyText.setSelectionRange(0, 99999);
-  document.execCommand("copy");
-  var tooltip = document.getElementById("myTooltip");
-  tooltip.innerHTML = "Copied";
+    var copyText = document.getElementById("dlurl");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+    var tooltip = document.getElementById("myTooltip");
+    tooltip.innerHTML = "Copied";
 }
 
 function outFunc() {
-  var tooltip = document.getElementById("myTooltip");
-  tooltip.innerHTML = "Copy";
+    var tooltip = document.getElementById("myTooltip");
+    tooltip.innerHTML = "Copy";
 }
