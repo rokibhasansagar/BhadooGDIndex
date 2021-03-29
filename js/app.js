@@ -1,5 +1,5 @@
 // Redesigned by t.me/TheFirstSpeedster from https://github.com/ParveenBhadooOfficial/Google-Drive-Index which was written by someone else, credits are given on Source Page.
-// v2.0.14
+// v2.0.15
 // Initialize the page
 function init() {
     document.siteName = $('title').html();
@@ -119,7 +119,7 @@ function nav(path) {
     });
     html += `</div></li>`;
 
-    html += `<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Current Path</a><div class="dropdown-menu" aria-labelledby="navbarDropdown"><a class="dropdown-item"  href="/${cur}:/ ">> Home</a>`;
+    html += `<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Current Path</a><div class="dropdown-menu" aria-labelledby="navbarDropdown"><a class="dropdown-item"  href="/">> Home</a>`;
 
     if (!model.is_search_page) {
         var arr = path.trim('/').split('/');
@@ -214,8 +214,43 @@ function list(path) {
     var content = `
   <div class="container"><br>
   <div class="card">
-  <h5 class="card-header" id="folderne"><input type="text" id="folderne" class="form-control" placeholder="Current Path: Homepage" value="" readonly><script>document.getElementById("folderne").innerHTML='Current Folder: '+decodeURI(this.window.location.href.substring(window.location.href.lastIndexOf('/',window.location.href.lastIndexOf('/')-1))).replace('/','').replace('/','');</script>
-  </h5>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb" id="folderne"><li class="breadcrumb-item"><a href="/">Home</a></li>&nbsp;->&nbsp;
+<script>
+navlink='';
+navfulllink = window.location.pathname + window.location.search;
+navfulllink.split('/').forEach(navname => {
+  if (navname != '') {
+    navlink = "" + navlink + "/" + navname + "";
+    if (navname.endsWith('?a=view/')) {
+    navnamede = decodeURIComponent(navname);
+    navnamews = navnamede.replace(/\?.+/g,"$'")
+	if (navnamews.length > 15){
+	navnamecr = navnamews.slice(0,5) + '...';
+	}
+    else {
+	navnamecr = navnamews.slice(0,15);
+	}
+    document.getElementById('folderne').innerHTML += '<li class="breadcrumb-item"><a href="' + navlink + '">' + navnamecr + '</a></li>';
+    }
+    else {
+    navnamede = decodeURIComponent(navname);
+	if (navnamede.length > 15){
+	navnamecr = navnamede.slice(0,15) + '...';
+	}
+    else {
+	navnamecr = navnamede.slice(0,15);
+	}
+    document.getElementById('folderne').innerHTML += '<li class="breadcrumb-item"><a href="' + navlink + '/">' + navnamecr + '</a></li>';
+    }
+  }
+});
+</script>
+</ol>
+</nav>
+
+
   <div id="list" class="list-group">
   </div>
   </div>
@@ -617,7 +652,6 @@ function get_file(path, file, callback) {
     }
 }
 
-
 // File display ?a=view
 function file(path) {
     var name = path.split('/').pop();
@@ -663,7 +697,7 @@ function file_others(path) {
 <div class="container"><br>
 <div class="card">
 <div class="card-body">
-  <div class="alert alert-danger" id="folderne" role="alert"></div><script>document.getElementById("folderne").innerHTML=decodeURI(this.window.location.href.substring(window.location.href.lastIndexOf('/',window.location.href.lastIndexOf('/')+1))).replace('/','').replace('?a=view','');</script>
+  <div class="alert alert-danger" id="folderna" role="alert"></div><script>document.getElementById("folderna").innerHTML=decodeURI(this.window.location.href.substring(window.location.href.lastIndexOf('/',window.location.href.lastIndexOf('/')+1))).replace('/','').replace('?a=view','');</script>
 </div>
 <div class="card-body">
 <div class="input-group mb-4">
@@ -780,7 +814,8 @@ function file_audio(path) {
   <div class="container"><br>
   <div class="card" style="background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);">
   <div class="card-body text-center">
-  <div class="alert alert-danger" id="folderne" role="alert"></div><script>document.getElementById("folderne").innerHTML=decodeURI(this.window.location.href.substring(window.location.href.lastIndexOf('/',window.location.href.lastIndexOf('/')+1))).replace('/','').replace('?a=view','');</script>
+  <div class="alert alert-danger" id="folderne" role="alert"></div>
+<script>document.getElementById("folderne").innerHTML=decodeURI(this.window.location.href.substring(window.location.href.lastIndexOf('/',window.location.href.lastIndexOf('/')+1))).replace('/','').replace('?a=view','');</script>
   <br><img draggable="false" src="${UI.audioposter}" width="100%" /><br>
   <audio id="vplayer" width="100%" playsinline controls>
     <source src="${url}" type="audio/ogg">
@@ -991,15 +1026,15 @@ $(function() {
 
 // Copy to Clipboard for Direct Links, This will be modified soon with other UI
 function copyFunction() {
-    var copyText = document.getElementById("dlurl");
-    copyText.select();
-    copyText.setSelectionRange(0, 99999);
-    document.execCommand("copy");
-    var tooltip = document.getElementById("myTooltip");
-    tooltip.innerHTML = "Copied";
+  var copyText = document.getElementById("dlurl");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  var tooltip = document.getElementById("myTooltip");
+  tooltip.innerHTML = "Copied";
 }
 
 function outFunc() {
-    var tooltip = document.getElementById("myTooltip");
-    tooltip.innerHTML = "Copy";
+  var tooltip = document.getElementById("myTooltip");
+  tooltip.innerHTML = "Copy";
 }
