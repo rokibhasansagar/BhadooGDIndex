@@ -116,14 +116,13 @@ const uiConfig = {
 | cerulean  | cosmo   | cyborg  | dark    | flatly | journal  |
 | litera    | lumen   | lux     | materia | minty  | pulse    |
 | sandstone | simplex | sketchy | slate   | solar  | spacelab |
-| superhero | united  | yeti    | light   |        |          |
-|           |         |         |         |        |          |        
+| superhero | united  | yeti    | light   |        |          |    
 
 ## Audio and Video
 
 * Poster for Video is added as default.
-* If you wish to keep one poster add image link in Config.
-* You can also set poster name as eg. poster.jpg or screenshot.png where this file should be inside the same folder as the video file is.
+* If you wish to keep one poster, add image link in Config.
+* You can also set poster link as eg. poster.jpg or screenshot.png where this file should be inside the same folder as the video file is.
 
 ## Search Limitations
 
@@ -132,11 +131,8 @@ const uiConfig = {
 
 ## Upcoming Changes
 
-* Clear Path to Navigate inside Previous Folders (currenty shows inside menu).
 * Icons from other Index for better view.
-* Adding Links to other Indexes.
 * Adding More Features from other Indexes.
-* Click to Copy Download Button
 
 ## Other Indexes
 
