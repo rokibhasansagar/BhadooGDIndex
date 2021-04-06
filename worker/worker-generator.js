@@ -335,7 +335,7 @@ async function handleRequest(request) {
     <div class="mdui-typo">
         <pre class="snippet"><code class="html js">${codeJS}</code></pre>
     </div>
-    <center><h5>© 2020 - Bhadoo Cloud Cyber Systems</h5></center>
+    <center><h5>© 2021 - Bhadoo Cloud Cyber Systems</h5></center>
 </div>
 
 <script>
