@@ -1,11 +1,11 @@
 # Google Personal/Shared Drive Index [![](https://data.jsdelivr.com/v1/package/gh/ParveenBhadooOfficial/Bhadoo-Drive-Index/badge)](https://www.jsdelivr.com/package/gh/ParveenBhadooOfficial/Bhadoo-Drive-Index) [![](https://data.jsdelivr.com/v1/package/gh/ParveenBhadooOfficial/Google-Drive-Index/badge)](https://www.jsdelivr.com/package/gh/ParveenBhadooOfficial/Google-Drive-Index) [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FParveenBhadooOfficial%2FGoogle-Drive-Index&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 
 * Supports Both My and Team/Shared Drives with Dark Mode.
-* Click https://generator.driveindex.ga to make yours or watch https://youtu.be/t4pNZdmkkJc.
+* Click https://generator.driveindex.ga to make yours or watch https://youtu.be/Ihk4Gm3DPvg.
 
-[![Screenshot](https://raw.githubusercontent.com/ParveenBhadooOfficial/Bhadoo-Drive-Index/master/images/beta-light-screenshot.png)](https://youtu.be/t4pNZdmkkJc)
+[![Screenshot](https://raw.githubusercontent.com/ParveenBhadooOfficial/Bhadoo-Drive-Index/master/images/beta-light-screenshot.png)](https://youtu.be/Ihk4Gm3DPvg)
 
-[![Screenshot](https://raw.githubusercontent.com/ParveenBhadooOfficial/Bhadoo-Drive-Index/master/images/beta-dark-screenshot.png)](https://youtu.be/t4pNZdmkkJc)
+[![Screenshot](https://raw.githubusercontent.com/ParveenBhadooOfficial/Bhadoo-Drive-Index/master/images/beta-dark-screenshot.png)](https://youtu.be/Ihk4Gm3DPvg)
 
 `Note: The Changes in your workers config can effect later due to cache. Use incognito mode everytime to open the worker URL to overcome that issue.`
 
@@ -38,7 +38,7 @@
 * Now paste the code you copied before.
 * Click on Save and Deploy.
 * Done. (May take time for some users due to new account or cache issues)
-* [Watch Video](https://youtu.be/t4pNZdmkkJc)
+* [Watch Video](https://youtu.be/Ihk4Gm3DPvg)
 
 ## Basic Config
 
