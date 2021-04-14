@@ -129,7 +129,7 @@ function nav(path) {
                 var n = arr[i];
                 n = decodeURI(n);
                 p += n + '/';
-                if (p.endsWith(".mp3/") === true || p.endsWith(".mp4/") === true || p.endsWith(".mkv/") === true || p.endsWith(".flac/") === true || p.endsWith(".m4a/") === true || p.endsWith(".pdf/") === true || p.endsWith(".jpg/") === true || p.endsWith(".png/") === true || p.endsWith(".jpeg/") === true || p.endsWith(".gif/") === true || p.endsWith(".md/") === true || p.endsWith(".zip/") === true || p.endsWith(".rar/") === true || p.endsWith(".exe/") === true || p.endsWith(".tar/") === true || p.endsWith(".txt/") === true || p.endsWith(".html/") === true) {
+                if (p.endsWith(".mp3/") === true || p.endsWith(".wma/") === true || p.endsWith(".wpl/") === true || p.endsWith(".aif/") === true || p.endsWith(".cda/") === true || p.endsWith(".mpa/") === true || p.endsWith(".wav/") === true || p.endsWith(".ogg/") === true || p.endsWith(".mp4/") === true || p.endsWith(".mkv/") === true || p.endsWith(".mov/") === true || p.endsWith(".flac/") === true || p.endsWith(".m4a/") === true || p.endsWith(".pdf/") === true || p.endsWith(".jpg/") === true || p.endsWith(".png/") === true || p.endsWith(".jpeg/") === true || p.endsWith(".gif/") === true || p.endsWith(".md/") === true || p.endsWith(".zip/") === true || p.endsWith(".rar/") === true || p.endsWith(".exe/") === true || p.endsWith(".tar/") === true || p.endsWith(".txt/") === true || p.endsWith(".html/") === true || p.endsWith(".7z/") === true || p.endsWith(".arj/") === true || p.endsWith(".deb/") === true || p.endsWith(".pkg/") === true || p.endsWith(".rpm/") === true || p.endsWith(".tar.gz/") === true || p.endsWith(".z/") === true || p.endsWith(".bin/") === true || p.endsWith(".dmg/") === true || p.endsWith(".iso/") === true || p.endsWith(".toast/") === true || p.endsWith(".vcd/") === true || p.endsWith(".csv/") === true || p.endsWith(".dat/") === true || p.endsWith(".db/") === true || p.endsWith(".dbf/") === true || p.endsWith(".log/") === true || p.endsWith(".mdv/") === true || p.endsWith(".sav/") === true || p.endsWith(".sql/") === true || p.endsWith(".xml/") === true || p.endsWith(".email/") === true || p.endsWith(".vcf/") === true || p.endsWith(".apk/") === true || p.endsWith(".bat/") === true || p.endsWith(".bin/") === true || p.endsWith(".cgi/") === true || p.endsWith(".jar/") === true || p.endsWith(".py/") === true || p.endsWith(".msi/") === true || p.endsWith(".wsf/") === true || p.endsWith(".fnt/") === true || p.endsWith(".fon/") === true || p.endsWith(".otf/") === true || p.endsWith(".ttf/") === true || p.endsWith(".ai/") === true || p.endsWith(".bmp/") === true || p.endsWith(".ico/") === true || p.endsWith(".ps/") === true || p.endsWith(".psd/") === true || p.endsWith(".svg/") === true || p.endsWith(".tif/") === true || p.endsWith(".tiff/") === true || p.endsWith(".asp/") === true || p.endsWith(".aspx/") === true || p.endsWith(".cer/") === true || p.endsWith(".cfm/") === true || p.endsWith(".cgi/") === true || p.endsWith(".pl/") === true || p.endsWith(".css/") === true || p.endsWith(".htm/") === true || p.endsWith(".html/") === true || p.endsWith(".js/") === true || p.endsWith(".jsp/") === true || p.endsWith(".part/") === true || p.endsWith(".php/") === true || p.endsWith(".rss/") === true || p.endsWith(".xhtml/") === true || p.endsWith(".key/") === true || p.endsWith(".odp/") === true || p.endsWith(".pps/") === true || p.endsWith(".ppt/") === true || p.endsWith(".pptx/") === true || p.endsWith(".pem/") === true || p.endsWith(".ppk/") === true || p.endsWith(".java/") === true || p.endsWith(".sh/") === true || p.endsWith(".vb/") === true || p.endsWith(".ods/") === true || p.endsWith(".xls/") === true || p.endsWith(".xlsm/") === true || p.endsWith(".xlsx/") === true || p.endsWith(".3gp/") === true || p.endsWith(".flv/") === true || p.endsWith(".m4v/") === true || p.endsWith(".mpg/") === true || p.endsWith(".mpeg/") === true || p.endsWith(".avi/") === true || p.endsWith(".doc/") === true || p.endsWith(".docx/") === true || p.endsWith(".rtf/") === true) {
                     p = p.slice(0, -1);
                 }
                 if (n === '') {
@@ -687,13 +687,14 @@ function file_others(path) {
         "rar": "rar",
     };
     var name = path.split('/').pop();
+    var decodename = decodeURI(name);
     var ext = name.split('.').pop().toLowerCase();
     var href = window.location.origin + path;
     var content = `
 <div class="container"><br>
 <div class="card">
 <div class="card-body">
-  <div class="alert alert-danger" id="folderna" role="alert"></div><script>document.getElementById("folderna").innerHTML=decodeURI(this.window.location.href.substring(window.location.href.lastIndexOf('/',window.location.href.lastIndexOf('/')+1))).replace('/','').replace('?a=view','');</script>
+  <div class="alert alert-danger" id="folderna" role="alert">${decodename}</div>
 </div>
 <div class="card-body">
 <div class="input-group mb-4">
@@ -721,13 +722,14 @@ function file_code(path) {
         "md": "Markdown",
     };
     var name = path.split('/').pop();
+    var decodename = decodeURI(name);
     var ext = name.split('.').pop().toLowerCase();
     var href = window.location.origin + path;
     var content = `
 <div class="container"><br>
 <div class="card">
 <div class="card-body">
-  <div class="alert alert-danger" id="folderne" role="alert"></div><script>document.getElementById("folderne").innerHTML=decodeURI(this.window.location.href.substring(window.location.href.lastIndexOf('/',window.location.href.lastIndexOf('/')+1))).replace('/','').replace('?a=view','');</script>
+  <div class="alert alert-danger" id="folderne" role="alert">${decodename}</div>
 <div>
 <pre id="editor" ></pre>
 </div>
@@ -756,13 +758,14 @@ function file_code(path) {
 // Document display video |mp4|webm|avi|
 function file_video(path) {
     const name = path.split('/').pop();
+    const decodename = decodeURI(name);
     const caption = name.slice(0, name.lastIndexOf('.')) + '.srt'
     const url = window.location.origin + path;
     const content = `
   <div class="container text-center"><br>
   <div class="card text-center">
   <div class="text-center">
-  <div class="alert alert-danger" id="folderne" role="alert"></div><script>document.getElementById("folderne").innerHTML=decodeURI(this.window.location.href.substring(window.location.href.lastIndexOf('/',window.location.href.lastIndexOf('/')+1))).replace('/','').replace('?a=view','');</script>
+  <div class="alert alert-danger" id="folderne" role="alert">${decodename}</div>
 	<video id="vplayer" width="100%" height="100%" playsinline controls data-poster="${UI.poster}">
 	  <source src="${url}" type="video/mp4" />
 	  <source src="${url}" type="video/webm" />
@@ -790,8 +793,8 @@ function file_video(path) {
       <a class="dropdown-item" href="potplayer://${url}">PotPlayer</a>
       <a class="dropdown-item" href="vlc://${url}">VLC</a>
       <a class="dropdown-item" href="nplayer-${url}">nPlayer</a>
-      <a class="dropdown-item" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=undefined;end">MX Player (Free)</a>
-      <a class="dropdown-item" href="intent:${url}#Intent;package=com.mxtech.videoplayer.pro;S.title=undefined;end">MX Player (Pro)</a>
+      <a class="dropdown-item" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${decodename};end">MX Player (Free)</a>
+      <a class="dropdown-item" href="intent:${url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${decodename};end">MX Player (Pro)</a>
     </div>
 </div>
 <button onclick="copyFunction()" onmouseout="outFunc()" class="btn btn-success"> <span class="tooltiptext" id="myTooltip">Copy</span> </button>
@@ -805,13 +808,14 @@ function file_video(path) {
 
 // File display Audio |mp3|flac|m4a|wav|ogg|
 function file_audio(path) {
+    var name = path.split('/').pop();
+    var decodename = decodeURI(name);
     var url = window.location.origin + path;
     var content = `
   <div class="container"><br>
   <div class="card" style="background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);">
   <div class="card-body text-center">
-  <div class="alert alert-danger" id="folderne" role="alert"></div>
-<script>document.getElementById("folderne").innerHTML=decodeURI(this.window.location.href.substring(window.location.href.lastIndexOf('/',window.location.href.lastIndexOf('/')+1))).replace('/','').replace('?a=view','');</script>
+  <div class="alert alert-danger" id="folderne" role="alert">${decodename}</div>
   <br><img draggable="false" src="${UI.audioposter}" width="100%" /><br>
   <audio id="vplayer" width="100%" playsinline controls>
     <source src="${url}" type="audio/ogg">
@@ -840,6 +844,8 @@ function file_audio(path) {
 
 // Document display pdf
 function file_pdf(path) {
+    const name = path.split('/').pop();
+    const decodename = decodeURI(name);
     const url = window.location.origin + path;
     const inline_url = `${url}?inline=true`
     const file_name = decodeURI(path.slice(path.lastIndexOf('/') + 1, path.length))
@@ -847,7 +853,7 @@ function file_pdf(path) {
   <div class="container"><br>
   <div class="card">
   <div class="card-body text-center">
-  <div class="alert alert-danger" id="folderne" role="alert"></div><script>document.getElementById("folderne").innerHTML=decodeURI(this.window.location.href.substring(window.location.href.lastIndexOf('/',window.location.href.lastIndexOf('/')+1))).replace('/','').replace('?a=view','');</script>
+  <div class="alert alert-danger" id="folderne" role="alert">${decodename}</div>
   <object data="${inline_url}" type="application/pdf" name="${file_name}" style="width:100%;height:94vh;"><embed src="${inline_url}" type="application/pdf"/></object>
   </div>
   <div class="card-body">
@@ -867,6 +873,8 @@ function file_pdf(path) {
 
 // image display
 function file_image(path) {
+    var name = path.split('/').pop();
+    var decodename = decodeURI(name);
     var url = window.location.origin + path;
     var durl = decodeURI(url);
     // console.log(window.location.pathname)
@@ -893,7 +901,7 @@ function file_image(path) {
   <div class="container"><br>
   <div class="card">
   <div class="card-body text-center">
-  <div class="alert alert-danger" id="folderne" role="alert"></div><script>document.getElementById("folderne").innerHTML=decodeURI(this.window.location.href.substring(window.location.href.lastIndexOf('/',window.location.href.lastIndexOf('/')+1))).replace('/','').replace('?a=view','');</script>
+  <div class="alert alert-danger" id="folderne" role="alert">${decodename}</div>
   <img src="${url}" width="50%">
   </div>
   <div class="card-body">
@@ -937,7 +945,7 @@ function utc2beijing(utc_datetime) {
     timestamp = timestamp.getTime();
     timestamp = timestamp / 1000;
 
-    // 8 hours increase, Beijing time is eight more time zones than UTC time
+    // 5.5 hours increase, India time is five and half more time zones than UTC time
     var unixtimestamp = timestamp + 5.5 * 60 * 60;
 
     // Timestamp to time
