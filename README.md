@@ -1,4 +1,8 @@
-# Google Personal/Shared Drive Index [![](https://data.jsdelivr.com/v1/package/gh/ParveenBhadooOfficial/Bhadoo-Drive-Index/badge)](https://www.jsdelivr.com/package/gh/ParveenBhadooOfficial/Bhadoo-Drive-Index) [![](https://data.jsdelivr.com/v1/package/gh/ParveenBhadooOfficial/Google-Drive-Index/badge)](https://www.jsdelivr.com/package/gh/ParveenBhadooOfficial/Google-Drive-Index) [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FParveenBhadooOfficial%2FGoogle-Drive-Index&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+# Google Personal/Shared Drive Index 
+
+[![](https://data.jsdelivr.com/v1/package/gh/ParveenBhadooOfficial/Bhadoo-Drive-Index/badge)](https://www.jsdelivr.com/package/gh/ParveenBhadooOfficial/Bhadoo-Drive-Index) [![](https://data.jsdelivr.com/v1/package/gh/ParveenBhadooOfficial/Google-Drive-Index/badge)](https://www.jsdelivr.com/package/gh/ParveenBhadooOfficial/Google-Drive-Index) [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FParveenBhadooOfficial%2FGoogle-Drive-Index&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+
+## Full Whitelabel and Customizable Index | One of a kind
 
 * Supports Both My and Team/Shared Drives with Dark Mode.
 * Click https://generator.driveindex.ga to make yours or watch https://youtu.be/Ihk4Gm3DPvg.
@@ -131,6 +135,14 @@ const uiConfig = {
 * Search only works if you use Shared Drive ID or root.
 * Search won't work or the bar won't appear if you're using Folder ID inside from root or Shared Drive.
 
+## Making your own repo, editing and making changes
+
+* Fork this Repo or Import.
+* Make your changes in `app.js` and `workers-beta.js` files.
+* Make a new release in Github.
+* Change jsDelivr CDN URL and version code in `workers-beta.js`.
+* Deploy in Cloudflare Workers.
+
 ## Upcoming Changes
 
 * Icons from other Index for better view.
@@ -156,3 +168,10 @@ const uiConfig = {
 ## Support this Project
 
 [![Support](https://cdn.buymeacoffee.com/buttons/v2/default-white.png)](https://www.buymeacoffee.com/bhadoo)
+
+### Donate by Crpto
+
+* ETH `0xaf25cdc7967213172a745453a64e8a0b59686729`
+* BTC `3BgSznxLB5u4WiuVERb1dKWeTqSSwK9NPW`
+* BAT `0xaf25cdc7967213172a745453a64e8a0b59686729`
+
