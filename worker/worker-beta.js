@@ -19,15 +19,18 @@ const authConfig = {
      * No Basic Auth disk is required, just keep user and pass empty at the same time. (No need to set it directly)
      * [Note] For the disk whose id is set to the subfolder id, the search function will not be supported (it does not affect other disks).
      */
+
+
     "roots": 
 	    [
 
-	   {id: "",
+	    {
+	    id: "",
             name: "Drive One",
             user: "",
             pass: "",
             protect_file_link: false
-             }
+            }
 
 /** Below code can be copied multiple times to add multiple drives.
     User can add array using ["", ""], upto 5 users are currently supported.
@@ -44,6 +47,8 @@ const authConfig = {
 */
 
             ],
+
+
     /**
      * The number displayed on each page of the file list page. [Recommended setting value is between 100 and 1000];
      * If the setting is greater than 1000, it will cause an error when requesting drive api;
