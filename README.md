@@ -47,13 +47,17 @@
 ## Basic Config
 
 ````
-"roots": [{
-    "id": "root", // shared drive id or folder id
-    "name": "Cloud Zero", // name for drive
-    "user": "admin", // username for id pass
-    "pass": "admin", // password for id pass (works also if their is no username, keep blank if no auth is needed.
-    "protect_file_link": true // protects the direct links when true.
-}],
+    "roots": 
+	    [
+
+	    {
+	    id: "",
+            name: "Drive One",
+            user: "",
+            pass: "",
+            protect_file_link: false
+            }
+            ],
 ````
 
 ## Multiple ID Config
