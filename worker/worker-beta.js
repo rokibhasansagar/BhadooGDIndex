@@ -20,20 +20,29 @@ const authConfig = {
      * [Note] For the disk whose id is set to the subfolder id, the search function will not be supported (it does not affect other disks).
      */
     "roots": 
-	    [{
-            "id": "",
-            "name": "Drive One",
-            "user": "",
-            "pass": "",
-            "protect_file_link": false
-             }/**,
-             {
-            "id": "",
-            "name": "Drive Two",
-            "user": "",
-            "pass": "",
-            "protect_file_link": false
-            }*/
+	    [
+
+	   {id: "",
+            name: "Drive One",
+            user: "",
+            pass: "",
+            protect_file_link: false
+             }
+
+/** Below code can be copied multiple times to add multiple drives.
+    User can add array using ["", ""], upto 5 users are currently supported.
+
+            ,
+            {
+            id: "",
+            name: "Drive Two",
+            user: ["user1", "user2"],
+            pass: ["pass1", "pass2"],
+            protect_file_link: false
+            }
+
+*/
+
             ],
     /**
      * The number displayed on each page of the file list page. [Recommended setting value is between 100 and 1000];
@@ -445,7 +454,7 @@ class googleDrive {
             if (auth) {
                 try {
                     const [received_user, received_pass] = atob(auth.split(' ').pop()).split(':');
-                    return (received_user === user && received_pass === pass) ? null : _401;
+                    return (received_user === user[0] && received_pass === pass[0] || received_user === user[1] && received_pass === pass[1] || received_user === user[2] && received_pass === pass[2] || received_user === user[3] && received_pass === pass[3] || received_user === user[4] && received_pass === pass[4]) ? null : _401;
                 } catch (e) {}
             }
         } else return null;
