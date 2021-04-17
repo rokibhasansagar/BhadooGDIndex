@@ -19,22 +19,36 @@ const authConfig = {
      * No Basic Auth disk is required, just keep user and pass empty at the same time. (No need to set it directly)
      * [Note] For the disk whose id is set to the subfolder id, the search function will not be supported (it does not affect other disks).
      */
+
+
     "roots": 
-	    [{
-            "id": "",
-            "name": "Drive One",
-            "user": "",
-            "pass": "",
-            "protect_file_link": false
-             }/**,
-             {
-            "id": "",
-            "name": "Drive Two",
-            "user": "",
-            "pass": "",
-            "protect_file_link": false
-            }*/
+	    [
+
+	    {
+	    id: "",
+            name: "Drive One",
+            user: "",
+            pass: "",
+            protect_file_link: false
+            }
+
+/** Below code can be copied multiple times to add multiple drives.
+    User can add array using ["", ""], upto 5 users are currently supported.
+
+            ,
+            {
+            id: "",
+            name: "Drive Two",
+            user: ["user1", "user2"],
+            pass: ["pass1", "pass2"],
+            protect_file_link: false
+            }
+
+*/
+
             ],
+
+
     /**
      * The number displayed on each page of the file list page. [Recommended setting value is between 100 and 1000];
      * If the setting is greater than 1000, it will cause an error when requesting drive api;
@@ -82,6 +96,8 @@ const uiConfig = {
     "poster": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.10/images/poster.jpg", // Video poster URL or see Readme to how to load from Drive
     "audioposter": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.10/images/music.jpg", // Video poster URL or see Readme to how to load from Drive
     "jsdelivr_cdn_src": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index", // If Project is Forked, then enter your Github repo
+    "render_head_md": true, // Render Head.md
+    "render_readme_md": true, // Render Readme.md
     "plyr_io_version": "3.6.4" // Change plyr.io version in future when needed.
 };
 
@@ -141,7 +157,7 @@ function html(current_drive_order = 0, model = {}) {
   <link rel="stylesheet" href="https://cdn.plyr.io/${uiConfig.plyr_io_version}/plyr.css" />
   <link rel="stylesheet" href="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/css/bootstrap/${uiConfig.theme}/bootstrap.min.css">
   <style>${uiConfig.display_size ? '' : '.csize{display:none;}'}${uiConfig.display_time ? '' : '.cmtime{display:none;}'}</style>
-  <script src="https://gdi-static-experimental.hashhackers.com/js/app.js"></script>
+  <script src="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/js/app.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/markdown-it@10.0.0/dist/markdown-it.min.js"></script>
 </head>
 <body>
@@ -443,7 +459,7 @@ class googleDrive {
             if (auth) {
                 try {
                     const [received_user, received_pass] = atob(auth.split(' ').pop()).split(':');
-                    return (received_user === user && received_pass === pass) ? null : _401;
+                    return (received_user === user[0] && received_pass === pass[0] || received_user === user[1] && received_pass === pass[1] || received_user === user[2] && received_pass === pass[2] || received_user === user[3] && received_pass === pass[3] || received_user === user[4] && received_pass === pass[4]) ? null : _401;
                 } catch (e) {}
             }
         } else return null;
