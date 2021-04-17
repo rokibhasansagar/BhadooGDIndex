@@ -58,23 +58,37 @@
 
 ## Multiple ID Config
 
+* Add this code for each drive. see cloudflare workers code for more info. (requires common sense)
+
 ````
-"roots": [{
-        "id": "root", // shared drive id or folder id
-        "name": "Cloud Zero", // name for drive
-        "user": "admin", // username for id pass
-        "pass": "admin", // password for id pass (works also if their is no username, keep blank if no auth is needed.
-        "protect_file_link": true // protects the direct links when true.
-    },
-    {
-        "id": "root", // shared drive id or folder id
-        "name": "Cloud Zero", // name for drive
-        "user": "admin", // username for id pass
-        "pass": "admin", // password for id pass (works also if their is no username, keep blank if no auth is needed.
-        "protect_file_link": true // protects the direct links when true.
-    }
-],
+            ,
+            {
+            id: "",
+            name: "Drive Two",
+            user: ["user1", "user2"],
+            pass: ["pass1", "pass2"],
+            protect_file_link: false
+            }
 ````
+
+## Multiple Users
+
+* For single user
+
+````
+            user: "yourusername",
+            pass: "yourpassword",
+````
+
+* For multiple users (upto 5 users)
+
+````
+            user: ["user1", "user2"],
+            pass: ["pass1", "pass2"],
+````
+
+* where `user1:pass1` and `user2:pass2` are combinations.
+* if users adds `user: ["", ""],` empty values but more than one empty value then the site will ask for authentication but user can enter without entering any data by clicking submit.
 
 ## Brand Customization and Dark Mode
 
