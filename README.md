@@ -51,11 +51,11 @@
 	    [
 
 	    {
-	    id: "",
-            name: "Drive One",
-            user: "",
-            pass: "",
-            protect_file_link: false
+	    "id": "",
+            "name": "Drive One",
+            "user": "",
+            "pass": "",
+            "protect_file_link": false
             }
 
             ],
@@ -68,11 +68,11 @@
 ````
             ,
             {
-            id: "",
-            name: "Drive Two",
-            user: ["user1", "user2"],
-            pass: ["pass1", "pass2"],
-            protect_file_link: false
+            "id": "",
+            "name": "Drive Two",
+            "user": ["user1", "user2"],
+            "pass": ["pass1", "pass2"],
+            "protect_file_link": false
             }
 ````
 
@@ -81,19 +81,19 @@
 * For single user
 
 ````
-            user: "yourusername",
-            pass: "yourpassword",
+            "user": "yourusername",
+            "pass": "yourpassword",
 ````
 
 * For multiple users (upto 5 users)
 
 ````
-            user: ["user1", "user2"],
-            pass: ["pass1", "pass2"],
+            "user": ["user1", "user2"],
+            "pass": ["pass1", "pass2"],
 ````
 
 * where `user1:pass1` and `user2:pass2` are combinations.
-* if users adds `user: ["", ""],` empty values but more than one empty value then the site will ask for authentication but user can enter without entering any data by clicking submit.
+* if users adds `"user": ["", ""],` empty values but more than one empty value then the site will ask for authentication but user can enter without entering any data by clicking submit.
 
 ## Brand Customization and Dark Mode
 
