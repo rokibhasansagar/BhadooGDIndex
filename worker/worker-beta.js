@@ -25,11 +25,11 @@ const authConfig = {
 	    [
 
 	    {
-	    id: "",
-            name: "Drive One",
-            user: "",
-            pass: "",
-            protect_file_link: false
+	    "id": "",
+            "name": "Drive One",
+            "user": "",
+            "pass": "",
+            "protect_file_link": false
             }
 
 /** Below code can be copied multiple times to add multiple drives.
@@ -37,11 +37,11 @@ const authConfig = {
 
             ,
             {
-            id: "",
-            name: "Drive Two",
-            user: ["user1", "user2"],
-            pass: ["pass1", "pass2"],
-            protect_file_link: false
+            "id": "",
+            "name": "Drive Two",
+            "user": ["user1", "user2"],
+            "pass": ["pass1", "pass2"],
+            "protect_file_link": false
             }
 
 */
