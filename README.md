@@ -162,7 +162,7 @@ const uiConfig = {
 * Change jsDelivr CDN URL and version code in `workers-beta.js`.
 * Deploy in Cloudflare Workers.
 
-# Get Google_Client_ID and Secret and Generate Token
+## Get Google_Client_ID and Secret and Generate Token
 
 * Open [Google Dev Credentials Site](https://console.developers.google.com/apis/credentials).
 * Create a Project, name as you like.
