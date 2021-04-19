@@ -171,7 +171,7 @@ const uiConfig = {
 * Click Configure Consent Screen.
 * Select External.
 * Fill your APP Details
-* Select Scope as `https://www.googleapis.com/auth/drive` (wait few hours if Google Drive is not showing up if you've just enbaled the scope)
+* Select Scope as `https://www.googleapis.com/auth/drive` (wait few hours if Google Drive is not showing up if you've just enabled the scope) or
 * You can also enter manual scope `https://www.googleapis.com/auth/drive` and click on add to table and then save or update.
 * Proceed with Save and Continue.
 * Add your email id you want to use as test user, upto 100 emails maximum. (Because you are not verified)
