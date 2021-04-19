@@ -27,8 +27,8 @@ const authConfig = {
 	    {
 	    "id": "",
             "name": "Drive One",
-            "user": "",
-            "pass": "",
+            "user": [""],
+            "pass": [""],
             "protect_file_link": false
             }
 
