@@ -162,6 +162,27 @@ const uiConfig = {
 * Change jsDelivr CDN URL and version code in `workers-beta.js`.
 * Deploy in Cloudflare Workers.
 
+# Get Google_Client_ID and Secret and Generate Token
+
+* Open [Google Dev Credentials Site](https://console.developers.google.com/apis/credentials).
+* Create a Project, name as you like.
+* Enable [Drive API](https://console.developers.google.com/apis/library/drive.googleapis.com)
+* In [Credentials Page](https://console.developers.google.com/apis/credentials) Click `Create Credentials` and then Click `OAuth Client ID`.
+* Click Configure Consent Screen.
+* Select External.
+* Fill your APP Details
+* Select Scope as `https://www.googleapis.com/auth/drive` (wait few hours if Google Drive is not showing up if you've just enbaled the scope)
+* You can also enter manual scope `https://www.googleapis.com/auth/drive` and click on add to table and then save or update.
+* Proceed with Save and Continue.
+* Add your email id you want to use as test user, upto 100 emails maximum. (Because you are not verified)
+* In [Credentials Page](https://console.developers.google.com/apis/credentials) Click `Create Credentials` and then Click `OAuth Client ID`.
+* Select Desktop App.
+* Now you have your own CLIENT ID and CLIENT SECRET.
+* Copy your details and save for future use.
+* Copy [this](https://github.com/ParveenBhadooOfficial/Google-Drive-Index/blob/master/worker/worker-generator.js) code.
+* Replace Line 6 and 7 with your own CLIENT ID and CLIENT SECRET.
+* Paste this code in Cloudflare Workers and follow the site.
+
 ## Upcoming Changes
 
 * Icons from other Index for better view.
@@ -193,4 +214,3 @@ const uiConfig = {
 * ETH `0xaf25cdc7967213172a745453a64e8a0b59686729`
 * BTC `3BgSznxLB5u4WiuVERb1dKWeTqSSwK9NPW`
 * BAT `0xaf25cdc7967213172a745453a64e8a0b59686729`
-
