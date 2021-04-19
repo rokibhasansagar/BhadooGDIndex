@@ -459,7 +459,7 @@ class googleDrive {
             if (auth) {
                const [received_user, received_pass] = atob(auth.split(' ').pop()).split(':');
                 if (user.includes(received_user)) {
-                    if (received_pass == pass[user.indexOf(received_user) {
+                    if (received_pass == pass[user.indexOf(received_user)]) {
                     return null;
                     } else return _401;
                 } else return _401;
