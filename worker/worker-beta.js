@@ -33,7 +33,7 @@ const authConfig = {
             }
 
 /** Below code can be copied multiple times to add multiple drives.
-    User can add array using ["", ""], upto 5 users are currently supported.
+    User can add array using ["", ""].
 
             ,
             {
@@ -457,10 +457,12 @@ class googleDrive {
         if (user || pass) {
             const auth = request.headers.get('Authorization')
             if (auth) {
-                try {
-                    const [received_user, received_pass] = atob(auth.split(' ').pop()).split(':');
-                    return (received_user === user[0] && received_pass === pass[0] || received_user === user[1] && received_pass === pass[1] || received_user === user[2] && received_pass === pass[2] || received_user === user[3] && received_pass === pass[3] || received_user === user[4] && received_pass === pass[4]) ? null : _401;
-                } catch (e) {}
+               const [received_user, received_pass] = atob(auth.split(' ').pop()).split(':');
+                if (user.includes(received_user)) {
+                    if (received_pass == pass[user.indexOf(received_user) {
+                    return null;
+                    } else return _401;
+                } else return _401;
             }
         } else return null;
         return _401;
