@@ -27,8 +27,8 @@ const authConfig = {
 	    {
 	    "id": "",
             "name": "Drive One",
-            "user": [""],
-            "pass": [""],
+            "user": "",
+            "pass": "",
             "protect_file_link": false
             }
 
@@ -98,7 +98,9 @@ const uiConfig = {
     "jsdelivr_cdn_src": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index", // If Project is Forked, then enter your Github repo
     "render_head_md": true, // Render Head.md
     "render_readme_md": true, // Render Readme.md
-    "plyr_io_version": "3.6.4" // Change plyr.io version in future when needed.
+    "plyr_io_version": "3.6.4", // Change plyr.io version in future when needed.
+    "unauthorized_owner_link": "https://i.telegram.ind.in/TheFirstSpeedster", // Unauthorized Error Page Link to Owner
+    "unauthorized_owner_email": "admin@hashhackers.com" // Unauthorized Error Page Owner Email
 };
 
 /**
@@ -167,6 +169,15 @@ function html(current_drive_order = 0, model = {}) {
   <script src="https://cdn.plyr.io/${uiConfig.plyr_io_version}/plyr.polyfilled.js"></script>
 </html>`;
 };
+
+const unauthorized = `<html>
+<head><title>401 Unauthorized</title></head>
+<body>
+<center><h1>401 Unauthorized</h1></center>
+<hr><center>nginx/1.18.0</center>
+<center>Please contact <a href="${uiConfig.unauthorized_owner_link}">Site Owner</a> at ${uiConfig.unauthorized_owner_email}</center>
+</body>
+</html>`
 
 addEventListener('fetch', event => {
     event.respondWith(handleRequest(event.request));
@@ -448,9 +459,10 @@ class googleDrive {
     basicAuthResponse(request) {
         const user = this.root.user || '',
             pass = this.root.pass || '',
-            _401 = new Response('Unauthorized', {
+            _401 = new Response(unauthorized, {
                 headers: {
-                    'WWW-Authenticate': `Basic realm="goindex:drive:${this.order}"`
+                    'WWW-Authenticate': `Basic realm="goindex:drive:${this.order}"`,
+		    'content-type': 'text/html;charset=UTF-8'
                 },
                 status: 401
             });
