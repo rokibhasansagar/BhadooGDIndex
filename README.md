@@ -76,7 +76,7 @@
             }
 ````
 
-## Multiple Users
+## Multiple Users Password
 
 * For single user
 
@@ -95,6 +95,13 @@
 * where `user1:pass1` and `user2:pass2` are combinations.
 * if users adds `"user": ["", ""],` empty values but more than one empty value then the site will ask for authentication but user can enter without entering any data by clicking submit.
 
+## Use of .password File
+
+* This is directory encryption added by the original author.
+* Add a .password file your required password in your folder which you want to protect, each folder should have its own .password file.
+* The password is stored inside the Google Drive Folder, not the index and the .password file is hidden an cannot be accessed using Index.
+* Example use https://bit.ly/3tBxXJN and password is `thispassword`
+
 ## Brand Customization and Dark Mode
 
 * In Latest Release, you can rebrand the Index as per your needs.
@@ -102,7 +109,6 @@
 * After that each line has its own custom feature. Edit as per your needs.
 * You can remove credit option but we request you not to.
 * See Below code to understand Customization.
-
 
 ````
 const uiConfig = {
