@@ -27,13 +27,13 @@ const authConfig = {
 	    {
 	    "id": "",
             "name": "Drive One",
-            "user": [""],
-            "pass": [""],
+            "user": "",
+            "pass": "",
             "protect_file_link": false
             }
 
 /** Below code can be copied multiple times to add multiple drives.
-    User can add array using ["", ""], upto 5 users are currently supported.
+    User can add array using ["", ""].
 
             ,
             {
@@ -98,7 +98,11 @@ const uiConfig = {
     "jsdelivr_cdn_src": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index", // If Project is Forked, then enter your Github repo
     "render_head_md": true, // Render Head.md
     "render_readme_md": true, // Render Readme.md
-    "plyr_io_version": "3.6.4" // Change plyr.io version in future when needed.
+    "plyr_io_version": "3.6.4", // Change plyr.io version in future when needed.
+    "unauthorized_owner_link": "https://i.telegram.ind.in/TheFirstSpeedster", // Unauthorized Error Page Link to Owner
+    "unauthorized_owner_email": "admin@hashhackers.com", // Unauthorized Error Page Owner Email
+    "enable_arc": true, // If you want to use arc.io
+    "arc_code": "jfoY2h19" // arc.io Integraion Code, get yours from https://portal.arc.io
 };
 
 /**
@@ -144,6 +148,7 @@ function html(current_drive_order = 0, model = {}) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
   <title>${authConfig.siteName}</title>
+  ${uiConfig.enable_arc ? '<script async src="https://arc.io/widget.min.js#': ''}${uiConfig.arc_code}${uiConfig.enable_arc ? '"></script>': ''}
   <meta name="robots" content="noindex" />
   <link rel="icon" href="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/images/favicon.ico">
   <script>
@@ -167,6 +172,15 @@ function html(current_drive_order = 0, model = {}) {
   <script src="https://cdn.plyr.io/${uiConfig.plyr_io_version}/plyr.polyfilled.js"></script>
 </html>`;
 };
+
+const unauthorized = `<html>
+<head><title>401 Unauthorized</title></head>
+<body>
+<center><h1>401 Unauthorized</h1></center>
+<hr><center>nginx/1.18.0</center>
+<center>Please contact <a href="${uiConfig.unauthorized_owner_link}">Site Owner</a> at ${uiConfig.unauthorized_owner_email}</center>
+</body>
+</html>`
 
 addEventListener('fetch', event => {
     event.respondWith(handleRequest(event.request));
@@ -213,11 +227,11 @@ async function handleRequest(request) {
     }
 
     if (path == '/') return redirectToIndexPage();
-    if (path.toLowerCase() == '/favicon.ico') {
-        // You can find a favicon later
-        return new Response('', {
-            status: 404
-        })
+    if (path.toLowerCase() == '/arc-sw.js'){
+        return fetch("https://arc.io/arc-sw.js")
+    }
+    else if (path.toLowerCase() == '/admin') {
+        return Response.redirect("https://bit.ly/3sAxYwr", 301)
     }
 
     // Special command format
@@ -448,19 +462,22 @@ class googleDrive {
     basicAuthResponse(request) {
         const user = this.root.user || '',
             pass = this.root.pass || '',
-            _401 = new Response('Unauthorized', {
+            _401 = new Response(unauthorized, {
                 headers: {
-                    'WWW-Authenticate': `Basic realm="goindex:drive:${this.order}"`
+                    'WWW-Authenticate': `Basic realm="goindex:drive:${this.order}"`,
+		    'content-type': 'text/html;charset=UTF-8'
                 },
                 status: 401
             });
         if (user || pass) {
             const auth = request.headers.get('Authorization')
             if (auth) {
-                try {
-                    const [received_user, received_pass] = atob(auth.split(' ').pop()).split(':');
-                    return (received_user === user[0] && received_pass === pass[0] || received_user === user[1] && received_pass === pass[1] || received_user === user[2] && received_pass === pass[2] || received_user === user[3] && received_pass === pass[3] || received_user === user[4] && received_pass === pass[4]) ? null : _401;
-                } catch (e) {}
+               const [received_user, received_pass] = atob(auth.split(' ').pop()).split(':');
+                if (user.includes(received_user)) {
+                    if (received_pass == pass[user.indexOf(received_user)]) {
+                    return null;
+                    } else return _401;
+                } else return _401;
             }
         } else return null;
         return _401;
