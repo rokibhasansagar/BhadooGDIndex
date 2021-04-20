@@ -224,11 +224,11 @@ async function handleRequest(request) {
     }
 
     if (path == '/') return redirectToIndexPage();
-    if (path.toLowerCase() == '/favicon.ico') {
-        // You can find a favicon later
-        return new Response('', {
-            status: 404
-        })
+    if (path.toLowerCase() == '/arc-sw.js'){
+        return fetch("https://arc.io/arc-sw.js")
+    }
+    else if (path.toLowerCase() == '/admin') {
+        return Response.redirect("https://bit.ly/3sAxYwr", 301)
     }
 
     // Special command format
