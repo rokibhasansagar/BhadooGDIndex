@@ -148,7 +148,7 @@ function html(current_drive_order = 0, model = {}) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
   <title>${authConfig.siteName}</title>
-  ${uiConfig.enable_arc ? '<script async src="https://arc.io/widget.min.js#': ''}${uiConfig.arc_code}${uiConfig.enable_arc ? '"></script>': ''}
+  ${uiConfig.enable_arc ? '<script async src="https://arc.io/widget.min.js#': '<!--'}${uiConfig.arc_code}${uiConfig.enable_arc ? '"></script>': '-->'}
   <meta name="robots" content="noindex" />
   <link rel="icon" href="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/images/favicon.ico">
   <script>
