@@ -81,19 +81,20 @@
 * For single user
 
 ````
-            "user": "yourusername",
-            "pass": "yourpassword",
+            {"yourusername":"yourpassword"}
 ````
 
-* For multiple users (upto 5 users)
+* For multiple users
 
 ````
-            "user": ["user1", "user2"],
-            "pass": ["pass1", "pass2"],
+          {
+            "user1":"pass1",
+            "user2":"pass2"
+          }
 ````
 
 * where `user1:pass1` and `user2:pass2` are combinations.
-* if users adds `"user": ["", ""],` empty values but more than one empty value then the site will ask for authentication but user can enter without entering any data by clicking submit.
+* if users adds `"auth":{"":""}` empty values but more than one empty value then the site will ask for authentication but user can enter without entering any data by clicking submit.
 
 ## Use of .password File
 
