@@ -53,10 +53,9 @@
 	    {
 	    "id": "",
             "name": "Drive One",
-            "user": "",
-            "pass": "",
-            "protect_file_link": false
-            }
+            "protect_file_link": false,
+            "auth":{"username":"password"}
+            },
 
             ],
 ````
@@ -66,14 +65,12 @@
 * Add this code for each drive. see cloudflare workers code for more info. (requires common sense)
 
 ````
-            ,
             {
             "id": "",
             "name": "Drive Two",
-            "user": ["user1", "user2"],
-            "pass": ["pass1", "pass2"],
-            "protect_file_link": false
-            }
+            "protect_file_link": false,
+            "auth":{"username":"password"}
+            },
 ````
 
 ## Multiple Users Password
@@ -89,7 +86,7 @@
 ````
           {
             "user1":"pass1",
-            "user2":"pass2"
+            "user2":"pass2",
           }
 ````
 
