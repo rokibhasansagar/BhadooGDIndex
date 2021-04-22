@@ -768,6 +768,7 @@ function file_video(path) {
     const caption = name.slice(0, name.lastIndexOf('.')) + '.srt'
     const urls = window.location.origin + path;
     const url = decodeURI(urls);
+    const url_without_https = url.replace(/^(https?:|)\/\//,'')
     const content = `
   <div class="container text-center"><br>
   <div class="card text-center">
@@ -796,12 +797,13 @@ function file_video(path) {
       <span class="sr-only"></span>
     </button>
     <div class="dropdown-menu">
-      <a class="dropdown-item" href="iina://weblink?url=${url}">IINA</a>
-      <a class="dropdown-item" href="potplayer://${url}">PotPlayer</a>
-      <a class="dropdown-item" href="vlc://${url}">VLC</a>
-      <a class="dropdown-item" href="nplayer-${url}">nPlayer</a>
-      <a class="dropdown-item" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${decodename};end">MX Player (Free)</a>
-      <a class="dropdown-item" href="intent:${url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${decodename};end">MX Player (Pro)</a>
+	<a class="dropdown-item" href="iina://weblink?url=${url}">IINA</a>
+	<a class="dropdown-item" href="potplayer://${url}">PotPlayer</a>
+	<a class="dropdown-item" href="vlc://${url}">VLC</a>
+	<a class="dropdown-item" href="nplayer-${url}">nPlayer</a>
+	<a class="dropdown-item" href="intent://${url_without_https}#Intent;type=video/any;package=is.xyz.mpv;scheme=https;end;">mpv-android</a>
+	<a class="dropdown-item" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${decodename};end">MX Player (Free)</a>
+	<a class="dropdown-item" href="intent:${url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${decodename};end">MX Player (Pro)</a>
     </div>
 </div>
 <button onclick="copyFunction()" onmouseout="outFunc()" class="btn btn-success"> <span class="tooltiptext" id="myTooltip">Copy</span> </button>
