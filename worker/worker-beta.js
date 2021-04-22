@@ -35,8 +35,7 @@ const authConfig = {
       {
           "id": "",
           "name": "Drive Two",
-          "protect_file_link": false,
-          // "auth": { "user1":"pass1", "user2":"pass2", }  /** remove double slash at starting of this line to use password. */
+          "protect_file_link": false,          // "auth": { "user1":"pass1", "user2":"pass2", }  // remove double slash at starting of this line to use password.
       },
  
 */
