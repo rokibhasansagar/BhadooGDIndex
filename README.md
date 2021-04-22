@@ -91,7 +91,7 @@
             "pass": "yourpassword",
 ````
 
-* For multiple users (upto 5 users)
+* For multiple users (unlimited users)
 
 ````
             "user": ["user1", "user2"],
