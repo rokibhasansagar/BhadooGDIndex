@@ -4,6 +4,7 @@
 
 ## Full Whitelabel and Customizable Index | One of a kind
 
+* Discuss Problems here at [Discussions](https://github.com/ParveenBhadooOfficial/Google-Drive-Index/discussions)
 * Supports Both My and Team/Shared Drives with Dark Mode.
 * Click https://generator.driveindex.ga to make yours or watch https://youtu.be/Ihk4Gm3DPvg.
 
@@ -27,7 +28,7 @@
 
 * Stable Release `2.0.16` on generator.driveindex.ga
 * Unstable Release `2.0.16-x` x here could be anything.
-* Beta Version (Latest) - [generator.driveindex.ga](https://generator.driveindex.ga) (Dark Theme Available)
+* Beta Version (Latest) - [generator.driveindex.ga](https://generator.driveindex.ga) (22 Themes Available)
 * If you want to deploy main drive leave the option ROOT as it is.
 * If you want to deploy your Team Drive/Shared Drive/Folder then copy the ID and replace it with ROOT.
 * Eg. if you open this shared drive `https://drive.google.com/drive/u/0/folders/0AOM2i7MQiuWIUk9PVA` - `0AOM2i7MQiuWIUk9PVA` is its ID.
