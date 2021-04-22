@@ -20,33 +20,32 @@ const authConfig = {
      * [Note] For the disk whose id is set to the subfolder id, the search function will not be supported (it does not affect other disks).
      */
 
-
     "roots": 
-	    [
-
-	    {
-	    "id": "",
-            "name": "Drive One",
-            "user": "",
-            "pass": "",
-            "protect_file_link": false
-            }
+        [
+        
+        {
+        "id": "root",
+        "name": "Drive One",
+        "user": "a", // ["user1", "user2"], if more than 1 user
+        "pass": "b", // ["pass1", "pass2"], if more than 1 user
+        "protect_file_link": false
+        }
 
 /** Below code can be copied multiple times to add multiple drives.
-    User can add array using ["", ""].
+    User can add array using ["", ""], upto 5 users are currently supported.
 
-            ,
-            {
-            "id": "",
-            "name": "Drive Two",
-            "user": ["user1", "user2"],
-            "pass": ["pass1", "pass2"],
-            "protect_file_link": false
-            }
+        ,
+        {
+        "id": "",
+        "name": "Drive Two",
+        "user": ["user1", "user2"],
+        "pass": ["pass1", "pass2"],
+        "protect_file_link": false
+        }
 
 */
 
-            ],
+        ],
 
 
     /**
@@ -99,8 +98,8 @@ const uiConfig = {
     "render_head_md": true, // Render Head.md
     "render_readme_md": true, // Render Readme.md
     "plyr_io_version": "3.6.4", // Change plyr.io version in future when needed.
-    "unauthorized_owner_link": "https://i.telegram.ind.in/TheFirstSpeedster", // Unauthorized Error Page Link to Owner
-    "unauthorized_owner_email": "admin@hashhackers.com", // Unauthorized Error Page Owner Email
+    "unauthorized_owner_link": "https://i.telegram.ind.in/BhadooCloud", // Unauthorized Error Page Link to Owner
+    "unauthorized_owner_email": "enter your email here", // Unauthorized Error Page Owner Email
     "enable_arc": true, // If you want to use arc.io
     "arc_code": "jfoY2h19" // arc.io Integraion Code, get yours from https://portal.arc.io
 };
@@ -208,7 +207,7 @@ async function handleRequest(request) {
     }
 
     // From path extract from drive order
-    // 并根据 drive order 获取对应的 gd instance
+    // And get the corresponding gd instance according to drive order
     let gd;
     let url = new URL(request.url);
     let path = url.pathname;
@@ -235,7 +234,7 @@ async function handleRequest(request) {
     }
 
     // Special command format
-    const command_reg = /^\/(?<num>\d+):(?<command>[a-zA-Z0-9]+)$/g;
+    const command_reg = /^\/(?<num>\d+):(?<command>[a-zA-Z0-9]+)(\/.*)?$/g;
     const match = command_reg.exec(path);
     if (match) {
         const num = match.groups.num;
@@ -693,7 +692,7 @@ class googleDrive {
         params.q = `trashed = false AND name !='.password' AND (${name_search_str})`;
         params.fields = "nextPageToken, files(id, name, mimeType, size , modifiedTime)";
         params.pageSize = this.authConfig.search_result_list_page_size;
-        // params.orderBy = 'folder,name,modifiedTime desc';
+        params.orderBy = 'folder,name,modifiedTime desc';
 
         let url = 'https://www.googleapis.com/drive/v3/files';
         url += '?' + this.enQuery(params);
