@@ -312,16 +312,16 @@ async function handleRequest(request) {
                 <label class="mdui-textfield-label">Drive Folder/Shared Drive ID instead of root</label>
                 <input class="mdui-textfield-input" type="text" value="root" name="root"/>
             </div>
-            <h4>Username and Password works only if it's root or Shared Drive (not for folders inside Drive)</h4>
+            <h4>Username and Password works only if it's root or Shared Drive (not for folders inside Drive) --> Now Enter Details inside the code, multiple users supported.</h4>
             <div class="mdui-textfield">
                 <i class="mdui-icon material-icons">account_circle</i>
                 <label class="mdui-textfield-label">Set Username (Optional)</label>
-                <input class="mdui-textfield-input" type="text" name="user"/>
+                <input class="mdui-textfield-input" type="text" name="user" readonly>
             </div>
             <div class="mdui-textfield">
                 <i class="mdui-icon material-icons">enhanced_encryption</i>
                 <label class="mdui-textfield-label">Set Password (Optional)</label>
-                <input class="mdui-textfield-input" type="password" name="root_pass"/>
+                <input class="mdui-textfield-input" type="password" name="root_pass" readonly>
             </div>
             <div class="mdui-textfield">
                 <input class="mdui-btn mdui-color-theme-accent mdui-ripple" type='submit' value="2. Generate Code"/>
@@ -335,10 +335,11 @@ async function handleRequest(request) {
     <div class="mdui-typo">
         <pre class="snippet"><code class="html js">${codeJS}</code></pre>
     </div>
-    <center><h5>© 2021 - Bhadoo Cloud Cyber Systems</h5></center>
+    <center><h5>© <span id="year"></span> - Bhadoo Cloud Cyber Systems</h5></center>
 </div>
 
 <script>
+    document.getElementById("year").innerHTML = new Date().getFullYear();
     /*snippets.js*/
     var snippets = document.querySelectorAll('.snippet');
     
