@@ -1,13 +1,20 @@
 /**
  * A Script Redesigned by Parveen Bhadoo from GOIndex at https://github.com/ParveenBhadooOfficial/Google-Drive-Index
  */
+
+// add multiple serviceaccounts as {}, {}, {}, random account will be selected by each time app is opened.
+const serviceaccounts = [
+    {}
+];
+const randomserviceaccount = serviceaccounts[Math.floor(Math.random()*serviceaccounts.length)];
+
 const authConfig = {
     "siteName": "Bhadoo Drive Index", // Website name
     "client_id": "58094879805-4654k2k5nqdid5bavft7fvea5u9po0t1.apps.googleusercontent.com", // Client id from Google Cloud Console
     "client_secret": "ZNPZ-vS6N9Zjsyb_sNMZmXHL", // Client Secret from Google Cloud Console
     "refresh_token": "", // Authorize token
     "service_account": false, // true if you're using Service Account instead of user account
-    "service_account_json": {}, // appropriate values for SA, more in ReadMe file
+    "service_account_json": randomserviceaccount, // appropriate values for SA, more in ReadMe file
     /**
      * Set up multiple Drives to display; add multiples by format
      * [id]: It can be the team disk id, subfolder id, or "root" (representing the root directory of personal disk);
@@ -26,7 +33,7 @@ const authConfig = {
           "id": "",
           "name": "Drive One",
           "protect_file_link": false,
-          "auth": {"username":"password"}
+         // "auth": {"username":"password"} /** Remove double slash before "auth" to activate id password protection */
       },
  
 /** Below code can be copied multiple times to add multiple drives.
