@@ -2,10 +2,12 @@
  * A Script Redesigned by Parveen Bhadoo from GOIndex at https://github.com/ParveenBhadooOfficial/Google-Drive-Index
  */
 const authConfig = {
-    "siteName": "Google Drive Index", // Website name
-    "client_id": "58094879805-4654k2k5nqdid5bavft7fvea5u9po0t1.apps.googleusercontent.com",
-    "client_secret": "ZNPZ-vS6N9Zjsyb_sNMZmXHL",
+    "siteName": "Bhadoo Drive Index", // Website name
+    "client_id": "58094879805-4654k2k5nqdid5bavft7fvea5u9po0t1.apps.googleusercontent.com", // Client id from Google Cloud Console
+    "client_secret": "ZNPZ-vS6N9Zjsyb_sNMZmXHL", // Client Secret from Google Cloud Console
     "refresh_token": "", // Authorize token
+    "service_account": false, // true if you're using Service Account instead of user account
+    "service_account_json": {}, // appropriate values for SA, more in ReadMe file
     /**
      * Set up multiple Drives to display; add multiples by format
      * [id]: It can be the team disk id, subfolder id, or "root" (representing the root directory of personal disk);
@@ -19,21 +21,20 @@ const authConfig = {
      * No Basic Auth disk is required, just keep user and pass empty at the same time. (No need to set it directly)
      * [Note] For the disk whose id is set to the subfolder id, the search function will not be supported (it does not affect other disks).
      */
-
     "roots": 
         [
-        
         {
         "id": "root",
         "name": "Drive One",
-        "user": "a", // ["user1", "user2"], if more than 1 user
-        "pass": "b", // ["pass1", "pass2"], if more than 1 user
+        "user": "", // ["user1", "user2"], if more than 1 user
+        "pass": "", // ["pass1", "pass2"], if more than 1 user
         "protect_file_link": false
         }
+/** Below code can be copied multiple times to add multiple drives. 
+    User can add array using ["", ""], no limit on number of users.*/
 
-/** Below code can be copied multiple times to add multiple drives.
-    User can add array using ["", ""], upto 5 users are currently supported.
-
+/** Remove this line if using below code
+         
         ,
         {
         "id": "",
@@ -43,7 +44,7 @@ const authConfig = {
         "protect_file_link": false
         }
 
-*/
+*/// Remove this line if using above code
 
         ],
 
@@ -70,7 +71,7 @@ const authConfig = {
      * [Note] If the password verification of the .password file is turned on, each time the directory is listed, the overhead of querying the directory for the existence of the .password file is additionally added.
      */
     "enable_password_file_verify": false
-};
+    };
 
 
 /**
@@ -79,11 +80,13 @@ const authConfig = {
 const uiConfig = {
     "theme": "dark", // switch between themes, default set to dark, select from https://github.com/ParveenBhadooOfficial/Google-Drive-Index#themes
     "dark_mode": true, // incase you're viewing wrong colors try switching this
-    "version": "2.0.15", // don't touch this one. get latest code using generator at https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index
+    "version": "2.0.15", // don't touch this one. get latest code using generator at https://generator.driveindex.ga
+    // If you're using Image then set to true, If you want text then set it to false
     "logo_image": true, // true if you're using image link in next option.
     "logo_height": "", // only if logo_image is true
     "logo_width": "100px", // only if logo_image is true
-    "logo_link_name": "https://cdn.jsdelivr.net/gh/jscdn/svg@1.0.3/bhadoo-cloud-logo-white.svg", // if logo is true then link otherwise just text for name
+    // if logo is true then link otherwise just text for name
+    "logo_link_name": "https://cdn.jsdelivr.net/gh/jscdn/svg@1.0.3/bhadoo-cloud-logo-white.svg",
     "contact_link": "https://t.telegram.ind.in/BhadooCloud", // Link to Contact Button on Menu
     "copyright_year": "2050", // year of copyright, can be anything like 2015 - 2020 or just 2020
     "company_name": "Bhadoo Cloud", // Name next to copyright
@@ -136,6 +139,66 @@ const CONSTS = new(class {
     folder_mime_type = 'application/vnd.google-apps.folder';
 })();
 
+/**
+ * Functions that are required to generate the JWT token required for service account authentication
+ */
+const JWT = {
+  header: {
+    alg: 'RS256',
+    typ: 'JWT'
+  },
+  importKey: async function(pemKey) {
+    var pemDER = this.textUtils.base64ToArrayBuffer(pemKey.split('\n').map(s => s.trim()).filter(l => l.length && !l.startsWith('---')).join(''));
+    return crypto.subtle.importKey('pkcs8', pemDER, { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' }, false, ['sign']);
+  },
+  createSignature: async function(text, key) {
+    const textBuffer = this.textUtils.stringToArrayBuffer(text);
+    return crypto.subtle.sign('RSASSA-PKCS1-v1_5', key, textBuffer)
+  },
+  generateGCPToken: async function(serviceAccount) {
+    const iat = parseInt(Date.now()/1000);
+    var payload = {
+      "iss": serviceAccount.client_email,
+      "scope": "https://www.googleapis.com/auth/drive",
+      "aud": "https://oauth2.googleapis.com/token",
+      "exp": iat+3600,
+      "iat": iat
+    };
+    const encPayload = btoa(JSON.stringify(payload));
+    const encHeader = btoa(JSON.stringify(this.header));
+    var key = await this.importKey(serviceAccount.private_key);
+    var signed = await this.createSignature(encHeader+"."+encPayload, key);
+    return encHeader+"."+encPayload+"."+this.textUtils.arrayBufferToBase64(signed).replace(/\//g, '_').replace(/\+/g, '-');
+  },
+  textUtils: {
+    base64ToArrayBuffer: function(base64) {
+      var binary_string = atob(base64);
+      var len = binary_string.length;
+      var bytes = new Uint8Array(len);
+      for (var i = 0; i < len; i++) {
+        bytes[i] = binary_string.charCodeAt(i);
+      }
+      return bytes.buffer;
+    },
+    stringToArrayBuffer: function(str){
+      var len = str.length;
+      var bytes = new Uint8Array(len);
+      for (var i = 0; i < len; i++) {
+        bytes[i] = str.charCodeAt(i);
+      }
+      return bytes.buffer;
+    },
+    arrayBufferToBase64: function(buffer) {
+      let binary = '';
+      let bytes = new Uint8Array(buffer);
+      let len = bytes.byteLength;
+      for (let i = 0; i < len; i++) {
+        binary += String.fromCharCode(bytes[i]);
+      }
+      return btoa(binary);
+    }
+  }
+};
 
 // gd instances
 var gds = [];
@@ -161,7 +224,7 @@ function html(current_drive_order = 0, model = {}) {
   <link rel="stylesheet" href="https://cdn.plyr.io/${uiConfig.plyr_io_version}/plyr.css" />
   <link rel="stylesheet" href="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/css/bootstrap/${uiConfig.theme}/bootstrap.min.css">
   <style>${uiConfig.display_size ? '' : '.csize{display:none;}'}${uiConfig.display_time ? '' : '.cmtime{display:none;}'}</style>
-  <script src="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/js/app.min.js"></script>
+  <script src="//gateway.hashhackers.com/app.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/markdown-it@10.0.0/dist/markdown-it.min.js"></script>
 </head>
 <body>
@@ -464,7 +527,7 @@ class googleDrive {
             _401 = new Response(unauthorized, {
                 headers: {
                     'WWW-Authenticate': `Basic realm="goindex:drive:${this.order}"`,
-		    'content-type': 'text/html;charset=UTF-8'
+		            'content-type': 'text/html;charset=UTF-8'
                 },
                 status: 401
             });
@@ -877,11 +940,21 @@ class googleDrive {
         const headers = {
             'Content-Type': 'application/x-www-form-urlencoded'
         };
-        const post_data = {
-            'client_id': this.authConfig.client_id,
-            'client_secret': this.authConfig.client_secret,
-            'refresh_token': this.authConfig.refresh_token,
-            'grant_type': 'refresh_token'
+        var post_data;
+        if(this.authConfig.service_account && typeof this.authConfig.service_account_json != "undefined")
+        {
+        const jwttoken = await JWT.generateGCPToken(this.authConfig.service_account_json);
+        post_data = {
+            grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+            assertion: jwttoken,
+        };
+        } else {
+        post_data = {
+            client_id: this.authConfig.client_id,
+            client_secret: this.authConfig.client_secret,
+            refresh_token: this.authConfig.refresh_token,
+            grant_type: "refresh_token",
+        };
         }
 
         let requestOption = {
