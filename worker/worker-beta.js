@@ -33,7 +33,7 @@ const authConfig = {
           "id": "",
           "name": "Drive One",
           "protect_file_link": false,
-         // "auth": {"username":"password"} /** Remove double slash before "auth" to activate id password protection */
+         // "auth": {"username":"password"} // Remove double slash before "auth" to activate id password protection
       },
  
 /** Below code can be copied multiple times to add multiple drives.
@@ -42,11 +42,8 @@ const authConfig = {
       {
           "id": "",
           "name": "Drive Two",
-          "protect_file_link": false,
-          "auth": {
-            "user1":"pass1",
-            "user2":"pass2",
-          }
+          "protect_file_link": false, 
+         // "auth": { "user1":"pass1", "user2":"pass2", }  // remove double slash at starting of this line to use password.
       },
  
 */

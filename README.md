@@ -4,7 +4,8 @@
 
 ## Full Whitelabel and Customizable Index | One of a kind
 
-* Supports Both My and Team/Shared Drives with Dark Mode and 20 other themes.
+* Discuss Problems here at [Discussions](https://github.com/ParveenBhadooOfficial/Google-Drive-Index/discussions)
+* Supports Both My and Team/Shared Drives with Dark Mode.
 * Click https://generator.driveindex.ga to make yours or watch https://youtu.be/Ihk4Gm3DPvg.
 
 [![](https://opengraph.githubassets.com/cc723ada47a587e6a6de9850ee06dc5e6eeeb8a33560e9313cafdebc4c18bb42/ParveenBhadooOfficial/Google-Drive-Index)](https://github.com/ParveenBhadooOfficial/Google-Drive-Index)
@@ -120,7 +121,7 @@
 const uiConfig = {
     "theme": "dark", // switch between themes, default set to dark, select from https://github.com/ParveenBhadooOfficial/Google-Drive-Index#themes
     "dark_mode": true, // incase you're viewing wrong colors try switching this
-    "version": "2.0.15", // don't touch this one. get latest code using generator at https://generator.driveindex.ga
+    "version": "2.0.16", // don't touch this one. get latest code using generator at https://generator.driveindex.ga
     // If you're using Image then set to true, If you want text then set it to false
     "logo_image": true, // true if you're using image link in next option.
     "logo_height": "", // only if logo_image is true
