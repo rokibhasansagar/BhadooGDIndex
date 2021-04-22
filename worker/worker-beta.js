@@ -10,8 +10,7 @@ const authConfig = {
      * Set up multiple Drives to display; add multiples by format
      * [id]: It can be the team disk id, subfolder id, or "root" (representing the root directory of personal disk);
      * [name]: Display name
-     * [user]: Basic Auth's username
-     * [pass]: Basic Auth Password
+     * [auth]: Basic Auth's username & Basic Auth Password in dict/json format.
      * [protect_file_link]: Basic Auth Whether it is used to protect the file link, the default value (when not set) is false, that is, the file link is not protected (convenient for straight-chain download / external playback, etc.)
      * Basic Auth for each disk can be set individually. Basic Auth protects all folders / subfolders in the disk by default
      * [Note] The file link is not protected by default, which can facilitate straight-chain download / external playback;
@@ -19,33 +18,32 @@ const authConfig = {
      * No Basic Auth disk is required, just keep user and pass empty at the same time. (No need to set it directly)
      * [Note] For the disk whose id is set to the subfolder id, the search function will not be supported (it does not affect other disks).
      */
-
-    "roots": 
-        [
-        
-        {
-        "id": "root",
-        "name": "Drive One",
-        "user": "a", // ["user1", "user2"], if more than 1 user
-        "pass": "b", // ["pass1", "pass2"], if more than 1 user
-        "protect_file_link": false
-        }
-
+ 
+ 
+    "roots":[
+      {
+          "id": "",
+          "name": "Drive One",
+          "protect_file_link": false,
+          "auth": {"username":"password"}
+      },
+ 
 /** Below code can be copied multiple times to add multiple drives.
-    User can add array using ["", ""], upto 5 users are currently supported.
-
-        ,
-        {
-        "id": "",
-        "name": "Drive Two",
-        "user": ["user1", "user2"],
-        "pass": ["pass1", "pass2"],
-        "protect_file_link": false
-        }
-
+    User can add multiple username and password using json. Example - {"user1":"pass1", "user2":"pass2"}.
+ 
+      {
+          "id": "",
+          "name": "Drive Two",
+          "protect_file_link": false,
+          "auth": {
+            "user1":"pass1",
+            "user2":"pass2",
+          }
+      },
+ 
 */
-
-        ],
+ 
+            ],
 
 
     /**
@@ -459,21 +457,20 @@ class googleDrive {
      * @returns {Response|null}
      */
     basicAuthResponse(request) {
-        const user = this.root.user || '',
-            pass = this.root.pass || '',
-            _401 = new Response(unauthorized, {
+        const auth = this.root.auth || '',
+          _401 = new Response(unauthorized, {
                 headers: {
                     'WWW-Authenticate': `Basic realm="goindex:drive:${this.order}"`,
-		    'content-type': 'text/html;charset=UTF-8'
+                    'content-type': 'text/html;charset=UTF-8'
                 },
                 status: 401
             });
-        if (user || pass) {
-            const auth = request.headers.get('Authorization')
-            if (auth) {
-               const [received_user, received_pass] = atob(auth.split(' ').pop()).split(':');
-                if (user.includes(received_user)) {
-                    if (received_pass == pass[user.indexOf(received_user)]) {
+        if (auth) {
+            const _auth = request.headers.get('Authorization')
+            if (_auth) {
+               const [received_user, received_pass] = atob(_auth.split(' ').pop()).split(':');
+                if (auth.hasOwnProperty(received_user)) {
+                    if (auth[received_user] == received_pass) {
                     return null;
                     } else return _401;
                 } else return _401;
