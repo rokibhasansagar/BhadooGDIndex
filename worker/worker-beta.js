@@ -300,6 +300,9 @@ async function handleRequest(request) {
     else if (path.toLowerCase() == '/admin') {
         return Response.redirect("https://bit.ly/3sAxYwr", 301)
     }
+    else if (path.toLowerCase() == '/update') {
+        return Response.redirect("https://generator.driveindex.ga", 301)
+    }
 
     // Special command format
     const command_reg = /^\/(?<num>\d+):(?<command>[a-zA-Z0-9]+)(\/.*)?$/g;
