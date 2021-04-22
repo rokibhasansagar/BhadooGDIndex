@@ -4,8 +4,10 @@
 
 ## Full Whitelabel and Customizable Index | One of a kind
 
-* Supports Both My and Team/Shared Drives with Dark Mode.
+* Supports Both My and Team/Shared Drives with Dark Mode and 20 other themes.
 * Click https://generator.driveindex.ga to make yours or watch https://youtu.be/Ihk4Gm3DPvg.
+
+[![](https://opengraph.githubassets.com/cc723ada47a587e6a6de9850ee06dc5e6eeeb8a33560e9313cafdebc4c18bb42/ParveenBhadooOfficial/Google-Drive-Index)](https://github.com/ParveenBhadooOfficial/Google-Drive-Index)
 
 [![Screenshot](https://raw.githubusercontent.com/ParveenBhadooOfficial/Bhadoo-Drive-Index/master/images/beta-light-screenshot.png)](https://youtu.be/Ihk4Gm3DPvg)
 
@@ -17,7 +19,7 @@
 
 * [gdi.js.org](https://gdi.js.org) by [js.org](https://js.org)
 
-## Demo Sites
+## Demo Sites (outdated)
 
 * [light-demo.ve.workers.dev](https://light-demo.ve.workers.dev)
 * [dark-demo.ve.workers.dev](https://dark-demo.ve.workers.dev)
@@ -25,8 +27,8 @@
 
 ## How to
 
-* Stable Release `2.0.15` on generator.driveindex.ga
-* Unstable Release `2.0.15-x` x here could be anything.
+* Stable Release `2.0.16` on generator.driveindex.ga
+* Unstable Release `2.0.16-x` x here could be anything.
 * Beta Version (Latest) - [generator.driveindex.ga](https://generator.driveindex.ga) (Dark Theme Available)
 * If you want to deploy main drive leave the option ROOT as it is.
 * If you want to deploy your Team Drive/Shared Drive/Folder then copy the ID and replace it with ROOT.
@@ -68,7 +70,7 @@
                 "id": "",
                 "name": "Drive Two",
                 "protect_file_link": false,
-                "auth":{"username":"password"}
+                //"auth":{"username":"password"}
             }
 ````
 
@@ -83,20 +85,22 @@
 * For single user
 
 ````
-            {"yourusername":"yourpassword"}
+            // "auth": {"username":"password"} /** remove double slash at starting of this line to use password. */
 ````
 
 * For multiple users (unlimited users)
 
 ````
-            "auth":{
-                "user1":"pass1",
-                "user2":"pass2",
-              }
+      {
+          "id": "",
+          "name": "Drive Two",
+          "protect_file_link": false,
+          // "auth": { "user1":"pass1", "user2":"pass2", }  /** remove double slash at starting of this line to use password. */
+      },
 ````
 
-* where `user1:pass1` and `user2:pass2` are combinations.
-* if users adds `"auth":{"":""}` empty values but more than one empty value then the site will ask for authentication but user can enter without entering any data by clicking submit.
+* where `"user1":"pass1"` and `"user2":"pass2"` are combinations.
+* if users adds `"auth":{"":""}` empty values then the site will ask for authentication but user can enter without entering any data by clicking submit.
 
 ## Use of .password File
 
@@ -148,6 +152,7 @@ const uiConfig = {
 
 * Signup at arc.io
 * Add your site and enable arc in Customization with your code.
+* Change arc_code in configuration, get code from arc website.
 
 ## Themes
 
