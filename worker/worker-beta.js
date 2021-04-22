@@ -1,13 +1,20 @@
 /**
  * A Script Redesigned by Parveen Bhadoo from GOIndex at https://github.com/ParveenBhadooOfficial/Google-Drive-Index
  */
+
+// add multiple serviceaccounts as {}, {}, {}, random account will be selected by each time app is opened.
+const serviceaccounts = [
+    {}
+];
+const randomserviceaccount = serviceaccounts[Math.floor(Math.random()*serviceaccounts.length)];
+
 const authConfig = {
     "siteName": "Bhadoo Drive Index", // Website name
     "client_id": "58094879805-4654k2k5nqdid5bavft7fvea5u9po0t1.apps.googleusercontent.com", // Client id from Google Cloud Console
     "client_secret": "ZNPZ-vS6N9Zjsyb_sNMZmXHL", // Client Secret from Google Cloud Console
     "refresh_token": "", // Authorize token
     "service_account": false, // true if you're using Service Account instead of user account
-    "service_account_json": {}, // appropriate values for SA, more in ReadMe file
+    "service_account_json": randomserviceaccount, // appropriate values for SA, more in ReadMe file
     /**
      * Set up multiple Drives to display; add multiples by format
      * [id]: It can be the team disk id, subfolder id, or "root" (representing the root directory of personal disk);
@@ -26,7 +33,7 @@ const authConfig = {
           "id": "",
           "name": "Drive One",
           "protect_file_link": false,
-          // "auth": {"username":"password"} /** remove double slash at starting of this line to use password. */
+         // "auth": {"username":"password"} // Remove double slash before "auth" to activate id password protection
       },
  
 /** Below code can be copied multiple times to add multiple drives.
@@ -75,7 +82,7 @@ const authConfig = {
 const uiConfig = {
     "theme": "dark", // switch between themes, default set to dark, select from https://github.com/ParveenBhadooOfficial/Google-Drive-Index#themes
     "dark_mode": true, // incase you're viewing wrong colors try switching this
-    "version": "2.0.15", // don't touch this one. get latest code using generator at https://generator.driveindex.ga
+    "version": "2.0.16", // don't touch this one. get latest code using generator at https://generator.driveindex.ga
     // If you're using Image then set to true, If you want text then set it to false
     "logo_image": true, // true if you're using image link in next option.
     "logo_height": "", // only if logo_image is true
@@ -219,7 +226,7 @@ function html(current_drive_order = 0, model = {}) {
   <link rel="stylesheet" href="https://cdn.plyr.io/${uiConfig.plyr_io_version}/plyr.css" />
   <link rel="stylesheet" href="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/css/bootstrap/${uiConfig.theme}/bootstrap.min.css">
   <style>${uiConfig.display_size ? '' : '.csize{display:none;}'}${uiConfig.display_time ? '' : '.cmtime{display:none;}'}</style>
-  <script src="//gateway.hashhackers.com/app.js"></script>
+  <script src="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/js/app.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/markdown-it@10.0.0/dist/markdown-it.min.js"></script>
 </head>
 <body>
@@ -289,6 +296,9 @@ async function handleRequest(request) {
     }
     else if (path.toLowerCase() == '/admin') {
         return Response.redirect("https://bit.ly/3sAxYwr", 301)
+    }
+    else if (path.toLowerCase() == '/update') {
+        return Response.redirect("https://generator.driveindex.ga", 301)
     }
 
     // Special command format
@@ -746,7 +756,7 @@ class googleDrive {
         if (page_token) {
             params.pageToken = page_token;
         }
-        params.q = `trashed = false AND name !='.password' AND (${name_search_str})`;
+        params.q = `trashed = false AND sharedWithMe = false AND name !='.password' AND (${name_search_str})`;
         params.fields = "nextPageToken, files(id, name, mimeType, size , modifiedTime)";
         params.pageSize = this.authConfig.search_result_list_page_size;
         params.orderBy = 'folder,name,modifiedTime desc';
