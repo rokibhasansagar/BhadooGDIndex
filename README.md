@@ -53,9 +53,10 @@
 	    {
 	    "id": "",
             "name": "Drive One",
-            "protect_file_link": false,
-            "auth":{"username":"password"}
-            },
+            "user": "",
+            "pass": "",
+            "protect_file_link": false
+            }
 
             ],
 ````
@@ -65,12 +66,14 @@
 * Add this code for each drive. see cloudflare workers code for more info. (requires common sense)
 
 ````
+            ,
             {
             "id": "",
             "name": "Drive Two",
-            "protect_file_link": false,
-            "auth":{"username":"password"}
-            },
+            "user": ["user1", "user2"],
+            "pass": ["pass1", "pass2"],
+            "protect_file_link": false
+            }
 ````
 
 ## Multiple Users Password
@@ -78,20 +81,19 @@
 * For single user
 
 ````
-            {"yourusername":"yourpassword"}
+            "user": "yourusername",
+            "pass": "yourpassword",
 ````
 
-* For multiple users
+* For multiple users (upto 5 users)
 
 ````
-          {
-            "user1":"pass1",
-            "user2":"pass2",
-          }
+            "user": ["user1", "user2"],
+            "pass": ["pass1", "pass2"],
 ````
 
 * where `user1:pass1` and `user2:pass2` are combinations.
-* if users adds `"auth":{"":""}` empty values but more than one empty value then the site will ask for authentication but user can enter without entering any data by clicking submit.
+* if users adds `"user": ["", ""],` empty values but more than one empty value then the site will ask for authentication but user can enter without entering any data by clicking submit.
 
 ## Use of .password File
 
