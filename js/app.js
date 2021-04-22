@@ -365,7 +365,11 @@ function append_files_to_list(path, files) {
     for (i in files) {
         var item = files[i];
         var ep = item.name + '/';
-        var p = path + escape(ep);
+        if (ep.includes("#") == true){
+          var p = path + escape(ep);
+        } else {
+          var p = path + ep;
+        }
         if (item['size'] == undefined) {
             item['size'] = "";
         }
@@ -377,17 +381,21 @@ function append_files_to_list(path, files) {
         } else {
             var p = path + item.name;
             var epn = item.name;
-            var pn = path + escape(epn);
-            const filepath = path + item.name;
+            if (ep.includes("#") == true){
+              var pn = path + escape(epn);
+            } else {
+              var pn = path + epn;
+            }
+            var filepath = path + item.name;
             var c = "file";
             // README is displayed after the last page is loaded, otherwise it will affect the scroll event
-            if (is_lastpage_loaded && item.name == "README.md" && UI.render_readme_md ) {
+            if (is_lastpage_loaded && item.name == "README.md" && UI.render_readme_md) {
                 get_file(p, item, function(data) {
                     markdown("#readme_md", data);
                     $("img").addClass("img-fluid")
                 });
             }
-            if (item.name == "HEAD.md" && UI.render_head_md ) {
+            if (item.name == "HEAD.md" && UI.render_head_md) {
                 get_file(p, item, function(data) {
                     markdown("#head_md", data);
                     $("img").addClass("img-fluid")
@@ -607,11 +615,17 @@ function onSearchResultItemClick(a_ele) {
         if (data) {
             var href = `/${cur}:${data}${can_preview ? '?a=view' : ''}`;
             if (href.endsWith("/")) {
-                hrefurl = href;
-                ehrefurl = escape(hrefurl);
+              if (href.includes("#") == true){
+                var ehrefurl = escape(href);
+              } else {
+                var ehrefurl = href;
+              }
             } else {
-                hrefurl = escape(href);
-                ehrefurl = hrefurl + '?a=view';
+              if (href.includes("#") == true){
+                ehrefurl = escape(href) + '?a=view';
+              } else {
+                ehrefurl = href + '?a=view';
+              }
             }
             title = `Result`;
             $('#staticBackdropLabel').html(title);
@@ -730,7 +744,11 @@ function file_code(path) {
     var decodename = unescape(name);
     var ext = name.split('.').pop().toLowerCase();
     var ahref = window.location.origin + path;
-    var href = decodeURI(ahref);
+    if (ahref.includes("#") == true){
+      var href = ahref;
+    } else {
+      var href = unescape(ahref);
+    }
     var content = `
 <div class="container"><br>
 <div class="card">
@@ -763,13 +781,16 @@ function file_code(path) {
 
 // Document display video |mp4|webm|avi|
 function file_video(path) {
-    const name = path.split('/').pop();
-    const decodename = unescape(name);
-    const caption = name.slice(0, name.lastIndexOf('.')) + '.srt'
-    const urls = window.location.origin + path;
-    const url = decodeURI(urls);
-    const url_without_https = url.replace(/^(https?:|)\/\//,'')
-    const content = `
+    var name = path.split('/').pop();
+    var decodename = unescape(name);
+    var caption = name.slice(0, name.lastIndexOf('.'))
+    var urls = window.location.origin + path;
+    if (urls.includes("#") == true){
+      var url = urls;
+    } else {
+      var url = decodeURIComponent(urls);
+    }
+    var content = `
   <div class="container text-center"><br>
   <div class="card text-center">
   <div class="text-center">
@@ -777,7 +798,18 @@ function file_video(path) {
 	<video id="vplayer" width="100%" height="100%" playsinline controls data-poster="${UI.poster}">
 	  <source src="${url}" type="video/mp4" />
 	  <source src="${url}" type="video/webm" />
-	  <track kind="captions" label="English Captions" src="${caption}" srclang="en" default />
+	  <track kind="captions" label="Default" src="${caption}.srt" srclang="en" default />
+    <track kind="captions" label="English" src="${caption}.en.srt" srclang="en" />
+    <track kind="captions" label="Hindi" src="${caption}.hi.srt" srclang="hi" />
+    <track kind="captions" label="Russian" src="${caption}.ru.srt" srclang="ru" />
+    <track kind="captions" label="Malayalam" src="${caption}.ml.srt" srclang="ml" />
+    <track kind="captions" label="Korean" src="${caption}.ko.srt" srclang="ko" />
+    <track kind="captions" label="Japanese" src="${caption}.ja.srt" srclang="ja" />
+    <track kind="captions" label="Indonesian" src="${caption}.id.srt" srclang="id" />
+    <track kind="captions" label="German" src="${caption}.de.srt" srclang="de" />
+    <track kind="captions" label="French" src="${caption}.fr.srt" srclang="fr" />
+    <track kind="captions" label="Chinese" src="${caption}.zh.srt" srclang="zh" />
+    <track kind="captions" label="Arabic" src="${caption}.ar.srt" srclang="ar" />
 	</video>
   </div>
 	${UI.disable_player ? '<style>.plyr{display:none;}</style>' : ''}
@@ -797,13 +829,12 @@ function file_video(path) {
       <span class="sr-only"></span>
     </button>
     <div class="dropdown-menu">
-	<a class="dropdown-item" href="iina://weblink?url=${url}">IINA</a>
-	<a class="dropdown-item" href="potplayer://${url}">PotPlayer</a>
-	<a class="dropdown-item" href="vlc://${url}">VLC</a>
-	<a class="dropdown-item" href="nplayer-${url}">nPlayer</a>
-	<a class="dropdown-item" href="intent://${url_without_https}#Intent;type=video/any;package=is.xyz.mpv;scheme=https;end;">mpv-android</a>
-	<a class="dropdown-item" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${decodename};end">MX Player (Free)</a>
-	<a class="dropdown-item" href="intent:${url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${decodename};end">MX Player (Pro)</a>
+      <a class="dropdown-item" href="iina://weblink?url=${url}">IINA</a>
+      <a class="dropdown-item" href="potplayer://${url}">PotPlayer</a>
+      <a class="dropdown-item" href="vlc://${url}">VLC</a>
+      <a class="dropdown-item" href="nplayer-${url}">nPlayer</a>
+      <a class="dropdown-item" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${decodename};end">MX Player (Free)</a>
+      <a class="dropdown-item" href="intent:${url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${decodename};end">MX Player (Pro)</a>
     </div>
 </div>
 <button onclick="copyFunction()" onmouseout="outFunc()" class="btn btn-success"> <span class="tooltiptext" id="myTooltip">Copy</span> </button>
@@ -820,7 +851,11 @@ function file_audio(path) {
     var name = path.split('/').pop();
     var decodename = unescape(name);
     var urls = window.location.origin + path;
-    var url = decodeURI(urls);
+    if (urls.includes("#") == true){
+      var url = urls;
+    } else {
+      var url = unescape(urls);
+    }
     var content = `
   <div class="container"><br>
   <div class="card" style="background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);">
@@ -854,18 +889,21 @@ function file_audio(path) {
 
 // Document display pdf
 function file_pdf(path) {
-    const name = path.split('/').pop();
-    const decodename = unescape(name);
-    const urls = window.location.origin + path;
-    const url = decodeURI(urls);
-    const inline_url = `${url}?inline=true`
-    const file_name = decodeURI(path.slice(path.lastIndexOf('/') + 1, path.length))
+    var name = path.split('/').pop();
+    var decodename = unescape(name);
+    var urls = window.location.origin + path;
+    if (urls.includes("#") == true){
+      var url = urls;
+    } else {
+      var url = unescape(urls);
+    }
+    var inline_url = `${url}?inline=true`
     var content = `
   <div class="container"><br>
   <div class="card">
   <div class="card-body text-center">
   <div class="alert alert-danger" id="folderne" role="alert">${decodename}</div>
-  <object data="${inline_url}" type="application/pdf" name="${file_name}" style="width:100%;height:94vh;"><embed src="${inline_url}" type="application/pdf"/></object>
+  <object data="${inline_url}" type="application/pdf" name="${decodename}" style="width:100%;height:94vh;"><embed src="${inline_url}" type="application/pdf"/></object>
   </div>
   <div class="card-body">
 <div class="input-group mb-4">
@@ -887,11 +925,15 @@ function file_image(path) {
     var name = path.split('/').pop();
     var decodename = unescape(name);
     var url = window.location.origin + path;
-    var durl = decodeURI(url);
+    if (url.includes("#") == true){
+      var durl  = url;
+    } else {
+      var durl = unescape(url);
+    }
     // console.log(window.location.pathname)
-    const currentPathname = window.location.pathname
-    const lastIndex = currentPathname.lastIndexOf('/');
-    const fatherPathname = currentPathname.slice(0, lastIndex + 1);
+    var currentPathname = window.location.pathname
+    var lastIndex = currentPathname.lastIndexOf('/');
+    var fatherPathname = currentPathname.slice(0, lastIndex + 1);
     // console.log(fatherPathname)
     let target_children = localStorage.getItem(fatherPathname);
     // console.log(`fatherPathname: ${fatherPathname}`);
