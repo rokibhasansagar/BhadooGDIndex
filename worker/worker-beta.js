@@ -759,7 +759,7 @@ class googleDrive {
         if (page_token) {
             params.pageToken = page_token;
         }
-        params.q = `trashed = false AND name !='.password' AND (${name_search_str})`;
+        params.q = `trashed = false AND sharedWithMe = false AND name !='.password' AND (${name_search_str})`;
         params.fields = "nextPageToken, files(id, name, mimeType, size , modifiedTime)";
         params.pageSize = this.authConfig.search_result_list_page_size;
         params.orderBy = 'folder,name,modifiedTime desc';
