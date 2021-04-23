@@ -28,8 +28,8 @@
 
 ## How to
 
-* Stable Release `2.0.15` on generator.driveindex.ga
-* Unstable Release `2.0.16-x` x here could be anything.
+* Stable Release `2.0.16` on generator.driveindex.ga
+* Unstable Release `2.0.17-x` x here could be anything.
 * Beta Version (Latest) - [generator.driveindex.ga](https://generator.driveindex.ga) (Dark Theme Available)
 * If you want to deploy main drive leave the option ROOT as it is.
 * If you want to deploy your Team Drive/Shared Drive/Folder then copy the ID and replace it with ROOT.
@@ -120,14 +120,14 @@
 ````
 const uiConfig = {
     "theme": "dark", // switch between themes, default set to dark, select from https://github.com/ParveenBhadooOfficial/Google-Drive-Index#themes
-    "dark_mode": true, // incase you're viewing wrong colors try switching this
-    "version": "2.0.16", // don't touch this one. get latest code using generator at https://generator.driveindex.ga
+    "version": "2.0.16-beta", // don't touch this one. get latest code using generator at https://generator.driveindex.ga
     // If you're using Image then set to true, If you want text then set it to false
     "logo_image": true, // true if you're using image link in next option.
     "logo_height": "", // only if logo_image is true
     "logo_width": "100px", // only if logo_image is true
     // if logo is true then link otherwise just text for name
     "logo_link_name": "https://cdn.jsdelivr.net/gh/jscdn/svg@1.0.3/bhadoo-cloud-logo-white.svg",
+    "fixed_header": false, // If you want the header to be flexible or fixed.
     "contact_link": "https://t.telegram.ind.in/BhadooCloud", // Link to Contact Button on Menu
     "copyright_year": "2050", // year of copyright, can be anything like 2015 - 2020 or just 2020
     "company_name": "Bhadoo Cloud", // Name next to copyright
