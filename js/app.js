@@ -788,13 +788,13 @@ function file_video(path) {
     var name = path.split('/').pop();
     var decodename = unescape(name);
     var caption = name.slice(0, name.lastIndexOf('.'))
-    var url_without_https = url.replace(/^(https?:|)\/\//,'')
     if (path.includes("%23") == true){
       var path = path;
     } else {
       var path = unescape(path);
     }
     var url = window.location.origin + path;
+    var url_without_https = url.replace(/^(https?:|)\/\//,'')
     var content = `
   <div class="container text-center"><br>
   <div class="card text-center">
