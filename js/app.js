@@ -98,7 +98,7 @@ function nav(path) {
     var model = window.MODEL;
     var html = "";
     var cur = window.current_drive_order || 0;
-    html += `<nav class="navbar navbar-expand-lg fixed-top ${UI.dark_mode ? 'navbar-dark bg-dark' : 'navbar-light bg-light'}">
+    html += `<nav class="navbar navbar-expand-lg${UI.fixed_header ?' fixed-top': ''} navbar-dark bg-dark">
   <a class="navbar-brand" href="/${cur}:/">${UI.logo_image ? '<img border="0" alt="'+UI.company_name+'" src="'+UI.logo_link_name+'" height="'+UI.height+'" width="'+UI.logo_width+'">' : UI.logo_link_name}</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -150,7 +150,7 @@ function nav(path) {
 </ul>
 <form class="form-inline my-2 my-lg-0" method="get" action="/${cur}:search">
 <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search" value="${search_text}" required>
-<button class="btn ${UI.dark_mode ? 'btn-secondary' : 'btn-outline-success'} my-2 my-sm-0" onclick="if($('#search_bar_form>input').val()) $('#search_bar_form').submit();" type="submit">Search</button>
+<button class="btn btn-secondary my-2 my-sm-0" onclick="if($('#search_bar_form>input').val()) $('#search_bar_form').submit();" type="submit">Search</button>
 </form>
 </div>
 </nav>
@@ -211,7 +211,7 @@ function requestSearch(params, resultCallback) {
 // Render file list
 function list(path) {
     var content = `
-  <div class="container"><br>
+  <div class="container">${UI.fixed_header ?'<br>': ''}
   <div class="card">
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb" id="folderne"><li class="breadcrumb-item"><a href="/">Home</a></li>&nbsp;->&nbsp;
@@ -377,7 +377,7 @@ function append_files_to_list(path, files) {
         item['modifiedTime'] = utc2beijing(item['modifiedTime']);
         item['size'] = formatFileSize(item['size']);
         if (item['mimeType'] == 'application/vnd.google-apps.folder') {
-            html += `<a href="${p}" class="list-group-item ${UI.dark_mode ? 'list-group-item-action' : 'btn-outline-secondary'}"><svg width="1.5em" height="1.5em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><linearGradient id="WQEfvoQAcpQgQgyjQQ4Hqa" x1="24" x2="24" y1="6.708" y2="14.977" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#eba600"></stop><stop offset="1" stop-color="#c28200"></stop></linearGradient><path fill="url(#WQEfvoQAcpQgQgyjQQ4Hqa)" d="M24.414,10.414l-2.536-2.536C21.316,7.316,20.553,7,19.757,7L5,7C3.895,7,3,7.895,3,9l0,30	c0,1.105,0.895,2,2,2l38,0c1.105,0,2-0.895,2-2V13c0-1.105-0.895-2-2-2l-17.172,0C25.298,11,24.789,10.789,24.414,10.414z"></path><linearGradient id="WQEfvoQAcpQgQgyjQQ4Hqb" x1="24" x2="24" y1="10.854" y2="40.983" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffd869"></stop><stop offset="1" stop-color="#fec52b"></stop></linearGradient><path fill="url(#WQEfvoQAcpQgQgyjQQ4Hqb)" d="M21.586,14.414l3.268-3.268C24.947,11.053,25.074,11,25.207,11H43c1.105,0,2,0.895,2,2v26	c0,1.105-0.895,2-2,2H5c-1.105,0-2-0.895-2-2V15.5C3,15.224,3.224,15,3.5,15h16.672C20.702,15,21.211,14.789,21.586,14.414z"></path></svg> ${item.name}<span class="badge-info badge-pill float-right csize"> ${item['size']}</span><span class="badge-primary badge-pill float-right cmtime">${item['modifiedTime']}</span></a>`;
+            html += `<a href="${p}" class="list-group-item list-group-item-action"><svg width="1.5em" height="1.5em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><linearGradient id="WQEfvoQAcpQgQgyjQQ4Hqa" x1="24" x2="24" y1="6.708" y2="14.977" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#eba600"></stop><stop offset="1" stop-color="#c28200"></stop></linearGradient><path fill="url(#WQEfvoQAcpQgQgyjQQ4Hqa)" d="M24.414,10.414l-2.536-2.536C21.316,7.316,20.553,7,19.757,7L5,7C3.895,7,3,7.895,3,9l0,30	c0,1.105,0.895,2,2,2l38,0c1.105,0,2-0.895,2-2V13c0-1.105-0.895-2-2-2l-17.172,0C25.298,11,24.789,10.789,24.414,10.414z"></path><linearGradient id="WQEfvoQAcpQgQgyjQQ4Hqb" x1="24" x2="24" y1="10.854" y2="40.983" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffd869"></stop><stop offset="1" stop-color="#fec52b"></stop></linearGradient><path fill="url(#WQEfvoQAcpQgQgyjQQ4Hqb)" d="M21.586,14.414l3.268-3.268C24.947,11.053,25.074,11,25.207,11H43c1.105,0,2,0.895,2,2v26	c0,1.105-0.895,2-2,2H5c-1.105,0-2-0.895-2-2V15.5C3,15.224,3.224,15,3.5,15h16.672C20.702,15,21.211,14.789,21.586,14.414z"></path></svg> ${item.name}<span class="badge float-right csize"> ${item['size']}</span><span class="badge-primary badge-pill float-right cmtime">${item['modifiedTime']}</span></a>`;
         } else {
             var p = path + item.name;
             var epn = item.name;
@@ -407,7 +407,7 @@ function append_files_to_list(path, files) {
                 pn += "?a=view";
                 c += " view";
             }
-            html += `<div class="list-group-item ${UI.dark_mode ? 'list-group-item-action' : 'btn-outline-secondary'}"><a class="list-group-item-action" href="${pn}"><svg width="1.5em" height="1.5em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path fill="#50e6ff" d="M39,16v25c0,1.105-0.895,2-2,2H11c-1.105,0-2-0.895-2-2V7c0-1.105,0.895-2,2-2h17L39,16z"></path><linearGradient id="F8F33TU9HxDNWNbQYRyY3a" x1="28.529" x2="33.6" y1="15.472" y2="10.4" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3079d6"></stop><stop offset="1" stop-color="#297cd2"></stop></linearGradient><path fill="url(#F8F33TU9HxDNWNbQYRyY3a)" d="M28,5v9c0,1.105,0.895,2,2,2h9L28,5z"></path></svg> ${item.name}</a><a href="${p}"><img class="float-right" src="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.7/images/download-file.svg" width="25px"></a><span class="badge-info badge-pill float-right csize"> ${item['size']}</span><span class="badge-primary badge-pill float-right cmtime">${item['modifiedTime']}</span></div>`;
+            html += `<div class="list-group-item list-group-item-action"><a class="list-group-item-action" href="${pn}"><svg width="1.5em" height="1.5em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path fill="#50e6ff" d="M39,16v25c0,1.105-0.895,2-2,2H11c-1.105,0-2-0.895-2-2V7c0-1.105,0.895-2,2-2h17L39,16z"></path><linearGradient id="F8F33TU9HxDNWNbQYRyY3a" x1="28.529" x2="33.6" y1="15.472" y2="10.4" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3079d6"></stop><stop offset="1" stop-color="#297cd2"></stop></linearGradient><path fill="url(#F8F33TU9HxDNWNbQYRyY3a)" d="M28,5v9c0,1.105,0.895,2,2,2h9L28,5z"></path></svg> ${item.name}</a><a href="${p}"><svg class="float-right"width="25px" style="margin-left: 8px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"> <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"></path> <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"></path> </svg></a><span class="badge float-right csize"> ${item['size']}</span><span class="badge-primary badge-pill float-right cmtime">${item['modifiedTime']}</span></div>`;
         }
     }
 
@@ -574,7 +574,7 @@ function append_search_result_to_list(files) {
         item['modifiedTime'] = utc2beijing(item['modifiedTime']);
         item['size'] = formatFileSize(item['size']);
         if (item['mimeType'] == 'application/vnd.google-apps.folder') {
-            html += `<a onclick="onSearchResultItemClick(this)" data-toggle="modal" data-target="#staticBackdrop" id="${item['id']}" class="list-group-item ${UI.dark_mode ? 'list-group-item-action' : 'btn-outline-secondary'}"><svg width="1.5em" height="1.5em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><linearGradient id="WQEfvoQAcpQgQgyjQQ4Hqa" x1="24" x2="24" y1="6.708" y2="14.977" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#eba600"></stop><stop offset="1" stop-color="#c28200"></stop></linearGradient><path fill="url(#WQEfvoQAcpQgQgyjQQ4Hqa)" d="M24.414,10.414l-2.536-2.536C21.316,7.316,20.553,7,19.757,7L5,7C3.895,7,3,7.895,3,9l0,30	c0,1.105,0.895,2,2,2l38,0c1.105,0,2-0.895,2-2V13c0-1.105-0.895-2-2-2l-17.172,0C25.298,11,24.789,10.789,24.414,10.414z"></path><linearGradient id="WQEfvoQAcpQgQgyjQQ4Hqb" x1="24" x2="24" y1="10.854" y2="40.983" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffd869"></stop><stop offset="1" stop-color="#fec52b"></stop></linearGradient><path fill="url(#WQEfvoQAcpQgQgyjQQ4Hqb)" d="M21.586,14.414l3.268-3.268C24.947,11.053,25.074,11,25.207,11H43c1.105,0,2,0.895,2,2v26	c0,1.105-0.895,2-2,2H5c-1.105,0-2-0.895-2-2V15.5C3,15.224,3.224,15,3.5,15h16.672C20.702,15,21.211,14.789,21.586,14.414z"></path></svg> ${item.name}<span class="badge-info badge-pill float-right csize"> ${item['size']}</span><span class="badge-primary badge-pill float-right cmtime">${item['modifiedTime']}</span></a>`;
+            html += `<a onclick="onSearchResultItemClick(this)" data-toggle="modal" data-target="#staticBackdrop" id="${item['id']}" class="list-group-item list-group-item-action"><svg width="1.5em" height="1.5em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><linearGradient id="WQEfvoQAcpQgQgyjQQ4Hqa" x1="24" x2="24" y1="6.708" y2="14.977" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#eba600"></stop><stop offset="1" stop-color="#c28200"></stop></linearGradient><path fill="url(#WQEfvoQAcpQgQgyjQQ4Hqa)" d="M24.414,10.414l-2.536-2.536C21.316,7.316,20.553,7,19.757,7L5,7C3.895,7,3,7.895,3,9l0,30	c0,1.105,0.895,2,2,2l38,0c1.105,0,2-0.895,2-2V13c0-1.105-0.895-2-2-2l-17.172,0C25.298,11,24.789,10.789,24.414,10.414z"></path><linearGradient id="WQEfvoQAcpQgQgyjQQ4Hqb" x1="24" x2="24" y1="10.854" y2="40.983" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffd869"></stop><stop offset="1" stop-color="#fec52b"></stop></linearGradient><path fill="url(#WQEfvoQAcpQgQgyjQQ4Hqb)" d="M21.586,14.414l3.268-3.268C24.947,11.053,25.074,11,25.207,11H43c1.105,0,2,0.895,2,2v26	c0,1.105-0.895,2-2,2H5c-1.105,0-2-0.895-2-2V15.5C3,15.224,3.224,15,3.5,15h16.672C20.702,15,21.211,14.789,21.586,14.414z"></path></svg> ${item.name}<span class="badge float-right csize"> ${item['size']}</span><span class="badge-primary badge-pill float-right cmtime">${item['modifiedTime']}</span></a>`;
         } else {
             var p = '/' + cur + ':/' + item.name;
             var c = "file";
@@ -583,7 +583,7 @@ function append_search_result_to_list(files) {
                 p += "?a=view";
                 c += " view";
             }
-            html += `<a onclick="onSearchResultItemClick(this)" data-toggle="modal" data-target="#staticBackdrop" id="${item['id']}" gd-type="${item.mimeType}" class="list-group-item ${UI.dark_mode ? 'list-group-item-action' : 'btn-outline-secondary'}"><svg width="1.5em" height="1.5em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path fill="#50e6ff" d="M39,16v25c0,1.105-0.895,2-2,2H11c-1.105,0-2-0.895-2-2V7c0-1.105,0.895-2,2-2h17L39,16z"></path><linearGradient id="F8F33TU9HxDNWNbQYRyY3a" x1="28.529" x2="33.6" y1="15.472" y2="10.4" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3079d6"></stop><stop offset="1" stop-color="#297cd2"></stop></linearGradient><path fill="url(#F8F33TU9HxDNWNbQYRyY3a)" d="M28,5v9c0,1.105,0.895,2,2,2h9L28,5z"></path></svg> ${item.name}<span class="badge-info badge-pill float-right csize"> ${item['size']}</span><span class="badge-primary badge-pill float-right cmtime">${item['modifiedTime']}</span></a>`;
+            html += `<a onclick="onSearchResultItemClick(this)" data-toggle="modal" data-target="#staticBackdrop" id="${item['id']}" gd-type="${item.mimeType}" class="list-group-item list-group-item-action"><svg width="1.5em" height="1.5em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path fill="#50e6ff" d="M39,16v25c0,1.105-0.895,2-2,2H11c-1.105,0-2-0.895-2-2V7c0-1.105,0.895-2,2-2h17L39,16z"></path><linearGradient id="F8F33TU9HxDNWNbQYRyY3a" x1="28.529" x2="33.6" y1="15.472" y2="10.4" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3079d6"></stop><stop offset="1" stop-color="#297cd2"></stop></linearGradient><path fill="url(#F8F33TU9HxDNWNbQYRyY3a)" d="M28,5v9c0,1.105,0.895,2,2,2h9L28,5z"></path></svg> ${item.name}<span class="badge float-right csize"> ${item['size']}</span><span class="badge-primary badge-pill float-right cmtime">${item['modifiedTime']}</span></a>`;
         }
     }
 
@@ -707,8 +707,12 @@ function file_others(path) {
     var name = path.split('/').pop();
     var decodename = unescape(name);
     var ext = name.split('.').pop().toLowerCase();
-    var ahref = window.location.origin + path;
-    var href = decodeURI(ahref);
+    if (path.includes("%23") == true){
+      var path = path;
+    } else {
+      var path = unescape(path);
+    }
+    var url = window.location.origin + path;
     var content = `
 <div class="container"><br>
 <div class="card">
@@ -720,9 +724,9 @@ function file_others(path) {
   <div class="input-group-prepend">
     <span class="input-group-text" id="">Full URL</span>
   </div>
-  <input type="text" class="form-control" id="dlurl" value="${href}">
+  <input type="text" class="form-control" id="dlurl" value="${url}">
 </div>
-	<p class="card-text text-center"><a href="${href}" class="btn btn-primary">Download</a> <button onclick="copyFunction()" onmouseout="outFunc()" class="btn btn-success"> <span class="tooltiptext" id="myTooltip">Copy</span> </button></p><br></div>`;
+	<p class="card-text text-center"><a href="${url}" class="btn btn-primary">Download</a> <button onclick="copyFunction()" onmouseout="outFunc()" class="btn btn-success"> <span class="tooltiptext" id="myTooltip">Copy</span> </button></p><br></div>`;
     $('#content').html(content);
 }
 
@@ -743,12 +747,12 @@ function file_code(path) {
     var name = path.split('/').pop();
     var decodename = unescape(name);
     var ext = name.split('.').pop().toLowerCase();
-    var ahref = window.location.origin + path;
-    if (ahref.includes("#") == true){
-      var href = ahref;
+    if (path.includes("%23") == true){
+      var path = path;
     } else {
-      var href = unescape(ahref);
+      var path = unescape(path);
     }
+    var url = window.location.origin + path;
     var content = `
 <div class="container"><br>
 <div class="card">
@@ -763,9 +767,9 @@ function file_code(path) {
   <div class="input-group-prepend">
     <span class="input-group-text" id="">Full URL</span>
   </div>
-  <input type="text" class="form-control" id="dlurl" value="${href}">
+  <input type="text" class="form-control" id="dlurl" value="${url}">
 </div>
-	<p class="card-text text-center"><a href="${href}" class="btn btn-primary">Download</a> <button onclick="copyFunction()" onmouseout="outFunc()" class="btn btn-success"> <span class="tooltiptext" id="myTooltip">Copy</span> </button></p><br></div>
+	<p class="card-text text-center"><a href="${url}" class="btn btn-primary">Download</a> <button onclick="copyFunction()" onmouseout="outFunc()" class="btn btn-success"> <span class="tooltiptext" id="myTooltip">Copy</span> </button></p><br></div>
 <script src="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.8/js/ace/1.4.7/ace.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.8/js/ace/1.4.7/ext-language_tools.js"></script>`;
     $('#content').html(content);
@@ -784,32 +788,33 @@ function file_video(path) {
     var name = path.split('/').pop();
     var decodename = unescape(name);
     var caption = name.slice(0, name.lastIndexOf('.'))
-    var urls = window.location.origin + path;
-    if (urls.includes("#") == true){
-      var url = urls;
+    var url_without_https = url.replace(/^(https?:|)\/\//,'')
+    if (path.includes("%23") == true){
+      var path = path;
     } else {
-      var url = decodeURIComponent(urls);
+      var path = unescape(path);
     }
+    var url = window.location.origin + path;
     var content = `
   <div class="container text-center"><br>
   <div class="card text-center">
   <div class="text-center">
   <div class="alert alert-danger" id="folderne" role="alert">${decodename}</div>
-	<video id="vplayer" width="100%" height="100%" playsinline controls data-poster="${UI.poster}">
+	<video id="vplayer" width="100%" height="100%" playsinline controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'pip', 'airplay', 'fullscreen']; data-plyr-config="{ "title": "${decodename}"}" data-poster="${UI.poster}" style="--plyr-captions-text-color: #ffffff;--plyr-captions-background: #000000;">
 	  <source src="${url}" type="video/mp4" />
 	  <source src="${url}" type="video/webm" />
-	  <track kind="captions" label="Default" src="${caption}.srt" srclang="en" default />
-    <track kind="captions" label="English" src="${caption}.en.srt" srclang="en" />
-    <track kind="captions" label="Hindi" src="${caption}.hi.srt" srclang="hi" />
-    <track kind="captions" label="Russian" src="${caption}.ru.srt" srclang="ru" />
-    <track kind="captions" label="Malayalam" src="${caption}.ml.srt" srclang="ml" />
-    <track kind="captions" label="Korean" src="${caption}.ko.srt" srclang="ko" />
-    <track kind="captions" label="Japanese" src="${caption}.ja.srt" srclang="ja" />
-    <track kind="captions" label="Indonesian" src="${caption}.id.srt" srclang="id" />
-    <track kind="captions" label="German" src="${caption}.de.srt" srclang="de" />
-    <track kind="captions" label="French" src="${caption}.fr.srt" srclang="fr" />
-    <track kind="captions" label="Chinese" src="${caption}.zh.srt" srclang="zh" />
-    <track kind="captions" label="Arabic" src="${caption}.ar.srt" srclang="ar" />
+	  <track kind="captions" label="Default" src="${caption}.vtt" srclang="en" />
+    <track kind="captions" label="English" src="${caption}.en.vtt" srclang="en" default />
+    <track kind="captions" label="Hindi" src="${caption}.hi.vtt" srclang="hi" />
+    <track kind="captions" label="Russian" src="${caption}.ru.vtt" srclang="ru" />
+    <track kind="captions" label="Malayalam" src="${caption}.ml.vtt" srclang="ml" />
+    <track kind="captions" label="Korean" src="${caption}.ko.vtt" srclang="ko" />
+    <track kind="captions" label="Japanese" src="${caption}.ja.vtt" srclang="ja" />
+    <track kind="captions" label="Indonesian" src="${caption}.id.vtt" srclang="id" />
+    <track kind="captions" label="German" src="${caption}.de.vtt" srclang="de" />
+    <track kind="captions" label="French" src="${caption}.fr.vtt" srclang="fr" />
+    <track kind="captions" label="Chinese" src="${caption}.zh.vtt" srclang="zh" />
+    <track kind="captions" label="Arabic" src="${caption}.ar.vtt" srclang="ar" />
 	</video>
   </div>
 	${UI.disable_player ? '<style>.plyr{display:none;}</style>' : ''}
@@ -833,6 +838,7 @@ function file_video(path) {
       <a class="dropdown-item" href="potplayer://${url}">PotPlayer</a>
       <a class="dropdown-item" href="vlc://${url}">VLC</a>
       <a class="dropdown-item" href="nplayer-${url}">nPlayer</a>
+      <a class="dropdown-item" href="intent://${url_without_https}#Intent;type=video/any;package=is.xyz.mpv;scheme=https;end;">mpv-android</a>
       <a class="dropdown-item" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${decodename};end">MX Player (Free)</a>
       <a class="dropdown-item" href="intent:${url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${decodename};end">MX Player (Pro)</a>
     </div>
@@ -850,12 +856,12 @@ function file_video(path) {
 function file_audio(path) {
     var name = path.split('/').pop();
     var decodename = unescape(name);
-    var urls = window.location.origin + path;
-    if (urls.includes("#") == true){
-      var url = urls;
+    if (path.includes("%23") == true){
+      var path = path;
     } else {
-      var url = unescape(urls);
+      var path = unescape(path);
     }
+    var url = window.location.origin + path;
     var content = `
   <div class="container"><br>
   <div class="card" style="background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);">
@@ -891,19 +897,86 @@ function file_audio(path) {
 function file_pdf(path) {
     var name = path.split('/').pop();
     var decodename = unescape(name);
-    var urls = window.location.origin + path;
-    if (urls.includes("#") == true){
-      var url = urls;
+    if (path.includes("%23") == true){
+      var path = path;
     } else {
-      var url = unescape(urls);
+      var path = unescape(path);
     }
+    var url = window.location.origin + path;
     var inline_url = `${url}?inline=true`
     var content = `
+  <script>
+  var url = "https://" + window.location.hostname + window.location.pathname;
+  var pdfjsLib = window['pdfjs-dist/build/pdf'];
+  pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+  var pdfDoc = null,
+      pageNum = 1,
+      pageRendering = false,
+      pageNumPending = null,
+      scale = 0.8,
+      canvas = document.getElementById('the-canvas'),
+      ctx = canvas.getContext('2d');
+  function renderPage(num) {
+    pageRendering = true;
+    pdfDoc.getPage(num).then(function(page) {
+      var viewport = page.getViewport({scale: scale});
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+      var renderContext = {
+        canvasContext: ctx,
+        viewport: viewport
+      };
+      var renderTask = page.render(renderContext);
+      renderTask.promise.then(function() {
+        pageRendering = false;
+        if (pageNumPending !== null) {
+          renderPage(pageNumPending);
+          pageNumPending = null;
+        }
+      });
+    });
+    document.getElementById('page_num').textContent = num;
+  }
+  function queueRenderPage(num) {
+    if (pageRendering) {
+      pageNumPending = num;
+    } else {
+      renderPage(num);
+    }
+  }
+  function onPrevPage() {
+    if (pageNum <= 1) {
+      return;
+    }
+    pageNum--;
+    queueRenderPage(pageNum);
+  }
+  document.getElementById('prev').addEventListener('click', onPrevPage);
+  function onNextPage() {
+    if (pageNum >= pdfDoc.numPages) {
+      return;
+    }
+    pageNum++;
+    queueRenderPage(pageNum);
+  }
+  document.getElementById('next').addEventListener('click', onNextPage);
+  pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
+    pdfDoc = pdfDoc_;
+    document.getElementById('page_count').textContent = pdfDoc.numPages;
+    renderPage(pageNum);
+  });
+  </script>
   <div class="container"><br>
   <div class="card">
   <div class="card-body text-center">
   <div class="alert alert-danger" id="folderne" role="alert">${decodename}</div>
-  <object data="${inline_url}" type="application/pdf" name="${decodename}" style="width:100%;height:94vh;"><embed src="${inline_url}" type="application/pdf"/></object>
+  <div>
+  <button id="prev" class="btn btn-info">Previous</button>
+  <button id="next" class="btn btn-info">Next</button>
+  &nbsp; &nbsp;
+  <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+  </div><br>
+  <canvas id="the-canvas" style="max-width: 100%;"></canvas>
   </div>
   <div class="card-body">
 <div class="input-group mb-4">
@@ -924,12 +997,12 @@ function file_pdf(path) {
 function file_image(path) {
     var name = path.split('/').pop();
     var decodename = unescape(name);
-    var url = window.location.origin + path;
-    if (url.includes("#") == true){
-      var durl  = url;
+    if (path.includes("%23") == true){
+      var path = path;
     } else {
-      var durl = unescape(url);
+      var path = unescape(path);
     }
+    var url = window.location.origin + path;
     // console.log(window.location.pathname)
     var currentPathname = window.location.pathname
     var lastIndex = currentPathname.lastIndexOf('/');
