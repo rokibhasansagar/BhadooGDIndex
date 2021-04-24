@@ -212,6 +212,7 @@ function requestSearch(params, resultCallback) {
 function list(path) {
     var content = `
   <div class="container">${UI.fixed_header ?'<br>': ''}
+  <div id="head_md" style="display:none; padding: 20px 20px;"></div>
   <div class="card">
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb" id="folderne"><li class="breadcrumb-item"><a href="/">Home</a></li>&nbsp;->&nbsp;
