@@ -1116,15 +1116,10 @@ String.prototype.trim = function(char) {
 
 // README.md HEAD.md support
 function markdown(el, data) {
-    if (window.md == undefined) {
-        //$.getScript('https://cdn.jsdelivr.net/npm/markdown-it@10.0.0/dist/markdown-it.min.js',function(){
-        window.md = window.markdownit();
-        markdown(el, data);
-        //});
-    } else {
-        var html = md.render(data);
+        $.getScript('https://cdn.jsdelivr.net/npm/marked/marked.min.js',function(){
+        var html = marked(data);
         $(el).show().html(html);
-    }
+    });
 }
 
 // Listen for fallback events
