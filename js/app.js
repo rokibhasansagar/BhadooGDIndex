@@ -212,6 +212,7 @@ function requestSearch(params, resultCallback) {
 function list(path) {
     var content = `
   <div class="container">${UI.fixed_header ?'<br>': ''}
+  <div id="head_md" style="display:none; padding: 20px 20px;"></div>
   <div class="card">
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb" id="folderne"><li class="breadcrumb-item"><a href="/">Home</a></li>&nbsp;->&nbsp;
@@ -1116,15 +1117,8 @@ String.prototype.trim = function(char) {
 
 // README.md HEAD.md support
 function markdown(el, data) {
-    if (window.md == undefined) {
-        //$.getScript('https://cdn.jsdelivr.net/npm/markdown-it@10.0.0/dist/markdown-it.min.js',function(){
-        window.md = window.markdownit();
-        markdown(el, data);
-        //});
-    } else {
-        var html = md.render(data);
-        $(el).show().html(html);
-    }
+    var html = marked(data);
+    $(el).show().html(html);
 }
 
 // Listen for fallback events
