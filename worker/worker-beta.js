@@ -229,6 +229,7 @@ function html(current_drive_order = 0, model = {}) {
   <script src="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/js/app.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/markdown-it@10.0.0/dist/markdown-it.min.js"></script>
   <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
 </body>
