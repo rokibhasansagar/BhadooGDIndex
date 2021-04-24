@@ -1116,10 +1116,8 @@ String.prototype.trim = function(char) {
 
 // README.md HEAD.md support
 function markdown(el, data) {
-        $.getScript('https://cdn.jsdelivr.net/npm/marked/marked.min.js',function(){
-        var html = marked(data);
-        $(el).show().html(html);
-    });
+    var html = marked(data);
+    $(el).show().html(html);
 }
 
 // Listen for fallback events
