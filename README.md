@@ -76,7 +76,7 @@
 
 ## Service Account
 
-* Currently Single Service Account is supported.
+* Multiple Service Accounts are supported.
 * set `"service_account": false` to `"service_account": true`
 * Replace {} with data from service account `file.json`
 
