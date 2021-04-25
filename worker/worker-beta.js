@@ -555,12 +555,20 @@ class googleDrive {
         let requestOption = await this.requestOption();
         requestOption.headers['Range'] = range;
         let res = await fetch(url, requestOption);
-        const {
+        if (res.ok) {
+          const {
             headers
-        } = res = new Response(res.body, res)
-        this.authConfig.enable_cors_file_down && headers.append('Access-Control-Allow-Origin', '*');
-        inline === true && headers.set('Content-Disposition', 'inline');
-        return res;
+          } = res = new Response(res.body, res)
+          this.authConfig.enable_cors_file_down && headers.append('Access-Control-Allow-Origin', '*');
+          inline === true && headers.set('Content-Disposition', 'inline');
+          return res;
+        } else {
+          return new Response(fetch(`${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/assets/DownloadError.html`), {
+            headers: {
+              "content-type": "text/html;charset=UTF-8",
+            },
+          })
+        }
     }
 
     async file(path) {
