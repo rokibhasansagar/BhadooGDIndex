@@ -563,7 +563,8 @@ class googleDrive {
           inline === true && headers.set('Content-Disposition', 'inline');
           return res;
         } else {
-          return new Response(fetch(`${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/assets/DownloadError.html`), {
+          const res = await fetch(`${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/assets/DownloadError.html`);
+          return new Response(await res.text(), {
             headers: {
               "content-type": "text/html;charset=UTF-8",
             },
