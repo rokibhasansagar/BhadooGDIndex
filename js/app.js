@@ -1,5 +1,5 @@
 // Redesigned by t.me/TheFirstSpeedster from https://github.com/ParveenBhadooOfficial/Google-Drive-Index which was written by someone else, credits are given on Source Page.
-// v2.0.17-alpha.2
+// v2.0.17-alpha.3
 // Initialize the page
 function init() {
     document.siteName = $('title').html();
@@ -375,7 +375,7 @@ function append_files_to_list(path, files) {
             item['size'] = "";
         }
 
-        item['modifiedTime'] = utc2beijing(item['modifiedTime']);
+        item['modifiedTime'] = utc2delhi(item['modifiedTime']);
         item['size'] = formatFileSize(item['size']);
         if (item['mimeType'] == 'application/vnd.google-apps.folder') {
             html += `<a href="${p}" class="list-group-item list-group-item-action"><svg width="1.5em" height="1.5em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><linearGradient id="WQEfvoQAcpQgQgyjQQ4Hqa" x1="24" x2="24" y1="6.708" y2="14.977" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#eba600"></stop><stop offset="1" stop-color="#c28200"></stop></linearGradient><path fill="url(#WQEfvoQAcpQgQgyjQQ4Hqa)" d="M24.414,10.414l-2.536-2.536C21.316,7.316,20.553,7,19.757,7L5,7C3.895,7,3,7.895,3,9l0,30	c0,1.105,0.895,2,2,2l38,0c1.105,0,2-0.895,2-2V13c0-1.105-0.895-2-2-2l-17.172,0C25.298,11,24.789,10.789,24.414,10.414z"></path><linearGradient id="WQEfvoQAcpQgQgyjQQ4Hqb" x1="24" x2="24" y1="10.854" y2="40.983" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffd869"></stop><stop offset="1" stop-color="#fec52b"></stop></linearGradient><path fill="url(#WQEfvoQAcpQgQgyjQQ4Hqb)" d="M21.586,14.414l3.268-3.268C24.947,11.053,25.074,11,25.207,11H43c1.105,0,2,0.895,2,2v26	c0,1.105-0.895,2-2,2H5c-1.105,0-2-0.895-2-2V15.5C3,15.224,3.224,15,3.5,15h16.672C20.702,15,21.211,14.789,21.586,14.414z"></path></svg> ${item.name}<span class="badge float-right csize"> ${item['size']}</span><span class="badge-primary badge-pill float-right cmtime">${item['modifiedTime']}</span></a>`;
@@ -572,7 +572,7 @@ function append_search_result_to_list(files) {
             item['size'] = "";
         }
 
-        item['modifiedTime'] = utc2beijing(item['modifiedTime']);
+        item['modifiedTime'] = utc2delhi(item['modifiedTime']);
         item['size'] = formatFileSize(item['size']);
         if (item['mimeType'] == 'application/vnd.google-apps.folder') {
             html += `<a onclick="onSearchResultItemClick(this)" data-toggle="modal" data-target="#staticBackdrop" id="${item['id']}" class="list-group-item list-group-item-action"><svg width="1.5em" height="1.5em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><linearGradient id="WQEfvoQAcpQgQgyjQQ4Hqa" x1="24" x2="24" y1="6.708" y2="14.977" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#eba600"></stop><stop offset="1" stop-color="#c28200"></stop></linearGradient><path fill="url(#WQEfvoQAcpQgQgyjQQ4Hqa)" d="M24.414,10.414l-2.536-2.536C21.316,7.316,20.553,7,19.757,7L5,7C3.895,7,3,7.895,3,9l0,30	c0,1.105,0.895,2,2,2l38,0c1.105,0,2-0.895,2-2V13c0-1.105-0.895-2-2-2l-17.172,0C25.298,11,24.789,10.789,24.414,10.414z"></path><linearGradient id="WQEfvoQAcpQgQgyjQQ4Hqb" x1="24" x2="24" y1="10.854" y2="40.983" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffd869"></stop><stop offset="1" stop-color="#fec52b"></stop></linearGradient><path fill="url(#WQEfvoQAcpQgQgyjQQ4Hqb)" d="M21.586,14.414l3.268-3.268C24.947,11.053,25.074,11,25.207,11H43c1.105,0,2,0.895,2,2v26	c0,1.105-0.895,2-2,2H5c-1.105,0-2-0.895-2-2V15.5C3,15.224,3.224,15,3.5,15h16.672C20.702,15,21.211,14.789,21.586,14.414z"></path></svg> ${item.name}<span class="badge float-right csize"> ${item['size']}</span><span class="badge-primary badge-pill float-right cmtime">${item['modifiedTime']}</span></a>`;
@@ -714,11 +714,15 @@ function file_others(path) {
       var path = unescape(path);
     }
     var url = window.location.origin + path;
+    $.post("",
+    function(data){
+    var obj = JSON.parse(data);
+    var size = formatFileSize(obj.size);
     var content = `
 <div class="container"><br>
 <div class="card">
 <div class="card-body">
-  <div class="alert alert-danger" id="folderna" role="alert">${decodename}</div>
+  <div class="alert alert-danger" id="file_details" role="alert">${obj.name} - ${size}</div>
 </div>
 <div class="card-body">
 <div class="input-group mb-4">
@@ -727,8 +731,12 @@ function file_others(path) {
   </div>
   <input type="text" class="form-control" id="dlurl" value="${url}">
 </div>
-	<p class="card-text text-center"><a href="${url}" class="btn btn-primary">Download</a> <button onclick="copyFunction()" onmouseout="outFunc()" class="btn btn-success"> <span class="tooltiptext" id="myTooltip">Copy</span> </button></p><br></div>`;
+	<p class="card-text text-center">
+  ${UI.display_drive_link ? '<a type="button" class="btn btn-info" href="https://drive.google.com/file/d/'+ obj.id +'/view" id ="file_drive_link" target="_blank">Google Drive Link</a>': ''}
+  <a href="${url}" class="btn btn-primary">Download</a>
+  <button onclick="copyFunction()" onmouseout="outFunc()" class="btn btn-success"> <span class="tooltiptext" id="myTooltip">Copy</span> </button></p><br></div>`;
     $('#content').html(content);
+    });
 }
 
 // Document display |html|php|css|go|java|js|json|txt|sh|md|
@@ -754,11 +762,15 @@ function file_code(path) {
       var path = unescape(path);
     }
     var url = window.location.origin + path;
+    $.post("",
+    function(data){
+    var obj = JSON.parse(data);
+    var size = formatFileSize(obj.size);
     var content = `
 <div class="container"><br>
 <div class="card">
 <div class="card-body">
-  <div class="alert alert-danger" id="folderne" role="alert">${decodename}</div>
+  <div class="alert alert-danger" id="file_details" role="alert">${obj.name} - ${size}</div>
 <div>
 <pre id="editor" ></pre>
 </div>
@@ -770,10 +782,13 @@ function file_code(path) {
   </div>
   <input type="text" class="form-control" id="dlurl" value="${url}">
 </div>
-	<p class="card-text text-center"><a href="${url}" class="btn btn-primary">Download</a> <button onclick="copyFunction()" onmouseout="outFunc()" class="btn btn-success"> <span class="tooltiptext" id="myTooltip">Copy</span> </button></p><br></div>
+	<p class="card-text text-center">
+  ${UI.display_drive_link ? '<a type="button" class="btn btn-info" href="https://drive.google.com/file/d/'+ obj.id +'/view" id ="file_drive_link" target="_blank">Google Drive Link</a>': ''}
+  <a href="${url}" class="btn btn-primary">Download</a> <button onclick="copyFunction()" onmouseout="outFunc()" class="btn btn-success"> <span class="tooltiptext" id="myTooltip">Copy</span> </button></p><br></div>
 <script src="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.8/js/ace/1.4.7/ace.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.8/js/ace/1.4.7/ext-language_tools.js"></script>`;
     $('#content').html(content);
+    });
 
     $.get(path, function(data) {
         $('#editor').html($('<div/><div/><div/>').text(data).html());
@@ -796,12 +811,17 @@ function file_video(path) {
     }
     var url = window.location.origin + path;
     var url_without_https = url.replace(/^(https?:|)\/\//,'')
+    $.post("",
+    function(data){
+    var obj = JSON.parse(data);
+    var size = formatFileSize(obj.size);
+    var poster = obj.thumbnailLink.slice(0, -5);
     var content = `
   <div class="container text-center"><br>
   <div class="card text-center">
   <div class="text-center">
-  <div class="alert alert-danger" id="folderne" role="alert">${decodename}</div>
-	<video id="vplayer" width="100%" height="100%" playsinline controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'pip', 'airplay', 'fullscreen']; data-plyr-config="{ "title": "${decodename}"}" data-poster="${UI.poster}" style="--plyr-captions-text-color: #ffffff;--plyr-captions-background: #000000;">
+  <div class="alert alert-danger" id="file_details" role="alert">${obj.name} - ${size}</div>
+	<video id="vplayer" width="100%" height="100%" playsinline controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'pip', 'airplay', 'fullscreen']; data-plyr-config="{ "title": "${decodename}"}" data-poster="${poster}" style="--plyr-captions-text-color: #ffffff;--plyr-captions-background: #000000;">
 	  <source src="${url}" type="video/mp4" />
 	  <source src="${url}" type="video/webm" />
 	  <track kind="captions" label="Default" src="${caption}.vtt" srclang="en" />
@@ -829,6 +849,7 @@ function file_video(path) {
   </div>
   <input type="text" class="form-control" id="dlurl" value="${url}">
 </div>
+${UI.display_drive_link ? '<a type="button" class="btn btn-info" href="https://drive.google.com/file/d/'+ obj.id +'/view" id ="file_drive_link" target="_blank">Google Drive Link</a>': ''}
 <div class="btn-group text-center">
     <a href="${url}" type="button" class="btn btn-primary">Download</a>
     <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -849,8 +870,9 @@ function file_video(path) {
   </div>
   </div>
   </div>
-  `;
-    $('#content').html(content);
+  `;$('#content').html(content);
+  });
+
 }
 
 // File display Audio |mp3|flac|m4a|wav|ogg|
@@ -863,11 +885,15 @@ function file_audio(path) {
       var path = unescape(path);
     }
     var url = window.location.origin + path;
+    $.post("",
+    function(data){
+    var obj = JSON.parse(data);
+    var size = formatFileSize(obj.size);
     var content = `
   <div class="container"><br>
   <div class="card" style="background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);">
   <div class="card-body text-center">
-  <div class="alert alert-danger" id="folderne" role="alert">${decodename}</div>
+  <div class="alert alert-danger" id="file_details" role="alert">${obj.name} - ${size}</div>
   <br><img draggable="false" src="${UI.audioposter}" width="100%" /><br>
   <audio id="vplayer" width="100%" playsinline controls>
     <source src="${url}" type="audio/ogg">
@@ -880,18 +906,21 @@ function file_audio(path) {
    const player = new Plyr('#vplayer');
   </script></br>
   <div class="card-body">
-  <div class="input-group mb-4">
+<div class="input-group mb-4">
   <div class="input-group-prepend">
     <span class="input-group-text" id="">Full URL</span>
   </div>
   <input type="text" class="form-control" id="dlurl" value="${url}">
 </div>
-	<p class="card-text text-center"><a href="${url}" class="btn btn-primary">Download</a> <button onclick="copyFunction()" onmouseout="outFunc()" class="btn btn-success"> <span class="tooltiptext" id="myTooltip">Copy</span> </button></p><br>
+	<p class="card-text text-center">
+  ${UI.display_drive_link ? '<a type="button" class="btn btn-info" href="https://drive.google.com/file/d/'+ obj.id +'/view" id ="file_drive_link" target="_blank">Google Drive Link</a>': ''}
+  <a href="${url}" class="btn btn-primary">Download</a> <button onclick="copyFunction()" onmouseout="outFunc()" class="btn btn-success"> <span class="tooltiptext" id="myTooltip">Copy</span> </button></p><br>
   </div>
   </div>
   </div>
   `;
     $('#content').html(content);
+    });
 }
 
 // Document display pdf
@@ -905,6 +934,10 @@ function file_pdf(path) {
     }
     var url = window.location.origin + path;
     var inline_url = `${url}?inline=true`
+    $.post("",
+    function(data){
+    var obj = JSON.parse(data);
+    var size = formatFileSize(obj.size);
     var content = `
   <script>
   var url = "https://" + window.location.hostname + window.location.pathname;
@@ -970,7 +1003,7 @@ function file_pdf(path) {
   <div class="container"><br>
   <div class="card">
   <div class="card-body text-center">
-  <div class="alert alert-danger" id="folderne" role="alert">${decodename}</div>
+  <div class="alert alert-danger" id="file_details" role="alert">${obj.name} - ${size}</div>
   <div>
   <button id="prev" class="btn btn-info">Previous</button>
   <button id="next" class="btn btn-info">Next</button>
@@ -986,12 +1019,15 @@ function file_pdf(path) {
   </div>
   <input type="text" class="form-control" id="dlurl" value="${url}">
 </div>
-	<p class="card-text text-center"><a href="${url}" class="btn btn-primary">Download</a> <button onclick="copyFunction()" onmouseout="outFunc()" class="btn btn-success"> <span class="tooltiptext" id="myTooltip">Copy</span> </button></p><br>
+	<p class="card-text text-center">
+  ${UI.display_drive_link ? '<a type="button" class="btn btn-info" href="https://drive.google.com/file/d/'+ obj.id +'/view" id ="file_drive_link" target="_blank">Google Drive Link</a>': ''}
+  <a href="${url}" class="btn btn-primary">Download</a> <button onclick="copyFunction()" onmouseout="outFunc()" class="btn btn-success"> <span class="tooltiptext" id="myTooltip">Copy</span> </button></p><br>
   </div>
   </div>
   </div>
   `;
     $('#content').html(content);
+    });
 }
 
 // image display
@@ -1005,46 +1041,80 @@ function file_image(path) {
     }
     var url = window.location.origin + path;
     // console.log(window.location.pathname)
-    var currentPathname = window.location.pathname
-    var lastIndex = currentPathname.lastIndexOf('/');
-    var fatherPathname = currentPathname.slice(0, lastIndex + 1);
-    // console.log(fatherPathname)
+    const currentPathname = window.location.pathname
+    const lastIndex = currentPathname.lastIndexOf('/');
+    const fatherPathname = currentPathname.slice(0, lastIndex + 1);
+    console.log(fatherPathname)
     let target_children = localStorage.getItem(fatherPathname);
     // console.log(`fatherPathname: ${fatherPathname}`);
     // console.log(target_children)
     let targetText = '';
     if (target_children) {
-        try {
-            target_children = JSON.parse(target_children);
-            if (!Array.isArray(target_children)) {
-                target_children = []
-            }
-        } catch (e) {
-            console.error(e);
-            target_children = [];
+      try {
+        target_children = JSON.parse(target_children);
+        if (!Array.isArray(target_children)) {
+          target_children = []
         }
-    }
+      } catch (e) {
+        console.error(e);
+        target_children = [];
+      }
+      if (target_children.length > 0 && target_children.includes(path)) {
+        let len = target_children.length;
+        let cur = target_children.indexOf(path);
+        // console.log(`len = ${len}`)
+        // console.log(`cur = ${cur}`)
+        let prev_child = (cur - 1 > -1) ? target_children[cur - 1] : null;
+        let next_child = (cur + 1 < len) ? target_children[cur + 1] : null;
+		if (prev_child.endsWith(".jpg") == true || prev_child.endsWith(".png") || prev_child.endsWith(".jpeg") || prev_child.endsWith(".gif")){
+		var prevchild = true;
+		}
+		if (next_child.endsWith(".jpg") == true || next_child.endsWith(".png") || next_child.endsWith(".jpeg") || next_child.endsWith(".gif")){
+		var nextchild = true;
+		}
+        targetText = `
+
+                          ${prevchild ? `<a class="btn btn-primary" href="${prev_child}?a=view" role="button">Previous</a>` : `<a class="btn btn-primary" role="button" disabled>Previous</a>`}
+
+                          ${nextchild ? `<a class="btn btn-primary" href="${next_child}?a=view" role="button">Next</a>` : `<a class="btn btn-primary" role="button" disabled>Next</a>`}
+
+              `;
+            }
+            // <div id="btns" >
+            //             ${targetObj[path].prev ? `<span id="leftBtn" data-direction="left" data-filepath="${targetObj[path].prev}"><i class="mdui-icon material-icons">&#xe5c4;</i><span style="margin-left: 10px;">Prev</span></span>` : `<span style="cursor: not-allowed;color: rgba(0,0,0,0.2);margin-bottom:20px;"><i class="mdui-icon material-icons">&#xe5c4;</i><span style="margin-left: 10px;">Prev</span></span>`}
+            //             ${targetObj[path].next ? `<span id="rightBtn" data-direction="right"  data-filepath="${targetObj[path].next}"><i class="mdui-icon material-icons">&#xe5c8;</i><span style="margin-left: 10px;">Next</span></span>` : `<span style="cursor: not-allowed;color: rgba(0,0,0,0.2);"><i class="mdui-icon material-icons">&#xe5c4;</i><span style="margin-left: 10px;">Prev</span></span>`}
+            // </div>
+          }
+    $.post("",
+    function(data){
+    var obj = JSON.parse(data);
+    var size = formatFileSize(obj.size);
     var content = `
   <div class="container"><br>
   <div class="card">
   <div class="card-body text-center">
-  <div class="alert alert-danger" id="folderne" role="alert">${decodename}</div>
+  <div class="alert alert-danger" id="file_details" role="alert">${obj.name} - ${size}</div>
+  <div>${targetText}</div><br>
   <img src="${url}" width="50%">
   </div>
   <div class="card-body">
-  <div class="input-group mb-4">
+<div class="input-group mb-4">
   <div class="input-group-prepend">
     <span class="input-group-text" id="">Full URL</span>
   </div>
   <input type="text" class="form-control" id="dlurl" value="${url}">
 </div>
-	<p class="card-text text-center"><a href="${url}" class="btn btn-primary">Download</a> <button onclick="copyFunction()" onmouseout="outFunc()" class="btn btn-success"> <span class="tooltiptext" id="myTooltip">Copy</span> </button></p><br>
+	<p class="card-text text-center">
+  ${UI.display_drive_link ? '<a type="button" class="btn btn-info" href="https://drive.google.com/file/d/'+ obj.id +'/view" id ="file_drive_link" target="_blank">Google Drive Link</a>': ''}
+  <a href="${url}" class="btn btn-primary">Download</a>
+  <button onclick="copyFunction()" onmouseout="outFunc()" class="btn btn-success"> <span class="tooltiptext" id="myTooltip">Copy</span> </button></p><br>
   </div>
   </div>
   </div>
     `;
     // my code
     $('#content').html(content);
+    });
     $('#leftBtn, #rightBtn').click((e) => {
         let target = $(e.target);
         if (['I', 'SPAN'].includes(e.target.nodeName)) {
@@ -1059,7 +1129,7 @@ function file_image(path) {
 
 
 // Time conversion
-function utc2beijing(utc_datetime) {
+function utc2delhi(utc_datetime) {
     // Convert to normal time format year-month-day hour: minute: second
     var T_pos = utc_datetime.indexOf('T');
     var Z_pos = utc_datetime.indexOf('Z');
