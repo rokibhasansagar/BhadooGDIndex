@@ -153,6 +153,7 @@ const uiConfig = {
 * Signup at arc.io
 * Add your site and enable arc in Customization with your code.
 * Change arc_code in configuration, get code from arc website.
+* How to use [Read Here](https://telegra.ph/How-to-enable-arcio-widget-on-Bhadoo-Cloud-G-Drive-Index-04-25)
 
 ## Themes
 
