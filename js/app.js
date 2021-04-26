@@ -815,7 +815,12 @@ function file_video(path) {
     function(data){
     var obj = JSON.parse(data);
     var size = formatFileSize(obj.size);
+		if (obj.thumbnailLink != null){
     var poster = obj.thumbnailLink.slice(0, -5);
+		}
+		else {
+		var poster = UI.poster;
+		}
     var content = `
   <div class="container text-center"><br>
   <div class="card text-center">
