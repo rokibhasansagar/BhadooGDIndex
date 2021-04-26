@@ -81,7 +81,7 @@ const authConfig = {
  */
 const uiConfig = {
     "theme": "dark", // switch between themes, default set to dark, select from https://github.com/ParveenBhadooOfficial/Google-Drive-Index#themes
-    "version": "2.0.17-alpha.2", // don't touch this one. get latest code using generator at https://generator.driveindex.ga
+    "version": "2.0.17-alpha.3", // don't touch this one. get latest code using generator at https://generator.driveindex.ga
     // If you're using Image then set to true, If you want text then set it to false
     "logo_image": true, // true if you're using image link in next option.
     "logo_height": "", // only if logo_image is true
@@ -102,9 +102,10 @@ const uiConfig = {
     "jsdelivr_cdn_src": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index", // If Project is Forked, then enter your Github repo
     "render_head_md": true, // Render Head.md
     "render_readme_md": true, // Render Readme.md
+    "display_drive_link": false, // This will add a Link Button to Google Drive of that particular file.
     "plyr_io_version": "3.6.4", // Change plyr.io version in future when needed.
     "unauthorized_owner_link": "https://i.telegram.ind.in/BhadooCloud", // Unauthorized Error Page Link to Owner
-    "unauthorized_owner_email": "enter your email here", // Unauthorized Error Page Owner Email
+    "unauthorized_owner_email": "username@googlemail.com", // Unauthorized Error Page Owner Email
     "enable_arc": true, // If you want to use arc.io
     "arc_code": "jfoY2h19" // arc.io Integraion Code, get yours from https://portal.arc.io
 };
@@ -227,7 +228,7 @@ function html(current_drive_order = 0, model = {}) {
   <link rel="stylesheet" href="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/css/bootstrap/${uiConfig.theme}/bootstrap.min.css">
   <style>${uiConfig.display_size ? '' : '.csize{display:none;}'}${uiConfig.display_time ? '' : '.cmtime{display:none;}'}</style>
   <script src="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/js/app.min.js"></script>
-  <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/mozilla/pdf.js@gh-pages/build/pdf.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
