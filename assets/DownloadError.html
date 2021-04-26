@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Oops - Download Error</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            body {
+            background-color: #ffffff;
+            color: #161616;
+            }
+            .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -moz-transform: translateX(-50%) translateY(-50%);
+            -webkit-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
+            }
+            .muted{opacity: 0.5;font-size:8px;}
+        </style>
+    </head>
+    <body>
+        <a onclick="history.back()">
+            <div class="container">
+                <h1>Oops!</h1>
+                <p><i>Unable to download this file at this moment please try again later.</i></p>
+                <span class="muted" >Tap to go back</span>
+            </div>
+        </a>
+    </body>
+</html>
