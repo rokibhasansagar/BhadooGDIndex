@@ -366,11 +366,7 @@ function append_files_to_list(path, files) {
     for (i in files) {
         var item = files[i];
         var ep = item.name + '/';
-        if (ep.includes("#") == true){
-          var p = path + escape(ep);
-        } else {
-          var p = path + ep;
-        }
+        var p = path + ep.replace(new RegExp('#', 'g'), '%23');
         if (item['size'] == undefined) {
             item['size'] = "";
         }
@@ -382,11 +378,7 @@ function append_files_to_list(path, files) {
         } else {
             var p = path + item.name;
             var epn = item.name;
-            if (ep.includes("#") == true){
-              var pn = path + escape(epn);
-            } else {
-              var pn = path + epn;
-            }
+            var pn = path + epn.replace(new RegExp('#', 'g'), '%23');
             var filepath = path + item.name;
             var c = "file";
             // README is displayed after the last page is loaded, otherwise it will affect the scroll event
@@ -616,17 +608,9 @@ function onSearchResultItemClick(a_ele) {
         if (data) {
             var href = `/${cur}:${data}${can_preview ? '?a=view' : ''}`;
             if (href.endsWith("/")) {
-              if (href.includes("#") == true){
-                var ehrefurl = escape(href);
-              } else {
-                var ehrefurl = href;
-              }
+                var ehrefurl = href.replace(new RegExp('#', 'g'), '%23');
             } else {
-              if (href.includes("#") == true){
-                ehrefurl = escape(href) + '?a=view';
-              } else {
-                ehrefurl = href + '?a=view';
-              }
+                var ehrefurl = href.replace(new RegExp('#', 'g'), '%23') + '?a=view';
             }
             title = `Result`;
             $('#staticBackdropLabel').html(title);
@@ -708,11 +692,7 @@ function file_others(path) {
     var name = path.split('/').pop();
     var decodename = unescape(name);
     var ext = name.split('.').pop().toLowerCase();
-    if (path.includes("%23") == true){
-      var path = path;
-    } else {
-      var path = unescape(path);
-    }
+    var path = path;
     var url = window.location.origin + path;
     $.post("",
     function(data){
@@ -756,11 +736,7 @@ function file_code(path) {
     var name = path.split('/').pop();
     var decodename = unescape(name);
     var ext = name.split('.').pop().toLowerCase();
-    if (path.includes("%23") == true){
-      var path = path;
-    } else {
-      var path = unescape(path);
-    }
+    var path = path;
     var url = window.location.origin + path;
     $.post("",
     function(data){
@@ -804,11 +780,7 @@ function file_video(path) {
     var name = path.split('/').pop();
     var decodename = unescape(name);
     var caption = name.slice(0, name.lastIndexOf('.'))
-    if (path.includes("%23") == true){
-      var path = path;
-    } else {
-      var path = unescape(path);
-    }
+    var path = path;
     var url = window.location.origin + path;
     var url_without_https = url.replace(/^(https?:|)\/\//,'')
     $.post("",
@@ -884,11 +856,7 @@ ${UI.display_drive_link ? '<a type="button" class="btn btn-info" href="https://d
 function file_audio(path) {
     var name = path.split('/').pop();
     var decodename = unescape(name);
-    if (path.includes("%23") == true){
-      var path = path;
-    } else {
-      var path = unescape(path);
-    }
+    var path = path;
     var url = window.location.origin + path;
     $.post("",
     function(data){
@@ -932,11 +900,7 @@ function file_audio(path) {
 function file_pdf(path) {
     var name = path.split('/').pop();
     var decodename = unescape(name);
-    if (path.includes("%23") == true){
-      var path = path;
-    } else {
-      var path = unescape(path);
-    }
+    var path = path;
     var url = window.location.origin + path;
     var inline_url = `${url}?inline=true`
     $.post("",
@@ -947,7 +911,7 @@ function file_pdf(path) {
   <script>
   var url = "https://" + window.location.hostname + window.location.pathname;
   var pdfjsLib = window['pdfjs-dist/build/pdf'];
-  pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+  pdfjsLib.GlobalWorkerOptions.workerSrc = '//cdn.jsdelivr.net/gh/mozilla/pdf.js@gh-pages/build/pdf.worker.js';
   var pdfDoc = null,
       pageNum = 1,
       pageRendering = false,
@@ -1039,11 +1003,7 @@ function file_pdf(path) {
 function file_image(path) {
     var name = path.split('/').pop();
     var decodename = unescape(name);
-    if (path.includes("%23") == true){
-      var path = path;
-    } else {
-      var path = unescape(path);
-    }
+    var path = path;
     var url = window.location.origin + path;
     // console.log(window.location.pathname)
     const currentPathname = window.location.pathname
@@ -1079,9 +1039,9 @@ function file_image(path) {
 		}
         targetText = `
 
-                          ${prevchild ? `<a class="btn btn-primary" href="${prev_child}?a=view" role="button">Previous</a>` : `<a class="btn btn-primary" role="button" disabled>Previous</a>`}
+                          ${prevchild ? `<a class="btn btn-primary" href="${prev_child}?a=view" role="button">Previous</a>` : ``}
 
-                          ${nextchild ? `<a class="btn btn-primary" href="${next_child}?a=view" role="button">Next</a>` : `<a class="btn btn-primary" role="button" disabled>Next</a>`}
+                          ${nextchild ? `<a class="btn btn-primary" href="${next_child}?a=view" role="button">Next</a>` : ``}
 
               `;
             }
