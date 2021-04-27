@@ -144,7 +144,7 @@ const uiConfig = {
     "unauthorized_owner_link": "https://i.telegram.ind.in/BhadooCloud", // Unauthorized Error Page Link to Owner
     "unauthorized_owner_email": "enter your email here", // Unauthorized Error Page Owner Email
     "enable_arc": true, // If you want to use arc.io
-    "arc_code": "jfoY2h19" // arc.io Integraion Code, get yours from https://portal.arc.io
+    "arc_code": "jfoY2h19" // arc.io Integration Code, get yours from https://portal.arc.io
 }
 ````
 
