@@ -58,6 +58,7 @@ const uiConfig = {
     "render_readme_md": true, // Render Readme.md
     "display_drive_link": false, // This will add a Link Button to Google Drive of that particular file.
     "plyr_io_version": "3.6.4", // Change plyr.io version in future when needed.
+    "plyr_io_video_resolution": "16:9" // For reference, visit: https://github.com/sampotts/plyr#options
     "unauthorized_owner_link": "https://i.telegram.ind.in/BhadooCloud", // Unauthorized Error Page Link to Owner
     "unauthorized_owner_email": "username@googlemail.com", // Unauthorized Error Page Owner Email
     "enable_arc": true, // If you want to use arc.io
