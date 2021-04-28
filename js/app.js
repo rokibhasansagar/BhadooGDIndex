@@ -817,7 +817,7 @@ function file_video(path) {
   </div>
 	${UI.disable_player ? '<style>.plyr{display:none;}</style>' : ''}
   <script>
-   const player = new Plyr('#vplayer');
+   const player = new Plyr('#vplayer',{ratio: "${UI.plyr_io_video_resolution}"});
   </script></br>
 <div class="card-body">
 <div class="input-group mb-4">
