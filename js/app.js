@@ -1,5 +1,5 @@
 // Redesigned by t.me/TheFirstSpeedster from https://github.com/ParveenBhadooOfficial/Google-Drive-Index which was written by someone else, credits are given on Source Page.
-// v2.0.17-alpha.3
+// v2.0.17-alpha.4
 // Initialize the page
 function init() {
     document.siteName = $('title').html();
@@ -25,7 +25,7 @@ function init() {
   </div>
 </div>
 <br>
-<footer class="footer text-muted"> <div class="container"> <p class="float-right"> <a href="#">Back to top</a> </p> ${UI.credit ? '<p>Redesigned with <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="red" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" /> </svg> by <a href="https://github.com/ParveenBhadooOfficial/Google-Drive-Index" target="_blank">TheFirstSpeedster</a>, based on Open Source Softwares.</p>' : ''} <p>© ${UI.copyright_year} - <a href=" ${UI.company_link}" target="_blank"> ${UI.company_name}</a>, All Rights Reserved.</p> </div> </footer>
+<footer class="footer text-muted"> <div class="container"> <p class="float-right"> <a href="#">Back to top</a> </p> ${UI.credit ? '<p>Redesigned with <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="red" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" /> </svg> by <a href="https://github.com/ParveenBhadooOfficial/Google-Drive-Index" target="_blank">TheFirstSpeedster</a>, based on Open Source Softwares.</p>' : ''} <p>Â© ${UI.copyright_year} - <a href=" ${UI.company_link}" target="_blank"> ${UI.company_name}</a>, All Rights Reserved.</p> </div> </footer>
   `;
     $('body').html(html);
 }
@@ -45,6 +45,10 @@ function getDocumentHeight() {
         D.body.offsetHeight, D.documentElement.offsetHeight,
         D.body.clientHeight, D.documentElement.clientHeight
     );
+}
+
+function gdidecode(str) {
+var gdijsorg_0x5579=['join','toString','114773LJlqPi','charCodeAt','1evaKJu','128429mQiVMM','179727icrnig','1276161MsgKkV','map','111987FmCZVm','6IEPbgT','1924817UdCjIN','328673bHHLnC','14sGLkvR'];var gdijsorg_0x22bf03=gdijsorg_0x47d3;(function(_0x2015a9,_0x2d2e6f){var _0x194131=gdijsorg_0x47d3;while(!![]){try{var _0x50490c=parseInt(_0x194131(0x167))*-parseInt(_0x194131(0x165))+parseInt(_0x194131(0x160))+parseInt(_0x194131(0x15e))+-parseInt(_0x194131(0x161))*-parseInt(_0x194131(0x15f))+parseInt(_0x194131(0x162))*-parseInt(_0x194131(0x168))+-parseInt(_0x194131(0x16a))+parseInt(_0x194131(0x169));if(_0x50490c===_0x2d2e6f)break;else _0x2015a9['push'](_0x2015a9['shift']());}catch(_0x157d6c){_0x2015a9['push'](_0x2015a9['shift']());}}}(gdijsorg_0x5579,0xf40cd));function gdijsorg_0x47d3(_0x4aefd5,_0x2d1551){_0x4aefd5=_0x4aefd5-0x15e;var _0x557938=gdijsorg_0x5579[_0x4aefd5];return _0x557938;}return decodeURIComponent(atob(str)['split']('')[gdijsorg_0x22bf03(0x16b)](function(_0x1cdc7a){var _0x416153=gdijsorg_0x22bf03;return'%'+('00'+_0x1cdc7a[_0x416153(0x166)](0x0)[_0x416153(0x164)](0x10))['slice'](-0x2);})[gdijsorg_0x22bf03(0x163)](''));
 }
 
 function render(path) {
@@ -179,7 +183,7 @@ function requestListPath(path, params, resultCallback, authErrorCallback) {
         page_index: params['page_index'] || 0
     };
     $.post(path, p, function(data, status) {
-        var res = jQuery.parseJSON(data);
+        var res = jQuery.parseJSON(gdidecode(read(data)));
         if (res && res.error && res.error.code == '401') {
             // Password verification failed
             if (authErrorCallback) authErrorCallback(path)
@@ -201,7 +205,7 @@ function requestSearch(params, resultCallback) {
         page_index: params['page_index'] || 0
     };
     $.post(`/${window.current_drive_order}:search`, p, function(data, status) {
-        var res = jQuery.parseJSON(data);
+        var res = jQuery.parseJSON(gdidecode(read(data)));
         if (res && res.data) {
             if (resultCallback) resultCallback(res, p)
         }
@@ -366,7 +370,7 @@ function append_files_to_list(path, files) {
     for (i in files) {
         var item = files[i];
         var ep = item.name + '/';
-        var p = path + ep.replace(new RegExp('#', 'g'), '%23');
+        var p = path + ep.replace(new RegExp('#', 'g'), '%23').replace(new RegExp('\\?', 'g'), '%3F');
         if (item['size'] == undefined) {
             item['size'] = "";
         }
@@ -696,7 +700,7 @@ function file_others(path) {
     var url = window.location.origin + path;
     $.post("",
     function(data){
-    var obj = JSON.parse(data);
+    var obj = jQuery.parseJSON(gdidecode(read(data)));
     var size = formatFileSize(obj.size);
     var content = `
 <div class="container"><br>
@@ -740,7 +744,7 @@ function file_code(path) {
     var url = window.location.origin + path;
     $.post("",
     function(data){
-    var obj = JSON.parse(data);
+    var obj = jQuery.parseJSON(gdidecode(read(data)));
     var size = formatFileSize(obj.size);
     var content = `
 <div class="container"><br>
@@ -785,7 +789,7 @@ function file_video(path) {
     var url_without_https = url.replace(/^(https?:|)\/\//,'')
     $.post("",
     function(data){
-    var obj = JSON.parse(data);
+    var obj = jQuery.parseJSON(gdidecode(read(data)));
     var size = formatFileSize(obj.size);
 		if (obj.thumbnailLink != null){
     var poster = obj.thumbnailLink.slice(0, -5);
@@ -860,7 +864,7 @@ function file_audio(path) {
     var url = window.location.origin + path;
     $.post("",
     function(data){
-    var obj = JSON.parse(data);
+    var obj = jQuery.parseJSON(gdidecode(read(data)));
     var size = formatFileSize(obj.size);
     var content = `
   <div class="container"><br>
@@ -905,7 +909,7 @@ function file_pdf(path) {
     var inline_url = `${url}?inline=true`
     $.post("",
     function(data){
-    var obj = JSON.parse(data);
+    var obj = jQuery.parseJSON(gdidecode(read(data)));
     var size = formatFileSize(obj.size);
     var content = `
   <script>
@@ -1052,7 +1056,7 @@ function file_image(path) {
           }
     $.post("",
     function(data){
-    var obj = JSON.parse(data);
+    var obj = jQuery.parseJSON(gdidecode(read(data)));
     var size = formatFileSize(obj.size);
     var content = `
   <div class="container"><br>
@@ -1162,6 +1166,9 @@ window.onpopstate = function() {
     render(path);
 }
 
+function read(str) {
+var gdijsorg_0x1207=['join','645298GrGsiK','8269zzjDhb','28wpErfD','11eoSBcm','3578714TboDnQ','slice','52214BJnTpj','14039GFHzjM','187451gnBzKk','substr','reverse','1262156NwMIzh','2nDedhJ','split'];var gdijsorg_0x570bf1=gdijsorg_0x158f;function gdijsorg_0x158f(_0x32bcea,_0x29ebfd){_0x32bcea=_0x32bcea-0x150;var _0x1207c1=gdijsorg_0x1207[_0x32bcea];return _0x1207c1;}(function(_0xbbe83c,_0xbbffd8){var _0x2feec5=gdijsorg_0x158f;while(!![]){try{var _0x5d3639=parseInt(_0x2feec5(0x15c))*-parseInt(_0x2feec5(0x150))+-parseInt(_0x2feec5(0x15b))+-parseInt(_0x2feec5(0x157))+parseInt(_0x2feec5(0x151))*parseInt(_0x2feec5(0x152))+parseInt(_0x2feec5(0x153))*-parseInt(_0x2feec5(0x156))+parseInt(_0x2feec5(0x158))+parseInt(_0x2feec5(0x154));if(_0x5d3639===_0xbbffd8)break;else _0xbbe83c['push'](_0xbbe83c['shift']());}catch(_0x2894d2){_0xbbe83c['push'](_0xbbe83c['shift']());}}}(gdijsorg_0x1207,0xd11e8));var sa=str[gdijsorg_0x570bf1(0x15d)](''),ra=sa[gdijsorg_0x570bf1(0x15a)](),ja=ra[gdijsorg_0x570bf1(0x15e)](''),aj=ja[gdijsorg_0x570bf1(0x159)](0x18)[gdijsorg_0x570bf1(0x155)](0x0,-0x14);return aj;
+}
 
 $(function() {
     init();
