@@ -230,6 +230,7 @@ const uiConfig = {
 * Source: [yanzai](https://github.com/yanzai/goindex)
 * New Design: [Bootstrap](https://getbootstrap.com)
 * Cloudflare: Workers
+* Icons made by [Freepik](https://www.freepik.com) from [Flaticon](https://www.flaticon.com)
 
 ## Disclaimer
 
