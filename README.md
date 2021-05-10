@@ -10,9 +10,9 @@
 
 [![](https://opengraph.githubassets.com/cc723ada47a587e6a6de9850ee06dc5e6eeeb8a33560e9313cafdebc4c18bb42/ParveenBhadooOfficial/Google-Drive-Index)](https://github.com/ParveenBhadooOfficial/Google-Drive-Index)
 
-[![Screenshot](https://raw.githubusercontent.com/ParveenBhadooOfficial/Bhadoo-Drive-Index/master/images/beta-light-screenshot.png)](https://youtu.be/Ihk4Gm3DPvg)
+[![Screenshot](https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@master/images/themes/vapor.png)](https://youtu.be/Ihk4Gm3DPvg)
 
-[![Screenshot](https://raw.githubusercontent.com/ParveenBhadooOfficial/Bhadoo-Drive-Index/master/images/beta-dark-screenshot.png)](https://youtu.be/Ihk4Gm3DPvg)
+[![Screenshot](https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@master/images/themes/darkly.png)](https://youtu.be/Ihk4Gm3DPvg)
 
 `Note: The Changes in your workers config can effect later due to cache. Use incognito mode everytime to open the worker URL to overcome that issue.`
 
