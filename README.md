@@ -28,7 +28,7 @@
 
 ## How to
 
-* Stable Release `2.0.17-alpha.3` on generator.driveindex.ga
+* Stable Release `2.0.17-alpha.6` on generator.driveindex.ga
 * Beta Version (Latest) - [generator.driveindex.ga](https://generator.driveindex.ga) (Dark Theme Available)
 * If you want to deploy main drive leave the option ROOT as it is.
 * If you want to deploy your Team Drive/Shared Drive/Folder then copy the ID and replace it with ROOT.
@@ -50,15 +50,13 @@
 
 ````
     "roots":[
-
-	    {
-	        "id": "",
-                "name": "Drive One",
-                "protect_file_link": false,
-                "auth": {"username":"password"}
-            },
-
-            ],
+      {
+          "id": "root",
+          "name": "Drive One",
+          "protect_file_link": false,
+         // "auth": {"username":"password"} /* Remove double slash before "auth" to activate id password protection */
+      },
+    ]};
 ````
 
 ## Multiple ID Config
@@ -66,12 +64,20 @@
 * Add this code for each drive. see cloudflare workers code for more info. (requires common sense)
 
 ````
-            {
-                "id": "",
-                "name": "Drive Two",
-                "protect_file_link": false,
-                //"auth":{"username":"password"}
-            }
+    "roots":[
+      {
+          "id": "root",
+          "name": "Drive One",
+          "protect_file_link": false,
+         // "auth": {"username":"password"} /* Remove double slash before "auth" to activate id password protection */
+      },
+      {
+          "id": "root",
+          "name": "Drive Two",
+          "protect_file_link": false,
+         // "auth": {"username":"password", "username1":"password1"} /* Remove double slash before "auth" to activate id password protection */
+      },
+    ]};
 ````
 
 ## Service Account
@@ -118,15 +124,27 @@
 
 ````
 const uiConfig = {
-    "theme": "dark", // switch between themes, default set to dark, select from https://github.com/ParveenBhadooOfficial/Google-Drive-Index#themes
-    "version": "2.0.17-alpha.3", // don't touch this one. get latest code using generator at https://generator.driveindex.ga
+    "theme": "vapor", // switch between themes, default set to dark, select from https://github.com/ParveenBhadooOfficial/Google-Drive-Index#themes
+    "version": "2.0.17-alpha.6", // don't touch this one. get latest code using generator at https://generator.driveindex.ga
     // If you're using Image then set to true, If you want text then set it to false
     "logo_image": true, // true if you're using image link in next option.
     "logo_height": "", // only if logo_image is true
     "logo_width": "100px", // only if logo_image is true
     // if logo is true then link otherwise just text for name
     "logo_link_name": "https://cdn.jsdelivr.net/gh/jscdn/svg@1.0.3/bhadoo-cloud-logo-white.svg",
-    "fixed_header": false, // If you want the header to be flexible or fixed.
+    "fixed_header": true, // If you want the footer to be flexible or fixed.
+    "header_padding": "60", // Value 60 for fixed header, Value 20 for flixble header. Required to be changed accordingly in some themes.
+    "fixed_footer": false, // If you want the footer to be flexible or fixed.
+    "header_style_class": "navbar-dark bg-primary", // navbar-dark bg-primary || navbar-dark bg-dark || navbar-light bg-light
+    "footer_style_class": "bg-primary", // bg-primary || bg-dark || bg-light
+    "css_a_tag_color": "white", // Color Name or Hex Code eg. #ffffff
+    "css_p_tag_color": "white", // Color Name or Hex Code eg. #ffffff
+    "folder_text_color": "white", // Color Name or Hex Code eg. #ffffff
+    "loading_spinner_class": "text-light", // https://getbootstrap.com/docs/5.0/components/spinners/#colors
+    "search_button_class": "btn-outline-success", // https://getbootstrap.com/docs/5.0/components/buttons/#examples
+    "path_nav_alert_class": "alert alert-primary", // https://getbootstrap.com/docs/4.0/components/alerts/#examples
+    "file_view_alert_class": "alert alert-danger", // https://getbootstrap.com/docs/4.0/components/alerts/#examples
+    "file_count_alert_class": "alert alert-secondary", // https://getbootstrap.com/docs/4.0/components/alerts/#examples
     "contact_link": "https://t.telegram.ind.in/BhadooCloud", // Link to Contact Button on Menu
     "copyright_year": "2050", // year of copyright, can be anything like 2015 - 2020 or just 2020
     "company_name": "Bhadoo Cloud", // Name next to copyright
@@ -134,18 +152,23 @@ const uiConfig = {
     "credit": true, // Set this to true to give us credit
     "display_size": true, // Set this to false to hide display file size
     "display_time": false, // Set this to false to hide display modified time for folder and files
+    "display_download": true, // Set this to false to hide download icon for folder and files on main index
     "disable_player": false, // Set this to true to hide audio and video players
+    "disable_video_download": false, // Remove Download, Copy Button on Videos
+    "second_domain_for_dl": false, // If you want to display other URL for Downloading to protect your main domain.
+    "downloaddomain": "https://testing.fetchgoogleapi.workers.dev", // If "second_domain_for_dl": true then enter downloaddomain otherwise keep empty. eg. https://workers.workersname.workers.dev No Trailing '/'
     "poster": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.10/images/poster.jpg", // Video poster URL or see Readme to how to load from Drive
     "audioposter": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.10/images/music.jpg", // Video poster URL or see Readme to how to load from Drive
     "jsdelivr_cdn_src": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index", // If Project is Forked, then enter your Github repo
     "render_head_md": true, // Render Head.md
     "render_readme_md": true, // Render Readme.md
+    "display_drive_link": false, // This will add a Link Button to Google Drive of that particular file.
     "plyr_io_version": "3.6.4", // Change plyr.io version in future when needed.
     "unauthorized_owner_link": "https://i.telegram.ind.in/BhadooCloud", // Unauthorized Error Page Link to Owner
-    "unauthorized_owner_email": "enter your email here", // Unauthorized Error Page Owner Email
-    "enable_arc": true, // If you want to use arc.io
-    "arc_code": "jfoY2h19" // arc.io Integration Code, get yours from https://portal.arc.io
-}
+    "unauthorized_owner_email": "username@googlemail.com", // Unauthorized Error Page Owner Email
+    "enable_arc": false, // If you want to use arc.io
+    "arc_code": "jfoY2h19" // arc.io Integraion Code, get yours from https://portal.arc.io
+};
 ````
 
 ## arc.io Integration
@@ -157,9 +180,9 @@ const uiConfig = {
 
 ## Themes
 
-* There are 22 Themes from [bootswatch](https://github.com/thomaspark/bootswatch) where `light` is official [Bootstrap](https://getbootstrap.com) Theme and `dark` is darkly from bootswatch.
+* There are 25 Themes from [bootswatch](https://github.com/thomaspark/bootswatch) official [Bootstrap](https://getbootstrap.com) Themes.
 * You can check Theme from [bootswatch.com](https://bootswatch.com) before selecting.
-* To Change theme, first generate the code, paste in Cloudflare Workers and then select one theme code from below and paste it in line 37 of worker script.
+* To Change theme, first generate the code, paste in Cloudflare Workers and then select one theme code from below and paste it in line 56 of worker script.
 
 | Themes    |         |         |         |        |          |
 |-----------|---------|---------|---------|--------|----------|
@@ -172,8 +195,7 @@ const uiConfig = {
 ## Audio and Video
 
 * Poster for Video is added as default.
-* If you wish to keep one poster, add image link in Config.
-* You can also set poster link as eg. poster.jpg or screenshot.png where this file should be inside the same folder as the video file is.
+* Fetch Video Poster from Google Drive, uses default if none available.
 
 ## Search Limitations
 
@@ -182,7 +204,7 @@ const uiConfig = {
 
 ## Sorting by Name or Modified Time
 
-* Find `params.orderBy` in workers code.
+* Find `params.orderBy` in workers code L623 and L710.
 * use `params.orderBy = 'folder,name,modifiedTime desc';` to sort by File and Folder Name.
 * use `params.orderBy = 'folder,modifiedTime desc,name';` to sort by Modified Time.
 * A comma-separated list of sort keys. Valid keys are 'createdTime', 'folder', 'modifiedByMeTime', 'modifiedTime', 'name', 'name_natural', 'quotaBytesUsed', 'recency', 'sharedWithMeTime', 'starred', and 'viewedByMeTime'. Each key sorts ascending by default, but may be reversed with the 'desc' modifier. Example usage: ?orderBy=folder,modifiedTime desc,name. Please note that there is a current limitation for users with approximately one million files in which the requested sort order is ignored.
@@ -218,7 +240,6 @@ const uiConfig = {
 
 ## Upcoming Changes
 
-* Icons from other Index for better view.
 * Adding More Features from other Indexes.
 
 ## Other Indexes
@@ -237,7 +258,7 @@ const uiConfig = {
 
 * These Index's are written by someone else, possibly by donva and [maple3142](https://github.com/maple3142/GDIndex).
 * Beta Version is redesigned using Bootstrap from Alpha Version by @ParveenBhadooOfficial.
-* This Repo was imported from [yanzai](https://github.com/yanzai/goindex) and then modified for personal use. After requests from many users made compatible with user requirements.
+* This Repo was imported from [yanzai](https://github.com/yanzai/goindex) and then modified for personal use. After requests from many users made public with user requirements.
 
 ## Support this Project
 
