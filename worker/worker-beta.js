@@ -1,4 +1,4 @@
-// 2.0.17-alpha.5
+// 2.0.17-alpha.6
 
 /**
  * A Script Redesigned by Parveen Bhadoo from GOIndex at https://github.com/ParveenBhadooOfficial/Google-Drive-Index
@@ -54,7 +54,7 @@ const authConfig = {
 
 const uiConfig = {
     "theme": "vapor", // switch between themes, default set to dark, select from https://github.com/ParveenBhadooOfficial/Google-Drive-Index#themes
-    "version": "2.0.17-alpha.3", // don't touch this one. get latest code using generator at https://generator.driveindex.ga
+    "version": "2.0.17-alpha.6", // don't touch this one. get latest code using generator at https://generator.driveindex.ga
     // If you're using Image then set to true, If you want text then set it to false
     "logo_image": true, // true if you're using image link in next option.
     "logo_height": "", // only if logo_image is true
@@ -72,6 +72,7 @@ const uiConfig = {
     "loading_spinner_class": "text-light", // https://getbootstrap.com/docs/5.0/components/spinners/#colors
     "search_button_class": "btn-outline-success", // https://getbootstrap.com/docs/5.0/components/buttons/#examples
     "path_nav_alert_class": "alert alert-primary", // https://getbootstrap.com/docs/4.0/components/alerts/#examples
+    "file_view_alert_class": "alert alert-danger", // https://getbootstrap.com/docs/4.0/components/alerts/#examples
     "file_count_alert_class": "alert alert-secondary", // https://getbootstrap.com/docs/4.0/components/alerts/#examples
     "contact_link": "https://t.telegram.ind.in/BhadooCloud", // Link to Contact Button on Menu
     "copyright_year": "2050", // year of copyright, can be anything like 2015 - 2020 or just 2020
