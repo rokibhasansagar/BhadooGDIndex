@@ -1,5 +1,5 @@
 // Redesigned by t.me/TheFirstSpeedster from https://github.com/ParveenBhadooOfficial/Google-Drive-Index which was written by someone else, credits are given on Source Page.
-// v2.0.17-alpha.5
+// v2.0.17-alpha.6
 // Initialize the page
 function init() {
     document.siteName = $('title').html();
@@ -27,7 +27,7 @@ function init() {
   </div>
 </div>
 <br>
-<footer class="footer mt-auto py-3 text-muted ${UI.footer_style_class}" style="${UI.fixed_footer ?'position: fixed; ': ''}left: 0; bottom: 0; width: 100%; color: white; z-index: 9999;"> <div class="container" style="width: auto; padding: 0 10px;"> <p class="float-sm-end"> <a href="#">Back to top</a> </p> ${UI.credit ? '<p>Redesigned with <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="red" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" /> </svg> by <a href="https://github.com/ParveenBhadooOfficial/Google-Drive-Index" target="_blank">TheFirstSpeedster</a>, based on Open Source Softwares.</p>' : ''} <p>Â© ${UI.copyright_year} - <a href=" ${UI.company_link}" target="_blank"> ${UI.company_name}</a>, All Rights Reserved.</p> </div> </footer>
+<footer class="footer mt-auto py-3 text-muted ${UI.footer_style_class}" style="${UI.fixed_footer ?'position: fixed; ': ''}left: 0; bottom: 0; width: 100%; color: white; z-index: 9999;"> <div class="container" style="width: auto; padding: 0 10px;"> <p class="float-sm-end"> <a href="#">Back to top</a> </p> ${UI.credit ? '<p>Redesigned with <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="red" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" /> </svg> by <a href="https://github.com/ParveenBhadooOfficial/Google-Drive-Index" target="_blank">TheFirstSpeedster</a>, based on Open Source Softwares.</p>' : ''} <p>© ${UI.copyright_year} - <a href=" ${UI.company_link}" target="_blank"> ${UI.company_name}</a>, All Rights Reserved.</p> </div> </footer>
   `;
     $('body').html(html);
 }
@@ -158,7 +158,14 @@ function nav(path) {
             arr.shift();
             for (var i in arr) {
                 var an = arr[i];
-                var n = decodeURIComponent(an);
+                n1 = decodeURIComponent(an);
+                n2 = n1.replace(/\?.+/g, "$'")
+                if (n2.length > 15) {
+                    n = n2.slice(0, 5) + '...';
+                }
+                else {
+                    n = n2.slice(0, 15);
+                }
                 p += an + '/';
                 var ext = p.split('.').pop().toLowerCase();
                 if ("|mp3/|aac/|wma/|wpl/|aif/|cda/|mpa/|wav/|ogg/|mp4/|mkv/|mov/|flac/|m4a/|pdf/|jpg/|png/|jpeg/|gif/|md/|zip/|rar/|exe/|tar/|txt/|html/|7z/|arj/|deb/|pkg/|rpm/|tar.gz/|z/|bin/|dmg/|iso/|toast/|vcd/|csv/|dat/|db/|dbf/|log/|mdv/|sav/|sql/|xml/|email/|vcf/|apk/|bat/|bin/|cgi/|jar/|py/|msi/|wsf/|fnt/|fon/|otf/|ttf/|ai/|bmp/|ico/|ps/|psd/|svg/|tif/|tiff/|asp/|aspx/|cer/|cfm/|cgi/|pl/|css/|htm/|html/|js/|jsp/|part/|php/|rss/|xhtml/|key/|odp/|pps/|ppt/|pptx/|pem/|ppk/|java/|sh/|vb/|ods/|xls/|xlsm/|xlsx/|3gp/|flv/|m4v/|mpg/|mpeg/|avi/|doc/|docx/|rtf/|".indexOf(`|${ext}|`) >= 0) {
@@ -249,31 +256,32 @@ function list(path) {
   <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb" id="folderne"><li class="breadcrumb-item"><a href="/">Home</a></li>`;
   var navlink = '';
-  var navfulllink = window.location.pathname + window.location.search;
+  var navfulllink = window.location.pathname;
   var breadbar = '';
-  navfulllink.split('/').forEach(navname => {
-      if (navname != '') {
-          navlink = "" + navlink + "/" + navname + "";
-          if (navname.endsWith('?a=view/')) {
-              navnamede = decodeURIComponent(navname);
-              navnamews = navnamede.replace(/\?.+/g, "$'")
-              if (navnamews.length > 15) {
-                  navnamecr = navnamews.slice(0, 5) + '...';
-              } else {
-                  navnamecr = navnamews.slice(0, 15);
-              }
-              content += `<li class="breadcrumb-item"><a href="${navlink}">${navnamecr}</a></li>`;
-          } else {
-              navnamede = decodeURIComponent(navname);
-              if (navnamede.length > 15) {
-                  navnamecr = navnamede.slice(0, 15) + '...';
-              } else {
-                  navnamecr = navnamede.slice(0, 15);
-              }
-              content += `<li class="breadcrumb-item"><a href="${navlink}">${navnamecr}</a></li>`;
+  var navarrayde = decodeURIComponent(navfulllink).split('/');
+// <li class="breadcrumb-item"><a href="${item}">${navnamecr}</a></li>
+  var navarray = navfulllink.trim('/').split('/');
+  var p = '/';
+  if (navarray.length > 1) {
+      navarray.shift();
+      for (var i in navarray) {
+          var an = navarray[i];
+          n1 = decodeURIComponent(an);
+          n2 = n1.replace(/\?.+/g, "$'")
+          if (n2.length > 15) {
+              n = n2.slice(0, 5) + '...';
           }
+          else {
+              n = n2.slice(0, 15);
+          }
+          p += an + '/';
+          var ext = p.split('.').pop().toLowerCase();
+          if (n === '') {
+              break;
+          }
+          content += `<li class="breadcrumb-item"><a href="${p}">${n}</a></li>`;
       }
-  });
+  }
   content += `</ol>
   </nav>
   </div>
@@ -792,7 +800,7 @@ function file_others(path) {
 <div class="container"><br>
 <div class="card">
 <div class="card-body">
-  <div class="alert alert-danger" id="file_details" role="alert">${obj.name}<br>${size}</div>
+  <div class="${UI.file_view_alert_class}" id="file_details" role="alert">${obj.name}<br>${size}</div>
 </div>
 <div class="card-body">
 <div class="input-group mb-4">
@@ -836,7 +844,7 @@ function file_code(path) {
 <div class="container"><br>
 <div class="card">
 <div class="card-body">
-  <div class="alert alert-danger" id="file_details" role="alert">${obj.name}<br>${size}</div>
+  <div class="${UI.file_view_alert_class}" id="file_details" role="alert">${obj.name}<br>${size}</div>
 <div>
 <pre id="editor" ></pre>
 </div>
@@ -887,7 +895,7 @@ function file_video(path) {
   <div class="container text-center"><br>
   <div class="card text-center">
   <div class="text-center">
-  <div class="alert alert-danger" id="file_details" role="alert">${obj.name}<br>${size}</div>
+  <div class="${UI.file_view_alert_class}" id="file_details" role="alert">${obj.name}<br>${size}</div>
 	<video id="vplayer" width="100%" height="100%" playsinline controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'pip', 'airplay', 'fullscreen']; data-plyr-config="{ "title": "${decodename}"}" data-poster="${poster}" style="--plyr-captions-text-color: #ffffff;--plyr-captions-background: #000000;">
 	  <source src="${url}" type="video/mp4" />
 	  <source src="${url}" type="video/webm" />
@@ -958,7 +966,7 @@ function file_audio(path) {
   <div class="container"><br>
   <div class="card" style="background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);">
   <div class="card-body text-center">
-  <div class="alert alert-danger" id="file_details" role="alert">${obj.name}<br>${size}</div>
+  <div class="${UI.file_view_alert_class}" id="file_details" role="alert">${obj.name}<br>${size}</div>
   <br><img draggable="false" src="${UI.audioposter}" width="100%" /><br>
   <audio id="vplayer" width="100%" playsinline controls>
     <source src="${url}" type="audio/ogg">
@@ -1064,7 +1072,7 @@ function file_pdf(path) {
   <div class="container"><br>
   <div class="card">
   <div class="card-body text-center">
-  <div class="alert alert-danger" id="file_details" role="alert">${obj.name}<br>${size}</div>
+  <div class="${UI.file_view_alert_class}" id="file_details" role="alert">${obj.name}<br>${size}</div>
   <div>
   <button id="prev" class="btn btn-info">Previous</button>
   <button id="next" class="btn btn-info">Next</button>
@@ -1156,7 +1164,7 @@ function file_image(path) {
   <div class="container"><br>
   <div class="card">
   <div class="card-body text-center">
-  <div class="alert alert-danger" id="file_details" role="alert">${obj.name}<br>${size}</div>
+  <div class="${UI.file_view_alert_class}" id="file_details" role="alert">${obj.name}<br>${size}</div>
   <div>${targetText}</div><br>
   <img src="${url}" width="50%">
   </div>
