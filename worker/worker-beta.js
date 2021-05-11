@@ -83,7 +83,7 @@ const uiConfig = {
     "display_download": true, // Set this to false to hide download icon for folder and files on main index
     "disable_player": false, // Set this to true to hide audio and video players
     "disable_video_download": false, // Remove Download, Copy Button on Videos
-    "second_domain_for_dl": true, // If you want to display other URL for Downloading to protect your main domain.
+    "second_domain_for_dl": false, // If you want to display other URL for Downloading to protect your main domain.
     "downloaddomain": "https://testing.fetchgoogleapi.workers.dev", // If "second_domain_for_dl": true then enter downloaddomain otherwise keep empty. eg. https://workers.workersname.workers.dev No Trailing '/'
     "poster": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.10/images/poster.jpg", // Video poster URL or see Readme to how to load from Drive
     "audioposter": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.10/images/music.jpg", // Video poster URL or see Readme to how to load from Drive
