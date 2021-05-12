@@ -1,4 +1,4 @@
-// 2.0.17-alpha.6
+// 2.0.17-alpha.7
 
 /**
  * A Script Redesigned by Parveen Bhadoo from GOIndex at https://github.com/ParveenBhadooOfficial/Google-Drive-Index
@@ -54,7 +54,7 @@ const authConfig = {
 
 const uiConfig = {
     "theme": "vapor", // switch between themes, default set to dark, select from https://github.com/ParveenBhadooOfficial/Google-Drive-Index#themes
-    "version": "2.0.17-alpha.6", // don't touch this one. get latest code using generator at https://generator.driveindex.ga
+    "version": "2.0.17-alpha.7", // don't touch this one. get latest code using generator at https://generator.driveindex.ga
     // If you're using Image then set to true, If you want text then set it to false
     "logo_image": true, // true if you're using image link in next option.
     "logo_height": "", // only if logo_image is true
@@ -62,7 +62,7 @@ const uiConfig = {
     // if logo is true then link otherwise just text for name
     "logo_link_name": "https://cdn.jsdelivr.net/gh/jscdn/svg@1.0.3/bhadoo-cloud-logo-white.svg",
     "fixed_header": true, // If you want the footer to be flexible or fixed.
-    "header_padding": "60", // Value 60 for fixed header, Value 20 for flixble header. Required to be changed accordingly in some themes.
+    "header_padding": "60", // Value 60 for fixed header, Value 20 for flexible header. Required to be changed accordingly in some themes.
     "fixed_footer": false, // If you want the footer to be flexible or fixed.
     "header_style_class": "navbar-dark bg-primary", // navbar-dark bg-primary || navbar-dark bg-dark || navbar-light bg-light
     "footer_style_class": "bg-primary", // bg-primary || bg-dark || bg-light
@@ -95,7 +95,7 @@ const uiConfig = {
     "plyr_io_version": "3.6.4", // Change plyr.io version in future when needed.
     "unauthorized_owner_link": "https://i.telegram.ind.in/BhadooCloud", // Unauthorized Error Page Link to Owner
     "unauthorized_owner_email": "username@googlemail.com", // Unauthorized Error Page Owner Email
-    "enable_arc": false, // If you want to use arc.io
+    "enable_arc": true, // If you want to use arc.io
     "arc_code": "jfoY2h19" // arc.io Integraion Code, get yours from https://portal.arc.io
 };
 
@@ -134,15 +134,10 @@ function html(current_drive_order = 0, model = {}) {
     window.current_drive_order = ${current_drive_order};
     window.UI = JSON.parse('${JSON.stringify(uiConfig)}');
   </script>
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet"> <!-- Change Font File Here -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdn.plyr.io/${uiConfig.plyr_io_version}/plyr.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.0/dist/${uiConfig.theme}/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
   <style>
-  body {
-    font-family: 'Montserrat', sans-serif; // Change Font Family CSS here
-  }
   a {
       color: ${uiConfig.css_a_tag_color};
   }
@@ -620,7 +615,7 @@ class googleDrive {
             'supportsAllDrives': true
         };
         params.q = `'${parent}' in parents and trashed = false AND name !='.password'`;
-        params.orderBy = 'folder,modifiedTime desc,name';
+        params.orderBy = 'folder,name,modifiedTime desc';
         params.fields = "nextPageToken, files(id, name, mimeType, size , modifiedTime)";
         params.pageSize = this.authConfig.files_list_page_size;
 
@@ -707,7 +702,7 @@ class googleDrive {
         params.q = `trashed = false AND name !='.password' AND (${name_search_str})`;
         params.fields = "nextPageToken, files(id, name, mimeType, size , modifiedTime)";
         params.pageSize = this.authConfig.search_result_list_page_size;
-        params.orderBy = 'folder,modifiedTime desc,name';
+        params.orderBy = 'folder,name,modifiedTime desc';
 
         let url = 'https://www.googleapis.com/drive/v3/files';
         url += '?' + this.enQuery(params);
