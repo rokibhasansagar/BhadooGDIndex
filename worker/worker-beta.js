@@ -529,8 +529,7 @@ class googleDrive {
             inline === true && headers.set('Content-Disposition', 'inline');
             return res;
         } else {
-            // const res = await fetch(`${uiConfig.jsdelivr_cdn_src}@master/assets/DownloadError.html`);
-            const res = await fetch(`https://gateway.hashhackers.com/index404.html`);
+            const res = await fetch(`${uiConfig.jsdelivr_cdn_src}@master/assets/DownloadError.html`);
             return new Response(await res.text(), {
                 headers: {
                     "content-type": "text/html;charset=UTF-8",
