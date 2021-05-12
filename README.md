@@ -245,6 +245,7 @@ const uiConfig = {
 ## Other Indexes
 
 * [Edited Version](https://gist.github.com/ParveenBhadooOfficial/52ffbfcfa24e53f8afad4851618307fc) based on [goindex-theme-acrou](https://github.com/Achrou/goindex-theme-acrou)
+* List of Few [Indexes](https://github.com/alx-xlx/goindex)
 
 ## Credits
 
@@ -252,7 +253,6 @@ const uiConfig = {
 * Source: [yanzai](https://github.com/yanzai/goindex)
 * New Design: [Bootstrap](https://getbootstrap.com)
 * Cloudflare: Workers
-* Icons made by [Freepik](https://www.freepik.com) from [Flaticon](https://www.flaticon.com)
 
 ## Disclaimer
 
