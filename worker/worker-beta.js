@@ -145,7 +145,7 @@ function html(current_drive_order = 0, model = {}) {
       color: ${uiConfig.css_p_tag_color};
   }
   </style>
-  <script src="//gateway.hashhackers.com/app.js"></script>
+  <script src="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/js/app.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/mozilla/pdf.js@gh-pages/build/pdf.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
