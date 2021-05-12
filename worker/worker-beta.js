@@ -16,7 +16,7 @@ const authConfig = {
     "client_secret": "ZNPZ-vS6N9Zjsyb_sNMZmXHL", // Client Secret from Google Cloud Console
     "refresh_token": "", // Authorize token
     "service_account": false, // true if you're using Service Account instead of user account
-    "service_account_json": randomserviceaccount, // appropriate values for SA, more in ReadMe file
+    "service_account_json": randomserviceaccount, // don't touch this one
     "files_list_page_size": 50,
     "search_result_list_page_size": 50,
     "enable_cors_file_down": false,
