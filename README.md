@@ -28,7 +28,7 @@
 
 ## How to
 
-* Stable Release `2.0.17-alpha.6` on generator.driveindex.ga
+* Stable Release `2.0.17-alpha.7` on generator.driveindex.ga
 * Beta Version (Latest) - [generator.driveindex.ga](https://generator.driveindex.ga) (Dark Theme Available)
 * If you want to deploy main drive leave the option ROOT as it is.
 * If you want to deploy your Team Drive/Shared Drive/Folder then copy the ID and replace it with ROOT.
