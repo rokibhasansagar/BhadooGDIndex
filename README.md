@@ -256,6 +256,7 @@ const uiConfig = {
 
 ## Disclaimer
 
+* This project is not associated with Google, this project uses Google Drive API to Index Files and Folders.
 * These Index's are written by someone else, possibly by donva and [maple3142](https://github.com/maple3142/GDIndex).
 * Beta Version is redesigned using Bootstrap from Alpha Version by @ParveenBhadooOfficial.
 * This Repo was imported from [yanzai](https://github.com/yanzai/goindex) and then modified for personal use. After requests from many users made public with user requirements.
