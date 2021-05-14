@@ -309,7 +309,7 @@ async function handleRequest(request) {
             } else {
                 const params = url.searchParams;
                 return new Response(html(gd.order, {
-                    q: params.get("q") || '',
+                    q: params.get("q").replace(new RegExp(/'/g), "") || '', // Skip ' in search
                     is_search_page: true,
                     root_type: gd.root_type
                 }), {
