@@ -173,10 +173,9 @@ const uiConfig = {
 
 ## arc.io Integration
 
-* Signup at arc.io
-* Add your site and enable arc in Customization with your code.
-* Change arc_code in configuration, get code from arc website.
-* How to use [Read Here](https://telegra.ph/How-to-enable-arcio-widget-on-Bhadoo-Cloud-G-Drive-Index-04-25)
+* arc.io is embedded in code to support gdi.js.org
+* Just by keeping the arc.io code you're helping to support the developer (arc pays for CDN use).
+* Advanced users who have arc.io approved account can edit the code and replace widget id.
 
 ## Themes
 
