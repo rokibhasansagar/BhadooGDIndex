@@ -168,6 +168,16 @@ const unauthorized = `<html>
 </body>
 </html>`
 
+const not_found = `<html>
+<head><title>404 File Not Found</title></head>
+<body>
+<center><h1>404 File Not Found</h1></center>
+<hr><center>nginx/1.18.0</center>
+<center>Please contact <a href="${uiConfig.unauthorized_owner_link}">Site Owner</a> at ${uiConfig.unauthorized_owner_email}</center>
+</body>
+</html>`
+
+
 const SearchFunction = {
     formatSearchKeyword: function(keyword) {
         let nothing = "";
@@ -370,7 +380,7 @@ async function handleRequest(request) {
         let range = request.headers.get('Range');
         const inline_down = 'true' === url.searchParams.get('inline');
         if (gd.root.protect_file_link && basic_auth_res) return basic_auth_res;
-        return gd.down(file.id, range, inline_down);
+        return gd.down(file?.id, range, inline_down);
     }
 }
 
@@ -530,7 +540,16 @@ class googleDrive {
             this.authConfig.enable_cors_file_down && headers.append('Access-Control-Allow-Origin', '*');
             inline === true && headers.set('Content-Disposition', 'inline');
             return res;
-        } else {
+        } 
+        else if(res.status == 404){
+            return new Response(not_found, {
+                status: 404,
+                headers: {
+                    "content-type": "text/html;charset=UTF-8",
+                },
+            })
+        }
+        else {
             const res = await fetch(`${uiConfig.jsdelivr_cdn_src}@master/assets/DownloadError.html`);
             return new Response(await res.text(), {
                 headers: {
