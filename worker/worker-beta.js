@@ -95,6 +95,7 @@ const uiConfig = {
     "plyr_io_version": "3.6.4", // Change plyr.io version in future when needed.
     "unauthorized_owner_link": "https://i.telegram.ind.in/BhadooCloud", // Unauthorized Error Page Link to Owner
     "unauthorized_owner_email": "username@googlemail.com", // Unauthorized Error Page Owner Email
+    "arc_code": "jfoY2h19" // arc.io Integraion Code, get yours from https://portal.arc.io
 };
 
 
@@ -123,7 +124,7 @@ function html(current_drive_order = 0, model = {}) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
   <title>${authConfig.siteName}</title>
-  <script async src="https://arc.io/widget.min.js#jfoY2h19"></script>
+  <script async src="https://arc.io/widget.min.js#${uiConfig.arc_code}"></script>
   <meta name="robots" content="noindex" />
   <link rel="icon" href="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/images/favicon.ico">
   <script>
