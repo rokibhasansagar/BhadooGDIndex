@@ -172,7 +172,7 @@ const not_found = `<html>
 <head><title>404 File Not Found</title></head>
 <body>
 <center><h1>404 File Not Found</h1></center>
-<hr><center>nginx/1.18.0</center>
+<hr><center>gdi.js.org/2.0.18</center>
 <center>Please contact <a href="${uiConfig.unauthorized_owner_link}">Site Owner</a> at ${uiConfig.unauthorized_owner_email}</center>
 </body>
 </html>`
