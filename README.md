@@ -4,6 +4,8 @@
 
 ## Full Whitelabel and Customizable Index | One of a kind
 
+### [Generate Code](https://gdi.js.org/build)
+
 * Discuss Problems here at [Discussions](https://github.com/ParveenBhadooOfficial/Google-Drive-Index/discussions)
 * Supports Both My and Team/Shared Drives with Dark Mode.
 * Click https://generator.driveindex.ga to make yours or watch https://youtu.be/Ihk4Gm3DPvg.
