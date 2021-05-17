@@ -262,6 +262,11 @@ const uiConfig = {
 * Beta Version is redesigned using Bootstrap from Alpha Version by @ParveenBhadooOfficial.
 * This Repo was imported from [yanzai](https://github.com/yanzai/goindex) and then modified for personal use. After requests from many users made public with user requirements.
 
+## Privacy Policy
+
+* [Privacy Policy](https://gdi.js.org/privacy)
+* [LICENSE](https://github.com/ParveenBhadooOfficial/Google-Drive-Index/blob/master/LICENSE)
+
 ## Support this Project
 
 [![Support](https://cdn.buymeacoffee.com/buttons/v2/default-white.png)](https://www.buymeacoffee.com/bhadoo)
