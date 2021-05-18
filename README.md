@@ -1,5 +1,3 @@
-[![gdi.js.org](https://lh3.googleusercontent.com/cA5_k0_b7zfcncfsnBM6gHbafGGvws_xdDHdlvuAjG2eD2X-8dypzx1sIfYRQSqwHvM)](https://gdi.js.org)
-
 # Google Personal/Shared Drive Index 
 
 [![](https://data.jsdelivr.com/v1/package/gh/ParveenBhadooOfficial/Bhadoo-Drive-Index/badge)](https://www.jsdelivr.com/package/gh/ParveenBhadooOfficial/Bhadoo-Drive-Index) [![](https://data.jsdelivr.com/v1/package/gh/ParveenBhadooOfficial/Google-Drive-Index/badge)](https://www.jsdelivr.com/package/gh/ParveenBhadooOfficial/Google-Drive-Index) [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FParveenBhadooOfficial%2FGoogle-Drive-Index&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://github.com/ParveenBhadooOfficial/Google-Drive-Index)
