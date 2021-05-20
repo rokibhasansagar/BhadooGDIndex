@@ -251,6 +251,7 @@ function requestSearch(params, resultCallback) {
 // Render file list
 function list(path) {
   var content = `<div class="container">${UI.fixed_header ?'<br>': ''}
+	<div id="update"></div>
     <div id="head_md" style="display:none; padding: 20px 20px;"></div>
     <div class="${UI.path_nav_alert_class} d-flex align-items-center" role="alert" style="margin-bottom: 0; padding-bottom: 0rem;">
   <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
@@ -905,7 +906,6 @@ function file_video(path) {
     var path = path;
     var url = UI.second_domain_for_dl ? UI.downloaddomain + path : window.location.origin + path;
     var url_without_https = url.replace(/^(https?:|)\/\//,'')
-    var url_base64 = btoa(url)
     $.post("",
     function(data){
     var obj = jQuery.parseJSON(gdidecode(read(data)));
@@ -962,7 +962,6 @@ ${UI.display_drive_link ? '<a type="button" class="btn btn-info" href="https://d
       <a class="dropdown-item" href="vlc://${url}">VLC</a>
       <a class="dropdown-item" href="nplayer-${url}">nPlayer</a>
       <a class="dropdown-item" href="intent://${url_without_https}#Intent;type=video/any;package=is.xyz.mpv;scheme=https;end;">mpv-android</a>
-      <a class="dropdown-item" href="mpv://${url_base64}">mpv x64</a>
       <a class="dropdown-item" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${decodename};end">MX Player (Free)</a>
       <a class="dropdown-item" href="intent:${url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${decodename};end">MX Player (Pro)</a>
       <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager/idm.internet.download.manager.Downloader;S.title=${decodename};end">1DM (Free)</a>
