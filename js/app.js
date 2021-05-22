@@ -286,7 +286,7 @@ function list(path) {
   content += `</ol>
   </nav>
   </div>
-    <div id="list" class="list-group">
+    <div id="list" class="list-group text-break">
     </div>
   	<div class="${UI.file_count_alert_class} text-center d-none" role="alert" id="count">Total <span class="number text-center"></span> items</div>
     <div id="readme_md" style="display:none; padding: 20px 20px;"></div>
@@ -524,7 +524,7 @@ function render_search_result_list() {
   <div class="container"><br>
   <div class="card">
   <div class="${UI.path_nav_alert_class} d-flex align-items-center" role="alert" style="margin-bottom: 0;">Search Results</div>
-  <div id="list" class="list-group">
+  <div id="list" class="list-group text-break">
   </div>
   </div>
   <div class="${UI.file_count_alert_class} text-center d-none" role="alert" id="count">Total <span class="number text-center"></span> items</div>
@@ -855,12 +855,13 @@ function file_code(path) {
     var obj = jQuery.parseJSON(gdidecode(read(data)));
     var size = formatFileSize(obj.size);
     var content = `
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-twilight.css" integrity="sha256-Rl83wx+fN2p2ioYpdvpWxuhAbxj+/7IwaZrKQBu/KQE=" crossorigin="anonymous">
 <div class="container"><br>
 <div class="card text-center">
 <div class="card-body text-center">
   <div class="${UI.file_view_alert_class}" id="file_details" role="alert">${obj.name}<br>${size}</div>
 <div>
-<pre id="editor" ></pre>
+<pre class="line-numbers language-markup" data-src="plugins/line-numbers/index.html" data-start="-5" style="white-space: pre-wrap; counter-reset: linenumber -6;" data-src-status="loaded" tabindex="0"><code id="editor"></code></pre>
 </div>
 </div>
 <div class="card-body">
@@ -884,8 +885,8 @@ function file_code(path) {
       </div>
   </div>
   <button onclick="copyFunction()" onmouseout="outFunc()" class="btn btn-success"> <span class="tooltiptext" id="myTooltip">Copy</span> </button></div><br></div>
-<script src="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.8/js/ace/1.4.7/ace.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.8/js/ace/1.4.7/ext-language_tools.js"></script>`;
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.js" integrity="sha256-fZOd7N/oofoKcO92RzxvC0wMm+EvsKyRT4nmcmQbgzU=" crossorigin="anonymous"></script>
+`;
     $('#content').html(content);
     });
 
@@ -937,6 +938,7 @@ function file_video(path) {
     <track kind="captions" label="French" src="${caption}.fr.vtt" srclang="fr" />
     <track kind="captions" label="Chinese" src="${caption}.zh.vtt" srclang="zh" />
     <track kind="captions" label="Arabic" src="${caption}.ar.vtt" srclang="ar" />
+	<track kind="captions" label="${UI.custom_srt_lang}" src="${caption}.${UI.custom_srt_lang}.vtt" srclang="${UI.custom_srt_lang}" />
 	</video>
   </div>
 	${UI.disable_player ? '<style>.plyr{display:none;}</style>' : ''}
