@@ -22,15 +22,13 @@
 
 * [gdi.js.org](https://gdi.js.org) by [js.org](https://js.org)
 
-## Demo Sites (outdated)
+## Demo Site
 
-* [light-demo.ve.workers.dev](https://light-demo.ve.workers.dev)
-* [dark-demo.ve.workers.dev](https://dark-demo.ve.workers.dev)
-* [password-demo.ve.workers.dev](https://password-demo.ve.workers.dev) id and password are `admin` and `admin`
+* [testing.fetchgoogleapi.workers.dev/](https://testing.fetchgoogleapi.workers.dev/)
 
 ## How to
 
-* Stable Release `2.0.17-alpha.7` on generator.driveindex.ga
+* Stable Release `2.0.18` on generator.driveindex.ga
 * Beta Version (Latest) - [generator.driveindex.ga](https://generator.driveindex.ga) (Dark Theme Available)
 * If you want to deploy main drive leave the option ROOT as it is.
 * If you want to deploy your Team Drive/Shared Drive/Folder then copy the ID and replace it with ROOT.
@@ -126,16 +124,17 @@
 
 ````
 const uiConfig = {
-    "theme": "vapor", // switch between themes, default set to dark, select from https://github.com/ParveenBhadooOfficial/Google-Drive-Index#themes
-    "version": "2.0.17-alpha.7", // don't touch this one. get latest code using generator at https://generator.driveindex.ga
+    "theme": "slate", // switch between themes, default set to vapor, select from https://github.com/ParveenBhadooOfficial/Google-Drive-Index#themes
+    "version": "2.0.18", // don't touch this one. get latest code using generator at https://generator.driveindex.ga
     // If you're using Image then set to true, If you want text then set it to false
     "logo_image": true, // true if you're using image link in next option.
     "logo_height": "", // only if logo_image is true
     "logo_width": "100px", // only if logo_image is true
+    "favicon": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.17-alpha.7/images/favicon.ico",
     // if logo is true then link otherwise just text for name
     "logo_link_name": "https://cdn.jsdelivr.net/gh/jscdn/svg@1.0.3/bhadoo-cloud-logo-white.svg",
     "fixed_header": true, // If you want the footer to be flexible or fixed.
-    "header_padding": "60", // Value 60 for fixed header, Value 20 for flixble header. Required to be changed accordingly in some themes.
+    "header_padding": "60", // Value 60 for fixed header, Value 20 for flexible header. Required to be changed accordingly in some themes.
     "fixed_footer": false, // If you want the footer to be flexible or fixed.
     "header_style_class": "navbar-dark bg-primary", // navbar-dark bg-primary || navbar-dark bg-dark || navbar-light bg-light
     "footer_style_class": "bg-primary", // bg-primary || bg-dark || bg-light
@@ -147,15 +146,16 @@ const uiConfig = {
     "path_nav_alert_class": "alert alert-primary", // https://getbootstrap.com/docs/4.0/components/alerts/#examples
     "file_view_alert_class": "alert alert-danger", // https://getbootstrap.com/docs/4.0/components/alerts/#examples
     "file_count_alert_class": "alert alert-secondary", // https://getbootstrap.com/docs/4.0/components/alerts/#examples
-    "contact_link": "https://t.telegram.ind.in/BhadooCloud", // Link to Contact Button on Menu
+    "contact_link": "https://telegram.dog/Telegram", // Link to Contact Button on Menu
     "copyright_year": "2050", // year of copyright, can be anything like 2015 - 2020 or just 2020
-    "company_name": "Bhadoo Cloud", // Name next to copyright
-    "company_link": "https://t.telegram.ind.in/BhadooCloud", // link of copyright name
+    "company_name": "gdi.js.org", // Name next to copyright
+    "company_link": "https://telegram.dog/Telegram", // link of copyright name
     "credit": true, // Set this to true to give us credit
     "display_size": true, // Set this to false to hide display file size
     "display_time": false, // Set this to false to hide display modified time for folder and files
     "display_download": true, // Set this to false to hide download icon for folder and files on main index
     "disable_player": false, // Set this to true to hide audio and video players
+    "custom_srt_lang": "", // Subtitle Language Code for Custom .vtt language.
     "disable_video_download": false, // Remove Download, Copy Button on Videos
     "second_domain_for_dl": false, // If you want to display other URL for Downloading to protect your main domain.
     "downloaddomain": "https://testing.fetchgoogleapi.workers.dev", // If "second_domain_for_dl": true then enter downloaddomain otherwise keep empty. eg. https://workers.workersname.workers.dev No Trailing '/'
@@ -166,9 +166,9 @@ const uiConfig = {
     "render_readme_md": true, // Render Readme.md
     "display_drive_link": false, // This will add a Link Button to Google Drive of that particular file.
     "plyr_io_version": "3.6.4", // Change plyr.io version in future when needed.
-    "unauthorized_owner_link": "https://i.telegram.ind.in/BhadooCloud", // Unauthorized Error Page Link to Owner
-    "unauthorized_owner_email": "username@googlemail.com", // Unauthorized Error Page Owner Email
-    "enable_arc": false, // If you want to use arc.io
+    "plyr_io_video_resolution": "16:9" // For reference, visit: https://github.com/sampotts/plyr#options
+    "unauthorized_owner_link": "https://telegram.dog/Telegram", // Unauthorized Error Page Link to Owner
+    "unauthorized_owner_email": "abuse@telegram.org", // Unauthorized Error Page Owner Email
     "arc_code": "jfoY2h19" // arc.io Integraion Code, get yours from https://portal.arc.io
 };
 ````
