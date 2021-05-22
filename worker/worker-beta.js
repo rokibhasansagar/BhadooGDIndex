@@ -57,7 +57,7 @@ const authConfig = {
 
 const uiConfig = {
     "theme": "slate", // switch between themes, default set to vapor, select from https://github.com/ParveenBhadooOfficial/Google-Drive-Index#themes
-    "version": "2.0.17-alpha.7", // don't touch this one. get latest code using generator at https://generator.driveindex.ga
+    "version": "2.0.18", // don't touch this one. get latest code using generator at https://generator.driveindex.ga
     // If you're using Image then set to true, If you want text then set it to false
     "logo_image": true, // true if you're using image link in next option.
     "logo_height": "", // only if logo_image is true
@@ -100,7 +100,7 @@ const uiConfig = {
     "plyr_io_version": "3.6.4", // Change plyr.io version in future when needed.
     "plyr_io_video_resolution": "16:9" // For reference, visit: https://github.com/sampotts/plyr#options
     "unauthorized_owner_link": "https://telegram.dog/Telegram", // Unauthorized Error Page Link to Owner
-    "unauthorized_owner_email": "username@googlemail.com", // Unauthorized Error Page Owner Email
+    "unauthorized_owner_email": "abuse@telegram.org", // Unauthorized Error Page Owner Email
     "arc_code": "jfoY2h19" // arc.io Integraion Code, get yours from https://portal.arc.io
 };
 
