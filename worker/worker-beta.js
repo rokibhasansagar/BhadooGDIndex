@@ -151,7 +151,7 @@ function html(current_drive_order = 0, model = {}) {
   }
   </style>
   <script src="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/js/app.min.js"></script>
-  <script src="/update.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@master/js/update.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/mozilla/pdf.js@gh-pages/build/pdf.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
@@ -302,8 +302,6 @@ async function handleRequest(request) {
         return fetch("https://arc.io/arc-sw.js")
     } else if (path.toLowerCase() == '/admin') {
         return Response.redirect("https://bit.ly/3sAxYwr", 301)
-    } else if (path.toLowerCase() == '/update.min.js') {
-        return fetch("https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@master/js/update.min.js")
     }
 
     const command_reg = /^\/(?<num>\d+):(?<command>[a-zA-Z0-9]+)(\/.*)?$/g;
