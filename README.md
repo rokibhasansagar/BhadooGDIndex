@@ -6,7 +6,7 @@
 
 ## IMPORTANT UPDATE
 
-* If your index stopped working, that means you're using old config, please generate new code with features and bug fixes. If you see UPDATE banner after new install, don't panic, wait 24-48 hours, it'll go away, its due to cloudflare cache.
+* If your index stopped working, that means you're using old config, please generate new code with features and bug fixes. If you see UPDATE banner after new install, don't panic, wait 24-48 hours, it'll go away, its due to cloudflare cache or just generate code again as i've fixed since this update.
 
 ### [Generate Code](https://gdi.js.org/build)
 
