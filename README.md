@@ -176,8 +176,9 @@ const uiConfig = {
 ## arc.io Integration
 
 * arc.io is embedded in code to support gdi.js.org
-* Just by keeping the arc.io code you're helping to support the developer (arc pays for CDN use).
-* Advanced users who have arc.io approved account can edit the code and replace widget id.
+* if you have approved arc.io account, use your code.
+* incase you don't have arc account and want to support us, please keep our arc.io code in your index.
+* if anyone doesn't want to support us and want to remove arc, remove [this](https://github.com/ParveenBhadooOfficial/Google-Drive-Index/blob/master/worker/worker-beta.js#L133) line from workers code.
 
 ## Themes
 
