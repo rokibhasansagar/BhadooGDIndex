@@ -4,6 +4,10 @@
 
 ## Full Whitelabel and Customizable Index | One of a kind
 
+## IMPORTANT UPDATE
+
+* If your index stopped working, that means you're old config, please generate new code with features and bug fixes. If you see UPDATE banner after new install, don't panic, wait 24-48 hours, it'll go away, its due to cloudflare cache.
+
 ### [Generate Code](https://gdi.js.org/build)
 
 * Discuss Problems here at [Discussions](https://github.com/ParveenBhadooOfficial/Google-Drive-Index/discussions)
