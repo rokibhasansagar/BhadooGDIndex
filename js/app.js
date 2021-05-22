@@ -943,7 +943,7 @@ function file_video(path) {
   </div>
 	${UI.disable_player ? '<style>.plyr{display:none;}</style>' : ''}
   <script>
-   const player = new Plyr('#vplayer');
+   const player = new Plyr('#vplayer',{ratio: "${UI.plyr_io_video_resolution}"});
   </script></br>
 ${UI.disable_video_download ? `` : `
 <div class="card-body">
