@@ -719,7 +719,7 @@ function onSearchResultItemClick(a_ele) {
         }
         title = `Failed`;
         $('#SearchModelLabel').html(title);
-        content = `System Failed to Fetch the File/Folder Link, Please close and try agin.`;
+        content = `System Failed to Fetch the File/Folder Link, Please close and try again.`;
         $('#modal-body-space').html(content);
     })
 }
