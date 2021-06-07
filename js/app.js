@@ -737,19 +737,6 @@ function get_file(path, file, callback) {
     }
 }
 
-function get_file(path, file, callback) {
-    var key = "file_path_" + path + file['modifiedTime'];
-    var data = localStorage.getItem(key);
-    if (data != undefined) {
-        return callback(data);
-    } else {
-        $.get(path, function(d) {
-            localStorage.setItem(key, d);
-            callback(d);
-        });
-    }
-}
-
 // File display ?a=view
 function file(path) {
     var name = path.split('/').pop();
