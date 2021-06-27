@@ -7,7 +7,7 @@ const clientId = '58094879805-4654k2k5nqdid5bavft7fvea5u9po0t1.apps.googleuserco
 const clientSecret = 'ZNPZ-vS6N9Zjsyb_sNMZmXHL';
 const grantType = 'authorization_code';
 const redirectURI = 'urn:ietf:wg:oauth:2.0:oob';
-const jsURL = 'https://raw.githubusercontent.com/ParveenBhadooOfficial/Bhadoo-Drive-Index/master/worker/worker-beta.js';
+const jsURL = 'https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.20/worker/worker-beta.js';
 
 async function handleRequest(request) {
     let title = getParameterByName(request.url, 'site_name') || 'Bhadoo Drive Index';
@@ -50,19 +50,19 @@ async function handleRequest(request) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@0.4.1/dist/css/mdui.min.css">
     <script src="https://cdn.jsdelivr.net/npm/mdui@0.4.1/dist/js/mdui.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
-    
+
     <style>
         /*snippet.css*/
         .snippet {
             position: relative;
             overflow: visible;
         }
-        
+
         .snippet code {
             font-size: 14px;
             line-height: 20px;
         }
-        
+
         .snippet .btn {
             -webkit-transition: opacity 0.3s ease-in-out;
             -o-transition: opacity 0.3s ease-in-out;
@@ -84,18 +84,18 @@ async function handleRequest(request) {
             border: 1px solid #d5d5d5;
             border-radius: 3px;
         }
-        
+
         .snippet:hover .btn,
         .snippet .btn:focus {
             opacity: 1;
         }
-        
+
         @media screen and (max-width: 768px) {
             .snippet .btn {
                 opacity: 1;
             }
         }
-        
+
         code {
             background-color: #E8F5F2;
             border-radius: 3px;
@@ -104,17 +104,17 @@ async function handleRequest(request) {
             margin: 0;
             padding: 0.2em;
         }
-        
+
         .hljs-keyword {
             color: #008080;
             font-weight: normal;
         }
-        
+
         /*primer.css*/
         .tooltipped {
             position: relative
         }
-        
+
         .tooltipped:after {
             position: absolute;
             z-index: 1000000;
@@ -135,7 +135,7 @@ async function handleRequest(request) {
             border-radius: 3px;
             -webkit-font-smoothing: subpixel-antialiased
         }
-        
+
         .tooltipped:before {
             position: absolute;
             z-index: 1000001;
@@ -147,22 +147,22 @@ async function handleRequest(request) {
             content: "";
             border: 5px solid transparent
         }
-        
+
         .tooltipped:hover:before,.tooltipped:hover:after,.tooltipped:active:before,.tooltipped:active:after,.tooltipped:focus:before,.tooltipped:focus:after {
             display: inline-block;
             text-decoration: none
         }
-        
+
         .tooltipped-multiline:hover:after,.tooltipped-multiline:active:after,.tooltipped-multiline:focus:after {
             display: table-cell
         }
-        
+
         .tooltipped-s:after,.tooltipped-se:after,.tooltipped-sw:after {
             top: 100%;
             right: 50%;
             margin-top: 5px
         }
-        
+
         .tooltipped-s:before,.tooltipped-se:before,.tooltipped-sw:before {
             top: auto;
             right: 50%;
@@ -170,23 +170,23 @@ async function handleRequest(request) {
             margin-right: -5px;
             border-bottom-color: rgba(0,0,0,0.8)
         }
-        
+
         .tooltipped-se:after {
             right: auto;
             left: 50%;
             margin-left: -15px
         }
-        
+
         .tooltipped-sw:after {
             margin-right: -15px
         }
-        
+
         .tooltipped-n:after,.tooltipped-ne:after,.tooltipped-nw:after {
             right: 50%;
             bottom: 100%;
             margin-bottom: 5px
         }
-        
+
         .tooltipped-n:before,.tooltipped-ne:before,.tooltipped-nw:before {
             top: -5px;
             right: 50%;
@@ -194,23 +194,23 @@ async function handleRequest(request) {
             margin-right: -5px;
             border-top-color: rgba(0,0,0,0.8)
         }
-        
+
         .tooltipped-ne:after {
             right: auto;
             left: 50%;
             margin-left: -15px
         }
-        
+
         .tooltipped-nw:after {
             margin-right: -15px
         }
-        
+
         .tooltipped-s:after,.tooltipped-n:after {
             -webkit-transform: translateX(50%);
             -ms-transform: translateX(50%);
             transform: translateX(50%)
         }
-        
+
         .tooltipped-w:after {
             right: 100%;
             bottom: 50%;
@@ -219,7 +219,7 @@ async function handleRequest(request) {
             -ms-transform: translateY(50%);
             transform: translateY(50%)
         }
-        
+
         .tooltipped-w:before {
             top: 50%;
             bottom: 50%;
@@ -227,7 +227,7 @@ async function handleRequest(request) {
             margin-top: -5px;
             border-left-color: rgba(0,0,0,0.8)
         }
-        
+
         .tooltipped-e:after {
             bottom: 50%;
             left: 100%;
@@ -236,7 +236,7 @@ async function handleRequest(request) {
             -ms-transform: translateY(50%);
             transform: translateY(50%)
         }
-        
+
         .tooltipped-e:before {
             top: 50%;
             right: -5px;
@@ -244,7 +244,7 @@ async function handleRequest(request) {
             margin-top: -5px;
             border-right-color: rgba(0,0,0,0.8)
         }
-        
+
         .tooltipped-multiline:after {
             width: -moz-max-content;
             width: max-content;
@@ -254,7 +254,7 @@ async function handleRequest(request) {
             white-space: pre-line;
             border-collapse: separate
         }
-        
+
         .tooltipped-multiline.tooltipped-s:after,.tooltipped-multiline.tooltipped-n:after {
             right: auto;
             left: 50%;
@@ -262,21 +262,21 @@ async function handleRequest(request) {
             -ms-transform: translateX(-50%);
             transform: translateX(-50%)
         }
-        
+
         .tooltipped-multiline.tooltipped-w:after,.tooltipped-multiline.tooltipped-e:after {
             right: 100%
         }
-        
+
         @media screen and (min-width: 0\\0) {
             .tooltipped-multiline:after {
                 width: 250px
             }
         }
-        
+
         .tooltipped-sticky:before,.tooltipped-sticky:after {
             display: inline-block
         }
-        
+
         .tooltipped-sticky.tooltipped-multiline:after {
             display: table-cell
         }
@@ -342,50 +342,50 @@ async function handleRequest(request) {
     document.getElementById("year").innerHTML = new Date().getFullYear();
     /*snippets.js*/
     var snippets = document.querySelectorAll('.snippet');
-    
+
     [].forEach.call(snippets, function(snippet) {
         snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn" data-clipboard-snippet><img class="clippy" width="13" src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMjQiIHdpZHRoPSI4OTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHBhdGggZD0iTTEyOCA3NjhoMjU2djY0SDEyOHYtNjR6IG0zMjAtMzg0SDEyOHY2NGgzMjB2LTY0eiBtMTI4IDE5MlY0NDhMMzg0IDY0MGwxOTIgMTkyVjcwNGgzMjBWNTc2SDU3NnogbS0yODgtNjRIMTI4djY0aDE2MHYtNjR6TTEyOCA3MDRoMTYwdi02NEgxMjh2NjR6IG01NzYgNjRoNjR2MTI4Yy0xIDE4LTcgMzMtMTkgNDVzLTI3IDE4LTQ1IDE5SDY0Yy0zNSAwLTY0LTI5LTY0LTY0VjE5MmMwLTM1IDI5LTY0IDY0LTY0aDE5MkMyNTYgNTcgMzEzIDAgMzg0IDBzMTI4IDU3IDEyOCAxMjhoMTkyYzM1IDAgNjQgMjkgNjQgNjR2MzIwaC02NFYzMjBINjR2NTc2aDY0MFY3Njh6TTEyOCAyNTZoNTEyYzAtMzUtMjktNjQtNjQtNjRoLTY0Yy0zNSAwLTY0LTI5LTY0LTY0cy0yOS02NC02NC02NC02NCAyOS02NCA2NC0yOSA2NC02NCA2NGgtNjRjLTM1IDAtNjQgMjktNjQgNjR6IiAvPgo8L3N2Zz4K" alt="Copy to clipboard"></button>');
     });
-    
+
     var clipboardSnippets = new ClipboardJS('[data-clipboard-snippet]', {
         target: function(trigger) {
             return trigger.nextElementSibling;
         }
     });
-    
+
     clipboardSnippets.on('success', function(e) {
         e.clearSelection();
-    
+
         showTooltip(e.trigger, 'Copied!');
     });
-    
+
     clipboardSnippets.on('error', function(e) {
         showTooltip(e.trigger, fallbackMessage(e.action));
     });
-    
+
     /*tooltips.js*/
     var btns = document.querySelectorAll('.btn');
-    
+
     for (var i = 0; i < btns.length; i++) {
         btns[i].addEventListener('mouseleave', clearTooltip);
         btns[i].addEventListener('blur', clearTooltip);
     }
-    
+
     function clearTooltip(e) {
         e.currentTarget.setAttribute('class', 'btn');
         e.currentTarget.removeAttribute('aria-label');
     }
-    
+
     function showTooltip(elem, msg) {
         elem.setAttribute('class', 'btn tooltipped tooltipped-s');
         elem.setAttribute('aria-label', msg);
     }
-    
+
     // Simplistic detection, do not use it in production
     function fallbackMessage(action) {
         var actionMsg = '';
         var actionKey = (action === 'cut' ? 'X' : 'C');
-    
+
         if(/iPhone|iPad/i.test(navigator.userAgent)) {
             actionMsg = 'No support :(';
         }
@@ -395,7 +395,7 @@ async function handleRequest(request) {
         else {
             actionMsg = 'Press Ctrl-' + actionKey + ' to ' + action;
         }
-    
+
         return actionMsg;
     }
 
