@@ -101,7 +101,8 @@ const uiConfig = {
     "plyr_io_video_resolution": "16:9", // For reference, visit: https://github.com/sampotts/plyr#options
     "unauthorized_owner_link": "https://telegram.dog/Telegram", // Unauthorized Error Page Link to Owner
     "unauthorized_owner_email": "abuse@telegram.org", // Unauthorized Error Page Owner Email
-    "arc_code": "jfoY2h19" // arc.io Integraion Code, get yours from https://portal.arc.io
+    "arc_code": "jfoY2h19", // arc.io Integraion Code, get yours from https://portal.arc.io
+    "search_all_drives": false // turn this on to switch this to gdrive search application
 };
 
 
@@ -150,7 +151,7 @@ function html(current_drive_order = 0, model = {}) {
       color: ${uiConfig.css_p_tag_color};
   }
   </style>
-  <script src="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/js/app.min.js"></script>
+  ${uiConfig.search_all_drives ? '<script src="'+uiConfig.jsdelivr_cdn_src +'@' + uiConfig.version + '/js/search.min.js"></script>' : '<script src="'+uiConfig.jsdelivr_cdn_src +'@' + uiConfig.version + '/js/app.min.js"></script>'}
   <script src="https://cdn.jsdelivr.net/gh/mozilla/pdf.js@gh-pages/build/pdf.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
@@ -690,7 +691,7 @@ class googleDrive {
         const types = DriveFixedTerms.gd_root_type;
         const is_user_drive = this.root_type === types.user_drive;
         const is_share_drive = this.root_type === types.share_drive;
-
+        const search_all_drives = `${uiConfig.search_all_drives}`
         const empty_result = {
             nextPageToken: null,
             curPageIndex: page_index,
@@ -708,11 +709,21 @@ class googleDrive {
         let name_search_str = `name contains '${words.join("' AND name contains '")}'`;
         let params = {};
         if (is_user_drive) {
-            params.corpora = 'user'
+            if (search_all_drives == 'true') {
+                params.corpora = 'allDrives';
+            }
+            else {
+                params.corpora = 'user';
+            }
         }
         if (is_share_drive) {
-            params.corpora = 'drive';
-            params.driveId = this.root.id;
+            if (search_all_drives == 'true') {
+                params.corpora = 'allDrives';
+            }
+            else {
+                params.corpora = 'drive';
+                params.driveId = this.root.id;
+            }
             params.includeItemsFromAllDrives = true;
             params.supportsAllDrives = true;
         }
