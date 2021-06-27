@@ -7,7 +7,7 @@ const clientId = '58094879805-4654k2k5nqdid5bavft7fvea5u9po0t1.apps.googleuserco
 const clientSecret = 'ZNPZ-vS6N9Zjsyb_sNMZmXHL';
 const grantType = 'authorization_code';
 const redirectURI = 'urn:ietf:wg:oauth:2.0:oob';
-const jsURL = 'https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.20/worker/worker-beta.js';
+const jsURL = 'https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/raw/master/worker/worker-beta.js';
 
 async function handleRequest(request) {
     let title = getParameterByName(request.url, 'site_name') || 'Bhadoo Drive Index';
