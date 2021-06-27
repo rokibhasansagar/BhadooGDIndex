@@ -11,9 +11,9 @@
 * Supports Both My and Team/Shared Drives with Dark Mode.
 * Click https://bdi-generator.hashhackers.com to make yours or watch https://youtu.be/Ihk4Gm3DPvg.
 
-[![Screenshot](https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.20/images/themes/vapor.png)](https://youtu.be/Ihk4Gm3DPvg)
+[![Screenshot](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/raw/master/images/themes/vapor.png)](https://youtu.be/Ihk4Gm3DPvg)
 
-[![Screenshot](https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.20/images/themes/darkly.png)](https://youtu.be/Ihk4Gm3DPvg)
+[![Screenshot](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/raw/master/images/themes/darkly.png)](https://youtu.be/Ihk4Gm3DPvg)
 
 `Note: The Changes in your workers config can effect later due to cache. Use incognito mode every time to open the worker URL to overcome that issue.`
 
