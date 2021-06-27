@@ -11,15 +11,15 @@
 * Supports Both My and Team/Shared Drives with Dark Mode.
 * Click https://bdi-generator.hashhackers.com to make yours or watch https://youtu.be/Ihk4Gm3DPvg.
 
-[![Screenshot](https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.19/images/themes/vapor.png)](https://youtu.be/Ihk4Gm3DPvg)
+[![Screenshot](https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.20/images/themes/vapor.png)](https://youtu.be/Ihk4Gm3DPvg)
 
-[![Screenshot](https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.19/images/themes/darkly.png)](https://youtu.be/Ihk4Gm3DPvg)
+[![Screenshot](https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.20/images/themes/darkly.png)](https://youtu.be/Ihk4Gm3DPvg)
 
 `Note: The Changes in your workers config can effect later due to cache. Use incognito mode every time to open the worker URL to overcome that issue.`
 
 ## How to
 
-* Stable Release `2.0.19`
+* Stable Release `2.0.20`
 * Beta Version (Latest) - [bdi-generator](https://bdi-generator.hashhackers.com) (For Dark Theme use darkly)
 * If you want to deploy main drive leave the option ROOT as it is.
 * If you want to deploy your Team Drive/Shared Drive/Folder then copy the ID and replace it with ROOT.

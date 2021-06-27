@@ -285,7 +285,7 @@ async function handleRequest(request) {
 <body class="mdui-theme-primary-blue-grey mdui-theme-accent-blue">
 <div class="mdui-container">
     <br><br>
-    <a href="https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index"><img border="0" alt="Bhadoo Cloud" src="https://cdn.jsdelivr.net/gh/jscdn/svg@1.0.1/bhadoo-cloud-logo.svg" height="30px"></a><h3>Drive Index Generator - Beta</h3>
+    <a href="https://gitlab .com/ParveenBhadooOfficial/Google-Drive-Index"><img border="0" alt="Bhadoo Cloud" src="https://cdn.jsdelivr.net/gh/jscdn/svg@1.0.1/bhadoo-cloud-logo.svg" height="30px"></a><h3>Drive Index Generator - Beta</h3>
     <br>
     <div class="mdui-row">
         <div class="mdui-col-sm-2">
