@@ -1,4 +1,4 @@
-﻿/*  ░██████╗░██████╗░██╗░░░░░░░░██╗░██████╗░░░░█████╗░██████╗░░██████╗░
+/*  ░██████╗░██████╗░██╗░░░░░░░░██╗░██████╗░░░░█████╗░██████╗░░██████╗░
     ██╔════╝░██╔══██╗██║░░░░░░░░██║██╔════╝░░░██╔══██╗██╔══██╗██╔════╝░
     ██║░░██╗░██║░░██║██║░░░░░░░░██║╚█████╗░░░░██║░░██║██████╔╝██║░░██╗░
     ██║░░╚██╗██║░░██║██║░░░██╗░░██║░╚═══██╗░░░██║░░██║██╔══██╗██║░░╚██╗
@@ -22,93 +22,22 @@ const authConfig = {
     "service_account_json": randomserviceaccount, // don't touch this one
     "files_list_page_size": 50,
     "search_result_list_page_size": 50,
-    "enable_cors_file_down": false,
+    "enable_cors_file_down": true,
     "enable_password_file_verify": true, // support for .password file
     "roots":[
       {
           "id": "root",
           "name": "Drive One",
           "protect_file_link": false,
-         // "auth": {"username":"password"} /* Remove double slash before "auth" to activate id password protection */
+          "auth": {"username":"password"} /* Remove double slash before "auth" to activate id password protection */
       },
       {
           "id": "root",
           "name": "Drive Two",
           "protect_file_link": false,
-         // "auth": {"username":"password", "username1":"password1"} /* Remove double slash before "auth" to activate id password protection */
+          "auth": {"username":"password", "username1":"password1"} /* Remove double slash before "auth" to activate id password protection */
       },
     ]};
-
-
-/*
-███████╗██████╗░██╗████████╗  ████████╗██╗░░██╗███████╗░██████╗███████╗
-██╔════╝██╔══██╗██║╚══██╔══╝  ╚══██╔══╝██║░░██║██╔════╝██╔════╝██╔════╝
-█████╗░░██║░░██║██║░░░██║░░░  ░░░██║░░░███████║█████╗░░╚█████╗░█████╗░░
-██╔══╝░░██║░░██║██║░░░██║░░░  ░░░██║░░░██╔══██║██╔══╝░░░╚═══██╗██╔══╝░░
-███████╗██████╔╝██║░░░██║░░░  ░░░██║░░░██║░░██║███████╗██████╔╝███████╗
-╚══════╝╚═════╝░╚═╝░░░╚═╝░░░  ░░░╚═╝░░░╚═╝░░╚═╝╚══════╝╚═════╝░╚══════╝
-
-██╗░░░██╗░█████╗░██╗░░░░░██╗░░░██╗███████╗░██████╗
-██║░░░██║██╔══██╗██║░░░░░██║░░░██║██╔════╝██╔════╝
-╚██╗░██╔╝███████║██║░░░░░██║░░░██║█████╗░░╚█████╗░
-░╚████╔╝░██╔══██║██║░░░░░██║░░░██║██╔══╝░░░╚═══██╗
-░░╚██╔╝░░██║░░██║███████╗╚██████╔╝███████╗██████╔╝
-░░░╚═╝░░░╚═╝░░╚═╝╚══════╝░╚═════╝░╚══════╝╚═════╝░*/
-
-const uiConfig = {
-    "theme": "slate", // switch between themes, default set to vapor, select from https://www.npmjs.com/package/@googledrive/index
-    "version": "2.0.20", // don't touch this one. get latest code using generator at https://bdi-generator.hashhackers.com
-    // If you're using Image then set to true, If you want text then set it to false
-    "logo_image": true, // true if you're using image link in next option.
-    "logo_height": "", // only if logo_image is true
-    "logo_width": "100px", // only if logo_image is true
-    "favicon": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.20/images/favicon.ico",
-    // if logo is true then link otherwise just text for name
-    "logo_link_name": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.20/images/bhadoo-cloud-logo-white.svg",
-    "fixed_header": true, // If you want the footer to be flexible or fixed.
-    "header_padding": "60", // Value 60 for fixed header, Value 20 for flexible header. Required to be changed accordingly in some themes.
-    "nav_link_1": "Home", // change navigation link name
-    "nav_link_3": "Current Path", // change navigation link name
-    "nav_link_4": "Contact", // change navigation link name
-    "fixed_footer": false, // If you want the footer to be flexible or fixed.
-    "hide_footer": true, // hides the footer from site entirely.
-    "header_style_class": "navbar-dark bg-primary", // navbar-dark bg-primary || navbar-dark bg-dark || navbar-light bg-light
-    "footer_style_class": "bg-primary", // bg-primary || bg-dark || bg-light
-    "css_a_tag_color": "white", // Color Name or Hex Code eg. #ffffff
-    "css_p_tag_color": "white", // Color Name or Hex Code eg. #ffffff
-    "folder_text_color": "white", // Color Name or Hex Code eg. #ffffff
-    "loading_spinner_class": "text-light", // https://getbootstrap.com/docs/5.0/components/spinners/#colors
-    "search_button_class": "btn btn-danger", // https://getbootstrap.com/docs/5.0/components/buttons/#examples
-    "path_nav_alert_class": "alert alert-primary", // https://getbootstrap.com/docs/4.0/components/alerts/#examples
-    "file_view_alert_class": "alert alert-danger", // https://getbootstrap.com/docs/4.0/components/alerts/#examples
-    "file_count_alert_class": "alert alert-secondary", // https://getbootstrap.com/docs/4.0/components/alerts/#examples
-    "contact_link": "https://telegram.dog/Telegram", // Link to Contact Button on Menu
-    "copyright_year": "2050", // year of copyright, can be anything like 2015 - 2020 or just 2020
-    "company_name": "Bhadoo Cloud", // Name next to copyright
-    "company_link": "https://telegram.dog/Telegram", // link of copyright name
-    "credit": true, // Set this to true to give us credit
-    "display_size": true, // Set this to false to hide display file size
-    "display_time": false, // Set this to false to hide display modified time for folder and files
-    "display_download": true, // Set this to false to hide download icon for folder and files on main index
-    "disable_player": false, // Set this to true to hide audio and video players
-    "custom_srt_lang": "", // Subtitle Language Code for Custom .vtt language.
-    "disable_video_download": false, // Remove Download, Copy Button on Videos
-    "second_domain_for_dl": false, // If you want to display other URL for Downloading to protect your main domain.
-    "downloaddomain": "https://testing.fetchgoogleapi.workers.dev", // If "second_domain_for_dl": true then enter downloaddomain otherwise keep empty. eg. https://workers.workersname.workers.dev No Trailing '/'
-    "poster": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.20/images/poster.jpg", // Video poster URL or see Readme to how to load from Drive
-    "audioposter": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.20/images/music.jpg", // Video poster URL or see Readme to how to load from Drive
-    "jsdelivr_cdn_src": "https://cdn.jsdelivr.net/npm/@googledrive/index", // If Project is Forked, then enter your GitHub repo
-    "render_head_md": true, // Render Head.md
-    "render_readme_md": true, // Render Readme.md
-    "display_drive_link": false, // This will add a Link Button to Google Drive of that particular file.
-    "plyr_io_version": "3.6.4", // Change plyr.io version in future when needed.
-    "plyr_io_video_resolution": "16:9", // For reference, visit: https://github.com/sampotts/plyr#options
-    "unauthorized_owner_link": "https://telegram.dog/Telegram", // Unauthorized Error Page Link to Owner
-    "unauthorized_owner_email": "abuse@telegram.org", // Unauthorized Error Page Owner Email
-    "arc_code": "jfoY2h19", // arc.io Integration Code, get yours from https://portal.arc.io
-    "search_all_drives": false // turn this on to switch this to gdrive search application
-};
-
 
 /*
 ██████╗░░█████╗░  ███╗░░██╗░█████╗░████████╗  ███████╗██████╗░██╗████████╗
@@ -125,50 +54,33 @@ const uiConfig = {
 ██████╦╝███████╗███████╗╚█████╔╝░░╚██╔╝░╚██╔╝░
 ╚═════╝░╚══════╝╚══════╝░╚════╝░░░░╚═╝░░░╚═╝░░*/
 
+const uiConfig = {
+};
+
 // DON'T TOUCH BELOW THIS UNLESS YOU KNOW WHAT YOU'RE DOING
 var gds = [];
 
 function html(current_drive_order = 0, model = {}) {
     return `<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
-  <title>${authConfig.siteName}</title>
-  <script async src="https://arc.io/widget.min.js#${uiConfig.arc_code}"></script>
-  <meta name="robots" content="noindex" />
-  <link rel="icon" href="${uiConfig.favicon}">
-  <script>
-    window.drive_names = JSON.parse('${JSON.stringify(authConfig.roots.map(it => it.name))}');
-    window.MODEL = JSON.parse('${JSON.stringify(model)}');
-    window.current_drive_order = ${current_drive_order};
-    window.UI = JSON.parse('${JSON.stringify(uiConfig)}');
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.plyr.io/${uiConfig.plyr_io_version}/plyr.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.0/dist/${uiConfig.theme}/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-  <style>a{color:${uiConfig.css_a_tag_color};}p{color:${uiConfig.css_p_tag_color};}</style>
-  <script src="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/js/app.obf.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/mozilla/pdf.js@gh-pages/build/pdf.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-</head>
-<body>
-</body>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
-  <script src="https://cdn.plyr.io/${uiConfig.plyr_io_version}/plyr.polyfilled.js"></script>
-</html>`;
+    <html lang=en>
+      <meta charset=utf-8>
+      <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+      <title>Error 404 (Not Found)!!1</title>
+      <style>
+        *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat;-webkit-background-size:100% 100%}}#logo{display:inline-block;height:54px;width:150px}
+      </style>
+      <a href=//www.google.com/><span id=logo aria-label=Google></span></a>
+      <p><b>404.</b> <ins>That’s an error.</ins>
+      <p id="status"></p>
+
+      <script>
+      document.getElementById("status").innerHTML =
+    "The requested URL <code>" + window.location.pathname + "</code> was not found on this server.  <ins>That’s all we know.</ins>";
+      </script>`;
 };
 
-const unauthorized = `<html>
-<head><title>401 Unauthorized</title></head>
-<body>
-<center><h1>401 Unauthorized</h1></center>
-<hr><center>BhadooDriveIndex/${uiConfig.version}</center>
-<hr><center>Please contact <a href="${uiConfig.unauthorized_owner_link}">Site Owner</a> at ${uiConfig.unauthorized_owner_email}</center>
-</body>
-</html>`
-
-const not_found = `<!DOCTYPE html>
+const unauthorized = `
+<!DOCTYPE html>
 <html lang=en>
   <meta charset=utf-8>
   <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
@@ -183,7 +95,27 @@ const not_found = `<!DOCTYPE html>
   <script>
   document.getElementById("status").innerHTML =
 "The requested URL <code>" + window.location.pathname + "</code> was not found on this server.  <ins>That’s all we know.</ins>";
-  </script>`
+  </script>
+`
+
+const not_found = `
+<!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat;-webkit-background-size:100% 100%}}#logo{display:inline-block;height:54px;width:150px}
+  </style>
+  <a href=//www.google.com/><span id=logo aria-label=Google></span></a>
+  <p><b>404.</b> <ins>That’s an error.</ins>
+  <p id="status"></p>
+
+  <script>
+  document.getElementById("status").innerHTML =
+"The requested URL <code>" + window.location.pathname + "</code> was not found on this server.  <ins>That’s all we know.</ins>";
+  </script>
+`
 
 
 const SearchFunction = {
@@ -515,7 +447,6 @@ class googleDrive {
         const auth = this.root.auth || '',
             _401 = new Response(unauthorized, {
                 headers: {
-                    'WWW-Authenticate': `Basic realm="goindex:drive:${this.order}"`,
                     'content-type': 'text/html;charset=UTF-8'
                 },
                 status: 401
@@ -539,22 +470,21 @@ class googleDrive {
         let requestOption = await this.requestOption();
         requestOption.headers['Range'] = range;
         let res = await fetch(url, requestOption);
-        const second_domain_for_dl = `${uiConfig.second_domain_for_dl}`
-        if (second_domain_for_dl == 'true') {
-            const res = await fetch(`${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/assets/disable_download.html`);
-            return new Response(await res.text(), {
-                headers: {
-                    "content-type": "text/html;charset=UTF-8",
-                },
-            })
-        }
-        else if (res.ok) {
+        if (res.ok) {
             const {
                 headers
             } = res = new Response(res.body, res)
             this.authConfig.enable_cors_file_down && headers.append('Access-Control-Allow-Origin', '*');
             inline === true && headers.set('Content-Disposition', 'inline');
             return res;
+        }
+        else if(res.status == 404){
+            return new Response(not_found, {
+                status: 404,
+                headers: {
+                    "content-type": "text/html;charset=UTF-8",
+                },
+            })
         }
         else {
             const res = await fetch(`${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/assets/DownloadError.html`);

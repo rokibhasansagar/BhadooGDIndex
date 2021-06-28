@@ -3,8 +3,8 @@ addEventListener('fetch', event => {
 });
 
 const tokenURL = 'https://www.googleapis.com/oauth2/v4/token';
-const clientId = '58094879805-4654k2k5nqdid5bavft7fvea5u9po0t1.apps.googleusercontent.com';
-const clientSecret = 'ZNPZ-vS6N9Zjsyb_sNMZmXHL';
+const clientId = '746239575955-oao9hkv614p8glrqpvuh5i8mqfoq145b.apps.googleusercontent.com';
+const clientSecret = 'u5a1CSY5pNjdD2tGTU93TTnI';
 const grantType = 'authorization_code';
 const redirectURI = 'urn:ietf:wg:oauth:2.0:oob';
 const jsURL = 'https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/raw/master/worker/worker-beta.js';
@@ -47,8 +47,7 @@ async function handleRequest(request) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
     <title>Bhadoo Drive Index - Beta</title>
     <link rel="icon" type="image/x-icon" href="https://www.cloudflare.com/favicon.ico"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@0.4.1/dist/css/mdui.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/mdui@0.4.1/dist/js/mdui.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.0/dist/slate/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 
     <style>
@@ -75,7 +74,7 @@ async function handleRequest(request) {
             font-size: 13px;
             font-weight: 700;
             line-height: 20px;
-            color: #333;
+            color: #fff;
             white-space: nowrap;
             vertical-align: middle;
             cursor: pointer;
@@ -97,9 +96,9 @@ async function handleRequest(request) {
         }
 
         code {
-            background-color: #E8F5F2;
+            background-color: #000;
             border-radius: 3px;
-            color: #1BC1A1;
+            color: #fff;
             font-size: 85%;
             margin: 0;
             padding: 0.2em;
@@ -282,60 +281,45 @@ async function handleRequest(request) {
         }
     </style>
 </head>
-<body class="mdui-theme-primary-blue-grey mdui-theme-accent-blue">
-<div class="mdui-container">
+<body">
+<div class="container">
     <br><br>
-    <a href="https://gitlab .com/ParveenBhadooOfficial/Google-Drive-Index"><img border="0" alt="Bhadoo Cloud" src="https://cdn.jsdelivr.net/gh/jscdn/svg@1.0.1/bhadoo-cloud-logo.svg" height="30px"></a><h3>Drive Index Generator - Beta</h3>
+    <a href="https://www.npmjs.com/package/@googledrive/index"><h3>Bhadoo Index Generator - Beta</h3></a>
     <br>
-    <div class="mdui-row">
-        <div class="mdui-col-sm-2">
-            <a class="mdui-btn mdui-color-theme-accent mdui-ripple"
+        <div>
+            <h3>1. <a
                href="https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectURI}&response_type=code&access_type=offline&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive&approval_prompt=auto"
-               target="_blank">1. Get Authentication Code</a>
+               target="_blank"><img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png"></a></h3>
         </div>
-    </div>
-    <br><br>
-    <div class="mdui-row">
-        <form action='' method='get'>
-            <div class="mdui-textfield">
-                <i class="mdui-icon material-icons">fingerprint</i>
-                <label class="mdui-textfield-label">Paste Authentication Code Here</label>
-                <input class="mdui-textfield-input" type="text" name="auth_code"/>
-            </div>
-            <div class="mdui-textfield">
-                <i class="mdui-icon material-icons">subtitles</i>
-                <label class="mdui-textfield-label">Site Name (Optional)</label>
-                <input class="mdui-textfield-input" type="text" name="site_name"/>
-            </div>
-            <div class="mdui-textfield">
-                <i class="mdui-icon material-icons">folder_open</i>
-                <label class="mdui-textfield-label">Drive Folder/Shared Drive ID instead of root</label>
-                <input class="mdui-textfield-input" type="text" value="root" name="root"/>
-            </div>
-            <h4>Disabled: Now Enter Details inside the code, multiple users supported.</h4>
-            <div class="mdui-textfield">
-                <i class="mdui-icon material-icons">account_circle</i>
-                <label class="mdui-textfield-label">Set Username (Disabled)</label>
-                <input class="mdui-textfield-input" type="text" name="user" readonly>
-            </div>
-            <div class="mdui-textfield">
-                <i class="mdui-icon material-icons">enhanced_encryption</i>
-                <label class="mdui-textfield-label">Set Password (Disabled)</label>
-                <input class="mdui-textfield-input" type="password" name="root_pass" readonly>
-            </div>
-            <div class="mdui-textfield">
-                <input class="mdui-btn mdui-color-theme-accent mdui-ripple" type='submit' value="2. Generate Code"/>
-            </div>
-        </form>
+        <p>The App requests permissions to access your Google Drive files so do not share this code with anyone else.</p>
+    <br>
+    <div>
+<h3>2. Enter Details</h3>
+<form>
+  <div class="mb-3">
+    <label for="authcode" class="form-label">Authentication Code</label>
+    <input type="text" class="form-control" id="authcode" name="auth_code" aria-describedby="authcodefromgoogle" required>
+    <div id="authcodefromgoogle" class="form-text">Enter Code Generated from Google. Keep it private and do not share.</div>
+  </div>
+  <div class="mb-3">
+    <label for="sitename" class="form-label">Site Name</label>
+    <input type="text" class="form-control" name="site_name" id="sitename">
+  </div>
+  <div class="mb-3">
+    <label for="driveId" class="form-label">Share Drive ID or root</label>
+    <input type="text" class="form-control" value="root" name="root" id="driveId" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
     </div>
     <br><br>
     <h3>
-        3. Copy following code and paste into <a href="https://dash.cloudflare.com" target="_blank">CloudFlare Workers</a>
+        3. Copy following code and paste into <a href="https://dash.cloudflare.com" target="_blank">Cloudflare Workers</a>
     </h3>
-    <div class="mdui-typo">
+    <div class="overflow-auto" style="background-color:#000;">
         <pre class="snippet"><code class="html js">${codeJS}</code></pre>
     </div>
-    <center><h5>© <span id="year"></span> - Bhadoo Cloud Cyber Systems</h5></center>
+    <center><p>© <span id="year"></span> - Bhadoo Cloud Cyber Systems</p></center>
 </div>
 
 <script>
@@ -400,6 +384,7 @@ async function handleRequest(request) {
     }
 
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
 </body>
 </html>
 `;
