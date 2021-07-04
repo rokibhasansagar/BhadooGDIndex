@@ -185,27 +185,6 @@ const not_found = `<!DOCTYPE html>
 "The requested URL <code>" + window.location.pathname + "</code> was not found on this server.  <ins>That’s all we know.</ins>";
   </script>`
 
-  const blocked_region_html = `<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>URL Blocked</title>
-<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-<meta name="Keywords" content="" />
-<meta name="Description" content="" />
-<link rel="stylesheet" type="text/css" href="https://www.airtel.in/dot/fonts/font.css" />
-<link rel="stylesheet" type="text/css" href="https://www.airtel.in/dot/css/style.css" />
-<script type="text/javascript" src="https://www.airtel.in/dot/js/jquery-1.11.1.min.js" ></script>
-<script type="text/javascript" src="https://www.airtel.in/dot/js/common.js" ></script>
-
-</head>
-<body>
-<div class="container">
-	<div class="msgBox">Your requested URL has been blocked in your region due to security reasons. Please contact administrator for more information.</div>
-</div>
-</body>
-</html>`
-
 
 const SearchFunction = {
     formatSearchKeyword: function(keyword) {
@@ -295,6 +274,8 @@ addEventListener('fetch', event => {
 });
 
 async function handleRequest(request) {
+    const region = request.headers.get('cf-ipcountry').toUpperCase();
+    const region_blocked = `<!DOCTYPE html> <html lang=en> <meta charset=utf-8> <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width"> <title>Error 404 (Not Found)!!1</title> <style> *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat;-webkit-background-size:100% 100%}}#logo{display:inline-block;height:54px;width:150px} </style> <a href=//www.google.com/><span id=logo aria-label=Google></span></a> <p><b>404.</b> <ins>That’s an error.</ins> <p id="status"></p> <script> document.getElementById("status").innerHTML = "The requested URL <code>" + window.location.pathname + "</code> was not found on this server.  <ins>That’s all we know. Your IP is `+request.headers.get("CF-Connecting-IP")+` (`+request.cf.country+`)</ins>"; </script>`
     if (gds.length === 0) {
         for (let i = 0; i < authConfig.roots.length; i++) {
             const gd = new googleDrive(authConfig, i);
@@ -329,7 +310,7 @@ async function handleRequest(request) {
     } else if (path.toLowerCase() == '/admin') {
         return Response.redirect("https://www.npmjs.com/package/@googledrive/index", 301)
     } else if (blocked_region.includes(region)) {
-        return new Response(blocked_region_html, {
+        return new Response(region_blocked, {
             status: 403,
             headers: {
                 "content-type": "text/html;charset=UTF-8",
