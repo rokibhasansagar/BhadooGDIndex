@@ -12,7 +12,7 @@ const serviceaccounts = [
 {}
 ];
 const randomserviceaccount = serviceaccounts[Math.floor(Math.random()*serviceaccounts.length)];
-
+const blocked_region = ['']; // add regional codes seperated by comma, eg. ['IN', 'US', 'PK']
 const authConfig = {
     "siteName": "Bhadoo Drive Index", // Website name
     "client_id": "746239575955-oao9hkv614p8glrqpvuh5i8mqfoq145b.apps.googleusercontent.com", // Client id from Google Cloud Console
@@ -185,6 +185,27 @@ const not_found = `<!DOCTYPE html>
 "The requested URL <code>" + window.location.pathname + "</code> was not found on this server.  <ins>That’s all we know.</ins>";
   </script>`
 
+  const blocked_region_html = `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>URL Blocked</title>
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<link rel="stylesheet" type="text/css" href="https://www.airtel.in/dot/fonts/font.css" />
+<link rel="stylesheet" type="text/css" href="https://www.airtel.in/dot/css/style.css" />
+<script type="text/javascript" src="https://www.airtel.in/dot/js/jquery-1.11.1.min.js" ></script>
+<script type="text/javascript" src="https://www.airtel.in/dot/js/common.js" ></script>
+
+</head>
+<body>
+<div class="container">
+	<div class="msgBox">Your requested URL has been blocked in your region due to security reasons. Please contact administrator for more information.</div>
+</div>
+</body>
+</html>`
+
 
 const SearchFunction = {
     formatSearchKeyword: function(keyword) {
@@ -307,6 +328,13 @@ async function handleRequest(request) {
         return fetch("https://arc.io/arc-sw.js")
     } else if (path.toLowerCase() == '/admin') {
         return Response.redirect("https://www.npmjs.com/package/@googledrive/index", 301)
+    } else if (blocked_region.includes(region)) {
+        return new Response(blocked_region_html, {
+            status: 403,
+            headers: {
+                "content-type": "text/html;charset=UTF-8",
+            },
+        })
     }
 
     const command_reg = /^\/(?<num>\d+):(?<command>[a-zA-Z0-9]+)(\/.*)?$/g;
