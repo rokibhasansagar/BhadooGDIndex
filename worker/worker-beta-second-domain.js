@@ -13,6 +13,7 @@ const serviceaccounts = [
 ];
 const randomserviceaccount = serviceaccounts[Math.floor(Math.random()*serviceaccounts.length)];
 const blocked_region = ['']; // add regional codes seperated by comma, eg. ['IN', 'US', 'PK']
+const blocked_asn = []; // add ASN numbers from http://www.bgplookingglass.com/list-of-autonomous-system-numbers, eg. [16509, 12345]
 const authConfig = {
     "siteName": "Bhadoo Drive Index", // Website name
     "client_id": "746239575955-oao9hkv614p8glrqpvuh5i8mqfoq145b.apps.googleusercontent.com", // Client id from Google Cloud Console
@@ -208,6 +209,7 @@ addEventListener('fetch', event => {
 
 async function handleRequest(request) {
     const region = request.headers.get('cf-ipcountry').toUpperCase();
+    const asn_servers = request.cf.asn;
     if (gds.length === 0) {
         for (let i = 0; i < authConfig.roots.length; i++) {
             const gd = new googleDrive(authConfig, i);
@@ -242,7 +244,9 @@ async function handleRequest(request) {
     } else if (path.toLowerCase() == '/admin') {
         return Response.redirect("https://www.npmjs.com/package/@googledrive/index", 301)
     } else if (blocked_region.includes(region)) {
-        return fetch("https://blockedinyourcountry.netlify.app")
+        return new Response("Blocked")
+    } else if (blocked_asn.includes(asn_servers)) {
+        return new Response("Blocked")
     }
 
     const command_reg = /^\/(?<num>\d+):(?<command>[a-zA-Z0-9]+)(\/.*)?$/g;
