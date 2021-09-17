@@ -1,5 +1,5 @@
 // Redesigned by telegram.dog/TheFirstSpeedster at https://www.npmjs.com/package/@googledrive/index which was written by someone else, credits are given on Source Page.
-// v2.0.21
+// v2.0.22
 // Initialize the page
 function init() {
     document.siteName = $('title').html();
@@ -226,7 +226,9 @@ function requestListPath(path, params, resultCallback, authErrorCallback) {
         } else if (res && res.data) {
             if (resultCallback) resultCallback(res, path, p)
         }
-    })
+    }).fail(function(response) {
+        $('#list').html(`<div class='alert alert-danger' role='alert'> Unable to Get Data from the Server, Something went wrong. </div></div></div>`);
+    });
 }
 
 /**
@@ -251,7 +253,7 @@ function requestSearch(params, resultCallback) {
 // Render file list
 function list(path) {
   var content = `<div class="container">${UI.fixed_header ?'<br>': ''}
-	<div id="update"></div>
+  <div id="update"></div>
     <div id="head_md" style="display:none; padding: 20px 20px;"></div>
     <div class="${UI.path_nav_alert_class} d-flex align-items-center" role="alert" style="margin-bottom: 0; padding-bottom: 0rem;">
   <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
@@ -288,7 +290,7 @@ function list(path) {
   </div>
     <div id="list" class="list-group text-break">
     </div>
-  	<div class="${UI.file_count_alert_class} text-center d-none" role="alert" id="count">Total <span class="number text-center"></span> items</div>
+    <div class="${UI.file_count_alert_class} text-center d-none" role="alert" id="count">Total <span class="number text-center"></span> items</div>
     <div id="readme_md" style="display:none; padding: 20px 20px;"></div>
     </div>
     `;
@@ -798,7 +800,7 @@ function file_others(path) {
   </div>
   <input type="text" class="form-control" id="dlurl" value="${url}">
 </div>
-	<div class="card-text text-center">
+  <div class="card-text text-center">
   ${UI.display_drive_link ? '<a type="button" class="btn btn-info" href="https://drive.google.com/file/d/'+ obj.id +'/view" id ="file_drive_link" target="_blank">GD Link</a>': ''}
   <div class="btn-group text-center">
       <a href="${url}" type="button" class="btn btn-primary">Download</a>
@@ -858,7 +860,7 @@ function file_code(path) {
   </div>
   <input type="text" class="form-control" id="dlurl" value="${url}">
 </div>
-	<div class="card-text text-center">
+  <div class="card-text text-center">
   ${UI.display_drive_link ? '<a type="button" class="btn btn-info" href="https://drive.google.com/file/d/'+ obj.id +'/view" id ="file_drive_link" target="_blank">GD Link</a>': ''}
   <div class="btn-group text-center">
       <a href="${url}" type="button" class="btn btn-primary">Download</a>
@@ -893,27 +895,28 @@ function file_video(path) {
     var caption = name.slice(0, name.lastIndexOf('.'))
     var path = path;
     var url = UI.second_domain_for_dl ? UI.downloaddomain + path : window.location.origin + path;
+    var urlvlc = url.replace(new RegExp('[', 'g'), '%5B').replace(new RegExp(']', 'g'), '%5D');
     var url_without_https = url.replace(/^(https?:|)\/\//,'')
     var url_base64 = btoa(url)
     $.post("",
     function(data){
     var obj = jQuery.parseJSON(gdidecode(read(data)));
     var size = formatFileSize(obj.size);
-		if (obj.thumbnailLink != null){
+    if (obj.thumbnailLink != null){
     var poster = obj.thumbnailLink.slice(0, -5);
-		}
-		else {
-		var poster = UI.poster;
-		}
+    }
+    else {
+    var poster = UI.poster;
+    }
     var content = `
   <div class="container text-center"><br>
   <div class="card text-center">
   <div class="text-center">
   <div class="${UI.file_view_alert_class}" id="file_details" role="alert">${obj.name}<br>${size}</div>
-	<video id="vplayer" width="100%" height="100%" playsinline controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'pip', 'airplay', 'fullscreen']; data-plyr-config="{ "title": "${decodename}"}" data-poster="${poster}" style="--plyr-captions-text-color: #ffffff;--plyr-captions-background: #000000;">
-	  <source src="${url}" type="video/mp4" />
-	  <source src="${url}" type="video/webm" />
-	  <track kind="captions" label="Default" src="${caption}.vtt" srclang="en" />
+  <video id="vplayer" width="100%" height="100%" playsinline controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'pip', 'airplay', 'fullscreen']; data-plyr-config="{ "title": "${decodename}"}" data-poster="${poster}" style="--plyr-captions-text-color: #ffffff;--plyr-captions-background: #000000;">
+    <source src="${url}" type="video/mp4" />
+    <source src="${url}" type="video/webm" />
+    <track kind="captions" label="Default" src="${caption}.vtt" srclang="en" />
     <track kind="captions" label="English" src="${caption}.en.vtt" srclang="en" default />
     <track kind="captions" label="Hindi" src="${caption}.hi.vtt" srclang="hi" />
     <track kind="captions" label="Russian" src="${caption}.ru.vtt" srclang="ru" />
@@ -925,10 +928,10 @@ function file_video(path) {
     <track kind="captions" label="French" src="${caption}.fr.vtt" srclang="fr" />
     <track kind="captions" label="Chinese" src="${caption}.zh.vtt" srclang="zh" />
     <track kind="captions" label="Arabic" src="${caption}.ar.vtt" srclang="ar" />
-	<track kind="captions" label="${UI.custom_srt_lang}" src="${caption}.${UI.custom_srt_lang}.vtt" srclang="${UI.custom_srt_lang}" />
-	</video>
+  <track kind="captions" label="${UI.custom_srt_lang}" src="${caption}.${UI.custom_srt_lang}.vtt" srclang="${UI.custom_srt_lang}" />
+  </video>
   </div>
-	${UI.disable_player ? '<style>.plyr{display:none;}</style>' : ''}
+  ${UI.disable_player ? '<style>.plyr{display:none;}</style>' : ''}
   <script>
    const player = new Plyr('#vplayer',{ratio: "${UI.plyr_io_video_resolution}"});
   </script></br>
@@ -949,7 +952,7 @@ ${UI.display_drive_link ? '<a type="button" class="btn btn-info" href="https://d
     <div class="dropdown-menu">
       <a class="dropdown-item" href="iina://weblink?url=${url}">IINA</a>
       <a class="dropdown-item" href="potplayer://${url}">PotPlayer</a>
-      <a class="dropdown-item" href="vlc://${url}">VLC</a>
+      <a class="dropdown-item" href="vlc://${urlvlc}">VLC</a>
       <a class="dropdown-item" href="nplayer-${url}">nPlayer</a>
       <a class="dropdown-item" href="intent://${url_without_https}#Intent;type=video/any;package=is.xyz.mpv;scheme=https;end;">mpv-android</a>
       <a class="dropdown-item" href="mpv://${url_base64}">mpv x64</a>
@@ -993,7 +996,7 @@ function file_audio(path) {
   Your browser does not support the audio element.
   </audio>
   </div>
-	${UI.disable_player ? '<style>.plyr{display:none;}</style>' : ''}
+  ${UI.disable_player ? '<style>.plyr{display:none;}</style>' : ''}
   <script>
    const player = new Plyr('#vplayer');
   </script></br>
@@ -1004,7 +1007,7 @@ function file_audio(path) {
   </div>
   <input type="text" class="form-control" id="dlurl" value="${url}">
 </div>
-	<div class="card-text text-center">
+  <div class="card-text text-center">
   ${UI.display_drive_link ? '<a type="button" class="btn btn-info" href="https://drive.google.com/file/d/'+ obj.id +'/view" id ="file_drive_link" target="_blank">GD Link</a>': ''}
   <div class="btn-group text-center">
       <a href="${url}" type="button" class="btn btn-primary">Download</a>
@@ -1118,7 +1121,7 @@ function file_pdf(path) {
   </div>
   <input type="text" class="form-control" id="dlurl" value="${url}">
 </div>
-	<div class="card-text text-center">
+  <div class="card-text text-center">
   ${UI.display_drive_link ? '<a type="button" class="btn btn-info" href="https://drive.google.com/file/d/'+ obj.id +'/view" id ="file_drive_link" target="_blank">GD Link</a>': ''}
   <div class="btn-group text-center">
       <a href="${url}" type="button" class="btn btn-primary">Download</a>
@@ -1176,14 +1179,14 @@ function file_image(path) {
               var prevchild = false;
           }
           else if (prev_child.endsWith(".jpg") == true || prev_child.endsWith(".png") || prev_child.endsWith(".jpeg") || prev_child.endsWith(".gif")){
-      		    var prevchild = true;
-      		}
+              var prevchild = true;
+          }
           if (next_child == null) {
               var nextchild = false;
           }
-      		else if (next_child.endsWith(".jpg") == true || next_child.endsWith(".png") || next_child.endsWith(".jpeg") || next_child.endsWith(".gif")){
-      		    var nextchild = true;
-      		}
+          else if (next_child.endsWith(".jpg") == true || next_child.endsWith(".png") || next_child.endsWith(".jpeg") || next_child.endsWith(".gif")){
+              var nextchild = true;
+          }
             targetText = `
 
                               ${prevchild ? `<a class="btn btn-primary" href="${prev_child}?a=view" role="button">Previous</a>` : ``}
@@ -1212,7 +1215,7 @@ function file_image(path) {
   </div>
   <input type="text" class="form-control" id="dlurl" value="${url}">
 </div>
-	<div class="card-text text-center">
+  <div class="card-text text-center">
   ${UI.display_drive_link ? '<a type="button" class="btn btn-info" href="https://drive.google.com/file/d/'+ obj.id +'/view" id ="file_drive_link" target="_blank">GD Link</a>': ''}
   <div class="btn-group text-center">
       <a href="${url}" type="button" class="btn btn-primary">Download</a>
