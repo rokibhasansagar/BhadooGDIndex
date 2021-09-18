@@ -1,5 +1,5 @@
 // Redesigned by telegram.dog/TheFirstSpeedster at https://www.npmjs.com/package/@googledrive/index which was written by someone else, credits are given on Source Page.
-// v2.0.22
+// v2.0.23
 // Initialize the page
 function init() {
     document.siteName = $('title').html();
@@ -926,7 +926,7 @@ function file_video(path) {
     var caption = name.slice(0, name.lastIndexOf('.'))
     var path = path;
     var url = UI.second_domain_for_dl ? UI.downloaddomain + path : window.location.origin + path;
-    var urlvlc = url.replace(new RegExp('[', 'g'), '%5B').replace(new RegExp(']', 'g'), '%5D');
+    var urlvlc = url.replace(new RegExp('\\[', 'g'), '%5B').replace(new RegExp('\\]', 'g'), '%5D');
     var url_without_https = url.replace(/^(https?:|)\/\//, '')
     var url_base64 = btoa(url)
     $.post("",

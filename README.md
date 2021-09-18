@@ -25,7 +25,7 @@
 
 ## How to
 
-* Stable Release `2.0.22`
+* Stable Release `2.0.23`
 * Beta Version (Latest) - [bdi-generator](https://bdi-generator.hashhackers.com) (For Dark Theme use darkly)
 * If you want to deploy main drive leave the option ROOT as it is.
 * If you want to deploy your Team Drive/Shared Drive/Folder then copy the ID and replace it with ROOT.
@@ -122,14 +122,14 @@
 ````
 const uiConfig = {
   "theme": "slate", // switch between themes, default set to vapor, select from https://www.npmjs.com/package/@googledrive/index
-  "version": "2.0.22", // don't touch this one. get latest code using generator at https://bdi-generator.hashhackers.com
+  "version": "2.0.23", // don't touch this one. get latest code using generator at https://bdi-generator.hashhackers.com
   // If you're using Image then set to true, If you want text then set it to false
   "logo_image": true, // true if you're using image link in next option.
   "logo_height": "", // only if logo_image is true
   "logo_width": "100px", // only if logo_image is true
-  "favicon": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.22/images/favicon.ico",
+  "favicon": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.23/images/favicon.ico",
   // if logo is true then link otherwise just text for name
-  "logo_link_name": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.22/images/bhadoo-cloud-logo-white.svg",
+  "logo_link_name": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.23/images/bhadoo-cloud-logo-white.svg",
   "fixed_header": true, // If you want the footer to be flexible or fixed.
   "header_padding": "60", // Value 60 for fixed header, Value 20 for flexible header. Required to be changed accordingly in some themes.
   "nav_link_1": "Home", // change navigation link name
@@ -160,8 +160,8 @@ const uiConfig = {
   "disable_video_download": false, // Remove Download, Copy Button on Videos
   "second_domain_for_dl": false, // If you want to display other URL for Downloading to protect your main domain.
   "downloaddomain": "https://testing.fetchgoogleapi.workers.dev", // If "second_domain_for_dl": true then enter downloaddomain otherwise keep empty. eg. https://workers.workersname.workers.dev No Trailing '/'
-  "poster": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.22/images/poster.jpg", // Video poster URL or see Readme to how to load from Drive
-  "audioposter": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.22/images/music.jpg", // Video poster URL or see Readme to how to load from Drive
+  "poster": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.23/images/poster.jpg", // Video poster URL or see Readme to how to load from Drive
+  "audioposter": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.23/images/music.jpg", // Video poster URL or see Readme to how to load from Drive
   "jsdelivr_cdn_src": "https://cdn.jsdelivr.net/npm/@googledrive/index", // If Project is Forked, then enter your GitHub repo
   "render_head_md": true, // Render Head.md
   "render_readme_md": true, // Render Readme.md
@@ -187,13 +187,13 @@ const uiConfig = {
 * arc.io is embedded in code to support gdi.js.org
 * if you have approved arc.io account, use your code.
 * incase you don't have arc account and want to support us, please keep our arc.io code in your index.
-* if anyone doesn't want to support us and want to remove arc, remove L133 line from the workers code.
+* if anyone doesn't want to support us and want to remove arc, remove L140 line from the workers code.
 
 ## Themes
 
 * There are 25 Themes from [bootswatch](https://github.com/thomaspark/bootswatch) official [Bootstrap](https://getbootstrap.com) Themes.
 * You can check Theme from [bootswatch.com](https://bootswatch.com) before selecting.
-* To Change theme, first generate the code, paste in Cloud flare Workers and then select one theme code from below and paste it in line 56 of worker script.
+* To Change theme, first generate the code, paste in Cloud flare Workers and then select one theme code from below and paste it in line 61 of worker script.
 
 | Themes    |         |         |         |        |          |
 |-----------|---------|---------|---------|--------|----------|
@@ -246,7 +246,7 @@ const uiConfig = {
 * Now you have your own CLIENT ID and CLIENT SECRET.
 * Copy your details and save for future use.
 * Copy worker-generator.js code.
-* Replace Line 6 and 7 with your own CLIENT ID and CLIENT SECRET.
+* Replace Line 20 and 21 with your own CLIENT ID and CLIENT SECRET.
 * Paste this code in Cloud flare Workers and follow the site.
 
 ## Upcoming Changes
