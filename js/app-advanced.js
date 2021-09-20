@@ -816,9 +816,26 @@ function file_others(path) {
     var url = UI.second_domain_for_dl ? UI.downloaddomain + path : window.location.origin + path;
     $.post("",
         function(data) {
-            var obj = jQuery.parseJSON(gdidecode(read(data)));
-            var size = formatFileSize(obj.size);
-            var content = `
+            try {
+                var obj = jQuery.parseJSON(gdidecode(read(data)));
+                var size = formatFileSize(obj.size);
+                var mimeType = obj.mimeType;
+                if (mimeType == "application/vnd.google-apps.folder") {
+                    var content = `
+                  <div class="container"><br>
+                  <div class="card text-center">
+                  <div class="card-body text-center">
+                  <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>${obj.name}</b> is a folder.</div>
+                  </div><p>The Requested Link contains a folder not a file.</p>
+                  <div class="card-text text-center">
+                  <div class="btn-group text-center">
+                  <a href="` + window.location.pathname + `/" type="button" class="btn btn-primary">Open as Folder</a>
+                  </div>
+                  </div><br>
+                  </div>
+                  </div>`;
+                } else {
+                    var content = `
 <div class="container"><br>
 <div class="card text-center">
 <div class="card-body text-center">
@@ -847,6 +864,22 @@ function file_others(path) {
   <button onclick="copyFunction()" onmouseout="outFunc()" class="btn btn-success"> <span class="tooltiptext" id="myTooltip">Copy</span> </button>
   </div>
   <br></div>`;
+                }
+            } catch (err) {
+                var content = `
+<div class="container"><br>
+<div class="card text-center">
+    <div class="card-body text-center">
+      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> That’s an error.</div>
+    </div><p>The requested URL was not found on this server. That’s all we know.</p>
+      <div class="card-text text-center">
+      <div class="btn-group text-center">
+        <a href="/" type="button" class="btn btn-primary">Homepage</a>
+      </div>
+        </div><br>
+</div>
+</div>`
+            }
             $('#content').html(content);
         });
 }
@@ -872,9 +905,10 @@ function file_code(path) {
     var url = UI.second_domain_for_dl ? UI.downloaddomain + path : window.location.origin + path;
     $.post("",
         function(data) {
-            var obj = jQuery.parseJSON(gdidecode(read(data)));
-            var size = formatFileSize(obj.size);
-            var content = `
+            try {
+                var obj = jQuery.parseJSON(gdidecode(read(data)));
+                var size = formatFileSize(obj.size);
+                var content = `
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-twilight.css" integrity="sha256-Rl83wx+fN2p2ioYpdvpWxuhAbxj+/7IwaZrKQBu/KQE=" crossorigin="anonymous">
 <div class="container"><br>
 <div class="card text-center">
@@ -907,6 +941,21 @@ function file_code(path) {
   <button onclick="copyFunction()" onmouseout="outFunc()" class="btn btn-success"> <span class="tooltiptext" id="myTooltip">Copy</span> </button></div><br></div>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.js" integrity="sha256-fZOd7N/oofoKcO92RzxvC0wMm+EvsKyRT4nmcmQbgzU=" crossorigin="anonymous"></script>
 `;
+            } catch (err) {
+                var content = `
+<div class="container"><br>
+<div class="card text-center">
+    <div class="card-body text-center">
+      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> That’s an error.</div>
+    </div><p>The requested URL was not found on this server. That’s all we know.</p>
+      <div class="card-text text-center">
+      <div class="btn-group text-center">
+        <a href="/" type="button" class="btn btn-primary">Homepage</a>
+      </div>
+        </div><br>
+</div>
+</div>`
+            }
             $('#content').html(content);
         });
 
@@ -931,14 +980,15 @@ function file_video(path) {
     var url_base64 = btoa(url)
     $.post("",
         function(data) {
-            var obj = jQuery.parseJSON(gdidecode(read(data)));
-            var size = formatFileSize(obj.size);
-            if (obj.thumbnailLink != null) {
-                var poster = obj.thumbnailLink.slice(0, -5);
-            } else {
-                var poster = UI.poster;
-            }
-            var content = `
+            try {
+                var obj = jQuery.parseJSON(gdidecode(read(data)));
+                var size = formatFileSize(obj.size);
+                if (obj.thumbnailLink != null) {
+                    var poster = obj.thumbnailLink.slice(0, -5);
+                } else {
+                    var poster = UI.poster;
+                }
+                var content = `
   <div class="container text-center"><br>
   <div class="card text-center">
   <div class="text-center">
@@ -1000,9 +1050,23 @@ ${UI.display_drive_link ? '<a type="button" class="btn btn-info" href="https://d
   `}
   </div>
   `;
+            } catch (err) {
+                var content = `
+<div class="container"><br>
+<div class="card text-center">
+    <div class="card-body text-center">
+      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> That’s an error.</div>
+    </div><p>The requested URL was not found on this server. That’s all we know.</p>
+      <div class="card-text text-center">
+      <div class="btn-group text-center">
+        <a href="/" type="button" class="btn btn-primary">Homepage</a>
+      </div>
+        </div><br>
+</div>
+</div>`
+            }
             $('#content').html(content);
         });
-
 }
 
 // File display Audio |mp3|flac|m4a|wav|ogg|
@@ -1013,9 +1077,10 @@ function file_audio(path) {
     var url = UI.second_domain_for_dl ? UI.downloaddomain + path : window.location.origin + path;
     $.post("",
         function(data) {
-            var obj = jQuery.parseJSON(gdidecode(read(data)));
-            var size = formatFileSize(obj.size);
-            var content = `
+            try {
+                var obj = jQuery.parseJSON(gdidecode(read(data)));
+                var size = formatFileSize(obj.size);
+                var content = `
   <div class="container"><br>
   <div class="card" style="background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);">
   <div class="card-body text-center">
@@ -1056,6 +1121,21 @@ function file_audio(path) {
   </div>
   </div>
   `;
+            } catch (err) {
+                var content = `
+<div class="container"><br>
+<div class="card text-center">
+    <div class="card-body text-center">
+      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> That’s an error.</div>
+    </div><p>The requested URL was not found on this server. That’s all we know.</p>
+      <div class="card-text text-center">
+      <div class="btn-group text-center">
+        <a href="/" type="button" class="btn btn-primary">Homepage</a>
+      </div>
+        </div><br>
+</div>
+</div>`
+            }
             $('#content').html(content);
         });
 }
@@ -1069,9 +1149,10 @@ function file_pdf(path) {
     var inline_url = `${url}?inline=true`
     $.post("",
         function(data) {
-            var obj = jQuery.parseJSON(gdidecode(read(data)));
-            var size = formatFileSize(obj.size);
-            var content = `
+            try {
+                var obj = jQuery.parseJSON(gdidecode(read(data)));
+                var size = formatFileSize(obj.size);
+                var content = `
   <script>
   var url = "https://" + window.location.hostname + window.location.pathname;
   var pdfjsLib = window['pdfjs-dist/build/pdf'];
@@ -1170,6 +1251,21 @@ function file_pdf(path) {
   </div>
   </div>
   `;
+            } catch (err) {
+                var content = `
+<div class="container"><br>
+<div class="card text-center">
+    <div class="card-body text-center">
+      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> That’s an error.</div>
+    </div><p>The requested URL was not found on this server. That’s all we know.</p>
+      <div class="card-text text-center">
+      <div class="btn-group text-center">
+        <a href="/" type="button" class="btn btn-primary">Homepage</a>
+      </div>
+        </div><br>
+</div>
+</div>`
+            }
             $('#content').html(content);
         });
 }
@@ -1227,9 +1323,10 @@ function file_image(path) {
     }
     $.post("",
         function(data) {
-            var obj = jQuery.parseJSON(gdidecode(read(data)));
-            var size = formatFileSize(obj.size);
-            var content = `
+            try {
+                var obj = jQuery.parseJSON(gdidecode(read(data)));
+                var size = formatFileSize(obj.size);
+                var content = `
   <div class="container"><br>
   <div class="card">
   <div class="card-body text-center">
@@ -1262,6 +1359,21 @@ function file_image(path) {
   </div>
   </div>
     `;
+            } catch (err) {
+                var content = `
+<div class="container"><br>
+<div class="card text-center">
+    <div class="card-body text-center">
+      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> That’s an error.</div>
+    </div><p>The requested URL was not found on this server. That’s all we know.</p>
+      <div class="card-text text-center">
+      <div class="btn-group text-center">
+        <a href="/" type="button" class="btn btn-primary">Homepage</a>
+      </div>
+        </div><br>
+</div>
+</div>`
+            }
             // my code
             $('#content').html(content);
         });
