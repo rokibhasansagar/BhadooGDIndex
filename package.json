@@ -1,6 +1,6 @@
 {
   "name": "@googledrive/index",
-  "version": "2.0.24",
+  "version": "2.0.25",
   "description": "A Google Drive Index to List, Watch and Download Files using a Beautiful UI.",
   "main": "README.md",
   "keywords": [

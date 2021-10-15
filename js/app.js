@@ -1,5 +1,5 @@
 // Redesigned by telegram.dog/TheFirstSpeedster at https://www.npmjs.com/package/@googledrive/index which was written by someone else, credits are given on Source Page.
-// v2.0.24
+// v2.0.25
 // Initialize the page
 function init() {
     document.siteName = $('title').html();
@@ -1372,12 +1372,12 @@ function utc2delhi(utc_datetime) {
 
 // bytes adaptive conversion to KB, MB, GB
 function formatFileSize(bytes) {
-    if (bytes >= 1000000000) {
-        bytes = (bytes / 1000000000).toFixed(2) + ' GB';
-    } else if (bytes >= 1000000) {
-        bytes = (bytes / 1000000).toFixed(2) + ' MB';
-    } else if (bytes >= 1000) {
-        bytes = (bytes / 1000).toFixed(2) + ' KB';
+    if (bytes >= 1073741824) {
+        bytes = (bytes / 1073741824).toFixed(2) + ' GB';
+    } else if (bytes >= 1048576) {
+        bytes = (bytes / 1048576).toFixed(2) + ' MB';
+    } else if (bytes >= 1024) {
+        bytes = (bytes / 1024).toFixed(2) + ' KB';
     } else if (bytes > 1) {
         bytes = bytes + ' bytes';
     } else if (bytes == 1) {
