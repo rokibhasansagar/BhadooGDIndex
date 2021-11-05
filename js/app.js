@@ -1,5 +1,5 @@
 // Redesigned by telegram.dog/TheFirstSpeedster at https://www.npmjs.com/package/@googledrive/index which was written by someone else, credits are given on Source Page.
-// v2.0.25
+// v2.0.26
 // Initialize the page
 function init() {
     document.siteName = $('title').html();
@@ -1398,7 +1398,7 @@ String.prototype.trim = function(char) {
 
 // README.md HEAD.md support
 function markdown(el, data) {
-    var html = marked(data);
+    var html = marked.parse(data);
     $(el).show().html(html);
 }
 

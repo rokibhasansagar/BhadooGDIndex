@@ -1,5 +1,5 @@
 // Redesigned by telegram.dog/TheFirstSpeedster at https://www.npmjs.com/package/@googledrive/index which was written by someone else, credits are given on Source Page.
-// v2.0.25
+// v2.0.26
 // Initialize the page
 function init() {
     document.siteName = $('title').html();
@@ -624,7 +624,7 @@ function append_search_result_to_list(files) {
         item['modifiedTime'] = utc2delhi(item['modifiedTime']);
         item['size'] = formatFileSize(item['size']);
         if (item['mimeType'] == 'application/vnd.google-apps.folder') {
-            html += `<a style="color: ${UI.folder_text_color};" ${UI.search_all_drives ? `href="https://drive.google.com/drive/folders/` + item['id'] + `" target="_blank"` : `onclick="onSearchResultItemClick(this)" data-bs-toggle="modal" data-bs-target="#SearchModel" id="` + item['id'] + `" teamDriveId="` + item['teamDriveId'] + `"`} class="list-group-item list-group-item-action"><svg width="1.5em" height="1.5em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><linearGradient id="WQEfvoQAcpQgQgyjQQ4Hqa" x1="24" x2="24" y1="6.708" y2="14.977" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#eba600"></stop><stop offset="1" stop-color="#c28200"></stop></linearGradient><path fill="url(#WQEfvoQAcpQgQgyjQQ4Hqa)" d="M24.414,10.414l-2.536-2.536C21.316,7.316,20.553,7,19.757,7L5,7C3.895,7,3,7.895,3,9l0,30	c0,1.105,0.895,2,2,2l38,0c1.105,0,2-0.895,2-2V13c0-1.105-0.895-2-2-2l-17.172,0C25.298,11,24.789,10.789,24.414,10.414z"></path><linearGradient id="WQEfvoQAcpQgQgyjQQ4Hqb" x1="24" x2="24" y1="10.854" y2="40.983" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffd869"></stop><stop offset="1" stop-color="#fec52b"></stop></linearGradient><path fill="url(#WQEfvoQAcpQgQgyjQQ4Hqb)" d="M21.586,14.414l3.268-3.268C24.947,11.053,25.074,11,25.207,11H43c1.105,0,2,0.895,2,2v26	c0,1.105-0.895,2-2,2H5c-1.105,0-2-0.895-2-2V15.5C3,15.224,3.224,15,3.5,15h16.672C20.702,15,21.211,14.789,21.586,14.414z"></path></svg> ${item.name} ${UI.display_time ? `<span class="badge bg-info float-end"> ` + item['modifiedTime'] + ` </span>` : ``}</a>`;
+            html += `<a style="color: ${UI.folder_text_color};" ${UI.search_all_drives ? `href="https://drive.google.com/drive/folders/` + item['id'] + `" target="_blank"` : `onclick="onSearchResultItemClick(this)" data-bs-toggle="modal" data-bs-target="#SearchModel" id="` + item['id'] + `" driveId="` + item['driveId'] + `"`} class="list-group-item list-group-item-action"><svg width="1.5em" height="1.5em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><linearGradient id="WQEfvoQAcpQgQgyjQQ4Hqa" x1="24" x2="24" y1="6.708" y2="14.977" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#eba600"></stop><stop offset="1" stop-color="#c28200"></stop></linearGradient><path fill="url(#WQEfvoQAcpQgQgyjQQ4Hqa)" d="M24.414,10.414l-2.536-2.536C21.316,7.316,20.553,7,19.757,7L5,7C3.895,7,3,7.895,3,9l0,30	c0,1.105,0.895,2,2,2l38,0c1.105,0,2-0.895,2-2V13c0-1.105-0.895-2-2-2l-17.172,0C25.298,11,24.789,10.789,24.414,10.414z"></path><linearGradient id="WQEfvoQAcpQgQgyjQQ4Hqb" x1="24" x2="24" y1="10.854" y2="40.983" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffd869"></stop><stop offset="1" stop-color="#fec52b"></stop></linearGradient><path fill="url(#WQEfvoQAcpQgQgyjQQ4Hqb)" d="M21.586,14.414l3.268-3.268C24.947,11.053,25.074,11,25.207,11H43c1.105,0,2,0.895,2,2v26	c0,1.105-0.895,2-2,2H5c-1.105,0-2-0.895-2-2V15.5C3,15.224,3.224,15,3.5,15h16.672C20.702,15,21.211,14.789,21.586,14.414z"></path></svg> ${item.name} ${UI.display_time ? `<span class="badge bg-info float-end"> ` + item['modifiedTime'] + ` </span>` : ``}</a>`;
         } else {
             var p = '/' + cur + ':/' + item.name;
             var c = "file";
@@ -633,7 +633,7 @@ function append_search_result_to_list(files) {
                 p += "?a=view";
                 c += " view";
             }
-            html += `<a style="color: ${UI.css_a_tag_color};" ${UI.search_all_drives ? `href="https://drive.google.com/file/d/` + item['id'] + `/view" target="_blank"` : `onclick="onSearchResultItemClick(this)" data-bs-toggle="modal" data-bs-target="#SearchModel" id="` + item['id'] + `" teamDriveId="` + item['teamDriveId'] + `"`} gd-type="${item.mimeType}" class="list-group-item list-group-item-action">`
+            html += `<a style="color: ${UI.css_a_tag_color};" ${UI.search_all_drives ? `href="https://drive.google.com/file/d/` + item['id'] + `/view" target="_blank"` : `onclick="onSearchResultItemClick(this)" data-bs-toggle="modal" data-bs-target="#SearchModel" id="` + item['id'] + `" driveId="` + item['driveId'] + `"`} gd-type="${item.mimeType}" class="list-group-item list-group-item-action">`
 
             if ("|mp4|webm|avi|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|".indexOf(`|${ext}|`) >= 0) {
                 html += `<svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><g transform="translate(0 -1028.362)"><path d="m 12,1028.3622 c -6.62589,0 -12.00002,5.3741 -12.00002,12 0,6.6259 5.37413,12 12.00002,12 6.62589,0 12.00002,-5.3741 12.00002,-12 0,-6.6259 -5.37413,-12 -12.00002,-12 z" style="line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;block-progression:tb;white-space:normal;isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1" fill="#50b748" color="#000" enable-background="accumulate" font-family="sans-serif" font-weight="400" overflow="visible"/><path d="m 13,1035.162 a 2.5,2.5 0 0 0 -2.5,2.5 2.5,2.5 0 0 0 0.87695,1.9004 l -2.45117,0 A 2,2 0 0 0 9.5,1038.162 a 2,2 0 0 0 -2,-2 2,2 0 0 0 -2,2 2,2 0 0 0 0.64843,1.4707 C 5.77,1039.775 5.5,1040.133 5.5,1040.5624 l 0,4 c 0,0.554 0.44599,1 1,1 l 8,0 c 0.55401,0 1,-0.446 1,-1 l 0,-0.8008 3,1.8008 0,-6 -3,1.8008 0,-0.8008 c 0,-0.5194 -0.39686,-0.9294 -0.90235,-0.9805 a 2.5,2.5 0 0 0 0.90235,-1.9199 2.5,2.5 0 0 0 -2.5,-2.5 z m 0,1 a 1.5,1.5 0 0 1 1.5,1.5 1.5,1.5 0 0 1 -1.5,1.5 1.5,1.5 0 0 1 -1.5,-1.5 1.5,1.5 0 0 1 1.5,-1.5 z m -5.5,1 a 1,1 0 0 1 1,1 1,1 0 0 1 -1,1 1,1 0 0 1 -1,-1 1,1 0 0 1 1,-1 z m 2,6.4004 1,0 0,1 -1,0 0,-1 z m 2,0 1,0 0,1 -1,0 0,-1 z m 2,0 1,0 0,1 -1,0 0,-1 z" style="isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1" fill="#fff" color="#000" enable-background="accumulate" overflow="visible"/></g></svg>`
@@ -675,66 +675,66 @@ function append_search_result_to_list(files) {
  */
 function onSearchResultItemClick(a_ele) {
     var me = $(a_ele);
-    var teamDriveId = a_ele.getAttribute("teamDriveId")
-    if (teamDriveId == window.drive_ids[0]) {
+    var driveId = a_ele.getAttribute("driveId")
+    if (driveId == window.drive_ids[0]) {
         var searchhost = "/0";
-    } else if (teamDriveId == window.drive_ids[1]) {
+    } else if (driveId == window.drive_ids[1]) {
         var searchhost = "/1";
-    } else if (teamDriveId == window.drive_ids[2]) {
+    } else if (driveId == window.drive_ids[2]) {
         var searchhost = "/2";
-    } else if (teamDriveId == window.drive_ids[3]) {
+    } else if (driveId == window.drive_ids[3]) {
         var searchhost = "/3";
-    } else if (teamDriveId == window.drive_ids[4]) {
+    } else if (driveId == window.drive_ids[4]) {
         var searchhost = "/4";
-    } else if (teamDriveId == window.drive_ids[5]) {
+    } else if (driveId == window.drive_ids[5]) {
         var searchhost = "/5";
-    } else if (teamDriveId == window.drive_ids[6]) {
+    } else if (driveId == window.drive_ids[6]) {
         var searchhost = "/6";
-    } else if (teamDriveId == window.drive_ids[7]) {
+    } else if (driveId == window.drive_ids[7]) {
         var searchhost = "/7";
-    } else if (teamDriveId == window.drive_ids[8]) {
+    } else if (driveId == window.drive_ids[8]) {
         var searchhost = "/8";
-    } else if (teamDriveId == window.drive_ids[9]) {
+    } else if (driveId == window.drive_ids[9]) {
         var searchhost = "/9";
-    } else if (teamDriveId == window.drive_ids[10]) {
+    } else if (driveId == window.drive_ids[10]) {
         var searchhost = "/10";
-    } else if (teamDriveId == window.drive_ids[11]) {
+    } else if (driveId == window.drive_ids[11]) {
         var searchhost = "/11";
-    } else if (teamDriveId == window.drive_ids[12]) {
+    } else if (driveId == window.drive_ids[12]) {
         var searchhost = "/12";
-    } else if (teamDriveId == window.drive_ids[13]) {
+    } else if (driveId == window.drive_ids[13]) {
         var searchhost = "/13";
-    } else if (teamDriveId == window.drive_ids[14]) {
+    } else if (driveId == window.drive_ids[14]) {
         var searchhost = "/14";
-    } else if (teamDriveId == window.drive_ids[15]) {
+    } else if (driveId == window.drive_ids[15]) {
         var searchhost = "/15";
-    } else if (teamDriveId == window.drive_ids[16]) {
+    } else if (driveId == window.drive_ids[16]) {
         var searchhost = "/16";
-    } else if (teamDriveId == window.drive_ids[17]) {
+    } else if (driveId == window.drive_ids[17]) {
         var searchhost = "/17";
-    } else if (teamDriveId == window.drive_ids[18]) {
+    } else if (driveId == window.drive_ids[18]) {
         var searchhost = "/18";
-    } else if (teamDriveId == window.drive_ids[19]) {
+    } else if (driveId == window.drive_ids[19]) {
         var searchhost = "/19";
-    } else if (teamDriveId == window.drive_ids[20]) {
+    } else if (driveId == window.drive_ids[20]) {
         var searchhost = "/20";
-    } else if (teamDriveId == window.drive_ids[21]) {
+    } else if (driveId == window.drive_ids[21]) {
         var searchhost = "/21";
-    } else if (teamDriveId == window.drive_ids[22]) {
+    } else if (driveId == window.drive_ids[22]) {
         var searchhost = "/22";
-    } else if (teamDriveId == window.drive_ids[23]) {
+    } else if (driveId == window.drive_ids[23]) {
         var searchhost = "/23";
-    } else if (teamDriveId == window.drive_ids[24]) {
+    } else if (driveId == window.drive_ids[24]) {
         var searchhost = "/24";
-    } else if (teamDriveId == window.drive_ids[25]) {
+    } else if (driveId == window.drive_ids[25]) {
         var searchhost = "/25";
-    } else if (teamDriveId == window.drive_ids[26]) {
+    } else if (driveId == window.drive_ids[26]) {
         var searchhost = "/26";
-    } else if (teamDriveId == window.drive_ids[27]) {
+    } else if (driveId == window.drive_ids[27]) {
         var searchhost = "/27";
-    } else if (teamDriveId == window.drive_ids[28]) {
+    } else if (driveId == window.drive_ids[28]) {
         var searchhost = "/28";
-    } else if (teamDriveId == window.drive_ids[29]) {
+    } else if (driveId == window.drive_ids[29]) {
         var searchhost = "/29";
     } else {
         var searchhost = "/0";
@@ -1449,7 +1449,7 @@ String.prototype.trim = function(char) {
 
 // README.md HEAD.md support
 function markdown(el, data) {
-    var html = marked(data);
+    var html = marked.parse(data);
     $(el).show().html(html);
 }
 
