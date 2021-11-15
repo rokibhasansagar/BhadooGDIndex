@@ -43,6 +43,22 @@
 * Done. (May take time for some users due to new account or cache issues)
 * [Watch Video](https://youtu.be/Ihk4Gm3DPvg)
 
+## authConfig
+
+````
+"siteName": "Bhadoo Drive Index", // Website name
+"client_id": "746239575955-oao9hkv614p8glrqpvuh5i8mqfoq145b.apps.googleusercontent.com", // Client id from Google Cloud Console
+"client_secret": "u5a1CSY5pNjdD2tGTU93TTnI", // Client Secret from Google Cloud Console
+"refresh_token": "", // Authorize token
+"service_account": false, // true if you're using Service Account instead of user account
+"service_account_json": randomserviceaccount, // don't touch this one
+"files_list_page_size": 50,
+"search_result_list_page_size": 50,
+"enable_cors_file_down": false,
+"enable_password_file_verify": true, // support for .password file
+"direct_link_protection": false, // protects direct links with Display UI
+````
+
 ## Basic Config
 
 ````

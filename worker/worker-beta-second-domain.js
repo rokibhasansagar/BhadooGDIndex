@@ -25,6 +25,7 @@ const authConfig = {
     "search_result_list_page_size": 50,
     "enable_cors_file_down": true,
     "enable_password_file_verify": true, // support for .password file
+    "direct_link_protection": false, // protects direct links with Display UI
     "roots":[
       {
           "id": "root",
@@ -164,6 +165,97 @@ a{
 </body>
 </html>`
 
+const directlink = `
+<html>
+<head>
+<title>Direct Link - Access Denied</title>
+<link href='https://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
+<style>
+body{
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+    color:#b0bec5;
+    display:table;
+    font-weight:100;
+    font-family:Lato
+}
+.container{
+    text-align:center;
+    display:table-cell;
+    vertical-align:middle
+}
+.content{
+    text-align:center;
+    display:inline-block
+}
+.message{
+    font-size:80px;
+    margin-bottom:40px
+}
+a{
+    text-decoration:none;
+    color:#3498db
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+<div class="content">
+<div class="message">Access Denied</div>
+<center><a href=""><button id="goto">Click Here to Proceed!</button></a></center>
+</div>
+</div>
+</body>
+</html>
+`
+
+const asn_blocked = `<html>
+<head>
+<title>Access Denied</title>
+<link href='https://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
+<style>
+body{
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+    color:#b0bec5;
+    display:table;
+    font-weight:100;
+    font-family:Lato
+}
+.container{
+    text-align:center;
+    display:table-cell;
+    vertical-align:middle
+}
+.content{
+    text-align:center;
+    display:inline-block
+}
+.message{
+    font-size:80px;
+    margin-bottom:40px
+}
+a{
+    text-decoration:none;
+    color:#3498db
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+<div class="content">
+<div class="message">Access Denied</div>
+</div>
+</div>
+</body>
+</html>`
+
 const SearchFunction = {
     formatSearchKeyword: function(keyword) {
         let nothing = "";
@@ -254,6 +346,7 @@ addEventListener('fetch', event => {
 async function handleRequest(request) {
     const region = request.headers.get('cf-ipcountry').toUpperCase();
     const asn_servers = request.cf.asn;
+    const referer = request.headers.get("Referer");
     if (gds.length === 0) {
         for (let i = 0; i < authConfig.roots.length; i++) {
             const gd = new googleDrive(authConfig, i);
@@ -296,6 +389,13 @@ async function handleRequest(request) {
             });
     } else if (blocked_asn.includes(asn_servers)) {
         return new Response(asn_blocked, {
+                headers: {
+                    'content-type': 'text/html;charset=UTF-8'
+                },
+                status: 401
+            });
+    } else if (referer != url && authConfig['direct_link_protection']) {
+        return new Response(directlink, {
                 headers: {
                     'content-type': 'text/html;charset=UTF-8'
                 },

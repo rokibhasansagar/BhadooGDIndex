@@ -15,6 +15,7 @@ const randomserviceaccount = serviceaccounts[Math.floor(Math.random()*serviceacc
 const domains_for_dl = ['']; // add multiple cloudflare addresses to balance the load on download/stream servers, eg. ['https://testing.fetchgoogleapi.workers.dev', 'https://testing2.fetchgoogleapi2.workers.dev']
 const domain_for_dl = domains_for_dl[Math.floor(Math.random()*domains_for_dl.length)]; // DO NOT TOUCH THIS
 const blocked_region = ['']; // add regional codes seperated by comma, eg. ['IN', 'US', 'PK']
+const blocked_asn = []; // add ASN numbers from http://www.bgplookingglass.com/list-of-autonomous-system-numbers, eg. [16509, 12345]
 const authConfig = {
     "siteName": "Bhadoo Drive Index", // Website name
     "client_id": "746239575955-oao9hkv614p8glrqpvuh5i8mqfoq145b.apps.googleusercontent.com", // Client id from Google Cloud Console
@@ -26,6 +27,7 @@ const authConfig = {
     "search_result_list_page_size": 50,
     "enable_cors_file_down": false,
     "enable_password_file_verify": true, // support for .password file
+    "direct_link_protection": false, // protects direct links with Display UI
     "roots":[
       {
           "id": "",
@@ -269,6 +271,140 @@ const not_found = `<!DOCTYPE html>
 "The requested URL <code>" + window.location.pathname + "</code> was not found on this server.  <ins>That’s all we know.</ins>";
   </script>`
 
+  const asn_blocked = `<html>
+  <head>
+  <title>Access Denied</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
+  <style>
+  body{
+      margin:0;
+      padding:0;
+      width:100%;
+      height:100%;
+      color:#b0bec5;
+      display:table;
+      font-weight:100;
+      font-family:Lato
+  }
+  .container{
+      text-align:center;
+      display:table-cell;
+      vertical-align:middle
+  }
+  .content{
+      text-align:center;
+      display:inline-block
+  }
+  .message{
+      font-size:80px;
+      margin-bottom:40px
+  }
+  a{
+      text-decoration:none;
+      color:#3498db
+  }
+
+  </style>
+  </head>
+  <body>
+  <div class="container">
+  <div class="content">
+  <div class="message">Access Denied</div>
+  </div>
+  </div>
+  </body>
+  </html>`
+
+  const directlink = `
+  <html>
+  <head>
+  <title>Direct Link - Access Denied</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
+  <style>
+  body{
+      margin:0;
+      padding:0;
+      width:100%;
+      height:100%;
+      color:#b0bec5;
+      display:table;
+      font-weight:100;
+      font-family:Lato
+  }
+  .container{
+      text-align:center;
+      display:table-cell;
+      vertical-align:middle
+  }
+  .content{
+      text-align:center;
+      display:inline-block
+  }
+  .message{
+      font-size:80px;
+      margin-bottom:40px
+  }
+  a{
+      text-decoration:none;
+      color:#3498db
+  }
+
+  </style>
+  </head>
+  <body>
+  <div class="container">
+  <div class="content">
+  <div class="message">Access Denied</div>
+  <center><a href=""><button id="goto">Click Here to Proceed!</button></a></center>
+  </div>
+  </div>
+  </body>
+  </html>
+  `
+
+  const asn_blocked = `<html>
+  <head>
+  <title>Access Denied</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
+  <style>
+  body{
+      margin:0;
+      padding:0;
+      width:100%;
+      height:100%;
+      color:#b0bec5;
+      display:table;
+      font-weight:100;
+      font-family:Lato
+  }
+  .container{
+      text-align:center;
+      display:table-cell;
+      vertical-align:middle
+  }
+  .content{
+      text-align:center;
+      display:inline-block
+  }
+  .message{
+      font-size:80px;
+      margin-bottom:40px
+  }
+  a{
+      text-decoration:none;
+      color:#3498db
+  }
+
+  </style>
+  </head>
+  <body>
+  <div class="container">
+  <div class="content">
+  <div class="message">Access Denied</div>
+  </div>
+  </div>
+  </body>
+  </html>`
 
 const SearchFunction = {
     formatSearchKeyword: function(keyword) {
@@ -359,7 +495,8 @@ addEventListener('fetch', event => {
 
 async function handleRequest(request) {
     const region = request.headers.get('cf-ipcountry').toUpperCase();
-    const region_blocked = `<!DOCTYPE html> <html lang=en> <meta charset=utf-8> <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width"> <title>Error 404 (Not Found)!!1</title> <style> *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat;-webkit-background-size:100% 100%}}#logo{display:inline-block;height:54px;width:150px} </style> <a href=//www.google.com/><span id=logo aria-label=Google></span></a> <p><b>404.</b> <ins>That’s an error.</ins> <p id="status"></p> <script> document.getElementById("status").innerHTML = "The requested URL <code>" + window.location.pathname + "</code> was not found on this server.  <ins>That’s all we know. Your IP is `+request.headers.get("CF-Connecting-IP")+`</ins>"; </script>`
+    const asn_servers = request.cf.asn;
+    const referer = request.headers.get("Referer");
     if (gds.length === 0) {
         for (let i = 0; i < authConfig.roots.length; i++) {
             const gd = new googleDrive(authConfig, i);
@@ -394,12 +531,26 @@ async function handleRequest(request) {
     } else if (path.toLowerCase() == '/admin') {
         return Response.redirect("https://www.npmjs.com/package/@googledrive/index", 301)
     } else if (blocked_region.includes(region)) {
-        return new Response(region_blocked, {
+        return new Response(asn_blocked, {
             status: 403,
             headers: {
                 "content-type": "text/html;charset=UTF-8",
             },
         })
+    } else if (blocked_asn.includes(asn_servers)) {
+        return new Response(asn_blocked, {
+                headers: {
+                    'content-type': 'text/html;charset=UTF-8'
+                },
+                status: 401
+            });
+    } else if (referer != url && authConfig['direct_link_protection']) {
+        return new Response(directlink, {
+                headers: {
+                    'content-type': 'text/html;charset=UTF-8'
+                },
+                status: 401
+            });
     }
 
     const command_reg = /^\/(?<num>\d+):(?<command>[a-zA-Z0-9]+)(\/.*)?$/g;
