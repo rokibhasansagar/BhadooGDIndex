@@ -45,6 +45,13 @@
 * Done. (May take time for some users due to new account or cache issues)
 * [Watch Video](https://youtu.be/Ihk4Gm3DPvg)
 
+## Use Case and Workers needs to be used
+
+* If you're new and noob, just use [this](https://bdi-generator.hashhackers.com).
+* Simple Index with Normal or Service Account, use [this](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/raw/master/worker/worker-beta.js). (Can search all drives and display drive only links if enabled)
+* Advanced Index to Search All Drives and Handle Search and Display Index Links, use [this](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/raw/master/worker/worker-advanced.js). (make sure you add Service Account to those drives, which you're adding inside Index Code)
+* If you enable Second Domain option, you need to make additional Cloudflare workers and account using [this](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/raw/master/worker/worker-beta-second-domain.js).
+
 ## authConfig
 
 ````
@@ -58,6 +65,7 @@
 "search_result_list_page_size": 50,
 "enable_cors_file_down": false,
 "enable_password_file_verify": true, // support for .password file
+"enable_virus_infected_file_down": true, // support for downloading virus infected files
 "direct_link_protection": false, // protects direct links with Display UI
 ````
 
@@ -302,6 +310,8 @@ const uiConfig = {
 ## Support this Project
 
 [![Support](https://cdn.buymeacoffee.com/buttons/v2/default-white.png)](https://www.buymeacoffee.com/bhadoo)
+
+* Contribute to this project or improve this README.
 
 ### Donate by Crpto
 
