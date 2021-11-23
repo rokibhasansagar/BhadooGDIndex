@@ -27,6 +27,7 @@ const authConfig = {
     "search_result_list_page_size": 50,
     "enable_cors_file_down": false,
     "enable_password_file_verify": true, // support for .password file
+    "enable_virus_infected_file_down": true, // support for downloading virus infected files
     "direct_link_protection": false, // protects direct links with Display UI
     "roots":[
       {
@@ -361,6 +362,50 @@ const not_found = `<!DOCTYPE html>
   </body>
   </html>
   `
+
+  const virusdetected = `<html>
+  <head>
+  <title>Virus Detected</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
+  <style>
+  body{
+      margin:0;
+      padding:0;
+      width:100%;
+      height:100%;
+      color:#b0bec5;
+      display:table;
+      font-weight:100;
+      font-family:Lato
+  }
+  .container{
+      text-align:center;
+      display:table-cell;
+      vertical-align:middle
+  }
+  .content{
+      text-align:center;
+      display:inline-block
+  }
+  .message{
+      font-size:80px;
+      margin-bottom:40px
+  }
+  a{
+      text-decoration:none;
+      color:#3498db
+  }
+
+  </style>
+  </head>
+  <body>
+  <div class="container">
+  <div class="content">
+  <div class="message">Virus Detected</div>
+  </div>
+  </div>
+  </body>
+  </html>`
 
 const SearchFunction = {
     formatSearchKeyword: function(keyword) {
@@ -755,6 +800,33 @@ class googleDrive {
             this.authConfig.enable_cors_file_down && headers.append('Access-Control-Allow-Origin', '*');
             inline === true && headers.set('Content-Disposition', 'inline');
             return res;
+        }
+        else if (res.status === 403) {
+                if (this.authConfig.enable_virus_infected_file_down) {
+                url += '&acknowledgeAbuse=true';
+                res = await this.fetch200(url, requestOption);
+                const { headers } = res = new Response(res.body, res)
+                this.authConfig.enable_cors_file_down && headers.append('Access-Control-Allow-Origin', '*');
+                inline === true && headers.set('Content-Disposition', 'inline');
+                return res;
+                }
+                else {
+                    return new Response(virusdetected, {
+                        status: 404,
+                        headers: {
+                            "content-type": "text/html;charset=UTF-8",
+                        },
+                    })
+                }
+
+        }
+        else if(res.status == 404){
+            return new Response(not_found, {
+                status: 404,
+                headers: {
+                    "content-type": "text/html;charset=UTF-8",
+                },
+            })
         }
         else {
             const res = await fetch(`${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/assets/DownloadError.html`);

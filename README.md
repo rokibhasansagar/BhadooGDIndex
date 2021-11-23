@@ -290,7 +290,7 @@ const uiConfig = {
 * Website Hosting: [js.org](https://js.org) and [GitHub](https://github.com)
 * Dev Editor Used: [ATOM](https://atom.io)
 * Made for: [Cloudflare Workers](https://workers.cloudflare.com)
-* Several Different Fixes by [SpEcHiDe](https://github.com/SpEcHiDe), [Adnan Ahmad](https://gitlab.com/viperadnan), [Prashanth C A](https://github.com/Achrou/goindex-theme-acrou/pull/176) and Unmentioned Forgotten Contributors.
+* Several Different Fixes by [SpEcHiDe](https://github.com/SpEcHiDe), [Adnan Ahmad](https://gitlab.com/viperadnan), [Prashanth C A](https://github.com/Achrou/goindex-theme-acrou/pull/176), [cheems](https://github.com/cheems/goindex-extended/blob/master/index.js#L553) and Unmentioned Forgotten Contributors.
 
 ## Disclaimer
 
