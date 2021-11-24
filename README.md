@@ -49,8 +49,19 @@
 
 * If you're new and noob, just use [this](https://bdi-generator.hashhackers.com).
 * Simple Index with Normal or Service Account, use [this](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/raw/master/worker/worker-beta.js). (Can search all drives and display drive only links if enabled)
-* Advanced Index to Search All Drives and Handle Search and Display Index Links, use [this](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/raw/master/worker/worker-advanced.js). (make sure you add Service Account to those drives, which you're adding inside Index Code)
 * If you enable Second Domain option, you need to make additional Cloudflare workers and account using [this](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/raw/master/worker/worker-beta-second-domain.js).
+* Advanced Index to Search All Drives and Handle Search and Display Index Links, use [this](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/raw/master/worker/worker-advanced.js). (make sure you add Service Account to those drives, which you're adding inside Index Code)
+
+## Steps for Making Search All Drives Index
+
+1. Copy Code from [here](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/raw/master/worker/worker-advanced.js).
+2. Make a Single Service Account (Fresh and New)
+3. Add that SA Email to drives, only to those, which you want to Index. and change "service_account": false, to "service_account": true,
+4. Add that Service Account to Index
+5. In domains_for_dl = ['']; enter your Index URL, that you're making now. eg. https://example.com
+6. Add your Drive IDs in Index Code
+7. Change "second_domain_for_dl": false, to "second_domain_for_dl": true, (don't forget to deploy second domains worker.)
+8. Change "search_all_drives": false to "search_all_drives": true
 
 ## authConfig
 
