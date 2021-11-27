@@ -58,10 +58,10 @@
 2. Make a Single Service Account (Fresh and New)
 3. Add that SA Email to drives, only to those, which you want to Index. and change "service_account": false, to "service_account": true,
 4. Add that Service Account to Index
-5. In domains_for_dl = ['']; enter your Index URL, that you're making now. eg. https://example.com
+5. In domains_for_dl = ['']; enter your Index URL, that you're making now. eg. `https://example.com`
 6. Add your Drive IDs in Index Code
-7. Change "second_domain_for_dl": false, to "second_domain_for_dl": true, (don't forget to deploy second domains worker.)
-8. Change "search_all_drives": false to "search_all_drives": true
+7. Change `"second_domain_for_dl": false`, to `"second_domain_for_dl": true`, (don't forget to deploy second domains worker.)
+8. Keep `"search_all_drives": false`
 
 ## authConfig
 
