@@ -503,24 +503,26 @@ async function handleRequest(request) {
             });
     }
 
-    if (referer == null){
-        return new Response(directlink, {
-                headers: {
-                    'content-type': 'text/html;charset=UTF-8'
-                },
-                status: 401
-            });
-        console.log("Refer Null");
-    } else if (referer.includes(hostname) && authConfig['direct_link_protection']) {
-        console.log("Refer Detected");
-    } else {
-        return new Response(directlink, {
-                headers: {
-                    'content-type': 'text/html;charset=UTF-8'
-                },
-                status: 401
-            });
-        console.log("Wrong Refer URL");
+    if (authConfig['direct_link_protection']) {
+      if (referer == null){
+          return new Response(directlink, {
+                  headers: {
+                      'content-type': 'text/html;charset=UTF-8'
+                  },
+                  status: 401
+              });
+          console.log("Refer Null");
+      } else if (referer.includes(hostname)) {
+          console.log("Refer Detected");
+      } else {
+          return new Response(directlink, {
+                  headers: {
+                      'content-type': 'text/html;charset=UTF-8'
+                  },
+                  status: 401
+              });
+          console.log("Wrong Refer URL");
+      }
     }
 
     const command_reg = /^\/(?<num>\d+):(?<command>[a-zA-Z0-9]+)(\/.*)?$/g;
