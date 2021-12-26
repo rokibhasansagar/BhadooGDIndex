@@ -470,6 +470,7 @@ async function handleRequest(request) {
     let gd;
     let url = new URL(request.url);
     let path = url.pathname;
+    let hostname = url.hostname;
 
     function redirectToIndexPage() {
         return new Response('', {
