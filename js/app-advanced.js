@@ -1,5 +1,5 @@
 // Redesigned by telegram.dog/TheFirstSpeedster at https://www.npmjs.com/package/@googledrive/index which was written by someone else, credits are given on Source Page.
-// v2.0.26
+// v2.0.27
 // Initialize the page
 function init() {
     document.siteName = $('title').html();
@@ -130,7 +130,7 @@ function nav(path) {
     var cur = window.current_drive_order || 0;
     html += `<nav class="navbar navbar-expand-lg${UI.fixed_header ?' fixed-top': ''} ${UI.header_style_class}">
     <div class="container-fluid">
-  <a class="navbar-brand" href="/${cur}:/">${UI.logo_image ? '<img border="0" alt="'+UI.company_name+'" src="'+UI.logo_link_name+'" height="'+UI.height+'" width="'+UI.logo_width+'">' : UI.logo_link_name}</a>
+  <a class="navbar-brand" href="/">${UI.logo_image ? '<img border="0" alt="'+UI.company_name+'" src="'+UI.logo_link_name+'" height="'+UI.height+'" width="'+UI.logo_width+'">' : UI.logo_link_name}</a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -211,43 +211,122 @@ function nav(path) {
  * @param resultCallback Success Result Callback
  * @param authErrorCallback Pass Error Callback
  */
-function requestListPath(path, params, resultCallback, authErrorCallback) {
-    var p = {
-        password: params['password'] || null,
-        page_token: params['page_token'] || null,
-        page_index: params['page_index'] || 0
-    };
-    $.post(path, p, function(data, status) {
-        var res = jQuery.parseJSON(gdidecode(read(data)));
-        if (res && res.error && res.error.code == '401') {
-            // Password verification failed
-            if (authErrorCallback) authErrorCallback(path)
-        } else if (res && res.data) {
-            if (resultCallback) resultCallback(res, path, p)
-        }
-    }).fail(function(response) {
-        $('#list').html(`<div class='alert alert-danger' role='alert'> Unable to Get Data from the Server, Something went wrong. </div></div></div>`);
-    });
-}
+ function requestListPath(path, params, resultCallback, authErrorCallback) {
+     var p = {
+         password: params['password'] || null,
+         page_token: params['page_token'] || null,
+         page_index: params['page_index'] || 0
+     };
+     $('#update').html(`<div class='alert alert-info' role='alert'> Connecting...</div></div></div>`);
+     $.post(path, p, function(data, status) {
+         var res = jQuery.parseJSON(gdidecode(read(data)));
+         if (res && res.error && res.error.code == '401') {
+             // Password verification failed
+             if (authErrorCallback) authErrorCallback(path)
+         } else if (res && res.data === null) {
+             $('#spinner').remove();
+             $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data. </div></div></div>`);
+             $('#update').remove();
+         } else if (res && res.data) {
+             if (resultCallback) resultCallback(res, path, p)
+             $('#update').remove();
+         }
+     }).fail(function(response) {
+         $('#update').html(`<div class='alert alert-info' role='alert'> Retrying...</div></div></div>`);
+         $.post(path, p, function(data, status) {
+             var res = jQuery.parseJSON(gdidecode(read(data)));
+             if (res && res.error && res.error.code == '401') {
+                 // Password verification failed
+                 if (authErrorCallback) authErrorCallback(path)
+             } else if (res && res.data === null) {
+                 $('#spinner').remove();
+                 $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data. </div></div></div>`);
+                 $('#update').remove();
+             } else if (res && res.data) {
+                 if (resultCallback) resultCallback(res, path, p)
+                 $('#update').remove();
+             }
+         }).fail(function(response) {
+             $('#update').html(`<div class='alert alert-info' role='alert'> Retrying...</div></div></div>`);
+             $.post(path, p, function(data, status) {
+                 var res = jQuery.parseJSON(gdidecode(read(data)));
+                 if (res && res.error && res.error.code == '401') {
+                     // Password verification failed
+                     if (authErrorCallback) authErrorCallback(path)
+                 } else if (res && res.data === null) {
+                     $('#spinner').remove();
+                     $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data. </div></div></div>`);
+                     $('#update').remove();
+                 } else if (res && res.data) {
+                     if (resultCallback) resultCallback(res, path, p)
+                     $('#update').remove();
+                 }
+             }).fail(function(response) {
+                 $('#update').html(`<div class='alert alert-danger' role='alert'> Unable to get data from the server, Something went wrong.</div></div></div>`);
+                 $('#list').html(`<div class='alert alert-danger' role='alert'> We were unable to get data from the server.</div></div></div>`);
+                 $('#spinner').remove();
+             });
+         });
+     });
+ }
 
 /**
  * Search POST request
  * @param params Form params
  * @param resultCallback Success callback
  */
-function requestSearch(params, resultCallback) {
-    var p = {
-        q: params['q'] || null,
-        page_token: params['page_token'] || null,
-        page_index: params['page_index'] || 0
-    };
-    $.post(`/${window.current_drive_order}:search`, p, function(data, status) {
-        var res = jQuery.parseJSON(gdidecode(read(data)));
-        if (res && res.data) {
-            if (resultCallback) resultCallback(res, p)
-        }
-    })
-}
+ function requestSearch(params, resultCallback) {
+     var p = {
+         q: params['q'] || null,
+         page_token: params['page_token'] || null,
+         page_index: params['page_index'] || 0
+     };
+     $('#update').html(`<div class='alert alert-info' role='alert'> Connecting...</div></div></div>`);
+     $.post(`/${window.current_drive_order}:search`, p, function(data, status) {
+         var res = jQuery.parseJSON(gdidecode(read(data)));
+         if (res && res.data === null) {
+             $('#spinner').remove();
+             $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data.</div></div></div>`);
+             $('#update').remove();
+         }
+         if (res && res.data) {
+             if (resultCallback) resultCallback(res, p)
+             $('#update').remove();
+         }
+     }).fail(function(response) {
+         $('#update').html(`<div class='alert alert-info' role='alert'> Retrying...</div></div></div>`);
+         $.post(path, p, function(data, status) {
+             var res = jQuery.parseJSON(gdidecode(read(data)));
+             if (res && res.data === null) {
+                 $('#spinner').remove();
+                 $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data. </div></div></div>`);
+                 $('#update').remove();
+             }
+             if (res && res.data) {
+                 if (resultCallback) resultCallback(res, path, p)
+                 $('#update').remove();
+             }
+         }).fail(function(response) {
+             $('#update').html(`<div class='alert alert-info' role='alert'> Retrying...</div></div></div>`);
+             $.post(path, p, function(data, status) {
+                 var res = jQuery.parseJSON(gdidecode(read(data)));
+                 if (res && res.data === null) {
+                     $('#spinner').remove();
+                     $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data. </div></div></div>`);
+                     $('#update').remove();
+                 }
+                 if (res && res.data) {
+                     if (resultCallback) resultCallback(res, path, p)
+                     $('#update').remove();
+                 }
+             }).fail(function(response) {
+                 $('#update').html(`<div class='alert alert-danger' role='alert'> Unable to get data from the server, Something went wrong. 3 Failures</div></div></div>`);
+                 $('#list').html(`<div class='alert alert-danger' role='alert'> We were unable to get data from the server.</div></div></div>`);
+                 $('#spinner').remove();
+             });
+         });
+     });
+ }
 
 // Render file list
 function list(path) {
@@ -295,7 +374,7 @@ function list(path) {
     $('#content').html(content);
 
     var password = localStorage.getItem('password' + path);
-    $('#list').html(`<div class="d-flex justify-content-center"><div class="spinner-border ${UI.loading_spinner_class} m-5" role="status"><span class="sr-only"></span></div></div>`);
+    $('#list').html(`<div class="d-flex justify-content-center"><div class="spinner-border ${UI.loading_spinner_class} m-5" role="status" id="spinner"><span class="sr-only"></span></div></div>`);
     $('#readme_md').hide().html('');
     $('#head_md').hide().html('');
 
@@ -342,7 +421,7 @@ function list(path) {
                         window.scroll_status.loading_lock = true;
 
                         // Show a loading spinner
-                        $(`<div id="spinner" class="d-flex justify-content-center"><div class="spinner-border ${UI.loading_spinner_class} m-5" role="status"><span class="sr-only"></span></div></div>`)
+                        $(`<div id="spinner" class="d-flex justify-content-center"><div class="spinner-border ${UI.loading_spinner_class} m-5" role="status" id="spinner"><span class="sr-only"></span></div></div>`)
                             .insertBefore('#readme_md');
 
                         let $list = $('#list');
@@ -513,6 +592,7 @@ function append_files_to_list(path, files) {
 function render_search_result_list() {
     var content = `
   <div class="container"><br>
+  <div id="update"></div>
   <div class="card">
   <div class="${UI.path_nav_alert_class} d-flex align-items-center" role="alert" style="margin-bottom: 0;">Search Results</div>
   <div id="list" class="list-group text-break">
@@ -524,7 +604,7 @@ function render_search_result_list() {
   `;
     $('#content').html(content);
 
-    $('#list').html(`<div class="d-flex justify-content-center"><div class="spinner-border ${UI.loading_spinner_class} m-5" role="status"><span class="sr-only"></span></div></div>`);
+    $('#list').html(`<div class="d-flex justify-content-center"><div class="spinner-border ${UI.loading_spinner_class} m-5" role="status" id="spinner"><span class="sr-only"></span></div></div>`);
     $('#readme_md').hide().html('');
     $('#head_md').hide().html('');
 
@@ -571,7 +651,7 @@ function render_search_result_list() {
                         window.scroll_status.loading_lock = true;
 
                         // Show a loading spinner
-                        $(`<div id="spinner" class="d-flex justify-content-center"><div class="spinner-border ${UI.loading_spinner_class} m-5" role="status"><span class="sr-only"></span></div></div>`)
+                        $(`<div id="spinner" class="d-flex justify-content-center"><div class="spinner-border ${UI.loading_spinner_class} m-5" role="status" id="spinner"><span class="sr-only"></span></div></div>`)
                             .insertBefore('#readme_md');
 
                         let $list = $('#list');
@@ -743,7 +823,7 @@ function onSearchResultItemClick(a_ele) {
     var cur = window.current_drive_order;
     var title = `Loading...`;
     $('#SearchModelLabel').html(title);
-    var content = `<div class="d-flex justify-content-center"><div class="spinner-border ${UI.loading_spinner_class} m-5" role="status"><span class="sr-only"></span></div>`;
+    var content = `<div class="d-flex justify-content-center"><div class="spinner-border ${UI.loading_spinner_class} m-5" role="status" id="spinner"><span class="sr-only"></span></div>`;
     $('#modal-body-space').html(content);
 
     // Request a path
@@ -774,7 +854,7 @@ function onSearchResultItemClick(a_ele) {
 function file(path) {
     var name = path.split('/').pop();
     var ext = name.split('.').pop().toLowerCase().replace(`?a=view`, "").toLowerCase();
-    $('#content').html(`<div class="d-flex justify-content-center" style="height: 150px"><div class="spinner-border ${UI.loading_spinner_class} m-5" role="status"><span class="sr-only"></span></div></div>`);
+    $('#content').html(`<div class="d-flex justify-content-center" style="height: 150px"><div class="spinner-border ${UI.loading_spinner_class} m-5" role="status" id="spinner"><span class="sr-only"></span></div></div>`);
     if ("|html|php|css|go|java|js|json|txt|sh|md|".indexOf(`|${ext}|`) >= 0) {
         return file_code(path);
     }
@@ -1032,7 +1112,8 @@ ${UI.display_drive_link ? '<a type="button" class="btn btn-info" href="https://d
     <div class="dropdown-menu">
       <a class="dropdown-item" href="iina://weblink?url=${url}">IINA</a>
       <a class="dropdown-item" href="potplayer://${url}">PotPlayer</a>
-      <a class="dropdown-item" href="vlc://${urlvlc}">VLC</a>
+      <a class="dropdown-item" href="vlc://${urlvlc}">VLC Mobile</a>
+      <a class="dropdown-item" href="${urlvlc}">VLC Desktop</a>
       <a class="dropdown-item" href="nplayer-${url}">nPlayer</a>
       <a class="dropdown-item" href="intent://${url_without_https}#Intent;type=video/any;package=is.xyz.mpv;scheme=https;end;">mpv-android</a>
       <a class="dropdown-item" href="mpv://${url_base64}">mpv x64</a>

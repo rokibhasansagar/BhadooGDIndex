@@ -4,8 +4,8 @@
     ██║░░╚██╗██║░░██║██║░░░██╗░░██║░╚═══██╗░░░██║░░██║██╔══██╗██║░░╚██╗
     ╚██████╔╝██████╔╝██║██╗╚█████╔╝██████╔╝██╗╚█████╔╝██║░░██║╚██████╔╝
     ░╚═════╝░╚═════╝░╚═╝╚═╝░╚════╝░╚═════╝░╚═╝░╚════╝░╚═╝░░╚═╝░╚═════╝░
-                             v 2.0.26
-A Script Redesigned by Parveen Bhadoo from GOIndex at https://www.npmjs.com/package/@googledrive/index */
+                             v 2.0.27
+A Script Redesigned by Parveen Bhadoo from GOIndex at https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index */
 
 // add multiple serviceaccounts as {}, {}, {}, random account will be selected by each time app is opened.
 const serviceaccounts = [
@@ -60,8 +60,8 @@ const authConfig = {
 ░░░╚═╝░░░╚═╝░░╚═╝╚══════╝░╚═════╝░╚══════╝╚═════╝░*/
 
 const uiConfig = {
-    "theme": "slate", // switch between themes, default set to vapor, select from https://www.npmjs.com/package/@googledrive/index
-    "version": "2.0.26", // don't touch this one. get latest code using generator at https://bdi-generator.hashhackers.com
+    "theme": "slate", // switch between themes, default set to slate, select from https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index
+    "version": "2.0.27", // don't touch this one. get latest code using generator at https://bdi-generator.hashhackers.com
     // If you're using Image then set to true, If you want text then set it to false
     "logo_image": true, // true if you're using image link in next option.
     "logo_height": "", // only if logo_image is true
@@ -110,7 +110,7 @@ const uiConfig = {
     "unauthorized_owner_link": "https://telegram.dog/Telegram", // Unauthorized Error Page Link to Owner
     "unauthorized_owner_email": "abuse@telegram.org", // Unauthorized Error Page Owner Email
     "arc_code": "jfoY2h19", // arc.io Integration Code, get yours from https://portal.arc.io
-    "search_all_drives": false // turn this on to switch this to gdrive search application
+    "modified_function_no_use": false // don't touch this one
 };
 
 
@@ -932,7 +932,7 @@ class googleDrive {
         const types = DriveFixedTerms.gd_root_type;
         const is_user_drive = this.root_type === types.user_drive;
         const is_share_drive = this.root_type === types.share_drive;
-        const search_all_drives = `${uiConfig.search_all_drives}`
+        const modified_function_no_use = `${uiConfig.modified_function_no_use}`
         const empty_result = {
             nextPageToken: null,
             curPageIndex: page_index,
@@ -950,7 +950,7 @@ class googleDrive {
         let name_search_str = `name contains '${words.join("' AND name contains '")}'`;
         let params = {};
         if (is_user_drive) {
-            if (search_all_drives == 'true') {
+            if (modified_function_no_use == 'true') {
                 params.corpora = 'allDrives';
                 params.includeItemsFromAllDrives = true;
                 params.supportsAllDrives = true;
@@ -960,7 +960,7 @@ class googleDrive {
             }
         }
         if (is_share_drive) {
-            if (search_all_drives == 'true') {
+            if (modified_function_no_use == 'true') {
                 params.corpora = 'allDrives';
             }
             else {
