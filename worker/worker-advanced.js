@@ -4,7 +4,7 @@
     ██║░░╚██╗██║░░██║██║░░░██╗░░██║░╚═══██╗░░░██║░░██║██╔══██╗██║░░╚██╗
     ╚██████╔╝██████╔╝██║██╗╚█████╔╝██████╔╝██╗╚█████╔╝██║░░██║╚██████╔╝
     ░╚═════╝░╚═════╝░╚═╝╚═╝░╚════╝░╚═════╝░╚═╝░╚════╝░╚═╝░░╚═╝░╚═════╝░
-                             v 2.0.27
+                             v 2.0.28
 A Script Redesigned by Parveen Bhadoo from GOIndex at https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index */
 
 // add multiple serviceaccounts as {}, {}, {}, random account will be selected by each time app is opened.
@@ -28,6 +28,7 @@ const authConfig = {
     "enable_cors_file_down": false,
     "enable_password_file_verify": true, // support for .password file
     "direct_link_protection": false, // protects direct links with Display UI
+    "lock_folders": false, // keeps folders and search locked if auth in on, and allows individual file view
     "roots":[
       {
           "id": "",
@@ -61,7 +62,7 @@ const authConfig = {
 
 const uiConfig = {
     "theme": "slate", // switch between themes, default set to slate, select from https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index
-    "version": "2.0.27", // don't touch this one. get latest code using generator at https://bdi-generator.hashhackers.com
+    "version": "2.0.28", // don't touch this one. get latest code using generator at https://bdi-generator.hashhackers.com
     // If you're using Image then set to true, If you want text then set it to false
     "logo_image": true, // true if you're using image link in next option.
     "logo_height": "", // only if logo_image is true
@@ -739,6 +740,8 @@ class googleDrive {
     }
 
     basicAuthResponse(request) {
+        let url = new URL(request.url);
+        let path = url.pathname;
         const auth = this.root.auth || '',
             _401 = new Response(unauthorized, {
                 headers: {
@@ -747,17 +750,31 @@ class googleDrive {
                 },
                 status: 401
             });
-        if (auth) {
-            const _auth = request.headers.get('Authorization')
-            if (_auth) {
-                const [received_user, received_pass] = atob(_auth.split(' ').pop()).split(':');
-                if (auth.hasOwnProperty(received_user)) {
-                    if (auth[received_user] == received_pass) {
-                        return null;
+        if (authConfig['lock_folders']) {
+            if (auth && path.endsWith("/") || path.endsWith("search")) {
+                const _auth = request.headers.get('Authorization')
+                if (_auth) {
+                    const [received_user, received_pass] = atob(_auth.split(' ').pop()).split(':');
+                    if (auth.hasOwnProperty(received_user)) {
+                        if (auth[received_user] == received_pass) {
+                            return null;
+                        } else return _401;
                     } else return _401;
-                } else return _401;
-            }
-        } else return null;
+                }
+            } else return null;
+        } else {
+                if (auth) {
+                    const _auth = request.headers.get('Authorization')
+                    if (_auth) {
+                        const [received_user, received_pass] = atob(_auth.split(' ').pop()).split(':');
+                        if (auth.hasOwnProperty(received_user)) {
+                            if (auth[received_user] == received_pass) {
+                                return null;
+                            } else return _401;
+                        } else return _401;
+                    }
+                } else return null;
+        }
         return _401;
     }
 

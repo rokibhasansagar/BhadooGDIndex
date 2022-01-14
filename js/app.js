@@ -1,5 +1,5 @@
 // Redesigned by telegram.dog/TheFirstSpeedster at https://www.npmjs.com/package/@googledrive/index which was written by someone else, credits are given on Source Page.
-// v2.0.27
+// v2.0.28
 // Initialize the page
 function init() {
     document.siteName = $('title').html();
@@ -204,6 +204,15 @@ function nav(path) {
     $('#nav').html(html);
 }
 
+// Sleep Function to Retry API Calls
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}
+
 /**
  * Initiate POST request for listing
  * @param path Path
@@ -232,6 +241,7 @@ function nav(path) {
              $('#update').remove();
          }
      }).fail(function(response) {
+         sleep(2000);
          $('#update').html(`<div class='alert alert-info' role='alert'> Retrying...</div></div></div>`);
          $.post(path, p, function(data, status) {
              var res = jQuery.parseJSON(gdidecode(read(data)));
@@ -247,6 +257,7 @@ function nav(path) {
                  $('#update').remove();
              }
          }).fail(function(response) {
+             sleep(2000);
              $('#update').html(`<div class='alert alert-info' role='alert'> Retrying...</div></div></div>`);
              $.post(path, p, function(data, status) {
                  var res = jQuery.parseJSON(gdidecode(read(data)));
@@ -295,8 +306,9 @@ function nav(path) {
              $('#update').remove();
          }
      }).fail(function(response) {
+         sleep(2000);
          $('#update').html(`<div class='alert alert-info' role='alert'> Retrying...</div></div></div>`);
-         $.post(path, p, function(data, status) {
+         $.post(`/${window.current_drive_order}:search`, p, function(data, status) {
              var res = jQuery.parseJSON(gdidecode(read(data)));
              if (res && res.data === null) {
                  $('#spinner').remove();
@@ -304,12 +316,13 @@ function nav(path) {
                  $('#update').remove();
              }
              if (res && res.data) {
-                 if (resultCallback) resultCallback(res, path, p)
+                 if (resultCallback) resultCallback(res, p)
                  $('#update').remove();
              }
          }).fail(function(response) {
+             sleep(2000);
              $('#update').html(`<div class='alert alert-info' role='alert'> Retrying...</div></div></div>`);
-             $.post(path, p, function(data, status) {
+             $.post(`/${window.current_drive_order}:search`, p, function(data, status) {
                  var res = jQuery.parseJSON(gdidecode(read(data)));
                  if (res && res.data === null) {
                      $('#spinner').remove();
@@ -317,7 +330,7 @@ function nav(path) {
                      $('#update').remove();
                  }
                  if (res && res.data) {
-                     if (resultCallback) resultCallback(res, path, p)
+                     if (resultCallback) resultCallback(res, p)
                      $('#update').remove();
                  }
              }).fail(function(response) {
