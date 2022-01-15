@@ -7,9 +7,6 @@
 [![Day](https://data.jsdelivr.com/v1/package/npm/@googledrive/index/badge/day)](https://www.jsdelivr.com/package/npm/@googledrive/index)
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://www.npmjs.com/package/@googledrive/index)
 
-
-# Project Development Paused until Further Notice.
-
 ## Full White label and Customizable Index | One of a kind
 
 * Supports Both My and Team/Shared Drives with Dark Mode.
@@ -23,15 +20,15 @@
 
 [![Screenshot](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/raw/master/images/themes/darkly.png)](https://youtu.be/Ihk4Gm3DPvg)
 
-`Note: The Changes in your workers config can effect later due to cache. Use incognito mode every time to open the worker URL to overcome that issue.`
+`Note: The Changes in your worker's config can affect late due to cache. Use incognito mode every time to open the worker URL to overcome that issue.`
 
 ## How to
 
-* Stable Release `2.0.28`
+* Stable Release `2.1.0`
 * Beta Version (Latest) - [bdi-generator](https://bdi-generator.hashhackers.com) (For Dark Theme use darkly)
 * If you want to deploy main drive leave the option ROOT as it is.
 * If you want to deploy your Team Drive/Shared Drive/Folder then copy the ID and replace it with ROOT.
-* Eg. if you open this shared drive `https://drive.google.com/drive/u/0/folders/0AOM2i7MQiuWIUk9PVA` - `0AOM2i7MQiuWIUk9PVA` is its ID.
+* Eg. if you open this shared drive `https://drive.google.com/drive/u/0/folders/0AOM2i7Mi3uWIUk9PVA` - `0AOM2i7Mi3uWIUk9PVA` is its ID.
 * Authenticate and copy the code from Google and paste it into Authorization Code Box.
 * Click on Get Code to Generate Code and Copy it for later use.
 * Now Create Cloud flare account and verify email or login with existing account.
@@ -158,59 +155,65 @@
 
 ````
 const uiConfig = {
-  "theme": "slate", // switch between themes, default set to vapor, select from https://www.npmjs.com/package/@googledrive/index
-  "version": "2.0.28", // don't touch this one. get latest code using generator at https://bdi-generator.hashhackers.com
-  // If you're using Image then set to true, If you want text then set it to false
-  "logo_image": true, // true if you're using image link in next option.
-  "logo_height": "", // only if logo_image is true
-  "logo_width": "100px", // only if logo_image is true
-  "favicon": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.28/images/favicon.ico",
-  // if logo is true then link otherwise just text for name
-  "logo_link_name": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.28/images/bhadoo-cloud-logo-white.svg",
-  "fixed_header": true, // If you want the footer to be flexible or fixed.
-  "header_padding": "60", // Value 60 for fixed header, Value 20 for flexible header. Required to be changed accordingly in some themes.
-  "nav_link_1": "Home", // change navigation link name
-  "nav_link_3": "Current Path", // change navigation link name
-  "nav_link_4": "Contact", // change navigation link name
-  "fixed_footer": false, // If you want the footer to be flexible or fixed.
-  "hide_footer": true, // hides the footer from site entirely.
-  "header_style_class": "navbar-dark bg-primary", // navbar-dark bg-primary || navbar-dark bg-dark || navbar-light bg-light
-  "footer_style_class": "bg-primary", // bg-primary || bg-dark || bg-light
-  "css_a_tag_color": "white", // Color Name or Hex Code eg. #ffffff
-  "css_p_tag_color": "white", // Color Name or Hex Code eg. #ffffff
-  "folder_text_color": "white", // Color Name or Hex Code eg. #ffffff
-  "loading_spinner_class": "text-light", // https://getbootstrap.com/docs/5.0/components/spinners/#colors
-  "search_button_class": "btn btn-danger", // https://getbootstrap.com/docs/5.0/components/buttons/#examples
-  "path_nav_alert_class": "alert alert-primary", // https://getbootstrap.com/docs/4.0/components/alerts/#examples
-  "file_view_alert_class": "alert alert-danger", // https://getbootstrap.com/docs/4.0/components/alerts/#examples
-  "file_count_alert_class": "alert alert-secondary", // https://getbootstrap.com/docs/4.0/components/alerts/#examples
-  "contact_link": "https://telegram.dog/Telegram", // Link to Contact Button on Menu
-  "copyright_year": "2050", // year of copyright, can be anything like 2015 - 2020 or just 2020
-  "company_name": "Bhadoo Cloud", // Name next to copyright
-  "company_link": "https://telegram.dog/Telegram", // link of copyright name
-  "credit": true, // Set this to true to give us credit
-  "display_size": true, // Set this to false to hide display file size
-  "display_time": false, // Set this to false to hide display modified time for folder and files
-  "display_download": true, // Set this to false to hide download icon for folder and files on main index
-  "disable_player": false, // Set this to true to hide audio and video players
-  "custom_srt_lang": "", // Subtitle Language Code for Custom .vtt language.
-  "disable_video_download": false, // Remove Download, Copy Button on Videos
-  "second_domain_for_dl": false, // If you want to display other URL for Downloading to protect your main domain.
-  "downloaddomain": "https://testing.fetchgoogleapi.workers.dev", // If "second_domain_for_dl": true then enter downloaddomain otherwise keep empty. eg. https://workers.workersname.workers.dev No Trailing '/'
-  "poster": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.28/images/poster.jpg", // Video poster URL or see Readme to how to load from Drive
-  "audioposter": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.28/images/music.jpg", // Video poster URL or see Readme to how to load from Drive
-  "jsdelivr_cdn_src": "https://cdn.jsdelivr.net/npm/@googledrive/index", // If Project is Forked, then enter your GitHub repo
-  "render_head_md": true, // Render Head.md
-  "render_readme_md": true, // Render Readme.md
-  "display_drive_link": false, // This will add a Link Button to Google Drive of that particular file.
-  "plyr_io_version": "3.6.4", // Change plyr.io version in future when needed.
-  "plyr_io_video_resolution": "16:9", // For reference, visit: https://github.com/sampotts/plyr#options
-  "unauthorized_owner_link": "https://telegram.dog/Telegram", // Unauthorized Error Page Link to Owner
-  "unauthorized_owner_email": "abuse@telegram.org", // Unauthorized Error Page Owner Email
-  "arc_code": "jfoY2h19", // arc.io Integration Code, get yours from https://portal.arc.io
-  "search_all_drives": false // turn this on to switch this to gdrive search application
+    "theme": "slate", // switch between themes, default set to slate, select from https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index
+    "version": "2.1.0", // don't touch this one. get latest code using generator at https://bdi-generator.hashhackers.com
+    // If you're using Image then set to true, If you want text then set it to false
+    "logo_image": true, // true if you're using image link in next option.
+    "logo_height": "", // only if logo_image is true
+    "logo_width": "100px", // only if logo_image is true
+    "favicon": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.1.0/images/favicon.ico",
+    // if logo is true then link otherwise just text for name
+    "logo_link_name": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.1.0/images/bhadoo-cloud-logo-white.svg",
+    "fixed_header": true, // If you want the footer to be flexible or fixed.
+    "header_padding": "60", // Value 60 for fixed header, Value 20 for flexible header. Required to be changed accordingly in some themes.
+    "nav_link_1": "Home", // change navigation link name
+    "nav_link_3": "Current Path", // change navigation link name
+    "nav_link_4": "Contact", // change navigation link name
+    "show_logout_button": false, // shows logout button if auth0.com is active
+    "fixed_footer": false, // If you want the footer to be flexible or fixed.
+    "hide_footer": true, // hides the footer from site entirely.
+    "header_style_class": "navbar-dark bg-primary", // navbar-dark bg-primary || navbar-dark bg-dark || navbar-light bg-light
+    "footer_style_class": "bg-primary", // bg-primary || bg-dark || bg-light
+    "css_a_tag_color": "white", // Color Name or Hex Code eg. #ffffff
+    "css_p_tag_color": "white", // Color Name or Hex Code eg. #ffffff
+    "folder_text_color": "white", // Color Name or Hex Code eg. #ffffff
+    "loading_spinner_class": "text-light", // https://getbootstrap.com/docs/5.0/components/spinners/#colors
+    "search_button_class": "btn btn-danger", // https://getbootstrap.com/docs/5.0/components/buttons/#examples
+    "path_nav_alert_class": "alert alert-primary", // https://getbootstrap.com/docs/4.0/components/alerts/#examples
+    "file_view_alert_class": "alert alert-danger", // https://getbootstrap.com/docs/4.0/components/alerts/#examples
+    "file_count_alert_class": "alert alert-secondary", // https://getbootstrap.com/docs/4.0/components/alerts/#examples
+    "contact_link": "https://telegram.dog/Telegram", // Link to Contact Button on Menu
+    "copyright_year": "2050", // year of copyright, can be anything like 2015 - 2020 or just 2020
+    "company_name": "Bhadoo Cloud", // Name next to copyright
+    "company_link": "https://telegram.dog/Telegram", // link of copyright name
+    "credit": true, // Set this to true to give us credit
+    "display_size": true, // Set this to false to hide display file size
+    "display_time": false, // Set this to false to hide display modified time for folder and files
+    "display_download": true, // Set this to false to hide download icon for folder and files on main index
+    "disable_player": false, // Set this to true to hide audio and video players
+    "custom_srt_lang": "", // Subtitle Language Code for Custom .vtt language.
+    "disable_video_download": false, // Remove Download, Copy Button on Videos
+    "second_domain_for_dl": false, // If you want to display other URL for Downloading to protect your main domain.
+    "downloaddomain": domain_for_dl, // Ignore this and set domains at top of this page after service accounts.
+    "poster": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.1.0/images/poster.jpg", // Video poster URL or see Readme to how to load from Drive
+    "audioposter": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.1.0/images/music.jpg", // Video poster URL or see Readme to how to load from Drive
+    "jsdelivr_cdn_src": "https://cdn.jsdelivr.net/npm/@googledrive/index", // If Project is Forked, then enter your GitHub repo
+    "render_head_md": true, // Render Head.md
+    "render_readme_md": true, // Render Readme.md
+    "display_drive_link": false, // This will add a Link Button to Google Drive of that particular file.
+    "plyr_io_version": "3.6.4", // Change plyr.io version in future when needed.
+    "plyr_io_video_resolution": "16:9", // For reference, visit: https://github.com/sampotts/plyr#options
+    "unauthorized_owner_link": "https://telegram.dog/Telegram", // Unauthorized Error Page Link to Owner
+    "unauthorized_owner_email": "abuse@telegram.org", // Unauthorized Error Page Owner Email
+    "arc_code": "jfoY2h19", // arc.io Integration Code, get yours from https://portal.arc.io
+    "search_all_drives": false // gives gdrive links on search and searches all drives on that account, doesn't require adding
 };
 ````
+
+## Auth0 Integration
+
+* Detailed Guide will be added soon
+
 ## Second Domain Systems
 
 * set second_domain_for_dl to `true` first.
