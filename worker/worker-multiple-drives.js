@@ -4,8 +4,11 @@
     ██║░░╚██╗██║░░██║██║░░░██╗░░██║░╚═══██╗░░░██║░░██║██╔══██╗██║░░╚██╗
     ╚██████╔╝██████╔╝██║██╗╚█████╔╝██████╔╝██╗╚█████╔╝██║░░██║╚██████╔╝
     ░╚═════╝░╚═════╝░╚═╝╚═╝░╚════╝░╚═════╝░╚═╝░╚════╝░╚═╝░░╚═╝░╚═════╝░
-                             v 2.1.0
+                             v 2.1.2
 A Script Redesigned by Parveen Bhadoo from GOIndex at https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index */
+
+// WARNING WARNING WARNING
+// This Script doesn't support Folder ID, use root or Shared Drive ID only
 
 // add multiple serviceaccounts as {}, {}, {}, random account will be selected by each time app is opened.
 const serviceaccounts = [
@@ -73,7 +76,7 @@ const authConfig = {
 
 const uiConfig = {
     "theme": "slate", // switch between themes, default set to slate, select from https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index
-    "version": "2.1.0", // don't touch this one. get latest code using generator at https://bdi-generator.hashhackers.com
+    "version": "2.1.2", // don't touch this one. get latest code using generator at https://bdi-generator.hashhackers.com
     // If you're using Image then set to true, If you want text then set it to false
     "logo_image": true, // true if you're using image link in next option.
     "logo_height": "", // only if logo_image is true
@@ -123,7 +126,6 @@ const uiConfig = {
     "unauthorized_owner_link": "https://telegram.dog/Telegram", // Unauthorized Error Page Link to Owner
     "unauthorized_owner_email": "abuse@telegram.org", // Unauthorized Error Page Owner Email
     "arc_code": "jfoY2h19", // arc.io Integration Code, get yours from https://portal.arc.io
-    "modified_function_no_use": false // don't touch this one
 };
 
 
@@ -167,7 +169,7 @@ function html(current_drive_order = 0, model = {}) {
   <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.0/dist/${uiConfig.theme}/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
   <style>a{color:${uiConfig.css_a_tag_color};}p{color:${uiConfig.css_p_tag_color};}</style>
   <script src="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/js/app-multiple-drives.obf.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.1.00.377/build/pdf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.12.313/build/pdf.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked@4.0.0/marked.min.js"></script>
 </head>
 <body>
@@ -176,6 +178,97 @@ function html(current_drive_order = 0, model = {}) {
   <script src="https://cdn.plyr.io/${uiConfig.plyr_io_version}/plyr.polyfilled.js"></script>
 </html>`;
 };
+
+const homepage = `<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+      <title>${authConfig.siteName}</title>
+      <meta name="robots" content="noindex">
+      <link rel="icon" href="${uiConfig.favicon}">
+      <script>
+          window.drive_names = JSON.parse('${JSON.stringify(authConfig.roots.map(it => it.name))}');
+          window.UI = JSON.parse('${JSON.stringify(uiConfig)}');
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+      <link rel="stylesheet" href="https://cdn.plyr.io/${uiConfig.plyr_io_version}/plyr.css" />
+      <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.0/dist/${uiConfig.theme}/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+      <style>a{color:${uiConfig.css_a_tag_color};}p{color:${uiConfig.css_p_tag_color};}</style>
+   </head>
+   <body>
+      <header>
+         <div id="nav">
+            <nav class="navbar navbar-expand-lg${uiConfig.fixed_header ?' fixed-top': ''} ${uiConfig.header_style_class}">
+               <div class="container-fluid">
+                 <a class="navbar-brand" href="/">${uiConfig.logo_image ? '<img border="0" alt="'+uiConfig.company_name+'" src="'+uiConfig.logo_link_name+'" height="'+uiConfig.height+'" width="'+uiConfig.logo_width+'">' : uiConfig.logo_link_name}</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                          <a class="nav-link" href="/">${uiConfig.nav_link_1}</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Root</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Current Path</a>
+                           <div class="dropdown-menu" aria-labelledby="navbarDropdown"><a class="dropdown-item" href="/">&gt; ${uiConfig.nav_link_1}</a></div>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link" href="${uiConfig.contact_link}" target="_blank">${uiConfig.nav_link_4}</a>
+                        </li>
+                        ${uiConfig.show_logout_button ?'<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>': ''}
+                     </ul>
+                     <form class="d-flex" method="get" action="/0:search">
+                        <input class="form-control me-2" name="q" type="search" placeholder="Search" aria-label="Search" value="" required="">
+                        <button class="btn btn btn-danger" onclick="if($('#search_bar_form>input').val()) $('#search_bar_form').submit();" type="submit">Search</button>
+                     </form>
+                  </div>
+               </div>
+            </nav>
+         </div>
+      </header>
+      <div>
+         <div id="content" style="padding-top: 60px;">
+            <div class="container">
+               <div class="alert alert-primary d-flex align-items-center" role="alert" style="margin-bottom: 0; padding-bottom: 0rem;">
+                  <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                     <ol class="breadcrumb" id="folderne">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                     </ol>
+                  </nav>
+               </div>
+               <div id="list" class="list-group text-break">
+
+               </div>
+               <div class="${uiConfig.file_count_alert_class} text-center" role="alert" id="count">Total <span id="n_drives" class="number text-center"></span> drives</div>
+            </div>
+         </div>
+         <div class="modal fade" id="SearchModel" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="SearchModelLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h5 class="modal-title" id="SearchModelLabel"></h5>
+                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true"></span>
+                     </button>
+                  </div>
+                  <div class="modal-body" id="modal-body-space">
+                  </div>
+                  <div class="modal-footer" id="modal-body-space-buttons">
+                  </div>
+               </div>
+            </div>
+         </div>
+         <br>
+         <footer class="footer mt-auto py-3 text-muted ${uiConfig.footer_style_class}" style="${uiConfig.fixed_footer ?'position: fixed; ': ''}left: 0; bottom: 0; width: 100%; color: white; z-index: 9999;${uiConfig.hide_footer ? ' display:none;': ' display:block;'}"> <div class="container" style="width: auto; padding: 0 10px;"> <p class="float-end"> <a href="#">Back to top</a> </p> ${uiConfig.credit ? '<p>Redesigned with <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="red" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" /> </svg> by <a href="https://www.npmjs.com/package/@googledrive/index" target="_blank">TheFirstSpeedster</a>, based on Open Source Softwares.</p>' : ''} <p>© ${uiConfig.copyright_year} - <a href=" ${uiConfig.company_link}" target="_blank"> ${uiConfig.company_name}</a>, All Rights Reserved.</p> </div> </footer>
+      </div>
+   </body>
+    <script src="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/assets/homepage.min.js"></script>
+</html>`
 
 const unauthorized = `<html>
    <head>
@@ -391,8 +484,7 @@ const DriveFixedTerms = new(class {
     default_file_fields = 'parents,id,name,mimeType,modifiedTime,createdTime,fileExtension,size';
     gd_root_type = {
         user_drive: 0,
-        share_drive: 1,
-        sub_folder: 2
+        share_drive: 1
     };
     folder_mime_type = 'application/vnd.google-apps.folder';
 })();
@@ -500,7 +592,14 @@ async function handleRequest(request, event) {
         });
     }
 
-    if (path == '/') return redirectToIndexPage();
+    if (path == '/') {
+        return new Response(homepage, {
+            status: 200,
+            headers: {
+                "content-type": "text/html;charset=UTF-8",
+            },
+        })
+    }
     if (path.toLowerCase() == '/arc-sw.js') {
         return fetch("https://arc.io/arc-sw.js")
     } else if (path.toLowerCase() == '/admin') {
@@ -751,8 +850,7 @@ class googleDrive {
         if (root_id === 'root' || root_id === authConfig.user_drive_real_root_id) {
             this.root_type = types.user_drive;
         } else {
-            const obj = await this.getShareDriveObjById(root_id);
-            this.root_type = obj ? types.share_drive : types.sub_folder;
+            this.root_type = types.share_drive;
         }
     }
 
@@ -949,24 +1047,10 @@ class googleDrive {
         return this.passwords[path];
     }
 
-    async getShareDriveObjById(any_id) {
-        if (!any_id) return null;
-        if ('string' !== typeof any_id) return null;
-
-        let url = `https://www.googleapis.com/drive/v3/drives/${any_id}`;
-        let requestOption = await this.requestOption();
-        let res = await fetch(url, requestOption);
-        let obj = await res.json();
-        if (obj && obj.id) return obj;
-
-        return null
-    }
-
     async search(origin_keyword, page_token = null, page_index = 0) {
         const types = DriveFixedTerms.gd_root_type;
         const is_user_drive = this.root_type === types.user_drive;
         const is_share_drive = this.root_type === types.share_drive;
-        const modified_function_no_use = `${uiConfig.modified_function_no_use}`
         const empty_result = {
             nextPageToken: null,
             curPageIndex: page_index,
@@ -984,24 +1068,10 @@ class googleDrive {
         let name_search_str = `name contains '${words.join("' AND name contains '")}'`;
         let params = {};
         if (is_user_drive) {
-            if (modified_function_no_use == 'true') {
-                params.corpora = 'allDrives';
-                params.includeItemsFromAllDrives = true;
-                params.supportsAllDrives = true;
-            }
-            else {
-                params.corpora = 'user';
-            }
+            params.corpora = 'user';
         }
         if (is_share_drive) {
-            if (modified_function_no_use == 'true') {
-                params.corpora = 'allDrives';
-            }
-            else {
-                params.corpora = 'allDrives';
-                //params.corpora = 'drive';
-                //params.driveId = this.root.id;
-            }
+            params.corpora = 'allDrives';
             params.includeItemsFromAllDrives = true;
             params.supportsAllDrives = true;
         }
