@@ -26,6 +26,7 @@ const authConfig = {
     "enable_cors_file_down": true,
     "enable_password_file_verify": true, // support for .password file
     "direct_link_protection": false, // protects direct links with Display UI
+    "lock_folders": false, // keeps folders and search locked if auth in on, and allows individual file view
     "enable_auth0_com": false, // follow guide to add auth0.com to secure index with powerful login based system
     "roots":[
       {
