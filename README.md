@@ -25,6 +25,7 @@
 ## How to
 
 * Stable Release `2.1.2`
+* Latest Index is faster than before, but backup before making new, and report if I missed something in issues. :)
 * Beta Version (Latest) - [bdi-generator](https://bdi-generator.hashhackers.com) (For Dark Theme use darkly)
 * If you want to deploy main drive leave the option ROOT as it is.
 * If you want to deploy your Team Drive/Shared Drive/Folder then copy the ID and replace it with ROOT.
@@ -44,21 +45,27 @@
 
 ## Use Case and Workers needs to be used
 
-* If you're new and noob, just use [this](https://bdi-generator.hashhackers.com).
-* Simple Index with Normal or Service Account, use [this](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/raw/master/worker/worker-beta.js). (Can search all drives and display drive only links if enabled)
-* If you enable Second Domain option, you need to make additional Cloudflare workers and account using [this](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/raw/master/worker/worker-beta-second-domain.js).
-* Advanced Index to Search All Drives and Handle Search and Display Index Links, use [this](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/raw/master/worker/worker-advanced.js). (make sure you add Service Account to those drives, which you're adding inside Index Code)
+* If you're new and noob, just use [this](https://bdi-generator.hashhackers.com). Doesn't support FOLDER Id anymore.
+* Simple Index with Normal or Service Account, use [this](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/blob/master/worker/worker-super.js). (Can search all drives and display drive only links if enabled) Doesn't support FOLDER Id anymore.
+* If you enable Second Domain option, you need to make additional Cloudflare workers and account using [this](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/blob/master/worker/worker-second-domain.js). Doesn't support FOLDER Id anymore.
+* Advanced Index to Search All Drives and Handle Search and Display Index Links, use [this](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/blob/master/worker/worker-multiple-drives.js). (make sure you add Service Account to those drives, which you're adding inside Index Code)
+* [This](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/blob/master/worker/worker-legacy.js) is old code, slower and with errors. Use this only if you want to use FOLDER Id.
+
+## Drive ID Types
+
+* My Drive is `root`, eg. Drive of Simple Gmail Account.
+* Shared Drive ID is Team/Shared Drive IDs Root.
+* Folder ID is those which are not root and you create a folder and use it's ID. If you use this, this will work good in legacy as it'll not display search because Google Drive doesn't support Folder Only search. AVOID USING FOLDER IDs.
 
 ## Steps for Making Search All Drives Index
 
-1. Copy Code from [here](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/raw/master/worker/worker-advanced.js).
+1. Copy Code from [here](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/raw/master/worker/worker-multiple-drives.js).
 2. Make a Single Service Account (Fresh and New)
 3. Add that SA Email to drives, only to those, which you want to Index. and change "service_account": false, to "service_account": true,
 4. Add that Service Account to Index
 5. In domains_for_dl = ['']; enter your Index URL, that you're making now. eg. `https://example.com`
 6. Add your Drive IDs in Index Code
 7. Change `"second_domain_for_dl": false`, to `"second_domain_for_dl": true`, (don't forget to deploy second domains worker.)
-8. Keep `"search_all_drives": false`
 
 ## authConfig
 
@@ -217,7 +224,7 @@ const uiConfig = {
 ## Second Domain Systems
 
 * set second_domain_for_dl to `true` first.
-* set downloaddomain to ur new index you're going to make below.
+* set downloaddomain to your new index you're going to make below.
 * then make separate index on different cloudflare account with worker-beta-second-domain.js code.
 * change only refresh_token or SA and Drive IDs, don't touch anything else.
 * It's done.
