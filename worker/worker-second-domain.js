@@ -74,26 +74,12 @@ const uiConfig = {
 var gds = [];
 
 function html(current_drive_order = 0, model = {}) {
-    return `<!DOCTYPE html>
-    <html lang=en>
-      <meta charset=utf-8>
-      <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
-      <title>Error 404 (Not Found)!!1</title>
-      <style>
-        *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat;-webkit-background-size:100% 100%}}#logo{display:inline-block;height:54px;width:150px}
-      </style>
-      <a href=//www.google.com/><span id=logo aria-label=Google></span></a>
-      <p><b>404.</b> <ins>That’s an error.</ins>
-      <p id="status"></p>
-
-      <script>
-      document.getElementById("status").innerHTML =
-    "The requested URL <code>" + window.location.pathname + "</code> was not found on this server.  <ins>That’s all we know.</ins>";
-      </script>`;
+    return ``;
 };
 
-const unauthorized = `
-<!DOCTYPE html>
+const unauthorized = ``
+
+const not_found = `<!DOCTYPE html>
 <html lang=en>
   <meta charset=utf-8>
   <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
@@ -108,118 +94,98 @@ const unauthorized = `
   <script>
   document.getElementById("status").innerHTML =
 "The requested URL <code>" + window.location.pathname + "</code> was not found on this server.  <ins>That’s all we know.</ins>";
-  </script>
-`
+  </script>`
 
-const not_found = `
-<!DOCTYPE html>
-<html lang=en>
-  <meta charset=utf-8>
-  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
-  <title>Error 404 (Not Found)!!1</title>
+  const asn_blocked = `<html>
+  <head>
+  <title>Access Denied</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
   <style>
-    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat;-webkit-background-size:100% 100%}}#logo{display:inline-block;height:54px;width:150px}
+  body{
+      margin:0;
+      padding:0;
+      width:100%;
+      height:100%;
+      color:#b0bec5;
+      display:table;
+      font-weight:100;
+      font-family:Lato
+  }
+  .container{
+      text-align:center;
+      display:table-cell;
+      vertical-align:middle
+  }
+  .content{
+      text-align:center;
+      display:inline-block
+  }
+  .message{
+      font-size:80px;
+      margin-bottom:40px
+  }
+  a{
+      text-decoration:none;
+      color:#3498db
+  }
+
   </style>
-  <a href=//www.google.com/><span id=logo aria-label=Google></span></a>
-  <p><b>404.</b> <ins>That’s an error.</ins>
-  <p id="status"></p>
+  </head>
+  <body>
+  <div class="container">
+  <div class="content">
+  <div class="message">Access Denied</div>
+  </div>
+  </div>
+  </body>
+  </html>`
 
-  <script>
-  document.getElementById("status").innerHTML =
-"The requested URL <code>" + window.location.pathname + "</code> was not found on this server.  <ins>That’s all we know.</ins>";
-  </script>
-`
+  const directlink = `
+  <html>
+  <head>
+  <title>Direct Link - Access Denied</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
+  <style>
+  body{
+      margin:0;
+      padding:0;
+      width:100%;
+      height:100%;
+      color:#b0bec5;
+      display:table;
+      font-weight:100;
+      font-family:Lato
+  }
+  .container{
+      text-align:center;
+      display:table-cell;
+      vertical-align:middle
+  }
+  .content{
+      text-align:center;
+      display:inline-block
+  }
+  .message{
+      font-size:80px;
+      margin-bottom:40px
+  }
+  a{
+      text-decoration:none;
+      color:#3498db
+  }
 
-const asn_blocked = `<html>
-<head>
-<title>Access Denied</title>
-<link href='https://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
-<style>
-body{
-    margin:0;
-    padding:0;
-    width:100%;
-    height:100%;
-    color:#b0bec5;
-    display:table;
-    font-weight:100;
-    font-family:Lato
-}
-.container{
-    text-align:center;
-    display:table-cell;
-    vertical-align:middle
-}
-.content{
-    text-align:center;
-    display:inline-block
-}
-.message{
-    font-size:80px;
-    margin-bottom:40px
-}
-a{
-    text-decoration:none;
-    color:#3498db
-}
-
-</style>
-</head>
-<body>
-<div class="container">
-<div class="content">
-<div class="message">Access Denied</div>
-</div>
-</div>
-</body>
-</html>`
-
-const directlink = `
-<html>
-<head>
-<title>Direct Link - Access Denied</title>
-<link href='https://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
-<style>
-body{
-    margin:0;
-    padding:0;
-    width:100%;
-    height:100%;
-    color:#b0bec5;
-    display:table;
-    font-weight:100;
-    font-family:Lato
-}
-.container{
-    text-align:center;
-    display:table-cell;
-    vertical-align:middle
-}
-.content{
-    text-align:center;
-    display:inline-block
-}
-.message{
-    font-size:80px;
-    margin-bottom:40px
-}
-a{
-    text-decoration:none;
-    color:#3498db
-}
-
-</style>
-</head>
-<body>
-<div class="container">
-<div class="content">
-<div class="message">Access Denied</div>
-<center><a href=""><button id="goto">Click Here to Proceed!</button></a></center>
-</div>
-</div>
-</body>
-</html>
-`
+  </style>
+  </head>
+  <body>
+  <div class="container">
+  <div class="content">
+  <div class="message">Access Denied</div>
+  <center><a href=""><button id="goto">Click Here to Proceed!</button></a></center>
+  </div>
+  </div>
+  </body>
+  </html>
+  `
 
 const SearchFunction = {
     formatSearchKeyword: function(keyword) {
@@ -237,8 +203,7 @@ const DriveFixedTerms = new(class {
     default_file_fields = 'parents,id,name,mimeType,modifiedTime,createdTime,fileExtension,size';
     gd_root_type = {
         user_drive: 0,
-        share_drive: 1,
-        sub_folder: 2
+        share_drive: 1
     };
     folder_mime_type = 'application/vnd.google-apps.folder';
 })();
@@ -339,7 +304,7 @@ async function handleRequest(request, event) {
 
     function redirectToIndexPage() {
         return new Response('', {
-            status: 301,
+            status: 307,
             headers: {
                 'Location': `${url.origin}/0:/`
             }
@@ -353,11 +318,11 @@ async function handleRequest(request, event) {
         return Response.redirect("https://www.npmjs.com/package/@googledrive/index", 301)
     } else if (blocked_region.includes(region)) {
         return new Response(asn_blocked, {
-                headers: {
-                    'content-type': 'text/html;charset=UTF-8'
-                },
-                status: 401
-            });
+            status: 403,
+            headers: {
+                "content-type": "text/html;charset=UTF-8",
+            },
+        })
     } else if (blocked_asn.includes(asn_servers)) {
         return new Response(asn_blocked, {
                 headers: {
@@ -597,30 +562,46 @@ class googleDrive {
         if (root_id === 'root' || root_id === authConfig.user_drive_real_root_id) {
             this.root_type = types.user_drive;
         } else {
-            const obj = await this.getShareDriveObjById(root_id);
-            this.root_type = obj ? types.share_drive : types.sub_folder;
+            this.root_type = types.share_drive;
         }
     }
 
     basicAuthResponse(request) {
+        let url = new URL(request.url);
+        let path = url.pathname;
         const auth = this.root.auth || '',
-            _401 = new Response(unauthorized, {
+            _401 = new Response(not_found, {
                 headers: {
+                    //'WWW-Authenticate': `Basic realm="goindex:drive:${this.order}"`,
                     'content-type': 'text/html;charset=UTF-8'
                 },
                 status: 401
             });
-        if (auth) {
-            const _auth = request.headers.get('Authorization')
-            if (_auth) {
-                const [received_user, received_pass] = atob(_auth.split(' ').pop()).split(':');
-                if (auth.hasOwnProperty(received_user)) {
-                    if (auth[received_user] == received_pass) {
-                        return null;
+        if (authConfig['lock_folders']) {
+            if (auth && path.endsWith("/") || path.endsWith("search")) {
+                const _auth = request.headers.get('Authorization')
+                if (_auth) {
+                    const [received_user, received_pass] = atob(_auth.split(' ').pop()).split(':');
+                    if (auth.hasOwnProperty(received_user)) {
+                        if (auth[received_user] == received_pass) {
+                            return null;
+                        } else return _401;
                     } else return _401;
-                } else return _401;
-            }
-        } else return null;
+                }
+            } else return null;
+        } else {
+                if (auth) {
+                    const _auth = request.headers.get('Authorization')
+                    if (_auth) {
+                        const [received_user, received_pass] = atob(_auth.split(' ').pop()).split(':');
+                        if (auth.hasOwnProperty(received_user)) {
+                            if (auth[received_user] == received_pass) {
+                                return null;
+                            } else return _401;
+                        } else return _401;
+                    }
+                } else return null;
+        }
         return _401;
     }
 
@@ -629,7 +610,16 @@ class googleDrive {
         let requestOption = await this.requestOption();
         requestOption.headers['Range'] = range;
         let res = await fetch(url, requestOption);
-        if (res.ok) {
+        const second_domain_for_dl = `${uiConfig.second_domain_for_dl}`
+        if (second_domain_for_dl == 'true') {
+            const res = await fetch(`${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/assets/disable_download.html`);
+            return new Response(await res.text(), {
+                headers: {
+                    "content-type": "text/html;charset=UTF-8",
+                },
+            })
+        }
+        else if (res.ok) {
             const {
                 headers
             } = res = new Response(res.body, res)
@@ -675,7 +665,7 @@ class googleDrive {
             'includeItemsFromAllDrives': true,
             'supportsAllDrives': true
         };
-        params.q = `'${parent}' in parents and name = '${name}' and trashed = false`;
+        params.q = `'${parent}' in parents and name = '${name}' and trashed = false and mimeType != 'application/vnd.google-apps.shortcut'`;
         params.fields = "files(id, name, mimeType, size ,createdTime, modifiedTime, iconLink, thumbnailLink)";
         url += '?' + this.enQuery(params);
         let requestOption = await this.requestOption();
@@ -730,7 +720,7 @@ class googleDrive {
             'includeItemsFromAllDrives': true,
             'supportsAllDrives': true
         };
-        params.q = `'${parent}' in parents and trashed = false AND name !='.password'`;
+        params.q = `'${parent}' in parents and trashed = false AND name !='.password' and mimeType != 'application/vnd.google-apps.shortcut'`;
         params.orderBy = 'folder,name,modifiedTime desc';
         params.fields = "nextPageToken, files(id, name, mimeType, size , modifiedTime)";
         params.pageSize = this.authConfig.files_list_page_size;
@@ -769,24 +759,11 @@ class googleDrive {
         return this.passwords[path];
     }
 
-    async getShareDriveObjById(any_id) {
-        if (!any_id) return null;
-        if ('string' !== typeof any_id) return null;
-
-        let url = `https://www.googleapis.com/drive/v3/drives/${any_id}`;
-        let requestOption = await this.requestOption();
-        let res = await fetch(url, requestOption);
-        let obj = await res.json();
-        if (obj && obj.id) return obj;
-
-        return null
-    }
-
     async search(origin_keyword, page_token = null, page_index = 0) {
         const types = DriveFixedTerms.gd_root_type;
         const is_user_drive = this.root_type === types.user_drive;
         const is_share_drive = this.root_type === types.share_drive;
-        const search_all_drives = `${uiConfig.search_all_drives}`
+        const modified_function_no_use = `${uiConfig.modified_function_no_use}`
         const empty_result = {
             nextPageToken: null,
             curPageIndex: page_index,
@@ -804,20 +781,23 @@ class googleDrive {
         let name_search_str = `name contains '${words.join("' AND name contains '")}'`;
         let params = {};
         if (is_user_drive) {
-            if (search_all_drives == 'true') {
+            if (modified_function_no_use == 'true') {
                 params.corpora = 'allDrives';
+                params.includeItemsFromAllDrives = true;
+                params.supportsAllDrives = true;
             }
             else {
                 params.corpora = 'user';
             }
         }
         if (is_share_drive) {
-            if (search_all_drives == 'true') {
+            if (modified_function_no_use == 'true') {
                 params.corpora = 'allDrives';
             }
             else {
-                params.corpora = 'drive';
-                params.driveId = this.root.id;
+                params.corpora = 'allDrives';
+                //params.corpora = 'drive';
+                //params.driveId = this.root.id;
             }
             params.includeItemsFromAllDrives = true;
             params.supportsAllDrives = true;
@@ -825,8 +805,8 @@ class googleDrive {
         if (page_token) {
             params.pageToken = page_token;
         }
-        params.q = `trashed = false AND name !='.password' AND (${name_search_str})`;
-        params.fields = "nextPageToken, files(id, name, mimeType, size , modifiedTime)";
+        params.q = `trashed = false AND mimeType != 'application/vnd.google-apps.shortcut' AND name !='.password' AND (${name_search_str})`;
+        params.fields = "nextPageToken, files(id, driveId, name, mimeType, size , modifiedTime)";
         params.pageSize = this.authConfig.search_result_list_page_size;
         params.orderBy = 'folder,name,modifiedTime desc';
 
