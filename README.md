@@ -219,7 +219,24 @@ const uiConfig = {
 
 ## Auth0 Integration
 
-* Detailed Guide will be added soon
+* Please Note that auth0.com Free Plan allows 7000 active members per month only. Active members are those who have logged in once in that particular month.
+* Cloudflare KV is used by this method, in Free Workers Plan, it's very limited and you cannot use it much, to avoid this ask your users to login and not clear the site cookies unless important. We suggest you upgrade to 5 USD plan of Workers if you face quota exceeded error on Cloudflare.
+* Make a auth0.com account and while signup select advanced settings so you can edit the tenant name.
+* Tenant Name looks like this hashhackers.auth0.com where you can have your own sub-domain on auth0.com, then verify your email.
+* In Applications, Make New App, and select `Regular Web Applications`.
+* In the app, go to settings and from there you can copy your client id and secret to be used on Cloudflare.
+* Scroll down and see option `Allowed Callback URLs`, enter your website or workers URL that you will use for Index in following manner.
+* `https://example.com/auth`, make sure you enter `https://` and `/auth`.
+* Scroll down and see option `Allowed Logout URLs`, enter your website address where you would like to redirect when user logs out.
+* Now In Authentication, Go to Database and open the Database that is shown there, You will see option `Disable Sign Ups` to stop username and password signup option when needed.
+* In Authentication, you can go to `Social` and setup social login.
+* To disable signup using Social Networks, if you wish to do that one day, go to `Auth Pipeline` and then `Rules`. Create New Rule, and find the Rule Template for `Disable social signups`. Add your App Client ID in the line number 2, then save it.
+* Now come back to Cloudflare, and in Index code, enable auth0 with option true.
+* Now enter Tenant Domain, make sure to use `https://` eg. https://example.auth0.com
+* Enter your Client Id, Secret, Index Callback URL with `/auth` and Logout URL.
+* Now in Cloudflare, there is a option for `Workers KV`, Create Namespace with any name, suggested is `AUTH_STORE_NS`.
+* Now go to your worker for index, Click on Settings, then Click on Variables, at the end of the page you'll see `KV Namespace Bindings`, Enter variable name `AUTH_STORE` and then select the Name Space you created and Save it.
+* It's done. If you face any problem, Go to [Index Discussion Group](https://t.me/+u-KpgiLT4r82Yzhh) and ask your question with full details, where you're stuck. Before that please try doing this yourself.
 
 ## Second Domain Systems
 
