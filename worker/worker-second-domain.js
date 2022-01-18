@@ -4,8 +4,10 @@
     ██║░░╚██╗██║░░██║██║░░░██╗░░██║░╚═══██╗░░░██║░░██║██╔══██╗██║░░╚██╗
     ╚██████╔╝██████╔╝██║██╗╚█████╔╝██████╔╝██╗╚█████╔╝██║░░██║╚██████╔╝
     ░╚═════╝░╚═════╝░╚═╝╚═╝░╚════╝░╚═════╝░╚═╝░╚════╝░╚═╝░░╚═╝░╚═════╝░
-                             v 2.1.2
+                             v 2.1.3
 A Script Redesigned by Parveen Bhadoo from GOIndex at https://www.npmjs.com/package/@googledrive/index */
+
+// NOTE: THIS CAN HANDLE ALL FILE TYPES.
 
 // add multiple serviceaccounts as {}, {}, {}, random account will be selected by each time app is opened.
 const serviceaccounts = [
@@ -67,7 +69,7 @@ const authConfig = {
 ╚═════╝░╚══════╝╚══════╝░╚════╝░░░░╚═╝░░░╚═╝░░*/
 
 const uiConfig = {
-    "version": "2.1.2", // don't touch this one. get latest code using generator at https://bdi-generator.hashhackers.com
+    "version": "2.1.3", // don't touch this one. get latest code using generator at https://bdi-generator.hashhackers.com
     "jsdelivr_cdn_src": "https://cdn.jsdelivr.net/npm/@googledrive/index", // If Project is Forked, then enter your GitHub repo
 };
 
