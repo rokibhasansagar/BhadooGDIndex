@@ -26,7 +26,7 @@
 
 * Stable Release `2.1.4`
 * Latest Index is faster than before, but backup before making new, and report if I missed something in issues. :)
-* Beta Version (Latest) - [bdi-generator](https://bdi-generator.hashhackers.com) (For Dark Theme use darkly)
+* Beta Version (Latest) - [bdi-generator](https://bdi-generator.hashhackers.com) or [Temporary Link](https://temporary.ve.workers.dev/) (For Dark Theme use darkly)
 * If you want to deploy main drive leave the option ROOT as it is.
 * If you want to deploy your Team Drive/Shared Drive/Folder then copy the ID and replace it with ROOT.
 * Eg. if you open this shared drive `https://drive.google.com/drive/u/0/folders/0AOM2i7Mi3uWIUk9PVA` - `0AOM2i7Mi3uWIUk9PVA` is its ID.
