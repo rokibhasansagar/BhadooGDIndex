@@ -1,7 +1,7 @@
 let len = window.drive_names.length;
 let html = "";
 for (var i = 0; i < len; i++) {
-html += `<a href="/`+i+`:/" style="color: white;" class="list-group-item list-group-item-action">
+html += `<a href="/`+i+`:/" class="list-group-item list-group-item-action">
        <svg width="1.5em" height="1.5em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
           <linearGradient id="WQEfvoQAcpQgQgyjQQ4Hqa" x1="24" x2="24" y1="6.708" y2="14.977" gradientUnits="userSpaceOnUse">
              <stop offset="0" stop-color="#eba600"></stop>
