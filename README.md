@@ -1,24 +1,24 @@
 # Google Personal/Shared Drive Index
 
-[![Year](https://data.jsdelivr.com/v1/package/npm/@googledrive/index/badge/rank)](https://www.jsdelivr.com/package/npm/@googledrive/index)
-[![Year](https://data.jsdelivr.com/v1/package/npm/@googledrive/index/badge/year)](https://www.jsdelivr.com/package/npm/@googledrive/index)
-[![Month](https://data.jsdelivr.com/v1/package/npm/@googledrive/index/badge/month)](https://www.jsdelivr.com/package/npm/@googledrive/index)
-[![Week](https://data.jsdelivr.com/v1/package/npm/@googledrive/index/badge/week)](https://www.jsdelivr.com/package/npm/@googledrive/index)
-[![Day](https://data.jsdelivr.com/v1/package/npm/@googledrive/index/badge/day)](https://www.jsdelivr.com/package/npm/@googledrive/index)
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://www.npmjs.com/package/@googledrive/index)
+[![Year](https://data.jsdelivr.com/v1/package/gh/rokibhasansagar/BhadooGDIndex/badge/rank)](https://www.jsdelivr.com/package/gh/rokibhasansagar/BhadooGDIndex)
+[![Year](https://data.jsdelivr.com/v1/package/gh/rokibhasansagar/BhadooGDIndex/badge/year)](https://www.jsdelivr.com/package/gh/rokibhasansagar/BhadooGDIndex)
+[![Month](https://data.jsdelivr.com/v1/package/gh/rokibhasansagar/BhadooGDIndex/badge/month)](https://www.jsdelivr.com/package/gh/rokibhasansagar/BhadooGDIndex)
+[![Week](https://data.jsdelivr.com/v1/package/gh/rokibhasansagar/BhadooGDIndex/badge/week)](https://www.jsdelivr.com/package/gh/rokibhasansagar/BhadooGDIndex)
+[![Day](https://data.jsdelivr.com/v1/package/gh/rokibhasansagar/BhadooGDIndex/badge/day)](https://www.jsdelivr.com/package/gh/rokibhasansagar/BhadooGDIndex)
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/ParveenBhadooOfficial/Google-Drive-Index&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=NPM%20Hits&edge_flat=false)](https://www.npmjs.com/package/@googledrive/index)
 
 ## Full White label and Customizable Index | One of a kind
 
 * Supports Both My and Team/Shared Drives with Dark Mode.
-* Click https://bdi-generator.hashhackers.com to make yours or watch https://youtu.be/Ihk4Gm3DPvg.
+* Click https://bhadoogen.phantomzone.workers.dev to make yours or watch https://youtu.be/Ihk4Gm3DPvg.
 
 ## Read Wiki of Index before asking How to Do What...
 
 * [Getting-Started-with-Google-Drive-Index](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/wikis/Getting-Started-with-Google-Drive-Index)
 
-[![Screenshot](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/raw/master/images/themes/vapor.png)](https://youtu.be/Ihk4Gm3DPvg)
+[![Screenshot](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.5/images/themes/vapor.png)](https://youtu.be/Ihk4Gm3DPvg)
 
-[![Screenshot](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/raw/master/images/themes/darkly.png)](https://youtu.be/Ihk4Gm3DPvg)
+[![Screenshot](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.5/images/themes/darkly.png)](https://youtu.be/Ihk4Gm3DPvg)
 
 `Note: The Changes in your worker's config can affect late due to cache. Use incognito mode every time to open the worker URL to overcome that issue.`
 
@@ -26,7 +26,7 @@
 
 * Stable Release `2.1.5`
 * Latest Index is faster than before, but backup before making new, and report if I missed something in issues. :)
-* Beta Version (Latest) - [bdi-generator](https://bdi-generator.hashhackers.com) or [Temporary Link](https://temporary.ve.workers.dev/) (For Dark Theme use darkly)
+* Beta Version (Latest) - [bdi-generator](https://bhadoogen.phantomzone.workers.dev) (For Dark Theme use darkly)
 * If you want to deploy main drive leave the option ROOT as it is.
 * If you want to deploy your Team Drive/Shared Drive/Folder then copy the ID and replace it with ROOT.
 * Eg. if you open this shared drive `https://drive.google.com/drive/u/0/folders/0AOM2i7Mi3uWIUk9PVA` - `0AOM2i7Mi3uWIUk9PVA` is its ID.
@@ -45,11 +45,11 @@
 
 ## Use Case and Workers needs to be used
 
-* If you're new and noob, just use [this](https://bdi-generator.hashhackers.com). Doesn't support FOLDER Id anymore.
-* Simple Index with Normal or Service Account, use [this](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/blob/master/worker/worker-super.js). (Can search all drives and display drive only links if enabled) Doesn't support FOLDER Id anymore.
-* If you enable Second Domain option, you need to make additional Cloudflare workers and account using [this](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/blob/master/worker/worker-second-domain.js). Doesn't support FOLDER Id anymore.
-* Advanced Index to Search All Drives and Handle Search and Display Index Links, use [this](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/blob/master/worker/worker-multiple-drives.js). (make sure you add Service Account to those drives, which you're adding inside Index Code)
-* [This](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/blob/master/worker/worker-legacy.js) is old code, slower and with errors. Use this only if you want to use FOLDER Id.
+* If you're new and noob, just use [this](https://bhadoogen.phantomzone.workers.dev). Doesn't support FOLDER Id anymore.
+* Simple Index with Normal or Service Account, use [this](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.5/worker/worker-super.js). (Can search all drives and display drive only links if enabled) Doesn't support FOLDER Id anymore.
+* If you enable Second Domain option, you need to make additional Cloudflare workers and account using [this](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.5/worker/worker-second-domain.js). Doesn't support FOLDER Id anymore.
+* Advanced Index to Search All Drives and Handle Search and Display Index Links, use [this](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.5/worker/worker-multiple-drives.js). (make sure you add Service Account to those drives, which you're adding inside Index Code)
+* [This](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.5/worker/worker-legacy.js) is old code, slower and with errors. Use this only if you want to use FOLDER Id.
 
 ## Drive ID Types
 
@@ -59,7 +59,7 @@
 
 ## Steps for Making Search All Drives Index
 
-1. Copy Code from [here](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/raw/master/worker/worker-multiple-drives.js).
+1. Copy Code from [here](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.5/worker/worker-multiple-drives.js).
 2. Make a Single Service Account (Fresh and New)
 3. Add that SA Email to drives, only to those, which you want to Index. and change "service_account": false, to "service_account": true,
 4. Add that Service Account to Index
@@ -69,10 +69,10 @@
 
 ## authConfig
 
-````
-"siteName": "Bhadoo Drive Index", // Website name
-"client_id": "746239575955-oao9hkv614p8glrqpvuh5i8mqfoq145b.apps.googleusercontent.com", // Client id from Google Cloud Console
-"client_secret": "u5a1CSY5pNjdD2tGTU93TTnI", // Client Secret from Google Cloud Console
+```
+"siteName": "Bhadoo GDIndex", // Website name
+"client_id": "746508046283-m2viej9ibc2umfhtve1hldr8da1amqlj.apps.googleusercontent.com", // Client id from Google Cloud Console
+"client_secret": "iiC8G8u93OazY3-huOsbfuhi", // Client Secret from Google Cloud Console
 "refresh_token": "", // Authorize token
 "service_account": false, // true if you're using Service Account instead of user account
 "service_account_json": randomserviceaccount, // don't touch this one
@@ -82,11 +82,11 @@
 "enable_password_file_verify": true, // support for .password file
 "enable_virus_infected_file_down": true, // support for downloading virus infected files
 "direct_link_protection": false, // protects direct links with Display UI
-````
+```
 
 ## Basic Config
 
-````
+```
     "roots":[
       {
           "id": "root",
@@ -95,13 +95,13 @@
          // "auth": {"username":"password"} /* Remove double slash before "auth" to activate id password protection */
       },
     ]};
-````
+```
 
 ## Multiple ID Config
 
 * Add this code for each drive. see cloud flare workers code for more info. (requires common sense)
 
-````
+```
     "roots":[
       {
           "id": "root",
@@ -116,7 +116,7 @@
          // "auth": {"username":"password", "username1":"password1"} /* Remove double slash before "auth" to activate id password protection */
       },
     ]};
-````
+```
 
 ## Service Account
 
@@ -128,20 +128,20 @@
 
 * For single user
 
-````
+```
             // "auth": {"username":"password"} /** remove double slash at starting of this line to use password. */
-````
+```
 
 * For multiple users (unlimited users)
 
-````
+```
       {
           "id": "",
           "name": "Drive Two",
           "protect_file_link": false,
           // "auth": { "user1":"pass1", "user2":"pass2", }  /** remove double slash at starting of this line to use password. */
       },
-````
+```
 
 * where `"user1":"pass1"` and `"user2":"pass2"` are combinations.
 * if users adds `"auth":{"":""}` empty values then the site will ask for authentication but user can enter without entering any data by clicking submit.
@@ -160,17 +160,17 @@
 * You can remove credit option but we request you not to.
 * See Below code to understand Customization.
 
-````
+```
 const uiConfig = {
-    "theme": "slate", // switch between themes, default set to slate, select from https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index
-    "version": "2.1.5", // don't touch this one. get latest code using generator at https://bdi-generator.hashhackers.com
+    "theme": "slate", // switch between themes, default set to slate, select from https://github.com/rokibhasansagar/BhadooGDIndex#themes
+    "version": "2.1.5", // don't touch this one. get latest code using generator at https://bhadoogen.phantomzone.workers.dev/
     // If you're using Image then set to true, If you want text then set it to false
     "logo_image": true, // true if you're using image link in next option.
     "logo_height": "", // only if logo_image is true
     "logo_width": "100px", // only if logo_image is true
-    "favicon": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.1.5/images/favicon.ico",
+    "favicon": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.5/images/favicon.ico",
     // if logo is true then link otherwise just text for name
-    "logo_link_name": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.1.5/images/bhadoo-cloud-logo-white.svg",
+    "logo_link_name": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.5/images/bhadoo-cloud-logo-white.svg",
     "fixed_header": true, // If you want the footer to be flexible or fixed.
     "header_padding": "60", // Value 60 for fixed header, Value 20 for flexible header. Required to be changed accordingly in some themes.
     "nav_link_1": "Home", // change navigation link name
@@ -202,20 +202,20 @@ const uiConfig = {
     "disable_video_download": false, // Remove Download, Copy Button on Videos
     "second_domain_for_dl": false, // If you want to display other URL for Downloading to protect your main domain.
     "downloaddomain": domain_for_dl, // Ignore this and set domains at top of this page after service accounts.
-    "poster": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.1.5/images/poster.jpg", // Video poster URL or see Readme to how to load from Drive
-    "audioposter": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.1.5/images/music.jpg", // Video poster URL or see Readme to how to load from Drive
-    "jsdelivr_cdn_src": "https://cdn.jsdelivr.net/npm/@googledrive/index", // If Project is Forked, then enter your GitHub repo
+    "videodomain": video_domain_for_dl, // Ignore this and set domains at top of this page after service accounts.
+    "poster": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.5/images/poster.jpg", // Video poster URL or see Readme to how to load from Drive
+    "audioposter": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.5/images/music.jpg", // Video poster URL or see Readme to how to load from Drive
+    "jsdelivr_cdn_src": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex", // If Project is Forked, then enter your GitHub repo
     "render_head_md": true, // Render Head.md
     "render_readme_md": true, // Render Readme.md
     "display_drive_link": false, // This will add a Link Button to Google Drive of that particular file.
-    "plyr_io_version": "3.6.4", // Change plyr.io version in future when needed.
+    "plyr_io_version": "3.6.12", // Change plyr.io version in future when needed.
     "plyr_io_video_resolution": "16:9", // For reference, visit: https://github.com/sampotts/plyr#options
     "unauthorized_owner_link": "https://telegram.dog/Telegram", // Unauthorized Error Page Link to Owner
     "unauthorized_owner_email": "abuse@telegram.org", // Unauthorized Error Page Owner Email
-    "arc_code": "jfoY2h19", // arc.io Integration Code, get yours from https://portal.arc.io
     "search_all_drives": false // gives gdrive links on search and searches all drives on that account, doesn't require adding
 };
-````
+```
 
 ## Auth0 Integration  
 
@@ -246,12 +246,7 @@ const uiConfig = {
 * change only refresh_token or SA and Drive IDs, don't touch anything else.
 * It's done.
 
-## arc.io Integration
-
-* arc.io is embedded in code to support gdi.js.org
-* if you have approved arc.io account, use your code.
-* incase you don't have arc account and want to support us, please keep our arc.io code in your index.
-* if anyone doesn't want to support us and want to remove arc, remove L140 line from the workers code.
+## arc.io Integration [REMOVED]
 
 ## Themes
 
@@ -279,7 +274,7 @@ const uiConfig = {
 
 ## Sorting by Name or Modified Time
 
-* Find `params.orderBy` in workers code L623 and L710.
+* Find `params.orderBy` in workers code L1006 and L1092.
 * use `params.orderBy = 'folder,name,modifiedTime desc';` to sort by File and Folder Name.
 * use `params.orderBy = 'folder,modifiedTime desc,name';` to sort by Modified Time.
 * A comma-separated list of sort keys. Valid keys are 'createdTime', 'folder', 'modifiedByMeTime', 'modifiedTime', 'name', 'name_natural', 'quotaBytesUsed', 'recency', 'sharedWithMeTime', 'starred', and 'viewedByMeTime'. Each key sorts ascending by default, but may be reversed with the 'desc' modifier. Example usage: ?orderBy=folder,modifiedTime desc,name. Please note that there is a current limitation for users with approximately one million files in which the requested sort order is ignored.
@@ -287,9 +282,9 @@ const uiConfig = {
 ## Making your own repo, editing and making changes
 
 * Fork this Repo or Import.
-* Make your changes in `app.js` and `workers-beta.js` files.
+* Make your changes in `app.js` and `worker-super.js` files.
 * Make a new release in GitHub.
-* Change jsDelivr CDN URL and version code in `workers-beta.js`.
+* Change jsDelivr CDN URL and version code in `worker-super.js`.
 * Deploy in Cloud flare Workers.
 
 ## Get Google_Client_ID and Secret and Generate Token
@@ -309,8 +304,8 @@ const uiConfig = {
 * Select Desktop App.
 * Now you have your own CLIENT ID and CLIENT SECRET.
 * Copy your details and save for future use.
-* Copy worker-generator.js code.
-* Replace Line 20 and 21 with your own CLIENT ID and CLIENT SECRET.
+* Copy `worker-generator.js` code.
+* Replace Line 6 and 7 with your own CLIENT ID and CLIENT SECRET.
 * Paste this code in Cloud flare Workers and follow the site.
 
 ## Upcoming Changes

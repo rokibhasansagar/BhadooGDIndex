@@ -15,11 +15,11 @@ const serviceaccounts = [
 ];
 const randomserviceaccount = serviceaccounts[Math.floor(Math.random()*serviceaccounts.length)];
 const blocked_region = ['']; // add regional codes seperated by comma, eg. ['IN', 'US', 'PK']
-const blocked_asn = []; // add ASN numbers from http://www.bgplookingglass.com/list-of-autonomous-system-numbers, eg. [16509, 12345]
+const blocked_asn = ['']; // add ASN numbers from http://www.bgplookingglass.com/list-of-autonomous-system-numbers, eg. [16509, 12345]
 const authConfig = {
-    "siteName": "Bhadoo Drive Index", // Website name
-    "client_id": "746239575955-oao9hkv614p8glrqpvuh5i8mqfoq145b.apps.googleusercontent.com", // Client id from Google Cloud Console
-    "client_secret": "u5a1CSY5pNjdD2tGTU93TTnI", // Client Secret from Google Cloud Console
+    "siteName": "Bhadoo GDIndex", // Website name
+    "client_id": "746508046283-m2viej9ibc2umfhtve1hldr8da1amqlj.apps.googleusercontent.com", // Client id from Google Cloud Console
+    "client_secret": "iiC8G8u93OazY3-huOsbfuhi", // Client Secret from Google Cloud Console
     "refresh_token": "", // Authorize token
     "service_account": false, // true if you're using Service Account instead of user account
     "service_account_json": randomserviceaccount, // don't touch this one
@@ -69,8 +69,8 @@ const authConfig = {
 ╚═════╝░╚══════╝╚══════╝░╚════╝░░░░╚═╝░░░╚═╝░░*/
 
 const uiConfig = {
-    "version": "2.1.5", // don't touch this one. get latest code using generator at https://bdi-generator.hashhackers.com
-    "jsdelivr_cdn_src": "https://cdn.jsdelivr.net/npm/@googledrive/index", // If Project is Forked, then enter your GitHub repo
+    "version": "2.1.5", // don't touch this one. get latest code using generator at https://bhadoogen.phantomzone.workers.dev/
+    "jsdelivr_cdn_src": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex", // If Project is Forked, then enter your GitHub repo
 };
 
 // DON'T TOUCH BELOW THIS UNLESS YOU KNOW WHAT YOU'RE DOING
@@ -315,9 +315,7 @@ async function handleRequest(request, event) {
     }
 
     if (path == '/') return redirectToIndexPage();
-    if (path.toLowerCase() == '/arc-sw.js') {
-        return fetch("https://arc.io/arc-sw.js")
-    } else if (path.toLowerCase() == '/admin') {
+    if (path.toLowerCase() == '/admin') {
         return Response.redirect("https://www.npmjs.com/package/@googledrive/index", 301)
     } else if (blocked_region.includes(region)) {
         return new Response(asn_blocked, {
