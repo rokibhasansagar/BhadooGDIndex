@@ -4,7 +4,7 @@
     ██║░░╚██╗██║░░██║██║░░░██╗░░██║░╚═══██╗░░░██║░░██║██╔══██╗██║░░╚██╗
     ╚██████╔╝██████╔╝██║██╗╚█████╔╝██████╔╝██╗╚█████╔╝██║░░██║╚██████╔╝
     ░╚═════╝░╚═════╝░╚═╝╚═╝░╚════╝░╚═════╝░╚═╝░╚════╝░╚═╝░░╚═╝░╚═════╝░
-                             v 2.1.5
+                             v 2.1.6
 A Script Redesigned by Parveen Bhadoo from GOIndex at https://www.npmjs.com/package/@googledrive/index */
 
 // NOTE: THIS REDIRECT VIDEO LINKS TO MAIN INDEX, USE THIS TO DIVIDE VIDEO FILES TRAFFIC FROM NORMAL FILES TRAFFIC.
@@ -70,7 +70,7 @@ const authConfig = {
 ╚═════╝░╚══════╝╚══════╝░╚════╝░░░░╚═╝░░░╚═╝░░*/
 
 const uiConfig = {
-    "version": "2.1.5", // don't touch this one. get latest code using generator at https://bdi-generator.hashhackers.com
+    "version": "2.1.6", // don't touch this one. get latest code using generator at https://bdi-generator.hashhackers.com
     "jsdelivr_cdn_src": "https://cdn.jsdelivr.net/npm/@googledrive/index", // If Project is Forked, then enter your GitHub repo
 };
 
@@ -681,7 +681,14 @@ class googleDrive {
         params.fields = "files(id, name, mimeType, size ,createdTime, modifiedTime, iconLink, thumbnailLink)";
         url += '?' + this.enQuery(params);
         let requestOption = await this.requestOption();
-        let response = await fetch(url, requestOption);
+        let response;
+        for (let i = 0; i < 3; i++) {
+            response = await fetch(url, requestOption);
+            if (response.status === 200) {
+                break;
+            }
+            await this.sleep(800 * (i + 1));
+        }
         let obj = await response.json();
         // console.log(obj);
         return obj.files[0];
@@ -743,7 +750,14 @@ class googleDrive {
         let url = 'https://www.googleapis.com/drive/v3/files';
         url += '?' + this.enQuery(params);
         let requestOption = await this.requestOption();
-        let response = await fetch(url, requestOption);
+        let response;
+        for (let i = 0; i < 3; i++) {
+            response = await fetch(url, requestOption);
+            if (response.status === 200) {
+                break;
+            }
+            await this.sleep(800 * (i + 1));
+        }
         obj = await response.json();
 
         return {
@@ -825,7 +839,14 @@ class googleDrive {
         let url = 'https://www.googleapis.com/drive/v3/files';
         url += '?' + this.enQuery(params);
         let requestOption = await this.requestOption();
-        let response = await fetch(url, requestOption);
+        let response;
+        for (let i = 0; i < 3; i++) {
+            response = await fetch(url, requestOption);
+            if (response.status === 200) {
+                break;
+            }
+            await this.sleep(800 * (i + 1));
+        }
         let res_obj = await response.json();
 
         return {
@@ -944,7 +965,14 @@ class googleDrive {
         params.fields = "nextPageToken, files(id, name, mimeType)";
         url += '?' + this.enQuery(params);
         let requestOption = await this.requestOption();
-        let response = await fetch(url, requestOption);
+        let response;
+        for (let i = 0; i < 3; i++) {
+            response = await fetch(url, requestOption);
+            if (response.status === 200) {
+                break;
+            }
+            await this.sleep(800 * (i + 1));
+        }
         let obj = await response.json();
         if (obj.files[0] == undefined) {
             return null;
@@ -992,7 +1020,14 @@ class googleDrive {
             'body': this.enQuery(post_data)
         };
 
-        const response = await fetch(url, requestOption);
+        let response;
+        for (let i = 0; i < 3; i++) {
+            response = await fetch(url, requestOption);
+            if (response.status === 200) {
+                break;
+            }
+            await this.sleep(800 * (i + 1));
+        }
         return await response.json();
     }
 
@@ -1000,8 +1035,7 @@ class googleDrive {
         let response;
         for (let i = 0; i < 3; i++) {
             response = await fetch(url, requestOption);
-            console.log(response.status);
-            if (response.status != 403) {
+            if (response.status === 200) {
                 break;
             }
             await this.sleep(800 * (i + 1));

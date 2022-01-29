@@ -37,13 +37,13 @@ const authConfig = {
     "enable_auth0_com": false, // follow guide to add auth0.com to secure index with powerful login based system
     "roots":[
       {
-          "id": "",
+          "id": "root",
           "name": "Drive One",
           "protect_file_link": false,
          // "auth": {"username":"password"} /* Remove double slash before "auth" to activate id password protection */
       },
       {
-          "id": "",
+          "id": "root",
           "name": "Drive Two",
           "protect_file_link": false,
          // "auth": {"username":"password", "username1":"password1"} /* Remove double slash before "auth" to activate id password protection */
@@ -57,9 +57,6 @@ const authConfig = {
           callbackUrl: "", // your domain with /auth at the end. eg. https://example.com/auth, add this in auth0.com too
           logoutUrl: "", // your domain logout page eg. https://example.com, add this in auth0.com too
     }
-
-
-
 
 /*
 ███████╗██████╗░██╗████████╗  ████████╗██╗░░██╗███████╗░██████╗███████╗
@@ -83,9 +80,9 @@ const uiConfig = {
     "logo_image": true, // true if you're using image link in next option.
     "logo_height": "", // only if logo_image is true
     "logo_width": "100px", // only if logo_image is true
-    "favicon": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.20/images/favicon.ico",
+    "favicon": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.1.6/images/favicon.ico",
     // if logo is true then link otherwise just text for name
-    "logo_link_name": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.20/images/bhadoo-cloud-logo-white.svg",
+    "logo_link_name": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.1.6/images/bhadoo-cloud-logo-white.svg",
     "fixed_header": true, // If you want the footer to be flexible or fixed.
     "header_padding": "60", // Value 60 for fixed header, Value 20 for flexible header. Required to be changed accordingly in some themes.
     "nav_link_1": "Home", // change navigation link name
@@ -118,8 +115,8 @@ const uiConfig = {
     "second_domain_for_dl": false, // If you want to display other URL for Downloading to protect your main domain.
     "downloaddomain": domain_for_dl, // Ignore this and set domains at top of this page after service accounts.
     "videodomain": video_domain_for_dl, // Ignore this and set domains at top of this page after service accounts.
-    "poster": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.20/images/poster.jpg", // Video poster URL or see Readme to how to load from Drive
-    "audioposter": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.0.20/images/music.jpg", // Video poster URL or see Readme to how to load from Drive
+    "poster": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.1.6/images/poster.jpg", // Video poster URL or see Readme to how to load from Drive
+    "audioposter": "https://cdn.jsdelivr.net/npm/@googledrive/index@2.1.6/images/music.jpg", // Video poster URL or see Readme to how to load from Drive
     "jsdelivr_cdn_src": "https://cdn.jsdelivr.net/npm/@googledrive/index", // If Project is Forked, then enter your GitHub repo
     "render_head_md": true, // Render Head.md
     "render_readme_md": true, // Render Readme.md
@@ -129,6 +126,7 @@ const uiConfig = {
     "unauthorized_owner_link": "https://telegram.dog/Telegram", // Unauthorized Error Page Link to Owner
     "unauthorized_owner_email": "abuse@telegram.org", // Unauthorized Error Page Owner Email
     "arc_code": "jfoY2h19", // arc.io Integration Code, get yours from https://portal.arc.io
+    "search_all_drives": false // gives gdrive links on search and searches all drives on that account, doesn't require adding
 };
 
 
@@ -162,7 +160,6 @@ function html(current_drive_order = 0, model = {}) {
   <link rel="icon" href="${uiConfig.favicon}">
   <script>
     window.drive_names = JSON.parse('${JSON.stringify(authConfig.roots.map(it => it.name))}');
-    window.drive_ids = ${JSON.stringify(authConfig.roots.map(it => it.id))};
     window.MODEL = JSON.parse('${JSON.stringify(model)}');
     window.current_drive_order = ${current_drive_order};
     window.UI = JSON.parse('${JSON.stringify(uiConfig)}');
@@ -171,7 +168,7 @@ function html(current_drive_order = 0, model = {}) {
   <link rel="stylesheet" href="https://cdn.plyr.io/${uiConfig.plyr_io_version}/plyr.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.0/dist/${uiConfig.theme}/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
   <style>a{color:${uiConfig.css_a_tag_color};}p{color:${uiConfig.css_p_tag_color};}</style>
-  <script src="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/js/app-multiple-drives.obf.js"></script>
+  <script src="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/js/app-read-only.obf.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.12.313/build/pdf.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked@4.0.0/marked.min.js"></script>
 </head>
@@ -267,8 +264,8 @@ const homepage = `<!DOCTYPE html>
          <footer class="footer mt-auto py-3 text-muted ${uiConfig.footer_style_class}" style="${uiConfig.fixed_footer ?'position: fixed; ': ''}left: 0; bottom: 0; width: 100%; color: white; z-index: 9999;${uiConfig.hide_footer ? ' display:none;': ' display:block;'}"> <div class="container" style="width: auto; padding: 0 10px;"> <p class="float-end"> <a href="#">Back to top</a> </p> ${uiConfig.credit ? '<p>Redesigned with <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="red" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" /> </svg> by <a href="https://www.npmjs.com/package/@googledrive/index" target="_blank">TheFirstSpeedster</a>, based on Open Source Softwares.</p>' : ''} <p>© ${uiConfig.copyright_year} - <a href=" ${uiConfig.company_link}" target="_blank"> ${uiConfig.company_name}</a>, All Rights Reserved.</p> </div> </footer>
       </div>
    </body>
-   <script src="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/assets/homepage.min.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+  <script src="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/assets/homepage.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
 </html>`
 
 const unauthorized = `<html>
@@ -961,7 +958,9 @@ class googleDrive {
         let response;
         for (let i = 0; i < 3; i++) {
             response = await fetch(url, requestOption);
+            console.log(response.status, "API Trying, Try " , i);
             if (response.status === 200) {
+                console.log(response.status, "API Success, Try " , i);
                 break;
             }
             await this.sleep(800 * (i + 1));
@@ -1030,7 +1029,9 @@ class googleDrive {
         let response;
         for (let i = 0; i < 3; i++) {
             response = await fetch(url, requestOption);
+            console.log(response.status, "API Trying, Try " , i);
             if (response.status === 200) {
+                console.log(response.status, "API Success, Try " , i);
                 break;
             }
             await this.sleep(800 * (i + 1));
@@ -1066,6 +1067,7 @@ class googleDrive {
         const types = DriveFixedTerms.gd_root_type;
         const is_user_drive = this.root_type === types.user_drive;
         const is_share_drive = this.root_type === types.share_drive;
+        const search_all_drives = `${uiConfig.search_all_drives}`
         const empty_result = {
             nextPageToken: null,
             curPageIndex: page_index,
@@ -1083,10 +1085,23 @@ class googleDrive {
         let name_search_str = `name contains '${words.join("' AND name contains '")}'`;
         let params = {};
         if (is_user_drive) {
-            params.corpora = 'user';
+            if (search_all_drives == 'true') {
+                params.corpora = 'allDrives';
+                params.includeItemsFromAllDrives = true;
+                params.supportsAllDrives = true;
+            }
+            else {
+                params.corpora = 'user';
+            }
         }
         if (is_share_drive) {
-            params.corpora = 'allDrives';
+            if (search_all_drives == 'true') {
+                params.corpora = 'allDrives';
+            }
+            else {
+                params.corpora = 'drive';
+                params.driveId = this.root.id;
+            }
             params.includeItemsFromAllDrives = true;
             params.supportsAllDrives = true;
         }
@@ -1104,7 +1119,9 @@ class googleDrive {
         let response;
         for (let i = 0; i < 3; i++) {
             response = await fetch(url, requestOption);
+            console.log(response.status, "API Trying, Try " , i);
             if (response.status === 200) {
+                console.log(response.status, "API Success, Try " , i);
                 break;
             }
             await this.sleep(800 * (i + 1));
@@ -1230,7 +1247,9 @@ class googleDrive {
         let response;
         for (let i = 0; i < 3; i++) {
             response = await fetch(url, requestOption);
+            console.log(response.status, "API Trying, Try " , i);
             if (response.status === 200) {
+                console.log(response.status, "API Success, Try " , i);
                 break;
             }
             await this.sleep(800 * (i + 1));
@@ -1285,7 +1304,9 @@ class googleDrive {
         let response;
         for (let i = 0; i < 3; i++) {
             response = await fetch(url, requestOption);
+            console.log(response.status, "API Trying, Try " , i);
             if (response.status === 200) {
+                console.log(response.status, "API Success, Try " , i);
                 break;
             }
             await this.sleep(800 * (i + 1));
@@ -1297,7 +1318,9 @@ class googleDrive {
         let response;
         for (let i = 0; i < 3; i++) {
             response = await fetch(url, requestOption);
+            console.log(response.status, "API Trying, Try " , i);
             if (response.status === 200) {
+                console.log(response.status, "API Success, Try " , i);
                 break;
             }
             await this.sleep(800 * (i + 1));
