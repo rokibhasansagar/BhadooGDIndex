@@ -551,8 +551,307 @@ const JSONWebToken = {
     }
 };
 
-// auth0.com functions obfuscated
-const gdiauth_0x22c4ad=gdiauth_0x24fd;(function(_0x3ea7b7,_0x1a8660){const _0x57ea41=gdiauth_0x24fd,_0x420603=_0x3ea7b7();while(!![]){try{const _0x13311e=parseInt(_0x57ea41(0xcd))/0x1*(-parseInt(_0x57ea41(0xc2))/0x2)+parseInt(_0x57ea41(0xb5))/0x3+parseInt(_0x57ea41(0xbd))/0x4+-parseInt(_0x57ea41(0xa7))/0x5+parseInt(_0x57ea41(0xbf))/0x6*(parseInt(_0x57ea41(0xb8))/0x7)+-parseInt(_0x57ea41(0xe1))/0x8*(parseInt(_0x57ea41(0xca))/0x9)+parseInt(_0x57ea41(0xce))/0xa;if(_0x13311e===_0x1a8660)break;else _0x420603['push'](_0x420603['shift']());}catch(_0x25a1d3){_0x420603['push'](_0x420603['shift']());}}}(gdiauth_0x506f,0xb3a35));const AUTH0_DOMAIN=auth0['domain'],AUTH0_CLIENT_ID=auth0[gdiauth_0x22c4ad(0xc1)],AUTH0_CLIENT_SECRET=auth0['clientSecret'],AUTH0_CALLBACK_URL=auth0[gdiauth_0x22c4ad(0xe2)],AUTH0_LOGOUT_URL=auth0['logoutUrl'],SALT=gdiauth_0x22c4ad(0xd5),cookieKey='AUTH0-AUTH',generateStateParam=async()=>{const _0x5a5eb6=gdiauth_0x22c4ad,_0x14018c=await fetch('https://csprng.xyz/v1/api'),{Data:_0x2e1dd5}=await _0x14018c[_0x5a5eb6(0xc6)]();return await AUTH_STORE['put'](_0x5a5eb6(0xeb)+_0x2e1dd5,!![],{'expirationTtl':0x3c}),_0x2e1dd5;},exchangeCode=async _0x26a684=>{const _0x5eded4=gdiauth_0x22c4ad,_0x33e447=JSON[_0x5eded4(0xaf)]({'grant_type':_0x5eded4(0xed),'client_id':auth0[_0x5eded4(0xc1)],'client_secret':auth0['clientSecret'],'code':_0x26a684,'redirect_uri':auth0[_0x5eded4(0xe2)]});return persistAuth(await fetch(AUTH0_DOMAIN+_0x5eded4(0xb0),{'method':_0x5eded4(0xc5),'headers':{'content-type':_0x5eded4(0xc0)},'body':_0x33e447}));},decodeJWT=function(_0x50db3d){const _0x3685f9=gdiauth_0x22c4ad;var _0x57dc08=_0x50db3d['split']('.')[0x1][_0x3685f9(0xe4)](/-/g,'+')[_0x3685f9(0xe4)](/_/g,'/');switch(_0x57dc08[_0x3685f9(0xa8)]%0x4){case 0x0:break;case 0x2:_0x57dc08+='==';break;case 0x3:_0x57dc08+='=';break;default:throw'Illegal\x20base64url\x20string!';}const _0x140d7f=atob(_0x57dc08);try{return decodeURIComponent(escape(_0x140d7f));}catch(_0x4e7d48){return console[_0x3685f9(0xb6)](_0x4e7d48),_0x140d7f;}},validateToken=_0x359e38=>{const _0x3c1b03=gdiauth_0x22c4ad;try{const _0x110b8=_0x78e445=>Math[_0x3c1b03(0xd6)](Number(_0x78e445)/0x3e8),_0x282d79=new Date();let _0x519979=_0x359e38[_0x3c1b03(0xb3)];_0x519979=_0x519979[_0x3c1b03(0xc8)]('/')?_0x519979[_0x3c1b03(0xd8)](0x0,-0x1):_0x519979;if(_0x519979!==AUTH0_DOMAIN)throw new Error(_0x3c1b03(0xa2)+_0x519979+_0x3c1b03(0xdc)+AUTH0_DOMAIN+')');if(_0x359e38['aud']!==AUTH0_CLIENT_ID)throw new Error(_0x3c1b03(0xb1)+_0x359e38[_0x3c1b03(0xe8)]+')\x20doesn\x27t\x20match\x20AUTH0_CLIENT_ID\x20('+AUTH0_CLIENT_ID+')');if(_0x359e38['exp']<_0x110b8(_0x282d79))throw new Error(_0x3c1b03(0xea));_0x282d79[_0x3c1b03(0xcf)](_0x282d79[_0x3c1b03(0xb9)]()-0x1);if(_0x359e38[_0x3c1b03(0xc7)]<_0x110b8(_0x282d79))throw new Error(_0x3c1b03(0xa6));return!![];}catch(_0x4384f5){return console['log'](_0x4384f5[_0x3c1b03(0xd1)]),![];}},persistAuth=async _0x2691a1=>{const _0x134a8b=gdiauth_0x22c4ad,_0x416162=await _0x2691a1[_0x134a8b(0xc6)]();if(_0x416162[_0x134a8b(0xcc)])throw new Error(_0x416162['error']);const _0x60009f=new Date();_0x60009f[_0x134a8b(0xcf)](_0x60009f[_0x134a8b(0xb9)]()+0x1);const _0x313a0c=JSON['parse'](decodeJWT(_0x416162[_0x134a8b(0xd7)])),_0x30b4a0=validateToken(_0x313a0c);if(!_0x30b4a0)return{'status':0x191};const _0x5403fe=new TextEncoder()[_0x134a8b(0xac)](SALT+'-'+_0x313a0c['sub']),_0x5b9c02=await crypto[_0x134a8b(0xae)][_0x134a8b(0xd4)]({'name':_0x134a8b(0xc9)},_0x5403fe),_0x137aa7=new Uint8Array(_0x5b9c02),_0xf7249b=btoa(String[_0x134a8b(0xbe)][_0x134a8b(0xbb)](null,_0x137aa7));await AUTH_STORE[_0x134a8b(0xd3)](_0xf7249b,JSON['stringify'](_0x416162));const _0x4b100b={'Location':'/','Set-cookie':cookieKey+'='+_0xf7249b+_0x134a8b(0xa3)+_0x60009f[_0x134a8b(0xdb)]()};return{'headers':_0x4b100b,'status':0x12e};},redirectUrl=_0x32dc85=>auth0[gdiauth_0x22c4ad(0xe0)]+gdiauth_0x22c4ad(0xbc)+auth0[gdiauth_0x22c4ad(0xc1)]+gdiauth_0x22c4ad(0xda)+auth0[gdiauth_0x22c4ad(0xe2)]+'&scope=openid%20profile%20email&state='+encodeURIComponent(_0x32dc85),handleRedirect=async _0x240490=>{const _0x27bddc=gdiauth_0x22c4ad,_0x59ed6a=new URL(_0x240490[_0x27bddc(0xb2)]['url']),_0x520a37=_0x59ed6a[_0x27bddc(0xd0)][_0x27bddc(0xe9)]('state');if(!_0x520a37)return null;const _0x19715c=await AUTH_STORE[_0x27bddc(0xe9)](_0x27bddc(0xeb)+_0x520a37);if(!_0x19715c)return null;const _0x351a6=_0x59ed6a['searchParams']['get'](_0x27bddc(0xa1));if(_0x351a6)return exchangeCode(_0x351a6);return null;};function getCookie(_0x1b5ed0,_0x51d92a){const _0x32d846=gdiauth_0x22c4ad;var _0x33dfc0=_0x51d92a+'=',_0x5bf9ae=_0x1b5ed0[_0x32d846(0xec)](';');for(var _0x48cb4f=0x0;_0x48cb4f<_0x5bf9ae[_0x32d846(0xa8)];_0x48cb4f++){var _0x1e332c=_0x5bf9ae[_0x48cb4f];while(_0x1e332c[_0x32d846(0xad)](0x0)=='\x20')_0x1e332c=_0x1e332c['substring'](0x1,_0x1e332c[_0x32d846(0xa8)]);if(_0x1e332c[_0x32d846(0xd9)](_0x33dfc0)==0x0)return _0x1e332c[_0x32d846(0xa5)](_0x33dfc0['length'],_0x1e332c[_0x32d846(0xa8)]);}return null;}async function getAssetFromKV(_0x12f3cf){return null;}const verify=async _0xf20977=>{const _0x4ef88c=gdiauth_0x22c4ad,_0x2c7bed=_0xf20977[_0x4ef88c(0xb2)][_0x4ef88c(0xe5)]['get'](_0x4ef88c(0xba));if(_0x2c7bed&&_0x2c7bed[_0x4ef88c(0xb7)](cookieKey)){if(!getCookie(_0x2c7bed,cookieKey))return{};const _0xc96836=getCookie(_0x2c7bed,cookieKey),_0xbe62df=await AUTH_STORE['get'](_0xc96836);if(!_0xbe62df)return{};let _0x2c103a;try{_0x2c103a=JSON[_0x4ef88c(0xc3)](_0xbe62df);}catch(_0x41209d){throw new Error(_0x4ef88c(0xe7));}const {access_token:_0x1f864b,id_token:_0x26908d}=_0x2c103a,_0x121d0e=JSON[_0x4ef88c(0xc3)](decodeJWT(_0x26908d));return{'accessToken':_0x1f864b,'idToken':_0x26908d,'userInfo':_0x121d0e};}return{};},authorize=async _0x50e138=>{const _0xe11d63=gdiauth_0x22c4ad,_0x1f03ab=await verify(_0x50e138);if(_0x1f03ab[_0xe11d63(0xab)])return[!![],{'authorization':_0x1f03ab}];else{const _0x95b9b5=await generateStateParam();return[![],{'redirectUrl':redirectUrl(_0x95b9b5)}];}},hydrateState=(_0x1b1941={})=>({'element':_0x418358=>{const _0x457e5d=gdiauth_0x22c4ad;_0x418358[_0x457e5d(0xa4)](JSON[_0x457e5d(0xaf)](_0x1b1941));}}),config={'hydrateState':!![],'originless':!![]};function gdiauth_0x24fd(_0x34d741,_0x130460){const _0x506f81=gdiauth_0x506f();return gdiauth_0x24fd=function(_0x24fd5f,_0x3d8365){_0x24fd5f=_0x24fd5f-0xa0;let _0x1afa34=_0x506f81[_0x24fd5f];return _0x1afa34;},gdiauth_0x24fd(_0x34d741,_0x130460);}async function loginHandleRequest(_0x25e988){const _0x4c4b61=gdiauth_0x22c4ad;try{let _0x1428b2=_0x25e988[_0x4c4b61(0xb2)];const [_0x41271b,{authorization:_0x1c445e,redirectUrl:_0x4d5f50}]=await authorize(_0x25e988),_0x47e4da=new URL(_0x25e988[_0x4c4b61(0xb2)][_0x4c4b61(0xa9)]);if(_0x47e4da[_0x4c4b61(0xe6)]==='/auth'){const _0x58a5cf=await handleRedirect(_0x25e988);if(!_0x58a5cf){let _0x3318bb=new Headers();return _0x3318bb['set'](_0x4c4b61(0xc4),'1;\x20url='+auth0[_0x4c4b61(0xdf)]),_0x3318bb[_0x4c4b61(0xa0)](_0x4c4b61(0xdd),cookieKey+_0x4c4b61(0xcb)),new Response(_0x4c4b61(0xd2),{'status':0x12e,'headers':_0x3318bb});}return response=new Response(_0x1428b2['body'],{'request':_0x1428b2,..._0x58a5cf}),response;}if(!_0x41271b)return Response[_0x4c4b61(0xee)](_0x4d5f50);if(_0x47e4da[_0x4c4b61(0xe6)]===_0x4c4b61(0xde)){let _0x3368be=new Headers();return _0x3368be['set'](_0x4c4b61(0xb4),auth0[_0x4c4b61(0xe0)]+_0x4c4b61(0xaa)+auth0[_0x4c4b61(0xc1)]+_0x4c4b61(0xe3)+auth0['logoutUrl']),_0x3368be[_0x4c4b61(0xa0)](_0x4c4b61(0xdd),cookieKey+'=\x22\x22;\x20HttpOnly;\x20Secure;\x20SameSite=Lax;'),new Response('',{'status':0x12e,'headers':_0x3368be});}return null;}catch(_0x5005ba){return new Response(_0x5005ba['toString']());}}function gdiauth_0x506f(){const _0x3dc5b0=['SHA-256','22014GnkdbA','=\x22\x22;\x20HttpOnly;\x20Secure;\x20SameSite=Lax;','error','8039jhVkbk','5151660KImUEN','setDate','searchParams','message','Unauthorized\x20-\x20Redirecting','put','digest','keys565','ceil','id_token','slice','indexOf','&redirect_uri=','toUTCString',')\x20doesn\x27t\x20match\x20AUTH0_DOMAIN\x20(','Set-cookie','/logout','logoutUrl','domain','1272NoSshO','callbackUrl','&returnTo=','replace','headers','pathname','Unable\x20to\x20parse\x20auth\x20information\x20from\x20Workers\x20KV','aud','get','Token\x20exp\x20value\x20is\x20before\x20current\x20time','state-','split','authorization_code','redirect','set','code','Token\x20iss\x20value\x20(',';\x20Secure;\x20HttpOnly;\x20SameSite=Lax;\x20Expires=','setInnerContent','substring','Token\x20was\x20issued\x20before\x20one\x20day\x20ago\x20and\x20is\x20now\x20invalid','7311335mSnVkO','length','url','/v2/logout?client_id=','accessToken','encode','charAt','subtle','stringify','/oauth/token','Token\x20aud\x20value\x20(','request','iss','Location','4200462FUofTO','log','includes','176554OqfsBM','getDate','Cookie','apply','/authorize?response_type=code&client_id=','2645636WFpxDU','fromCharCode','12TJxRyt','application/json','clientId','10gwDYaw','parse','Refresh','POST','json','iat','endsWith'];gdiauth_0x506f=function(){return _0x3dc5b0;};return gdiauth_0x506f();}
+// auth0.com functions
+const AUTH0_DOMAIN  = auth0.domain
+const AUTH0_CLIENT_ID  = auth0.clientId
+const AUTH0_CLIENT_SECRET = auth0.clientSecret
+const AUTH0_CALLBACK_URL = auth0.callbackUrl
+const AUTH0_LOGOUT_URL = auth0.logoutUrl
+const SALT = `keys565`
+
+const cookieKey = 'AUTH0-AUTH'
+
+const generateStateParam = async () => {
+  if(authConfig['enable_auth0_com']){
+    const resp = await fetch('https://csprng.xyz/v1/api')
+    const { Data: state } = await resp.json()
+    await AUTH_STORE.put(`state-${state}`, true, { expirationTtl: 60 })
+    return state
+  }
+}
+
+const exchangeCode = async code => {
+  const body = JSON.stringify({
+    grant_type: 'authorization_code',
+    client_id: auth0.clientId,
+    client_secret: auth0.clientSecret,
+    code,
+    redirect_uri: auth0.callbackUrl,
+  })
+
+  return persistAuth(
+    await fetch(AUTH0_DOMAIN  + '/oauth/token', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body,
+    }),
+  )
+}
+
+// https://github.com/pose/webcrypto-jwt/blob/master/index.js
+const decodeJWT = function(token) {
+  var output = token
+    .split('.')[1]
+    .replace(/-/g, '+')
+    .replace(/_/g, '/')
+  switch (output.length % 4) {
+    case 0:
+      break
+    case 2:
+      output += '=='
+      break
+    case 3:
+      output += '='
+      break
+    default:
+      throw 'Illegal base64url string!'
+  }
+
+  const result = atob(output)
+
+  try {
+    return decodeURIComponent(escape(result))
+  } catch (err) {
+    console.log(err)
+    return result
+  }
+}
+
+const validateToken = token => {
+  try {
+    const dateInSecs = d => Math.ceil(Number(d) / 1000)
+    const date = new Date()
+
+    let iss = token.iss
+
+    // ISS can include a trailing slash but should otherwise be identical to
+    // the AUTH0_DOMAIN, so we should remove the trailing slash if it exists
+    iss = iss.endsWith('/') ? iss.slice(0, -1) : iss
+
+    if (iss !== AUTH0_DOMAIN) {
+      throw new Error(
+        `Token iss value (${iss}) doesn't match AUTH0_DOMAIN (${AUTH0_DOMAIN})`,
+      )
+    }
+
+    if (token.aud !== AUTH0_CLIENT_ID) {
+      throw new Error(
+        `Token aud value (${token.aud}) doesn't match AUTH0_CLIENT_ID (${AUTH0_CLIENT_ID})`,
+      )
+    }
+
+    if (token.exp < dateInSecs(date)) {
+      throw new Error(`Token exp value is before current time`)
+    }
+
+    // Token should have been issued within the last day
+    date.setDate(date.getDate() - 1)
+    if (token.iat < dateInSecs(date)) {
+      throw new Error(`Token was issued before one day ago and is now invalid`)
+    }
+
+    return true
+  } catch (err) {
+    console.log(err.message)
+    return false
+  }
+}
+
+const persistAuth = async exchange => {
+  const body = await exchange.json()
+
+  if (body.error) {
+    throw new Error(body.error)
+  }
+
+  const date = new Date()
+  date.setDate(date.getDate() + 1)
+
+  const decoded = JSON.parse(decodeJWT(body.id_token))
+  const validToken = validateToken(decoded)
+  if (!validToken) {
+    return { status: 401 }
+  }
+
+  const text = new TextEncoder().encode(`${SALT}-${decoded.sub}`)
+  const digest = await crypto.subtle.digest({ name: 'SHA-256' }, text)
+  const digestArray = new Uint8Array(digest)
+  const id = btoa(String.fromCharCode.apply(null, digestArray))
+
+  await AUTH_STORE.put(id, JSON.stringify(body))
+
+  const headers = {
+    Location: '/',
+    'Set-cookie': `${cookieKey}=${id}; Secure; HttpOnly; SameSite=Lax; Expires=${date.toUTCString()}`,
+  }
+
+  return { headers, status: 302 }
+}
+
+const redirectUrl = state =>
+  `${auth0.domain}/authorize?response_type=code&client_id=${
+    auth0.clientId
+  }&redirect_uri=${
+    auth0.callbackUrl
+  }&scope=openid%20profile%20email&state=${encodeURIComponent(state)}`
+
+const handleRedirect = async event => {
+  const url = new URL(event.request.url)
+
+  const state = url.searchParams.get('state')
+  if (!state) {
+    return null
+  }
+
+  const storedState = await AUTH_STORE.get(`state-${state}`)
+  if (!storedState) {
+    return null
+  }
+
+  const code = url.searchParams.get('code')
+  if (code) {
+    return exchangeCode(code)
+  }
+
+  return null
+}
+
+function getCookie(cookie,name) {
+    var nameEQ = name + "=";
+    var ca = cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
+async function getAssetFromKV(event){
+  return null
+}
+const verify = async event => {
+  const cookieHeader = event.request.headers.get('Cookie')
+
+  if (cookieHeader && cookieHeader.includes(cookieKey)) {
+    // cookieHeader.includes(cookieKey)
+    // throw new Error(getCookie(cookieHeader,cookieKey))
+    // const cookies = cookie.parse(cookieHeader)
+    if (!getCookie(cookieHeader,cookieKey)) return {}
+    const sub = getCookie(cookieHeader,cookieKey)
+
+    const kvData = await AUTH_STORE.get(sub)
+    if (!kvData) {
+      return {}
+      //throw new Error('Unable to find authorization data')
+    }
+
+    let kvStored
+    try {
+      kvStored = JSON.parse(kvData)
+    } catch (err) {
+      throw new Error('Unable to parse auth information from Workers KV')
+    }
+
+    const { access_token: accessToken, id_token: idToken } = kvStored
+    const userInfo = JSON.parse(decodeJWT(idToken))
+    return { accessToken, idToken, userInfo }
+  }
+  return {}
+}
+
+const authorize = async event => {
+  const authorization = await verify(event)
+  if (authorization.accessToken) {
+    return [true, { authorization }]
+  } else {
+    const state = await generateStateParam()
+    return [false, { redirectUrl: redirectUrl(state) }]
+  }
+}
+
+// const logout = event => {
+//   const cookieHeader = event.request.headers.get('Cookie')
+//   if (cookieHeader && cookieHeader.includes(cookieKey)) {
+//     return {
+//       headers: {
+//         'Set-cookie': `${cookieKey}=""; HttpOnly; Secure; SameSite=Lax;`,
+//       },
+//     }
+//   }
+//   return {}
+// }
+
+const hydrateState = (state = {}) => ({
+  element: el => {
+    el.setInnerContent(JSON.stringify(state))
+  },
+})
+
+
+// addEventListener('fetch', event => event.respondWith(handleRequest(event)))
+
+// see the readme for more info on what these config options do!
+const config = {
+  // opt into automatic authorization state hydration
+  hydrateState: true,
+  // return responses at the edge
+  originless: true,
+}
+
+async function loginHandleRequest(event) {
+  try {
+    let request = event.request
+
+    const [authorized, { authorization, redirectUrl }] = await authorize(event)
+    if (authorized && authorization.accessToken) {
+      request = new Request(request, {
+        headers: {
+          Authorization: `Bearer ${authorization.accessToken}`,
+        },
+      })
+    }
+
+    const url = new URL(event.request.url)
+    if (url.pathname === '/auth') {
+      const authorizedResponse = await handleRedirect(event)
+      if (!authorizedResponse) {
+        let redirectHeaders = new Headers()
+        redirectHeaders.set('Refresh', `1; url=${auth0.logoutUrl}`)
+        redirectHeaders.set('Set-cookie', `${cookieKey}=""; HttpOnly; Secure; SameSite=Lax;`)
+        return new Response('Unauthorized - Redirecting', { status: 302, headers: redirectHeaders })
+
+      }
+      response = new Response(request.body, {
+        request,
+        ...authorizedResponse,
+      })
+      return response
+    }
+
+    if (!authorized) {
+      return Response.redirect(redirectUrl)
+    }
+
+    if (url.pathname === '/logout') {
+
+      let redirectHeaders = new Headers()
+      redirectHeaders.set('Location', `${auth0.domain}/v2/logout?client_id=${auth0.clientId}&returnTo=${auth0.logoutUrl}`)
+      redirectHeaders.set('Set-cookie', `${cookieKey}=""; HttpOnly; Secure; SameSite=Lax;`)
+
+      return new Response('', {
+          status: 302,
+          headers: redirectHeaders
+        })
+    }
+
+    return null
+
+  } catch (err) {
+    return new Response(err.toString())
+  }
+}
+//end auth0.com function
 
 addEventListener('fetch', event => {
     event.respondWith(handleRequest(event.request, event));
