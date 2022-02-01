@@ -50,10 +50,10 @@
 #### More Options
 
 * workers-legacy.js is older version, less fast because of API requests it makes to check drive types, if you've too many drives, don't use this one.
-* worker-multiple-drives.js is only if you have more than one shared drives and you want to search in all of them and get index links in search.
+* worker-multiple-drives.js should be used when you have more than one shared drives and you want to search in all of them and get index links in search.
 * worker-second-domain-non-video.js is for using as second domain but doesn't support video files, instead it'll redirect to main index. Good to avoid video streaming ban by cloudflare.
 * worker-second-domain.js is for using in second domain worker.
-* worker-super-api.js is just API for Static Site. You can host API on Cloudflare as Backend, and serve Frontend on any platform, protects your workers account from being suspended as this one works in background and doesn't consume much recourses.
+* worker-super-api.js is just API for Static Site. You can host API on Cloudflare as Backend, and serve Frontend on any platform, protects your workers account from being suspended as this one works in background and doesn't consume much resources.
 * worker-super-read-only.js is for making a read only Index site. This can be used to showcase your drive files, disabling download or streaming permanently.
 * worker-generator.js is the code used on our Index Generation Site mentioned above.
 
@@ -71,7 +71,6 @@
 4. Add that Service Account to Index
 5. In domains_for_dl = ['']; enter your Index URL, that you're making now. eg. `https://example.com`
 6. Add your Drive IDs in Index Code
-7. Change `"second_domain_for_dl": false`, to `"second_domain_for_dl": true`, (don't forget to deploy second domains worker.)
 
 ## Basic Config
 
@@ -169,9 +168,9 @@
 
 ## Second Domain Systems
 
-* set second_domain_for_dl to `true` first.
-* set downloaddomain to your new index you're going to make below.
-* then make separate index on different cloudflare account with second-domain workers code.
+* set second_domain_for_dl to `true` first in UI Config.
+* set domains_for_dl and video_domains_for_dl to your new index you're going to make below in top config near service accounts.
+* then make separate index on different Cloudflare account with second-domain workers code.
 * change only refresh_token or SA and Drive IDs, don't touch anything else.
 * It's done.
 
@@ -180,7 +179,7 @@
 * arc.io is embedded in code to support gdi.js.org
 * if you have approved arc.io account, use your code.
 * incase you don't have arc account and want to support us, please keep our arc.io code in your index.
-* if anyone doesn't want to support us and want to remove arc, remove L140 line from the workers code.
+* if anyone doesn't want to support us and want to remove arc, remove the arc code from the workers code.
 
 ## Themes
 
@@ -204,7 +203,7 @@
 ## Search Limitations
 
 * Search only works if you use Shared Drive ID or root.
-* Search won't work or the bar won't appear if you're using Folder ID inside from root or Shared Drive. In Newer versions will appear but search won't work.
+* Search won't work or the bar won't appear if you're using Folder ID inside from root or Shared Drive. In Newer versions bar will appear but search won't work.
 
 ## Sorting by Name or Modified Time
 

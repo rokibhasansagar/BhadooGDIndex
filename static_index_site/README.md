@@ -11,7 +11,7 @@
 
 ### Important Note!
 
-* Use can use only 1 Drive, if you're using Multiple Drives, then search function will only if you have followed Multiple Drives Worker Rules.
+* User can use only 1 Drive, if you're using Multiple Drives, then search function will work only if you have followed Multiple Drives Worker Rules.
 * Incase of invalid config and using Multiple Drives, you may face problems on search results due to results from Drives which are not added.
 
 ### Advice
