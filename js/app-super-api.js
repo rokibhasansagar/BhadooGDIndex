@@ -1,6 +1,16 @@
 // Redesigned by telegram.dog/TheFirstSpeedster at https://www.npmjs.com/package/@googledrive/index which was written by someone else, credits are given on Source Page.
 // v2.1.7
 // Initialize the page
+function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+var query = getParameterByName('q');
+
 function init() {
     document.siteName = $('title').html();
     var html = `<header>
@@ -27,7 +37,7 @@ function init() {
   </div>
 </div>
 <br>
-<footer class="footer mt-auto py-3 text-muted ${UI.footer_style_class}" style="${UI.fixed_footer ?'position: fixed; ': ''}left: 0; bottom: 0; width: 100%; color: white; z-index: 9999;${UI.hide_footer ? ' display:none;': ' display:block;'}"> <div class="container" style="width: auto; padding: 0 10px;"> <p class="float-end"> <a href="#">Back to top</a> </p> ${UI.credit ? '<p>Redesigned with <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="red" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" /> </svg> by <a href="https://www.npmjs.com/package/@googledrive/index" target="_blank">TheFirstSpeedster</a>, based on Open Source Softwares.</p>' : ''} <p>© ${UI.copyright_year} - <a href=" ${UI.company_link}" target="_blank"> ${UI.company_name}</a>, All Rights Reserved.</p> </div> </footer>
+<footer class="footer mt-auto py-3 text-muted ${UI.footer_style_class}" style="${UI.fixed_footer ?'position: fixed; ': ''}left: 0; bottom: 0; width: 100%; color: white; z-index: 9999;${UI.hide_footer ? ' display:none;': ' display:block;'}"> <div class="container" style="width: auto; padding: 0 10px;"> <p class="float-end"> <a href="#">Back to top</a> </p> ${UI.credit ? '<p>Redesigned with <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="red" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" /> </svg> by <a href="https://www.npmjs.com/package/@googledrive/index" target="_blank">TheFirstSpeedster</a>, based on Open Source Softwares.</p>' : ''} <p>Â© ${UI.copyright_year} - <a href=" ${UI.company_link}" target="_blank"> ${UI.company_name}</a>, All Rights Reserved.</p> </div> </footer>
   `;
     $('body').html(html);
 }
@@ -130,7 +140,7 @@ function nav(path) {
     var cur = window.current_drive_order || 0;
     html += `<nav class="navbar navbar-expand-lg${UI.fixed_header ?' fixed-top': ''} ${UI.header_style_class}">
     <div class="container-fluid">
-  <a class="navbar-brand" href="/">${UI.logo_image ? '<img border="0" alt="'+UI.company_name+'" src="'+UI.logo_link_name+'" height="'+UI.logo_height+'" width="'+UI.logo_width+'">' : UI.logo_link_name}</a>
+  <a class="navbar-brand" href="/">${UI.logo_image ? '<img border="0" alt="'+UI.company_name+'" src="'+UI.logo_link_name+'" height="'+UI.height+'" width="'+UI.logo_width+'">' : UI.logo_link_name}</a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -206,11 +216,11 @@ function nav(path) {
 
 // Sleep Function to Retry API Calls
 function sleep(milliseconds) {
-    const date = Date.now();
-    let currentDate = null;
-    do {
-        currentDate = Date.now();
-    } while (currentDate - date < milliseconds);
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
 }
 
 /**
@@ -220,127 +230,126 @@ function sleep(milliseconds) {
  * @param resultCallback Success Result Callback
  * @param authErrorCallback Pass Error Callback
  */
-function requestListPath(path, params, resultCallback, authErrorCallback) {
-    var p = {
-        password: params['password'] || null,
-        page_token: params['page_token'] || null,
-        page_index: params['page_index'] || 0
-    };
-    $('#update').html(`<div class='alert alert-info' role='alert'> Connecting...</div></div></div>`);
-    $.post(path, p, function(data, status) {
-        var res = jQuery.parseJSON(gdidecode(read(data)));
-        if (res && res.error && res.error.code == '401') {
-            // Password verification failed
-            if (authErrorCallback) authErrorCallback(path)
-        } else if (res && res.data === null) {
-            $('#spinner').remove();
-            $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data. </div></div></div>`);
-            $('#update').remove();
-        } else if (res && res.data) {
-            if (resultCallback) resultCallback(res, path, p)
-            $('#update').remove();
-        }
-    }).fail(function(response) {
-        sleep(2000);
-        $('#update').html(`<div class='alert alert-info' role='alert'> Retrying...</div></div></div>`);
-        $.post(path, p, function(data, status) {
-            var res = jQuery.parseJSON(gdidecode(read(data)));
-            if (res && res.error && res.error.code == '401') {
-                // Password verification failed
-                if (authErrorCallback) authErrorCallback(path)
-            } else if (res && res.data === null) {
-                $('#spinner').remove();
-                $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data. </div></div></div>`);
-                $('#update').remove();
-            } else if (res && res.data) {
-                if (resultCallback) resultCallback(res, path, p)
-                $('#update').remove();
-            }
-        }).fail(function(response) {
-            sleep(2000);
-            $('#update').html(`<div class='alert alert-info' role='alert'> Retrying...</div></div></div>`);
-            $.post(path, p, function(data, status) {
-                var res = jQuery.parseJSON(gdidecode(read(data)));
-                if (res && res.error && res.error.code == '401') {
-                    // Password verification failed
-                    if (authErrorCallback) authErrorCallback(path)
-                } else if (res && res.data === null) {
-                    $('#spinner').remove();
-                    $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data. </div></div></div>`);
-                    $('#update').remove();
-                } else if (res && res.data) {
-                    if (resultCallback) resultCallback(res, path, p)
-                    $('#update').remove();
-                }
-            }).fail(function(response) {
-                $('#update').html(`<div class='alert alert-danger' role='alert'> Unable to get data from the server, Something went wrong.</div></div></div>`);
-                $('#list').html(`<div class='alert alert-danger' role='alert'> We were unable to get data from the server.</div></div></div>`);
-                $('#spinner').remove();
-            });
-        });
-    });
-}
-
+ function requestListPath(path, params, resultCallback, authErrorCallback) {
+     var p = {
+         password: params['password'] || null,
+         page_token: params['page_token'] || null,
+         page_index: params['page_index'] || 0
+     };
+     $('#update').html(`<div class='alert alert-info' role='alert'> Connecting...</div></div></div>`);
+     $.post(UI.api_url+path, p, function(data, status) {
+         var res = jQuery.parseJSON(gdidecode(read(data)));
+         if (res && res.error && res.error.code == '401') {
+             // Password verification failed
+             if (authErrorCallback) authErrorCallback(path)
+         } else if (res && res.data === null) {
+             $('#spinner').remove();
+             $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data. </div></div></div>`);
+             $('#update').remove();
+         } else if (res && res.data) {
+             if (resultCallback) resultCallback(res, path, p)
+             $('#update').remove();
+         }
+     }).fail(function(response) {
+         sleep(2000);
+         $('#update').html(`<div class='alert alert-info' role='alert'> Retrying...</div></div></div>`);
+         $.post(UI.api_url+path, p, function(data, status) {
+             var res = jQuery.parseJSON(gdidecode(read(data)));
+             if (res && res.error && res.error.code == '401') {
+                 // Password verification failed
+                 if (authErrorCallback) authErrorCallback(path)
+             } else if (res && res.data === null) {
+                 $('#spinner').remove();
+                 $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data. </div></div></div>`);
+                 $('#update').remove();
+             } else if (res && res.data) {
+                 if (resultCallback) resultCallback(res, path, p)
+                 $('#update').remove();
+             }
+         }).fail(function(response) {
+             sleep(2000);
+             $('#update').html(`<div class='alert alert-info' role='alert'> Retrying...</div></div></div>`);
+             $.post(UI.api_url+path, p, function(data, status) {
+                 var res = jQuery.parseJSON(gdidecode(read(data)));
+                 if (res && res.error && res.error.code == '401') {
+                     // Password verification failed
+                     if (authErrorCallback) authErrorCallback(path)
+                 } else if (res && res.data === null) {
+                     $('#spinner').remove();
+                     $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data. </div></div></div>`);
+                     $('#update').remove();
+                 } else if (res && res.data) {
+                     if (resultCallback) resultCallback(res, path, p)
+                     $('#update').remove();
+                 }
+             }).fail(function(response) {
+                 $('#update').html(`<div class='alert alert-danger' role='alert'> Unable to get data from the server, Something went wrong.</div></div></div>`);
+                 $('#list').html(`<div class='alert alert-danger' role='alert'> We were unable to get data from the server.</div></div></div>`);
+                 $('#spinner').remove();
+             });
+         });
+     });
+ }
 
 /**
  * Search POST request
  * @param params Form params
  * @param resultCallback Success callback
  */
-function requestSearch(params, resultCallback) {
-    var p = {
-        q: params['q'] || null,
-        page_token: params['page_token'] || null,
-        page_index: params['page_index'] || 0
-    };
-    $('#update').html(`<div class='alert alert-info' role='alert'> Connecting...</div></div></div>`);
-    $.post(`/${window.current_drive_order}:search`, p, function(data, status) {
-        var res = jQuery.parseJSON(gdidecode(read(data)));
-        if (res && res.data === null) {
-            $('#spinner').remove();
-            $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data.</div></div></div>`);
-            $('#update').remove();
-        }
-        if (res && res.data) {
-            if (resultCallback) resultCallback(res, p)
-            $('#update').remove();
-        }
-    }).fail(function(response) {
-        sleep(2000);
-        $('#update').html(`<div class='alert alert-info' role='alert'> Retrying...</div></div></div>`);
-        $.post(`/${window.current_drive_order}:search`, p, function(data, status) {
-            var res = jQuery.parseJSON(gdidecode(read(data)));
-            if (res && res.data === null) {
-                $('#spinner').remove();
-                $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data. </div></div></div>`);
-                $('#update').remove();
-            }
-            if (res && res.data) {
-                if (resultCallback) resultCallback(res, p)
-                $('#update').remove();
-            }
-        }).fail(function(response) {
-            sleep(2000);
-            $('#update').html(`<div class='alert alert-info' role='alert'> Retrying...</div></div></div>`);
-            $.post(`/${window.current_drive_order}:search`, p, function(data, status) {
-                var res = jQuery.parseJSON(gdidecode(read(data)));
-                if (res && res.data === null) {
-                    $('#spinner').remove();
-                    $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data. </div></div></div>`);
-                    $('#update').remove();
-                }
-                if (res && res.data) {
-                    if (resultCallback) resultCallback(res, p)
-                    $('#update').remove();
-                }
-            }).fail(function(response) {
-                $('#update').html(`<div class='alert alert-danger' role='alert'> Unable to get data from the server, Something went wrong. 3 Failures</div></div></div>`);
-                $('#list').html(`<div class='alert alert-danger' role='alert'> We were unable to get data from the server.</div></div></div>`);
-                $('#spinner').remove();
-            });
-        });
-    });
-}
+ function requestSearch(params, resultCallback) {
+     var p = {
+         q: query || null,
+         page_token: params['page_token'] || null,
+         page_index: params['page_index'] || 0
+     };
+     $('#update').html(`<div class='alert alert-info' role='alert'> Connecting...</div></div></div>`);
+     $.post(`${UI.api_url}/${window.current_drive_order}:search`, p, function(data, status) {
+         var res = jQuery.parseJSON(gdidecode(read(data)));
+         if (res && res.data === null) {
+             $('#spinner').remove();
+             $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data.</div></div></div>`);
+             $('#update').remove();
+         }
+         if (res && res.data) {
+             if (resultCallback) resultCallback(res, p)
+             $('#update').remove();
+         }
+     }).fail(function(response) {
+         sleep(2000);
+         $('#update').html(`<div class='alert alert-info' role='alert'> Retrying...</div></div></div>`);
+         $.post(`${UI.api_url}/${window.current_drive_order}:search`, p, function(data, status) {
+             var res = jQuery.parseJSON(gdidecode(read(data)));
+             if (res && res.data === null) {
+                 $('#spinner').remove();
+                 $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data. </div></div></div>`);
+                 $('#update').remove();
+             }
+             if (res && res.data) {
+                 if (resultCallback) resultCallback(res, p)
+                 $('#update').remove();
+             }
+         }).fail(function(response) {
+             sleep(2000);
+             $('#update').html(`<div class='alert alert-info' role='alert'> Retrying...</div></div></div>`);
+             $.post(`${UI.api_url}/${window.current_drive_order}:search`, p, function(data, status) {
+                 var res = jQuery.parseJSON(gdidecode(read(data)));
+                 if (res && res.data === null) {
+                     $('#spinner').remove();
+                     $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data. </div></div></div>`);
+                     $('#update').remove();
+                 }
+                 if (res && res.data) {
+                     if (resultCallback) resultCallback(res, p)
+                     $('#update').remove();
+                 }
+             }).fail(function(response) {
+                 $('#update').html(`<div class='alert alert-danger' role='alert'> Unable to get data from the server, Something went wrong. 3 Failures</div></div></div>`);
+                 $('#list').html(`<div class='alert alert-danger' role='alert'> We were unable to get data from the server.</div></div></div>`);
+                 $('#spinner').remove();
+             });
+         });
+     });
+ }
 
 // Render file list
 function list(path) {
@@ -552,7 +561,7 @@ function append_files_to_list(path, files) {
                 html += `<svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 32 32"><g transform="translate(0 -1020.362)"><g transform="translate(-.5)"><g transform="translate(.5)"><path style="line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;block-progression:tb;white-space:normal;isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1" fill="#4989b8" d="M 4,2 4,31 27,31 27,7.9941406 21.007812,2 20.800781,2 4,2 Z M 5,3 6,3 6,4 5,4 5,3 Z M 7,3 8,3 8,4 7,4 7,3 Z m 2,0 1,0 0,1 -1,0 0,-1 z m 2,0 1,0 0,1 -1,0 0,-1 z m 2,0 1,0 0,1 -1,0 0,-1 z m 2,0 1,0 0,1 -1,0 0,-1 z m 2,0 1,0 0,1 -1,0 0,-1 z m 2,0 1,0 0,1 -1,0 0,-1 z M 5,5 6,5 6,6 5,6 5,5 Z M 5,7 6,7 6,8 5,8 5,7 Z m 0,2 1,0 0,1 -1,0 0,-1 z m 20,0 1,0 0,1 -1,0 0,-1 z m -20,2 1,0 0,1 -1,0 0,-1 z m 20,0 1,0 0,1 -1,0 0,-1 z m -20,2 1,0 0,1 -1,0 0,-1 z m 20,0 1,0 0,1 -1,0 0,-1 z m -20,2 1,0 0,1 -1,0 0,-1 z m 20,0 1,0 0,1 -1,0 0,-1 z m -20,2 1,0 0,1 -1,0 0,-1 z m 20,0 1,0 0,1 -1,0 0,-1 z m -20,2 1,0 0,1 -1,0 0,-1 z m 20,0 1,0 0,1 -1,0 0,-1 z m -20,2 1,0 0,1 -1,0 0,-1 z m 20,0 1,0 0,1 -1,0 0,-1 z m -20,2 1,0 0,1 -1,0 0,-1 z m 20,0 1,0 0,1 -1,0 0,-1 z m -20,2 1,0 0,1 -1,0 0,-1 z m 20,0 1,0 0,1 -1,0 0,-1 z m -20,2 1,0 0,1 -1,0 0,-1 z m 20,0 1,0 0,1 -1,0 0,-1 z m -20,2 1,0 0,1 -1,0 0,-1 z m 2,0 1,0 0,1 -1,0 0,-1 z m 2,0 1,0 0,1 -1,0 0,-1 z m 2,0 1,0 0,1 -1,0 0,-1 z m 2,0 1,0 0,1 -1,0 0,-1 z m 2,0 1,0 0,1 -1,0 0,-1 z m 2,0 1,0 0,1 -1,0 0,-1 z m 2,0 1,0 0,1 -1,0 0,-1 z m 2,0 1,0 0,1 -1,0 0,-1 z m 2,0 1,0 0,1 -1,0 0,-1 z m 2,0 1,0 0,1 -1,0 0,-1 z" color="#000" enable-background="accumulate" font-family="sans-serif" font-weight="400" overflow="visible" transform="translate(0 1020.362)"/><path style="line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;block-progression:tb;white-space:normal;isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1" fill="#4e4e4e" fill-rule="evenodd" d="m 27.000003,1028.3562 -5.992006,-5.9941 -0.0019,5.9941 z" color="#000" enable-background="accumulate" font-family="sans-serif" font-weight="400" overflow="visible"/></g><path style="line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;block-progression:tb;white-space:normal;isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1" fill="#4e4e4e" d="m 9.5000015,1023.3622 0,20 2.4999985,-4 2.499999,4 0,-20 0,-1 -4.9999975,0 z" color="#000" enable-background="accumulate" font-family="sans-serif" font-weight="400" overflow="visible"/></g></g></svg>`
             }
 
-            html += ` <a class="list-group-item-action" style="text-decoration: none; color: ${UI.css_a_tag_color};">${item.name}</a>${UI.display_download ? `<a href="${p}"><svg class="float-end"width="25px" style="margin-left: 8px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"> <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"></path> <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"></path> </svg></a>` : ``}${UI.display_size ? `<span class="badge bg-primary float-end"> ` + item['size'] + ` </span>` : ``}${UI.display_time ? ` <span class="badge bg-info float-end"> ` + item['modifiedTime'] + ` </span>` : ``}</div>`;
+            html += ` <a class="list-group-item-action" style="text-decoration: none; color: ${UI.css_a_tag_color};" href="${pn}">${item.name}</a>${UI.display_download ? `<a href="${p}"><svg class="float-end"width="25px" style="margin-left: 8px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"> <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"></path> <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"></path> </svg></a>` : ``}${UI.display_size ? `<span class="badge bg-primary float-end"> ` + item['size'] + ` </span>` : ``}${UI.display_time ? ` <span class="badge bg-info float-end"> ` + item['modifiedTime'] + ` </span>` : ``}</div>`;
         }
     }
 
@@ -670,7 +679,7 @@ function render_search_result_list() {
 
                         let $list = $('#list');
                         requestSearch({
-                                q: window.MODEL.q,
+                                q: query,
                                 page_token: $list.data('nextPageToken'),
                                 // Request next page
                                 page_index: $list.data('curPageIndex') + 1
@@ -689,9 +698,11 @@ function render_search_result_list() {
         }
     }
 
+
+
     // Start requesting data from page 1
     requestSearch({
-        q: window.MODEL.q
+        q: query
     }, searchSuccessCallback);
 }
 
@@ -718,7 +729,7 @@ function append_search_result_to_list(files) {
         item['modifiedTime'] = utc2delhi(item['modifiedTime']);
         item['size'] = formatFileSize(item['size']);
         if (item['mimeType'] == 'application/vnd.google-apps.folder') {
-            html += `<a style="color: ${UI.folder_text_color};" ${UI.search_all_drives ? `href="https://drive.google.com/drive/folders/` + item['id'] + `" target="_blank"` : `onclick="onSearchResultItemClick(this)" data-bs-toggle="modal" data-bs-target="#SearchModel" id="` + item['id'] + `"`} class="list-group-item list-group-item-action"><svg width="1.5em" height="1.5em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><linearGradient id="WQEfvoQAcpQgQgyjQQ4Hqa" x1="24" x2="24" y1="6.708" y2="14.977" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#eba600"></stop><stop offset="1" stop-color="#c28200"></stop></linearGradient><path fill="url(#WQEfvoQAcpQgQgyjQQ4Hqa)" d="M24.414,10.414l-2.536-2.536C21.316,7.316,20.553,7,19.757,7L5,7C3.895,7,3,7.895,3,9l0,30	c0,1.105,0.895,2,2,2l38,0c1.105,0,2-0.895,2-2V13c0-1.105-0.895-2-2-2l-17.172,0C25.298,11,24.789,10.789,24.414,10.414z"></path><linearGradient id="WQEfvoQAcpQgQgyjQQ4Hqb" x1="24" x2="24" y1="10.854" y2="40.983" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffd869"></stop><stop offset="1" stop-color="#fec52b"></stop></linearGradient><path fill="url(#WQEfvoQAcpQgQgyjQQ4Hqb)" d="M21.586,14.414l3.268-3.268C24.947,11.053,25.074,11,25.207,11H43c1.105,0,2,0.895,2,2v26	c0,1.105-0.895,2-2,2H5c-1.105,0-2-0.895-2-2V15.5C3,15.224,3.224,15,3.5,15h16.672C20.702,15,21.211,14.789,21.586,14.414z"></path></svg> ${item.name} ${UI.display_time ? `<span class="badge bg-info float-end"> ` + item['modifiedTime'] + ` </span>` : ``}</a>`;
+            html += `<a style="color: ${UI.folder_text_color};" ${UI.search_all_drives ? `href="https://drive.google.com/drive/folders/` + item['id'] + `" target="_blank"` : `onclick="onSearchResultItemClick(this)" data-bs-toggle="modal" data-bs-target="#SearchModel" id="` + item['id'] + `" driveId="` + item['driveId'] + `"`} class="list-group-item list-group-item-action"><svg width="1.5em" height="1.5em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><linearGradient id="WQEfvoQAcpQgQgyjQQ4Hqa" x1="24" x2="24" y1="6.708" y2="14.977" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#eba600"></stop><stop offset="1" stop-color="#c28200"></stop></linearGradient><path fill="url(#WQEfvoQAcpQgQgyjQQ4Hqa)" d="M24.414,10.414l-2.536-2.536C21.316,7.316,20.553,7,19.757,7L5,7C3.895,7,3,7.895,3,9l0,30	c0,1.105,0.895,2,2,2l38,0c1.105,0,2-0.895,2-2V13c0-1.105-0.895-2-2-2l-17.172,0C25.298,11,24.789,10.789,24.414,10.414z"></path><linearGradient id="WQEfvoQAcpQgQgyjQQ4Hqb" x1="24" x2="24" y1="10.854" y2="40.983" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffd869"></stop><stop offset="1" stop-color="#fec52b"></stop></linearGradient><path fill="url(#WQEfvoQAcpQgQgyjQQ4Hqb)" d="M21.586,14.414l3.268-3.268C24.947,11.053,25.074,11,25.207,11H43c1.105,0,2,0.895,2,2v26	c0,1.105-0.895,2-2,2H5c-1.105,0-2-0.895-2-2V15.5C3,15.224,3.224,15,3.5,15h16.672C20.702,15,21.211,14.789,21.586,14.414z"></path></svg> ${item.name} ${UI.display_time ? `<span class="badge bg-info float-end"> ` + item['modifiedTime'] + ` </span>` : ``}</a>`;
         } else {
             var p = '/' + cur + ':/' + item.name;
             var c = "file";
@@ -727,7 +738,7 @@ function append_search_result_to_list(files) {
                 p += "?a=view";
                 c += " view";
             }
-            html += `<a style="color: ${UI.css_a_tag_color};" ${UI.search_all_drives ? `href="https://drive.google.com/file/d/` + item['id'] + `/view" target="_blank"` : ` data-bs-target="#SearchModel" id="` + item['id'] + `"`} gd-type="${item.mimeType}" class="list-group-item list-group-item-action">`
+            html += `<a style="color: ${UI.css_a_tag_color};" ${UI.search_all_drives ? `href="https://drive.google.com/file/d/` + item['id'] + `/view" target="_blank"` : `onclick="onSearchResultItemClick(this)" data-bs-toggle="modal" data-bs-target="#SearchModel" id="` + item['id'] + `" driveId="` + item['driveId'] + `"`} gd-type="${item.mimeType}" class="list-group-item list-group-item-action">`
 
             if ("|mp4|webm|avi|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|".indexOf(`|${ext}|`) >= 0) {
                 html += `<svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><g transform="translate(0 -1028.362)"><path d="m 12,1028.3622 c -6.62589,0 -12.00002,5.3741 -12.00002,12 0,6.6259 5.37413,12 12.00002,12 6.62589,0 12.00002,-5.3741 12.00002,-12 0,-6.6259 -5.37413,-12 -12.00002,-12 z" style="line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;block-progression:tb;white-space:normal;isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1" fill="#50b748" color="#000" enable-background="accumulate" font-family="sans-serif" font-weight="400" overflow="visible"/><path d="m 13,1035.162 a 2.5,2.5 0 0 0 -2.5,2.5 2.5,2.5 0 0 0 0.87695,1.9004 l -2.45117,0 A 2,2 0 0 0 9.5,1038.162 a 2,2 0 0 0 -2,-2 2,2 0 0 0 -2,2 2,2 0 0 0 0.64843,1.4707 C 5.77,1039.775 5.5,1040.133 5.5,1040.5624 l 0,4 c 0,0.554 0.44599,1 1,1 l 8,0 c 0.55401,0 1,-0.446 1,-1 l 0,-0.8008 3,1.8008 0,-6 -3,1.8008 0,-0.8008 c 0,-0.5194 -0.39686,-0.9294 -0.90235,-0.9805 a 2.5,2.5 0 0 0 0.90235,-1.9199 2.5,2.5 0 0 0 -2.5,-2.5 z m 0,1 a 1.5,1.5 0 0 1 1.5,1.5 1.5,1.5 0 0 1 -1.5,1.5 1.5,1.5 0 0 1 -1.5,-1.5 1.5,1.5 0 0 1 1.5,-1.5 z m -5.5,1 a 1,1 0 0 1 1,1 1,1 0 0 1 -1,1 1,1 0 0 1 -1,-1 1,1 0 0 1 1,-1 z m 2,6.4004 1,0 0,1 -1,0 0,-1 z m 2,0 1,0 0,1 -1,0 0,-1 z m 2,0 1,0 0,1 -1,0 0,-1 z" style="isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1" fill="#fff" color="#000" enable-background="accumulate" overflow="visible"/></g></svg>`
@@ -769,6 +780,14 @@ function append_search_result_to_list(files) {
  */
 function onSearchResultItemClick(a_ele) {
     var me = $(a_ele);
+    var driveId = a_ele.getAttribute("driveId")
+    var drive_ids = ["0ANNB57KL8wDHUk9PVA","0AGMgiJmLVyRcUk9PVA","0AKpquHOuLzRJUk9PVA","0AD6Sz1KwKmSZUk9PVA","0AO9NO5E_GGaBUk9PVA","0AMYjRTXTpjhIUk9PVA","0AGku44NiaW2-Uk9PVA","0ALJ_kVGpX1hVUk9PVA","0AGlMsaTal8AwUk9PVA","0AH5KpYlSTpZBUk9PVA","0AGgmqOn9Cj5iUk9PVA","0AP_TLvLf_EwxUk9PVA","0ABoH-yqXmPj6Uk9PVA","0AE8sUcDopSzxUk9PVA","0AHYjKN9ojO68Uk9PVA","0APNRURXunUqzUk9PVA","0AE4oZyHJsmk2Uk9PVA","0AIOsg0vg_2OHUk9PVA","0AFtPDhfC-9w9Uk9PVA","0AF2Tp3TN1y6BUk9PVA","0ANQj0UU6W784Uk9PVA","0APb2aqeTmB1FUk9PVA","0AFynwLCkCDgHUk9PVA","0AJP7JzsvbMwvUk9PVA","0AJshpyCbYCQrUk9PVA","0AH6h2VbpzKBHUk9PVA","0AMUvM5rVgr2VUk9PVA","0APjEpNF9-2yhUk9PVA","0ADvuSiy17GGUUk9PVA","0AADyOSdB1r_gUk9PVA","0AMBEq5yzV8iJUk9PVA","0AO2geV2jceGeUk9PVA","0AMxP23uxRhiRUk9PVA","0AGU_i1y77sGYUk9PVA","0AOCHuoV1RxWKUk9PVA","0AKThcO-Sek22Uk9PVA","0ANKqI4BSaw_CUk9PVA","0AO8SnfQocQPdUk9PVA","0ACazMLwKhWj8Uk9PVA","0ABWqvnVKsvkzUk9PVA","0ABzTJ_ROrM-yUk9PVA","0AL0LGwbBkeTuUk9PVA","0AE5DaYHHepzmUk9PVA","0AM6HlqEWcfUkUk9PVA","0AMOqvi6caIW7Uk9PVA","0AE1Tl7jTpE5xUk9PVA","0AD1bYPDpsWUyUk9PVA","0AHBaYkBnZ2lgUk9PVA","0AJM9vbVQQEJ_Uk9PVA","0AKf_XAIVVyumUk9PVA","0APKax7ak5AdZUk9PVA","0AOpbEmdQGXMAUk9PVA","0AIOl1lz1FTm8Uk9PVA","0APqekGQsIPK9Uk9PVA","0AH15VWwmcS-oUk9PVA","0APzHPKKqkC0tUk9PVA","0AFGUiXNOZkP3Uk9PVA","0ALn_3gcpTiQfUk9PVA","0AIhMEW8UT6TAUk9PVA","0ACNcMF_8yYZbUk9PVA","0AODXNm3wgRHTUk9PVA","0AFVRLWvFgwwCUk9PVA","0AGSmu6rRuorEUk9PVA","0AKX8oHOnSOV1Uk9PVA","0ABcIgO3AMtRkUk9PVA","0AAxhjUZBzI0GUk9PVA","0AA-seZqqPXo3Uk9PVA","0AI4-EUPsQs55Uk9PVA","0APi-tVUDcL3IUk9PVA","0AAwtR7TdeyJIUk9PVA","0AF08bYH3kV4dUk9PVA","0ACu8THW4v4_bUk9PVA"]
+    let length = drive_ids.length;
+    for (var i = 0; i < length; i++) {
+        if (driveId == drive_ids[i]) {
+            var searchhost = "/" + i;
+        }
+    }
     var can_preview = me.hasClass('view');
     var cur = window.current_drive_order;
     var title = `Loading...`;
@@ -777,11 +796,11 @@ function onSearchResultItemClick(a_ele) {
     $('#modal-body-space').html(content);
 
     // Request a path
-    $.post(`/${cur}:id2path`, {
+    $.post(`${UI.api_url}${searchhost}:id2path`, {
         id: a_ele.id
     }, function(data) {
         if (data) {
-            var href = `/${cur}:${data}${can_preview ? '?a=view' : ''}`;
+            var href = `${searchhost}:${data}${can_preview ? '?a=view' : ''}`;
             if (href.endsWith("/")) {
                 var ehrefurl = href.replace(new RegExp('#', 'g'), '%23').replace(new RegExp('\\?', 'g'), '%3F');
             } else {
@@ -793,24 +812,35 @@ function onSearchResultItemClick(a_ele) {
             $('#modal-body-space').html(content);
             return;
         }
-        title = `Failed`;
-        $('#SearchModelLabel').html(title);
-        content = `System Failed to Fetch the File/Folder Link, Please close and try again.`;
         $('#modal-body-space').html(content);
-    })
-}
-
-function get_file(path, file, callback) {
-    var key = "file_path_" + path + file['modifiedTime'];
-    var data = localStorage.getItem(key);
-    if (data != undefined) {
-        return callback(data);
-    } else {
-        $.get(path, function(d) {
-            localStorage.setItem(key, d);
-            callback(d);
-        });
-    }
+    }).fail(function(response) {
+        title = `Retrying`;
+        $('#SearchModelLabel').html(title);
+        content = `System Failed to Fetch the File/Folder Link, Retrying`;
+        $('#modal-body-space').html(content);
+         sleep(2000);
+         $.post(`${UI.api_url}${searchhost}:id2path`, {
+             id: a_ele.id
+         }, function(data) {
+             if (data) {
+                 var href = `${searchhost}:${data}${can_preview ? '?a=view' : ''}`;
+                 if (href.endsWith("/")) {
+                     var ehrefurl = href.replace(new RegExp('#', 'g'), '%23').replace(new RegExp('\\?', 'g'), '%3F');
+                 } else {
+                     var ehrefurl = href.replace(new RegExp('#', 'g'), '%23').replace(new RegExp('\\?', 'g'), '%3F') + '?a=view';
+                 }
+                 title = `Result`;
+                 $('#SearchModelLabel').html(title);
+                 content = `<a class="btn btn-info" href="${ehrefurl}">Open</a> <a class="btn btn-secondary" href="${ehrefurl}" target="_blank">Open in New Tab</a>`;
+                 $('#modal-body-space').html(content);
+                 return;
+             }
+             title = `Failed`;
+             $('#SearchModelLabel').html(title);
+             content = `System Failed to Fetch the File/Folder Link, Please close and try again.`;
+             $('#modal-body-space').html(content);
+         })
+       });
 }
 
 // File display ?a=view
@@ -857,7 +887,7 @@ function file_others(path) {
     var ext = name.split('.').pop().toLowerCase();
     var path = path;
     var url = UI.second_domain_for_dl ? UI.downloaddomain + path : window.location.origin + path;
-    $.post("",
+    $.post(UI.api_url+path,
         function(data) {
             try {
                 var obj = jQuery.parseJSON(gdidecode(read(data)));
@@ -884,15 +914,37 @@ function file_others(path) {
 <div class="card-body text-center">
   <div class="${UI.file_view_alert_class}" id="file_details" role="alert">${obj.name}<br>${size}</div>
 </div>
-`;
+<div class="card-body">
+<div class="input-group mb-4">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="">Full URL</span>
+  </div>
+  <input type="text" class="form-control" id="dlurl" value="${url}">
+</div>
+  <div class="card-text text-center">
+  ${UI.display_drive_link ? '<a type="button" class="btn btn-info" href="https://drive.google.com/file/d/'+ obj.id +'/view" id ="file_drive_link" target="_blank">GD Link</a>': ''}
+  <div class="btn-group text-center">
+      <a href="${url}" type="button" class="btn btn-primary">Download</a>
+      <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="sr-only"></span>
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager/idm.internet.download.manager.Downloader;S.title=${decodename};end">1DM (Free)</a>
+        <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.adm.lite/idm.internet.download.manager.Downloader;S.title=${decodename};end">1DM (Lite)</a>
+        <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.plus/idm.internet.download.manager.Downloader;S.title=${decodename};end">1DM+ (Plus)</a>
+      </div>
+  </div>
+  <button onclick="copyFunction()" onmouseout="outFunc()" class="btn btn-success"> <span class="tooltiptext" id="myTooltip">Copy</span> </button>
+  </div>
+  <br></div>`;
                 }
             } catch (err) {
                 var content = `
 <div class="container"><br>
 <div class="card text-center">
     <div class="card-body text-center">
-      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> That’s an error.</div>
-    </div><p>The requested URL was not found on this server. That’s all we know.</p>
+      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> Thatâ€™s an error.</div>
+    </div><p>The requested URL was not found on this server. Thatâ€™s all we know.</p>
       <div class="card-text text-center">
       <div class="btn-group text-center">
         <a href="/" type="button" class="btn btn-primary">Homepage</a>
@@ -924,7 +976,7 @@ function file_code(path) {
     var ext = name.split('.').pop().toLowerCase();
     var path = path;
     var url = UI.second_domain_for_dl ? UI.downloaddomain + path : window.location.origin + path;
-    $.post("",
+    $.post(UI.api_url+path,
         function(data) {
             try {
                 var obj = jQuery.parseJSON(gdidecode(read(data)));
@@ -939,14 +991,36 @@ function file_code(path) {
 <pre ${UI.second_domain_for_dl ? 'style="display:none;"': 'style="display:block;"'} class="line-numbers language-markup" data-src="plugins/line-numbers/index.html" data-start="-5" style="white-space: pre-wrap; counter-reset: linenumber -6;" data-src-status="loaded" tabindex="0"><code id="editor"></code></pre>
 </div>
 </div>
+<div class="card-body">
+<div class="input-group mb-4">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="">Full URL</span>
+  </div>
+  <input type="text" class="form-control" id="dlurl" value="${url}">
+</div>
+  <div class="card-text text-center">
+  ${UI.display_drive_link ? '<a type="button" class="btn btn-info" href="https://drive.google.com/file/d/'+ obj.id +'/view" id ="file_drive_link" target="_blank">GD Link</a>': ''}
+  <div class="btn-group text-center">
+      <a href="${url}" type="button" class="btn btn-primary">Download</a>
+      <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="sr-only"></span>
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager/idm.internet.download.manager.Downloader;S.title=${decodename};end">1DM (Free)</a>
+        <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.adm.lite/idm.internet.download.manager.Downloader;S.title=${decodename};end">1DM (Lite)</a>
+        <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.plus/idm.internet.download.manager.Downloader;S.title=${decodename};end">1DM+ (Plus)</a>
+      </div>
+  </div>
+  <button onclick="copyFunction()" onmouseout="outFunc()" class="btn btn-success"> <span class="tooltiptext" id="myTooltip">Copy</span> </button></div><br></div>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.js" integrity="sha256-fZOd7N/oofoKcO92RzxvC0wMm+EvsKyRT4nmcmQbgzU=" crossorigin="anonymous"></script>
 `;
             } catch (err) {
                 var content = `
 <div class="container"><br>
 <div class="card text-center">
     <div class="card-body text-center">
-      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> That’s an error.</div>
-    </div><p>The requested URL was not found on this server. That’s all we know.</p>
+      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> Thatâ€™s an error.</div>
+    </div><p>The requested URL was not found on this server. Thatâ€™s all we know.</p>
       <div class="card-text text-center">
       <div class="btn-group text-center">
         <a href="/" type="button" class="btn btn-primary">Homepage</a>
@@ -977,7 +1051,7 @@ function file_video(path) {
     var urlvlc = url.replace(new RegExp('\\[', 'g'), '%5B').replace(new RegExp('\\]', 'g'), '%5D');
     var url_without_https = url.replace(/^(https?:|)\/\//, '')
     var url_base64 = btoa(url)
-    $.post("",
+    $.post(UI.api_url+path,
         function(data) {
             try {
                 var obj = jQuery.parseJSON(gdidecode(read(data)));
@@ -992,16 +1066,71 @@ function file_video(path) {
   <div class="card text-center">
   <div class="text-center">
   <div class="${UI.file_view_alert_class}" id="file_details" role="alert">${obj.name}<br>${size}</div>
+  <video id="vplayer" width="100%" height="100%" playsinline controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'pip', 'airplay', 'fullscreen']; data-plyr-config="{ "title": "${decodename}"}" data-poster="${poster}" style="--plyr-captions-text-color: #ffffff;--plyr-captions-background: #000000;">
+    <source src="${url}" type="video/mp4" />
+    <source src="${url}" type="video/webm" />
+    <track kind="captions" label="Default" src="${caption}.vtt" srclang="en" />
+    <track kind="captions" label="English" src="${caption}.en.vtt" srclang="en" default />
+    <track kind="captions" label="Hindi" src="${caption}.hi.vtt" srclang="hi" />
+    <track kind="captions" label="Russian" src="${caption}.ru.vtt" srclang="ru" />
+    <track kind="captions" label="Malayalam" src="${caption}.ml.vtt" srclang="ml" />
+    <track kind="captions" label="Korean" src="${caption}.ko.vtt" srclang="ko" />
+    <track kind="captions" label="Japanese" src="${caption}.ja.vtt" srclang="ja" />
+    <track kind="captions" label="Indonesian" src="${caption}.id.vtt" srclang="id" />
+    <track kind="captions" label="German" src="${caption}.de.vtt" srclang="de" />
+    <track kind="captions" label="French" src="${caption}.fr.vtt" srclang="fr" />
+    <track kind="captions" label="Chinese" src="${caption}.zh.vtt" srclang="zh" />
+    <track kind="captions" label="Arabic" src="${caption}.ar.vtt" srclang="ar" />
+  <track kind="captions" label="${UI.custom_srt_lang}" src="${caption}.${UI.custom_srt_lang}.vtt" srclang="${UI.custom_srt_lang}" />
+  </video>
   </div>
-
+  ${UI.disable_player ? '<style>.plyr{display:none;}</style>' : ''}
+  <script>
+   const player = new Plyr('#vplayer',{ratio: "${UI.plyr_io_video_resolution}"});
+  </script></br>
+${UI.disable_video_download ? `` : `
+<div class="card-body">
+<div class="input-group mb-4">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="">Full URL</span>
+  </div>
+  <input type="text" class="form-control" id="dlurl" value="${url}">
+</div>
+${UI.display_drive_link ? '<a type="button" class="btn btn-info" href="https://drive.google.com/file/d/'+ obj.id +'/view" id ="file_drive_link" target="_blank">GD Link</a>': ''}
+<div class="btn-group text-center">
+    <a href="${url}" type="button" class="btn btn-primary">Download</a>
+    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="sr-only"></span>
+    </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="iina://weblink?url=${url}">IINA</a>
+      <a class="dropdown-item" href="potplayer://${url}">PotPlayer</a>
+      <a class="dropdown-item" href="vlc://${urlvlc}">VLC Mobile</a>
+      <a class="dropdown-item" href="${urlvlc}">VLC Desktop</a>
+      <a class="dropdown-item" href="nplayer-${url}">nPlayer</a>
+      <a class="dropdown-item" href="intent://${url_without_https}#Intent;type=video/any;package=is.xyz.mpv;scheme=https;end;">mpv-android</a>
+      <a class="dropdown-item" href="mpv://${url_base64}">mpv x64</a>
+      <a class="dropdown-item" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${decodename};end">MX Player (Free)</a>
+      <a class="dropdown-item" href="intent:${url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${decodename};end">MX Player (Pro)</a>
+      <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager/idm.internet.download.manager.Downloader;S.title=${decodename};end">1DM (Free)</a>
+      <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.adm.lite/idm.internet.download.manager.Downloader;S.title=${decodename};end">1DM (Lite)</a>
+      <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.plus/idm.internet.download.manager.Downloader;S.title=${decodename};end">1DM+ (Plus)</a>
+    </div>
+</div>
+<button onclick="copyFunction()" onmouseout="outFunc()" class="btn btn-success"> <span class="tooltiptext" id="myTooltip">Copy</span> </button>
+<br>
+  </div>
+  </div>
+  `}
+  </div>
   `;
             } catch (err) {
                 var content = `
 <div class="container"><br>
 <div class="card text-center">
     <div class="card-body text-center">
-      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> That’s an error.</div>
-    </div><p>The requested URL was not found on this server. That’s all we know.</p>
+      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> Thatâ€™s an error.</div>
+    </div><p>The requested URL was not found on this server. Thatâ€™s all we know.</p>
       <div class="card-text text-center">
       <div class="btn-group text-center">
         <a href="/" type="button" class="btn btn-primary">Homepage</a>
@@ -1020,7 +1149,7 @@ function file_audio(path) {
     var decodename = unescape(name);
     var path = path;
     var url = UI.second_domain_for_dl ? UI.downloaddomain + path : window.location.origin + path;
-    $.post("",
+    $.post(UI.api_url+path,
         function(data) {
             try {
                 var obj = jQuery.parseJSON(gdidecode(read(data)));
@@ -1041,14 +1170,38 @@ function file_audio(path) {
   <script>
    const player = new Plyr('#vplayer');
   </script></br>
+  <div class="card-body">
+<div class="input-group mb-4">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="">Full URL</span>
+  </div>
+  <input type="text" class="form-control" id="dlurl" value="${url}">
+</div>
+  <div class="card-text text-center">
+  ${UI.display_drive_link ? '<a type="button" class="btn btn-info" href="https://drive.google.com/file/d/'+ obj.id +'/view" id ="file_drive_link" target="_blank">GD Link</a>': ''}
+  <div class="btn-group text-center">
+      <a href="${url}" type="button" class="btn btn-primary">Download</a>
+      <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="sr-only"></span>
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager/idm.internet.download.manager.Downloader;S.title=${decodename};end">1DM (Free)</a>
+        <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.adm.lite/idm.internet.download.manager.Downloader;S.title=${decodename};end">1DM (Lite)</a>
+        <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.plus/idm.internet.download.manager.Downloader;S.title=${decodename};end">1DM+ (Plus)</a>
+      </div>
+  </div>
+  <button onclick="copyFunction()" onmouseout="outFunc()" class="btn btn-success"> <span class="tooltiptext" id="myTooltip">Copy</span> </button></div><br>
+  </div>
+  </div>
+  </div>
   `;
             } catch (err) {
                 var content = `
 <div class="container"><br>
 <div class="card text-center">
     <div class="card-body text-center">
-      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> That’s an error.</div>
-    </div><p>The requested URL was not found on this server. That’s all we know.</p>
+      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> Thatâ€™s an error.</div>
+    </div><p>The requested URL was not found on this server. Thatâ€™s all we know.</p>
       <div class="card-text text-center">
       <div class="btn-group text-center">
         <a href="/" type="button" class="btn btn-primary">Homepage</a>
@@ -1068,7 +1221,7 @@ function file_pdf(path) {
     var path = path;
     var url = UI.second_domain_for_dl ? UI.downloaddomain + path : window.location.origin + path;
     var inline_url = `${url}?inline=true`
-    $.post("",
+    $.post(UI.api_url+path,
         function(data) {
             try {
                 var obj = jQuery.parseJSON(gdidecode(read(data)));
@@ -1147,14 +1300,38 @@ function file_pdf(path) {
   </div><br>
   <canvas id="the-canvas" style="max-width: 100%;"></canvas>
   </div>
+  <div class="card-body">
+<div class="input-group mb-4">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="">Full URL</span>
+  </div>
+  <input type="text" class="form-control" id="dlurl" value="${url}">
+</div>
+  <div class="card-text text-center">
+  ${UI.display_drive_link ? '<a type="button" class="btn btn-info" href="https://drive.google.com/file/d/'+ obj.id +'/view" id ="file_drive_link" target="_blank">GD Link</a>': ''}
+  <div class="btn-group text-center">
+      <a href="${url}" type="button" class="btn btn-primary">Download</a>
+      <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="sr-only"></span>
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager/idm.internet.download.manager.Downloader;S.title=${decodename};end">1DM (Free)</a>
+        <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.adm.lite/idm.internet.download.manager.Downloader;S.title=${decodename};end">1DM (Lite)</a>
+        <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.plus/idm.internet.download.manager.Downloader;S.title=${decodename};end">1DM+ (Plus)</a>
+      </div>
+  </div>
+  <button onclick="copyFunction()" onmouseout="outFunc()" class="btn btn-success"> <span class="tooltiptext" id="myTooltip">Copy</span> </button></div><br>
+  </div>
+  </div>
+  </div>
   `;
             } catch (err) {
                 var content = `
 <div class="container"><br>
 <div class="card text-center">
     <div class="card-body text-center">
-      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> That’s an error.</div>
-    </div><p>The requested URL was not found on this server. That’s all we know.</p>
+      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> Thatâ€™s an error.</div>
+    </div><p>The requested URL was not found on this server. Thatâ€™s all we know.</p>
       <div class="card-text text-center">
       <div class="btn-group text-center">
         <a href="/" type="button" class="btn btn-primary">Homepage</a>
@@ -1218,7 +1395,7 @@ function file_image(path) {
                   `;
         }
     }
-    $.post("",
+    $.post(UI.api_url+path,
         function(data) {
             try {
                 var obj = jQuery.parseJSON(gdidecode(read(data)));
@@ -1261,8 +1438,8 @@ function file_image(path) {
 <div class="container"><br>
 <div class="card text-center">
     <div class="card-body text-center">
-      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> That’s an error.</div>
-    </div><p>The requested URL was not found on this server. That’s all we know.</p>
+      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> Thatâ€™s an error.</div>
+    </div><p>The requested URL was not found on this server. Thatâ€™s all we know.</p>
       <div class="card-text text-center">
       <div class="btn-group text-center">
         <a href="/" type="button" class="btn btn-primary">Homepage</a>

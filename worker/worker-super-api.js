@@ -4,11 +4,12 @@
     ██║░░╚██╗██║░░██║██║░░░██╗░░██║░╚═══██╗░░░██║░░██║██╔══██╗██║░░╚██╗
     ╚██████╔╝██████╔╝██║██╗╚█████╔╝██████╔╝██╗╚█████╔╝██║░░██║╚██████╔╝
     ░╚═════╝░╚═════╝░╚═╝╚═╝░╚════╝░╚═════╝░╚═╝░╚════╝░╚═╝░░╚═╝░╚═════╝░
-                             v 2.1.2
+                             v 2.1.7
 A Script Redesigned by Parveen Bhadoo from GOIndex at https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index */
 
 // add multiple serviceaccounts as {}, {}, {}, random account will be selected by each time app is opened.
 const serviceaccounts = [
+{}
 ];
 const randomserviceaccount = serviceaccounts[Math.floor(Math.random()*serviceaccounts.length)]; // DO NOT TOUCH THIS
 const domains_for_dl = ['']; // add multiple cloudflare addresses to balance the load on download/stream servers, eg. ['https://testing.fetchgoogleapi.workers.dev', 'https://testing2.fetchgoogleapi2.workers.dev']
@@ -27,24 +28,18 @@ const authConfig = {
     "files_list_page_size": 100,
     "search_result_list_page_size": 100,
     "enable_cors_file_down": false,
-    "cors_domain": "",
+    "cors_domain": "*",
     "enable_password_file_verify": true, // support for .password file
     "direct_link_protection": false, // protects direct links with Display UI
     "lock_folders": false, // keeps folders and search locked if auth in on, and allows individual file view
-    "enable_auth0_com": false, // follow guide to add auth0.com to secure index with powerful login based system
+    //"enable_auth0_com": false, // follow guide to add auth0.com to secure index with powerful login based system
     "roots":[
-      {
-          "id": "root",
-          "name": "Drive One",
-          "protect_file_link": false,
-         // "auth": {"username":"password"} /* Remove double slash before "auth" to activate id password protection */
-      },
-      {
-          "id": "root",
-          "name": "Drive Two",
-          "protect_file_link": false,
-         // "auth": {"username":"password", "username1":"password1"} /* Remove double slash before "auth" to activate id password protection */
-      },
+        {
+            "id": "root",
+            "name": "Drive One",
+            "protect_file_link": false,
+        // "auth": {"username":"password"} /* Remove double slash before "auth" to activate id password protection */
+        },
     ]};
 
     const auth0 = {
@@ -75,7 +70,8 @@ const authConfig = {
 
 const uiConfig = {
     "theme": "slate", // switch between themes, default set to slate, select from https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index
-    "version": "2.1.2", // don't touch this one. get latest code using generator at https://bdi-generator.hashhackers.com
+    "version": "2.1.7", // don't touch this one. get latest code using generator at https://bdi-generator.hashhackers.com
+    "api_url": "https://REPLACE_WITH_API_SITE_WHERE_YOU_ARE_DEPLOYING_THIS_CODE",
     // If you're using Image then set to true, If you want text then set it to false
     "logo_image": true, // true if you're using image link in next option.
     "logo_height": "", // only if logo_image is true
@@ -150,63 +146,21 @@ var gds = [];
 
 var current_drive_order = 0
 
-function html(current_drive_order = 0, model = {}) {
-    return `<html>
-<head>
-<title>API</title>
-<style>
-body{
-    margin:0;
-    padding:0;
-    width:100%;
-    height:100%;
-    color:#b0bec5;
-    display:table;
-    font-weight:100;
-    font-family:Lato
-}
-.container{
-    text-align:center;
-    display:table-cell;
-    vertical-align:middle
-}
-.content{
-    text-align:center;
-    display:inline-block
-}
-.message{
-    font-size:80px;
-    margin-bottom:40px
-}
-.submessage{
-    font-size:40px;
-    margin-bottom:40px
-}
-.copyright{
-    font-size:20px;
-}
-a{
-    text-decoration:none;
-    color:#3498db
-}
+const configjs = `window.location.pathname.includes(":search")?window.MODEL=JSON.parse('{"is_search_page":true,"root_type":1}'):window.MODEL=JSON.parse('{"is_search_page":false,"root_type":1}');
+window.drive_names = JSON.parse('${JSON.stringify(authConfig.roots.map(it => it.name))}');
+window.current_drive_order = ${current_drive_order};
+window.UI = JSON.parse('${JSON.stringify(uiConfig)}');`
 
-</style>
-</head>
-<body>
-<div class="container">
-<div class="content">
-<div class="message">Index API</div>
-<div class="submessage">All Systems Operational</div>
-<div class="copyright">Hash Hackers and Bhadoo Cloud Cyber Systems</div>
-</div>
-</div>
-</body>
-</html>`;
-};
+function html(current_drive_order = 0, model = {}) {
+    return `const path = window.location.pathname;
+if (path.includes(":search")) { window.MODEL = JSON.parse('{"is_search_page":true,"root_type":1}'); } else { window.MODEL = JSON.parse('{"is_search_page":false,"root_type":1}'); };
+window.drive_names = JSON.parse('${JSON.stringify(authConfig.roots.map(it => it.name))}');
+window.current_drive_order = ${current_drive_order};
+window.UI = JSON.parse('${JSON.stringify(uiConfig)}');};
 
 const homepage = `<html>
 <head>
-<title>Decryption Server - decrypt.hashhackers.com</title>
+<title>API</title>
 <style>
 body{
     margin:0;
@@ -578,7 +532,7 @@ async function handleRequest(request, event) {
         return new Response('', {
             status: 307,
             headers: {
-                'Location': `https://hashhackers.win`,
+                'Location': authConfig.cors_domain,
                 "Access-Control-Allow-Origin": authConfig.cors_domain,
             }
         });
@@ -601,8 +555,7 @@ async function handleRequest(request, event) {
                 "Access-Control-Allow-Origin": authConfig.cors_domain,
             },
         })
-    }
-    else if (path.toLowerCase() == '/arc-sw.js') {
+    } else if (path.toLowerCase() == '/arc-sw.js') {
         return fetch("https://arc.io/arc-sw.js")
     } else if (path.toLowerCase() == '/admin') {
         return Response.redirect("https://www.npmjs.com/package/@googledrive/index", 301)
@@ -672,7 +625,7 @@ async function handleRequest(request, event) {
                 }), {
                     status: 200,
                     headers: {
-                        'Content-Type': 'text/html; charset=utf-8',
+                        'Content-Type': 'text/javascript; charset=utf-8',
                         "Access-Control-Allow-Origin": authConfig.cors_domain,
                     }
                 });
@@ -713,7 +666,7 @@ async function handleRequest(request, event) {
         }), {
             status: 200,
             headers: {
-                'Content-Type': 'text/html; charset=utf-8',
+                'Content-Type': 'text/javascript; charset=utf-8',
                 "Access-Control-Allow-Origin": authConfig.cors_domain,
             }
         });
