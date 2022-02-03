@@ -23,7 +23,7 @@
 
 ## How to
 
-* Stable Release `2.1.7`
+* Stable Release `2.1.8`
 * Latest Index is faster than before, but backup before making new, and report if I missed something in issues. :)
 * Beta Version (Latest) - [bdi-generator](https://bdi-generator.hashhackers.com) (For Dark Theme use darkly)
 * If you want to deploy main drive leave the option ROOT as it is.

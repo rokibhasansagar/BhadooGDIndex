@@ -4,7 +4,7 @@
     ██║░░╚██╗██║░░██║██║░░░██╗░░██║░╚═══██╗░░░██║░░██║██╔══██╗██║░░╚██╗
     ╚██████╔╝██████╔╝██║██╗╚█████╔╝██████╔╝██╗╚█████╔╝██║░░██║╚██████╔╝
     ░╚═════╝░╚═════╝░╚═╝╚═╝░╚════╝░╚═════╝░╚═╝░╚════╝░╚═╝░░╚═╝░╚═════╝░
-                             v 2.1.7
+                             v 2.1.8
 A Script Redesigned by Parveen Bhadoo from GOIndex at https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index */
 
 // add multiple serviceaccounts as {}, {}, {}, random account will be selected by each time app is opened.
@@ -70,7 +70,7 @@ const authConfig = {
 
 const uiConfig = {
     "theme": "slate", // switch between themes, default set to slate, select from https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index
-    "version": "2.1.7", // don't touch this one. get latest code using generator at https://bdi-generator.hashhackers.com
+    "version": "2.1.8", // don't touch this one. get latest code using generator at https://bdi-generator.hashhackers.com
     "api_url": "https://REPLACE_WITH_API_SITE_WHERE_YOU_ARE_DEPLOYING_THIS_CODE",
     // If you're using Image then set to true, If you want text then set it to false
     "logo_image": true, // true if you're using image link in next option.

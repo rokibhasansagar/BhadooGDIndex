@@ -1,5 +1,5 @@
 // Redesigned by telegram.dog/TheFirstSpeedster at https://www.npmjs.com/package/@googledrive/index which was written by someone else, credits are given on Source Page.
-// v2.1.7
+// v2.1.8
 // Initialize the page
 function getParameterByName(name, url = window.location.href) {
     name = name.replace(/[\[\]]/g, '\\$&');
@@ -781,10 +781,9 @@ function append_search_result_to_list(files) {
 function onSearchResultItemClick(a_ele) {
     var me = $(a_ele);
     var driveId = a_ele.getAttribute("driveId")
-    var drive_ids = ["0ANNB57KL8wDHUk9PVA","0AGMgiJmLVyRcUk9PVA","0AKpquHOuLzRJUk9PVA","0AD6Sz1KwKmSZUk9PVA","0AO9NO5E_GGaBUk9PVA","0AMYjRTXTpjhIUk9PVA","0AGku44NiaW2-Uk9PVA","0ALJ_kVGpX1hVUk9PVA","0AGlMsaTal8AwUk9PVA","0AH5KpYlSTpZBUk9PVA","0AGgmqOn9Cj5iUk9PVA","0AP_TLvLf_EwxUk9PVA","0ABoH-yqXmPj6Uk9PVA","0AE8sUcDopSzxUk9PVA","0AHYjKN9ojO68Uk9PVA","0APNRURXunUqzUk9PVA","0AE4oZyHJsmk2Uk9PVA","0AIOsg0vg_2OHUk9PVA","0AFtPDhfC-9w9Uk9PVA","0AF2Tp3TN1y6BUk9PVA","0ANQj0UU6W784Uk9PVA","0APb2aqeTmB1FUk9PVA","0AFynwLCkCDgHUk9PVA","0AJP7JzsvbMwvUk9PVA","0AJshpyCbYCQrUk9PVA","0AH6h2VbpzKBHUk9PVA","0AMUvM5rVgr2VUk9PVA","0APjEpNF9-2yhUk9PVA","0ADvuSiy17GGUUk9PVA","0AADyOSdB1r_gUk9PVA","0AMBEq5yzV8iJUk9PVA","0AO2geV2jceGeUk9PVA","0AMxP23uxRhiRUk9PVA","0AGU_i1y77sGYUk9PVA","0AOCHuoV1RxWKUk9PVA","0AKThcO-Sek22Uk9PVA","0ANKqI4BSaw_CUk9PVA","0AO8SnfQocQPdUk9PVA","0ACazMLwKhWj8Uk9PVA","0ABWqvnVKsvkzUk9PVA","0ABzTJ_ROrM-yUk9PVA","0AL0LGwbBkeTuUk9PVA","0AE5DaYHHepzmUk9PVA","0AM6HlqEWcfUkUk9PVA","0AMOqvi6caIW7Uk9PVA","0AE1Tl7jTpE5xUk9PVA","0AD1bYPDpsWUyUk9PVA","0AHBaYkBnZ2lgUk9PVA","0AJM9vbVQQEJ_Uk9PVA","0AKf_XAIVVyumUk9PVA","0APKax7ak5AdZUk9PVA","0AOpbEmdQGXMAUk9PVA","0AIOl1lz1FTm8Uk9PVA","0APqekGQsIPK9Uk9PVA","0AH15VWwmcS-oUk9PVA","0APzHPKKqkC0tUk9PVA","0AFGUiXNOZkP3Uk9PVA","0ALn_3gcpTiQfUk9PVA","0AIhMEW8UT6TAUk9PVA","0ACNcMF_8yYZbUk9PVA","0AODXNm3wgRHTUk9PVA","0AFVRLWvFgwwCUk9PVA","0AGSmu6rRuorEUk9PVA","0AKX8oHOnSOV1Uk9PVA","0ABcIgO3AMtRkUk9PVA","0AAxhjUZBzI0GUk9PVA","0AA-seZqqPXo3Uk9PVA","0AI4-EUPsQs55Uk9PVA","0APi-tVUDcL3IUk9PVA","0AAwtR7TdeyJIUk9PVA","0AF08bYH3kV4dUk9PVA","0ACu8THW4v4_bUk9PVA"]
-    let length = drive_ids.length;
+    let length = window.drive_ids.length;
     for (var i = 0; i < length; i++) {
-        if (driveId == drive_ids[i]) {
+        if (driveId == window.drive_ids[i]) {
             var searchhost = "/" + i;
         }
     }
