@@ -1,6 +1,16 @@
 // Redesigned by telegram.dog/TheFirstSpeedster at https://www.npmjs.com/package/@googledrive/index which was written by someone else, credits are given on Source Page.
 // v2.1.8
 // Initialize the page
+function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+var query = getParameterByName('q');
+
 function init() {
     document.siteName = $('title').html();
     var html = `<header>
@@ -27,7 +37,7 @@ function init() {
   </div>
 </div>
 <br>
-<footer class="footer mt-auto py-3 text-muted ${UI.footer_style_class}" style="${UI.fixed_footer ?'position: fixed; ': ''}left: 0; bottom: 0; width: 100%; color: white; z-index: 9999;${UI.hide_footer ? ' display:none;': ' display:block;'}"> <div class="container" style="width: auto; padding: 0 10px;"> <p class="float-end"> <a href="#">Back to top</a> </p> ${UI.credit ? '<p>Redesigned with <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="red" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" /> </svg> by <a href="https://www.npmjs.com/package/@googledrive/index" target="_blank">TheFirstSpeedster</a>, based on Open Source Softwares.</p>' : ''} <p>© ${UI.copyright_year} - <a href=" ${UI.company_link}" target="_blank"> ${UI.company_name}</a>, All Rights Reserved.</p> </div> </footer>
+<footer class="footer mt-auto py-3 text-muted ${UI.footer_style_class}" style="${UI.fixed_footer ?'position: fixed; ': ''}left: 0; bottom: 0; width: 100%; color: white; z-index: 9999;${UI.hide_footer ? ' display:none;': ' display:block;'}"> <div class="container" style="width: auto; padding: 0 10px;"> <p class="float-end"> <a href="#">Back to top</a> </p> ${UI.credit ? '<p>Redesigned with <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="red" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" /> </svg> by <a href="https://www.npmjs.com/package/@googledrive/index" target="_blank">TheFirstSpeedster</a>, based on Open Source Softwares.</p>' : ''} <p>Â© ${UI.copyright_year} - <a href=" ${UI.company_link}" target="_blank"> ${UI.company_name}</a>, All Rights Reserved.</p> </div> </footer>
   `;
     $('body').html(html);
 }
@@ -130,7 +140,7 @@ function nav(path) {
     var cur = window.current_drive_order || 0;
     html += `<nav class="navbar navbar-expand-lg${UI.fixed_header ?' fixed-top': ''} ${UI.header_style_class}">
     <div class="container-fluid">
-  <a class="navbar-brand" href="/">${UI.logo_image ? '<img border="0" alt="'+UI.company_name+'" src="'+UI.logo_link_name+'" height="'+UI.logo_height+'" width="'+UI.logo_width+'">' : UI.logo_link_name}</a>
+  <a class="navbar-brand" href="/">${UI.logo_image ? '<img border="0" alt="'+UI.company_name+'" src="'+UI.logo_link_name+'" height="'+UI.height+'" width="'+UI.logo_width+'">' : UI.logo_link_name}</a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -206,11 +216,11 @@ function nav(path) {
 
 // Sleep Function to Retry API Calls
 function sleep(milliseconds) {
-    const date = Date.now();
-    let currentDate = null;
-    do {
-        currentDate = Date.now();
-    } while (currentDate - date < milliseconds);
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
 }
 
 /**
@@ -220,126 +230,126 @@ function sleep(milliseconds) {
  * @param resultCallback Success Result Callback
  * @param authErrorCallback Pass Error Callback
  */
-function requestListPath(path, params, resultCallback, authErrorCallback) {
-    var p = {
-        password: params['password'] || null,
-        page_token: params['page_token'] || null,
-        page_index: params['page_index'] || 0
-    };
-    $('#update').html(`<div class='alert alert-info' role='alert'> Connecting...</div></div></div>`);
-    $.post(path, p, function(data, status) {
-        var res = jQuery.parseJSON(gdidecode(read(data)));
-        if (res && res.error && res.error.code == '401') {
-            // Password verification failed
-            if (authErrorCallback) authErrorCallback(path)
-        } else if (res && res.data === null) {
-            $('#spinner').remove();
-            $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data. </div></div></div>`);
-            $('#update').remove();
-        } else if (res && res.data) {
-            if (resultCallback) resultCallback(res, path, p)
-            $('#update').remove();
-        }
-    }).fail(function(response) {
-        sleep(2000);
-        $('#update').html(`<div class='alert alert-info' role='alert'> Retrying...</div></div></div>`);
-        $.post(path, p, function(data, status) {
-            var res = jQuery.parseJSON(gdidecode(read(data)));
-            if (res && res.error && res.error.code == '401') {
-                // Password verification failed
-                if (authErrorCallback) authErrorCallback(path)
-            } else if (res && res.data === null) {
-                $('#spinner').remove();
-                $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data. </div></div></div>`);
-                $('#update').remove();
-            } else if (res && res.data) {
-                if (resultCallback) resultCallback(res, path, p)
-                $('#update').remove();
-            }
-        }).fail(function(response) {
-            sleep(2000);
-            $('#update').html(`<div class='alert alert-info' role='alert'> Retrying...</div></div></div>`);
-            $.post(path, p, function(data, status) {
-                var res = jQuery.parseJSON(gdidecode(read(data)));
-                if (res && res.error && res.error.code == '401') {
-                    // Password verification failed
-                    if (authErrorCallback) authErrorCallback(path)
-                } else if (res && res.data === null) {
-                    $('#spinner').remove();
-                    $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data. </div></div></div>`);
-                    $('#update').remove();
-                } else if (res && res.data) {
-                    if (resultCallback) resultCallback(res, path, p)
-                    $('#update').remove();
-                }
-            }).fail(function(response) {
-                $('#update').html(`<div class='alert alert-danger' role='alert'> Unable to get data from the server, Something went wrong.</div></div></div>`);
-                $('#list').html(`<div class='alert alert-danger' role='alert'> We were unable to get data from the server.</div></div></div>`);
-                $('#spinner').remove();
-            });
-        });
-    });
-}
+ function requestListPath(path, params, resultCallback, authErrorCallback) {
+     var p = {
+         password: params['password'] || null,
+         page_token: params['page_token'] || null,
+         page_index: params['page_index'] || 0
+     };
+     $('#update').html(`<div class='alert alert-info' role='alert'> Connecting...</div></div></div>`);
+     $.post(UI.api_url+path, p, function(data, status) {
+         var res = jQuery.parseJSON(gdidecode(read(data)));
+         if (res && res.error && res.error.code == '401') {
+             // Password verification failed
+             if (authErrorCallback) authErrorCallback(path)
+         } else if (res && res.data === null) {
+             $('#spinner').remove();
+             $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data. </div></div></div>`);
+             $('#update').remove();
+         } else if (res && res.data) {
+             if (resultCallback) resultCallback(res, path, p)
+             $('#update').remove();
+         }
+     }).fail(function(response) {
+         sleep(2000);
+         $('#update').html(`<div class='alert alert-info' role='alert'> Retrying...</div></div></div>`);
+         $.post(UI.api_url+path, p, function(data, status) {
+             var res = jQuery.parseJSON(gdidecode(read(data)));
+             if (res && res.error && res.error.code == '401') {
+                 // Password verification failed
+                 if (authErrorCallback) authErrorCallback(path)
+             } else if (res && res.data === null) {
+                 $('#spinner').remove();
+                 $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data. </div></div></div>`);
+                 $('#update').remove();
+             } else if (res && res.data) {
+                 if (resultCallback) resultCallback(res, path, p)
+                 $('#update').remove();
+             }
+         }).fail(function(response) {
+             sleep(2000);
+             $('#update').html(`<div class='alert alert-info' role='alert'> Retrying...</div></div></div>`);
+             $.post(UI.api_url+path, p, function(data, status) {
+                 var res = jQuery.parseJSON(gdidecode(read(data)));
+                 if (res && res.error && res.error.code == '401') {
+                     // Password verification failed
+                     if (authErrorCallback) authErrorCallback(path)
+                 } else if (res && res.data === null) {
+                     $('#spinner').remove();
+                     $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data. </div></div></div>`);
+                     $('#update').remove();
+                 } else if (res && res.data) {
+                     if (resultCallback) resultCallback(res, path, p)
+                     $('#update').remove();
+                 }
+             }).fail(function(response) {
+                 $('#update').html(`<div class='alert alert-danger' role='alert'> Unable to get data from the server, Something went wrong.</div></div></div>`);
+                 $('#list').html(`<div class='alert alert-danger' role='alert'> We were unable to get data from the server.</div></div></div>`);
+                 $('#spinner').remove();
+             });
+         });
+     });
+ }
 
 /**
  * Search POST request
  * @param params Form params
  * @param resultCallback Success callback
  */
-function requestSearch(params, resultCallback) {
-    var p = {
-        q: params['q'] || null,
-        page_token: params['page_token'] || null,
-        page_index: params['page_index'] || 0
-    };
-    $('#update').html(`<div class='alert alert-info' role='alert'> Connecting...</div></div></div>`);
-    $.post(`/${window.current_drive_order}:search`, p, function(data, status) {
-        var res = jQuery.parseJSON(gdidecode(read(data)));
-        if (res && res.data === null) {
-            $('#spinner').remove();
-            $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data.</div></div></div>`);
-            $('#update').remove();
-        }
-        if (res && res.data) {
-            if (resultCallback) resultCallback(res, p)
-            $('#update').remove();
-        }
-    }).fail(function(response) {
-        sleep(2000);
-        $('#update').html(`<div class='alert alert-info' role='alert'> Retrying...</div></div></div>`);
-        $.post(`/${window.current_drive_order}:search`, p, function(data, status) {
-            var res = jQuery.parseJSON(gdidecode(read(data)));
-            if (res && res.data === null) {
-                $('#spinner').remove();
-                $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data. </div></div></div>`);
-                $('#update').remove();
-            }
-            if (res && res.data) {
-                if (resultCallback) resultCallback(res, p)
-                $('#update').remove();
-            }
-        }).fail(function(response) {
-            sleep(2000);
-            $('#update').html(`<div class='alert alert-info' role='alert'> Retrying...</div></div></div>`);
-            $.post(`/${window.current_drive_order}:search`, p, function(data, status) {
-                var res = jQuery.parseJSON(gdidecode(read(data)));
-                if (res && res.data === null) {
-                    $('#spinner').remove();
-                    $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data. </div></div></div>`);
-                    $('#update').remove();
-                }
-                if (res && res.data) {
-                    if (resultCallback) resultCallback(res, p)
-                    $('#update').remove();
-                }
-            }).fail(function(response) {
-                $('#update').html(`<div class='alert alert-danger' role='alert'> Unable to get data from the server, Something went wrong. 3 Failures</div></div></div>`);
-                $('#list').html(`<div class='alert alert-danger' role='alert'> We were unable to get data from the server.</div></div></div>`);
-                $('#spinner').remove();
-            });
-        });
-    });
-}
+ function requestSearch(params, resultCallback) {
+     var p = {
+         q: query || null,
+         page_token: params['page_token'] || null,
+         page_index: params['page_index'] || 0
+     };
+     $('#update').html(`<div class='alert alert-info' role='alert'> Connecting...</div></div></div>`);
+     $.post(`${UI.api_url}/${window.current_drive_order}:search`, p, function(data, status) {
+         var res = jQuery.parseJSON(gdidecode(read(data)));
+         if (res && res.data === null) {
+             $('#spinner').remove();
+             $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data.</div></div></div>`);
+             $('#update').remove();
+         }
+         if (res && res.data) {
+             if (resultCallback) resultCallback(res, p)
+             $('#update').remove();
+         }
+     }).fail(function(response) {
+         sleep(2000);
+         $('#update').html(`<div class='alert alert-info' role='alert'> Retrying...</div></div></div>`);
+         $.post(`${UI.api_url}/${window.current_drive_order}:search`, p, function(data, status) {
+             var res = jQuery.parseJSON(gdidecode(read(data)));
+             if (res && res.data === null) {
+                 $('#spinner').remove();
+                 $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data. </div></div></div>`);
+                 $('#update').remove();
+             }
+             if (res && res.data) {
+                 if (resultCallback) resultCallback(res, p)
+                 $('#update').remove();
+             }
+         }).fail(function(response) {
+             sleep(2000);
+             $('#update').html(`<div class='alert alert-info' role='alert'> Retrying...</div></div></div>`);
+             $.post(`${UI.api_url}/${window.current_drive_order}:search`, p, function(data, status) {
+                 var res = jQuery.parseJSON(gdidecode(read(data)));
+                 if (res && res.data === null) {
+                     $('#spinner').remove();
+                     $('#list').html(`<div class='alert alert-danger' role='alert'> Server didn't sent any data. </div></div></div>`);
+                     $('#update').remove();
+                 }
+                 if (res && res.data) {
+                     if (resultCallback) resultCallback(res, p)
+                     $('#update').remove();
+                 }
+             }).fail(function(response) {
+                 $('#update').html(`<div class='alert alert-danger' role='alert'> Unable to get data from the server, Something went wrong. 3 Failures</div></div></div>`);
+                 $('#list').html(`<div class='alert alert-danger' role='alert'> We were unable to get data from the server.</div></div></div>`);
+                 $('#spinner').remove();
+             });
+         });
+     });
+ }
 
 // Render file list
 function list(path) {
@@ -669,7 +679,7 @@ function render_search_result_list() {
 
                         let $list = $('#list');
                         requestSearch({
-                                q: window.MODEL.q,
+                                q: query,
                                 page_token: $list.data('nextPageToken'),
                                 // Request next page
                                 page_index: $list.data('curPageIndex') + 1
@@ -688,9 +698,11 @@ function render_search_result_list() {
         }
     }
 
+
+
     // Start requesting data from page 1
     requestSearch({
-        q: window.MODEL.q
+        q: query
     }, searchSuccessCallback);
 }
 
@@ -783,7 +795,7 @@ function onSearchResultItemClick(a_ele) {
     $('#modal-body-space').html(content);
 
     // Request a path
-    $.post(`${searchhost}:id2path`, {
+    $.post(`${UI.api_url}${searchhost}:id2path`, {
         id: a_ele.id
     }, function(data) {
         if (data) {
@@ -805,29 +817,29 @@ function onSearchResultItemClick(a_ele) {
         $('#SearchModelLabel').html(title);
         content = `System Failed to Fetch the File/Folder Link, Retrying`;
         $('#modal-body-space').html(content);
-        sleep(2000);
-        $.post(`${searchhost}:id2path`, {
-            id: a_ele.id
-        }, function(data) {
-            if (data) {
-                var href = `${searchhost}:${data}${can_preview ? '?a=view' : ''}`;
-                if (href.endsWith("/")) {
-                    var ehrefurl = href.replace(new RegExp('#', 'g'), '%23').replace(new RegExp('\\?', 'g'), '%3F');
-                } else {
-                    var ehrefurl = href.replace(new RegExp('#', 'g'), '%23').replace(new RegExp('\\?', 'g'), '%3F') + '?a=view';
-                }
-                title = `Result`;
-                $('#SearchModelLabel').html(title);
-                content = `<a class="btn btn-info" href="${ehrefurl}">Open</a> <a class="btn btn-secondary" href="${ehrefurl}" target="_blank">Open in New Tab</a>`;
-                $('#modal-body-space').html(content);
-                return;
-            }
-            title = `Failed`;
-            $('#SearchModelLabel').html(title);
-            content = `System Failed to Fetch the File/Folder Link, Please close and try again.`;
-            $('#modal-body-space').html(content);
-        })
-    });
+         sleep(2000);
+         $.post(`${UI.api_url}${searchhost}:id2path`, {
+             id: a_ele.id
+         }, function(data) {
+             if (data) {
+                 var href = `${searchhost}:${data}${can_preview ? '?a=view' : ''}`;
+                 if (href.endsWith("/")) {
+                     var ehrefurl = href.replace(new RegExp('#', 'g'), '%23').replace(new RegExp('\\?', 'g'), '%3F');
+                 } else {
+                     var ehrefurl = href.replace(new RegExp('#', 'g'), '%23').replace(new RegExp('\\?', 'g'), '%3F') + '?a=view';
+                 }
+                 title = `Result`;
+                 $('#SearchModelLabel').html(title);
+                 content = `<a class="btn btn-info" href="${ehrefurl}">Open</a> <a class="btn btn-secondary" href="${ehrefurl}" target="_blank">Open in New Tab</a>`;
+                 $('#modal-body-space').html(content);
+                 return;
+             }
+             title = `Failed`;
+             $('#SearchModelLabel').html(title);
+             content = `System Failed to Fetch the File/Folder Link, Please close and try again.`;
+             $('#modal-body-space').html(content);
+         })
+       });
 }
 
 // File display ?a=view
@@ -874,7 +886,7 @@ function file_others(path) {
     var ext = name.split('.').pop().toLowerCase();
     var path = path;
     var url = UI.second_domain_for_dl ? UI.downloaddomain + path : window.location.origin + path;
-    $.post("",
+    $.post(UI.api_url+path,
         function(data) {
             try {
                 var obj = jQuery.parseJSON(gdidecode(read(data)));
@@ -930,8 +942,8 @@ function file_others(path) {
 <div class="container"><br>
 <div class="card text-center">
     <div class="card-body text-center">
-      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> That’s an error.</div>
-    </div><p>The requested URL was not found on this server. That’s all we know.</p>
+      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> Thatâ€™s an error.</div>
+    </div><p>The requested URL was not found on this server. Thatâ€™s all we know.</p>
       <div class="card-text text-center">
       <div class="btn-group text-center">
         <a href="/" type="button" class="btn btn-primary">Homepage</a>
@@ -963,7 +975,7 @@ function file_code(path) {
     var ext = name.split('.').pop().toLowerCase();
     var path = path;
     var url = UI.second_domain_for_dl ? UI.downloaddomain + path : window.location.origin + path;
-    $.post("",
+    $.post(UI.api_url+path,
         function(data) {
             try {
                 var obj = jQuery.parseJSON(gdidecode(read(data)));
@@ -1006,8 +1018,8 @@ function file_code(path) {
 <div class="container"><br>
 <div class="card text-center">
     <div class="card-body text-center">
-      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> That’s an error.</div>
-    </div><p>The requested URL was not found on this server. That’s all we know.</p>
+      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> Thatâ€™s an error.</div>
+    </div><p>The requested URL was not found on this server. Thatâ€™s all we know.</p>
       <div class="card-text text-center">
       <div class="btn-group text-center">
         <a href="/" type="button" class="btn btn-primary">Homepage</a>
@@ -1038,7 +1050,7 @@ function file_video(path) {
     var urlvlc = url.replace(new RegExp('\\[', 'g'), '%5B').replace(new RegExp('\\]', 'g'), '%5D');
     var url_without_https = url.replace(/^(https?:|)\/\//, '')
     var url_base64 = btoa(url)
-    $.post("",
+    $.post(UI.api_url+path,
         function(data) {
             try {
                 var obj = jQuery.parseJSON(gdidecode(read(data)));
@@ -1116,8 +1128,8 @@ ${UI.display_drive_link ? '<a type="button" class="btn btn-info" href="https://d
 <div class="container"><br>
 <div class="card text-center">
     <div class="card-body text-center">
-      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> That’s an error.</div>
-    </div><p>The requested URL was not found on this server. That’s all we know.</p>
+      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> Thatâ€™s an error.</div>
+    </div><p>The requested URL was not found on this server. Thatâ€™s all we know.</p>
       <div class="card-text text-center">
       <div class="btn-group text-center">
         <a href="/" type="button" class="btn btn-primary">Homepage</a>
@@ -1136,7 +1148,7 @@ function file_audio(path) {
     var decodename = unescape(name);
     var path = path;
     var url = UI.second_domain_for_dl ? UI.downloaddomain + path : window.location.origin + path;
-    $.post("",
+    $.post(UI.api_url+path,
         function(data) {
             try {
                 var obj = jQuery.parseJSON(gdidecode(read(data)));
@@ -1187,8 +1199,8 @@ function file_audio(path) {
 <div class="container"><br>
 <div class="card text-center">
     <div class="card-body text-center">
-      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> That’s an error.</div>
-    </div><p>The requested URL was not found on this server. That’s all we know.</p>
+      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> Thatâ€™s an error.</div>
+    </div><p>The requested URL was not found on this server. Thatâ€™s all we know.</p>
       <div class="card-text text-center">
       <div class="btn-group text-center">
         <a href="/" type="button" class="btn btn-primary">Homepage</a>
@@ -1208,7 +1220,7 @@ function file_pdf(path) {
     var path = path;
     var url = UI.second_domain_for_dl ? UI.downloaddomain + path : window.location.origin + path;
     var inline_url = `${url}?inline=true`
-    $.post("",
+    $.post(UI.api_url+path,
         function(data) {
             try {
                 var obj = jQuery.parseJSON(gdidecode(read(data)));
@@ -1317,8 +1329,8 @@ function file_pdf(path) {
 <div class="container"><br>
 <div class="card text-center">
     <div class="card-body text-center">
-      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> That’s an error.</div>
-    </div><p>The requested URL was not found on this server. That’s all we know.</p>
+      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> Thatâ€™s an error.</div>
+    </div><p>The requested URL was not found on this server. Thatâ€™s all we know.</p>
       <div class="card-text text-center">
       <div class="btn-group text-center">
         <a href="/" type="button" class="btn btn-primary">Homepage</a>
@@ -1382,7 +1394,7 @@ function file_image(path) {
                   `;
         }
     }
-    $.post("",
+    $.post(UI.api_url+path,
         function(data) {
             try {
                 var obj = jQuery.parseJSON(gdidecode(read(data)));
@@ -1425,8 +1437,8 @@ function file_image(path) {
 <div class="container"><br>
 <div class="card text-center">
     <div class="card-body text-center">
-      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> That’s an error.</div>
-    </div><p>The requested URL was not found on this server. That’s all we know.</p>
+      <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> Thatâ€™s an error.</div>
+    </div><p>The requested URL was not found on this server. Thatâ€™s all we know.</p>
       <div class="card-text text-center">
       <div class="btn-group text-center">
         <a href="/" type="button" class="btn btn-primary">Homepage</a>

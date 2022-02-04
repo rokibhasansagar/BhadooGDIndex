@@ -7,7 +7,7 @@ const clientId = '746508046283-m2viej9ibc2umfhtve1hldr8da1amqlj.apps.googleuserc
 const clientSecret = 'iiC8G8u93OazY3-huOsbfuhi';
 const grantType = 'authorization_code';
 const redirectURI = 'urn:ietf:wg:oauth:2.0:oob';
-const jsURL = 'https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.5/worker/worker-super.js';
+const jsURL = 'https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.8/worker/worker-super.js';
 
 async function handleRequest(request) {
     let title = getParameterByName(request.url, 'site_name') || 'Bhadoo GDIndex';
@@ -45,7 +45,7 @@ async function handleRequest(request) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
-    <title>Bhadoo GDIndex - Beta</title>
+    <title>Bhadoo GDIndex - Generator</title>
     <link rel="icon" type="image/x-icon" href="https://www.cloudflare.com/favicon.ico"/>
     <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.0/dist/slate/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>

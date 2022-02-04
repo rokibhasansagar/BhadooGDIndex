@@ -1,6 +1,6 @@
 {
-  "name": "@googledrive/index",
-  "version": "2.1.5",
+  "name": "rokibhasansagar/BhadooGDIndex",
+  "version": "2.1.8",
   "description": "A Google Drive Index to List, Watch and Download Files using a Beautiful UI.",
   "main": "README.md",
   "keywords": [
@@ -8,12 +8,16 @@
   ],
   "author": "Parveen Bhadoo",
   "license": "MIT",
+  "contributors": {
+    "name" : "Rokib Hasan Sagar",
+    "email" : "10854164+rokibhasansagar@users.noreply.github.com"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index.git"
+    "url": "git+https://github.com/rokibhasansagar/BhadooGDIndex.git"
   },
   "bugs": {
-    "url": "https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/issues"
+    "url": "https://github.com/rokibhasansagar/BhadooGDIndex/issues"
   },
-  "homepage": "https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/blob/master/README.md"
+  "homepage": "https://github.com/rokibhasansagar/BhadooGDIndex/blob/master/README.md"
 }

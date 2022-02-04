@@ -7,9 +7,6 @@
                              v 2.1.8
 A Script Redesigned by Parveen Bhadoo from GOIndex at https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index */
 
-// WARNING WARNING WARNING
-// This Script doesn't support Folder ID, use root or Shared Drive ID only
-
 // add multiple serviceaccounts as {}, {}, {}, random account will be selected by each time app is opened.
 const serviceaccounts = [
 {}
@@ -28,26 +25,21 @@ const authConfig = {
     "refresh_token": "", // Authorize token
     "service_account": false, // true if you're using Service Account instead of user account
     "service_account_json": randomserviceaccount, // don't touch this one
-    "files_list_page_size": 50,
-    "search_result_list_page_size": 50,
+    "files_list_page_size": 100,
+    "search_result_list_page_size": 100,
     "enable_cors_file_down": false,
+    "cors_domain": "*",
     "enable_password_file_verify": true, // support for .password file
     "direct_link_protection": false, // protects direct links with Display UI
     "lock_folders": false, // keeps folders and search locked if auth in on, and allows individual file view
-    "enable_auth0_com": false, // follow guide to add auth0.com to secure index with powerful login based system
+    //"enable_auth0_com": false, // follow guide to add auth0.com to secure index with powerful login based system
     "roots":[
-      {
-          "id": "root",
-          "name": "Drive One",
-          "protect_file_link": false,
-         // "auth": {"username":"password"} /* Remove double slash before "auth" to activate id password protection */
-      },
-      {
-          "id": "root",
-          "name": "Drive Two",
-          "protect_file_link": false,
-         // "auth": {"username":"password", "username1":"password1"} /* Remove double slash before "auth" to activate id password protection */
-      },
+        {
+            "id": "root",
+            "name": "Drive One",
+            "protect_file_link": false,
+        // "auth": {"username":"password"} /* Remove double slash before "auth" to activate id password protection */
+        },
     ]};
 
     const auth0 = {
@@ -76,6 +68,7 @@ const authConfig = {
 const uiConfig = {
     "theme": "slate", // switch between themes, default set to slate, select from https://github.com/rokibhasansagar/BhadooGDIndex#themes
     "version": "2.1.8", // don't touch this one. get latest code using generator at https://bhadoogen.phantomzone.workers.dev
+    "api_url": "https://REPLACE_WITH_API_SITE_WHERE_YOU_ARE_DEPLOYING_THIS_CODE",
     // If you're using Image then set to true, If you want text then set it to false
     "logo_image": true, // true if you're using image link in next option.
     "logo_height": "", // only if logo_image is true
@@ -83,12 +76,12 @@ const uiConfig = {
     "favicon": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.8/images/favicon.ico",
     // if logo is true then link otherwise just text for name
     "logo_link_name": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.8/images/bhadoo-cloud-logo-white.svg",
-    "fixed_header": true, // If you want the footer to be flexible or fixed.
-    "header_padding": "80", // Value 80 for fixed header, Value 20 for flexible header. Required to be changed accordingly in some themes.
+    "fixed_header": false, // If you want the footer to be flexible or fixed.
+    "header_padding": "60", // Value 60 for fixed header, Value 20 for flexible header. Required to be changed accordingly in some themes.
     "nav_link_1": "Home", // change navigation link name
     "nav_link_3": "Current Path", // change navigation link name
     "nav_link_4": "Contact", // change navigation link name
-    "show_logout_button": false, // shows logout button if auth0.com is active
+    "show_logout_button": true, // shows logout button if auth0.com is active
     "fixed_footer": false, // If you want the footer to be flexible or fixed.
     "hide_footer": true, // hides the footer from site entirely.
     "header_style_class": "navbar-dark bg-primary", // navbar-dark bg-primary || navbar-dark bg-dark || navbar-light bg-light
@@ -108,11 +101,11 @@ const uiConfig = {
     "credit": true, // Set this to true to give us credit
     "display_size": true, // Set this to false to hide display file size
     "display_time": false, // Set this to false to hide display modified time for folder and files
-    "display_download": true, // Set this to false to hide download icon for folder and files on main index
+    "display_download": false, // Set this to false to hide download icon for folder and files on main index
     "disable_player": false, // Set this to true to hide audio and video players
     "custom_srt_lang": "", // Subtitle Language Code for Custom .vtt language.
     "disable_video_download": false, // Remove Download, Copy Button on Videos
-    "second_domain_for_dl": false, // If you want to display other URL for Downloading to protect your main domain.
+    "second_domain_for_dl": true, // If you want to display other URL for Downloading to protect your main domain.
     "downloaddomain": domain_for_dl, // Ignore this and set domains at top of this page after service accounts.
     "videodomain": video_domain_for_dl, // Ignore this and set domains at top of this page after service accounts.
     "poster": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.8/images/poster.jpg", // Video poster URL or see Readme to how to load from Drive
@@ -125,7 +118,7 @@ const uiConfig = {
     "plyr_io_video_resolution": "16:9", // For reference, visit: https://github.com/sampotts/plyr#options
     "unauthorized_owner_link": "https://telegram.dog/Telegram", // Unauthorized Error Page Link to Owner
     "unauthorized_owner_email": "abuse@telegram.org", // Unauthorized Error Page Owner Email
-    "search_all_drives": false // gives gdrive links on search and searches all drives on that account, doesn't require adding
+    "modified_function_no_use": false // don't touch this one
 };
 
 
@@ -147,123 +140,70 @@ const uiConfig = {
 // DON'T TOUCH BELOW THIS UNLESS YOU KNOW WHAT YOU'RE DOING
 var gds = [];
 
+var current_drive_order = 0
+
+const configjs = `window.location.pathname.includes(":search")?window.MODEL=JSON.parse('{"is_search_page":true,"root_type":1}'):window.MODEL=JSON.parse('{"is_search_page":false,"root_type":1}');
+window.drive_names = JSON.parse('${JSON.stringify(authConfig.roots.map(it => it.name))}');
+window.current_drive_order = ${current_drive_order};
+window.UI = JSON.parse('${JSON.stringify(uiConfig)}');`
+
 function html(current_drive_order = 0, model = {}) {
-    return `<!DOCTYPE html>
-<html>
+    return `const path = window.location.pathname;
+if (path.includes(":search")) { window.MODEL = JSON.parse('{"is_search_page":true,"root_type":1}'); } else { window.MODEL = JSON.parse('{"is_search_page":false,"root_type":1}'); };
+window.drive_names = JSON.parse('${JSON.stringify(authConfig.roots.map(it => it.name))}');
+window.current_drive_order = ${current_drive_order};
+window.UI = JSON.parse('${JSON.stringify(uiConfig)}');};
+
+const homepage = `<html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
-  <title>${authConfig.siteName}</title>
-  <meta name="robots" content="noindex" />
-  <link rel="icon" href="${uiConfig.favicon}">
-  <script>
-    window.drive_names = JSON.parse('${JSON.stringify(authConfig.roots.map(it => it.name))}');
-    window.MODEL = JSON.parse('${JSON.stringify(model)}');
-    window.current_drive_order = ${current_drive_order};
-    window.UI = JSON.parse('${JSON.stringify(uiConfig)}');
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.plyr.io/${uiConfig.plyr_io_version}/plyr.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.0/dist/${uiConfig.theme}/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-  <style>a{color:${uiConfig.css_a_tag_color};}p{color:${uiConfig.css_p_tag_color};}</style>
-  <script src="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/js/app.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.12.313/build/pdf.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/marked@4.0.0/marked.min.js"></script>
+<title>API</title>
+<style>
+body{
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+    color:#b0bec5;
+    display:table;
+    font-weight:100;
+    font-family:Lato
+}
+.container{
+    text-align:center;
+    display:table-cell;
+    vertical-align:middle
+}
+.content{
+    text-align:center;
+    display:inline-block
+}
+.message{
+    font-size:80px;
+    margin-bottom:40px
+}
+.submessage{
+    font-size:40px;
+    margin-bottom:40px
+}
+.copyright{
+    font-size:20px;
+}
+a{
+    text-decoration:none;
+    color:#3498db
+}
+
+</style>
 </head>
 <body>
+<div class="container">
+<div class="content">
+<div class="message">Index API</div>
+<div class="submessage">All Systems Operational</div>
+<div class="copyright">Hash Hackers and Bhadoo Cloud Cyber Systems</div>
+</div>
+</div>
 </body>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
-  <script src="https://cdn.plyr.io/${uiConfig.plyr_io_version}/plyr.polyfilled.js"></script>
-</html>`;
-};
-
-const homepage = `<!DOCTYPE html>
-<html>
-   <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
-      <title>${authConfig.siteName}</title>
-      <meta name="robots" content="noindex">
-      <link rel="icon" href="${uiConfig.favicon}">
-      <script>
-          window.drive_names = JSON.parse('${JSON.stringify(authConfig.roots.map(it => it.name))}');
-          window.UI = JSON.parse('${JSON.stringify(uiConfig)}');
-      </script>
-      <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-      <link rel="stylesheet" href="https://cdn.plyr.io/${uiConfig.plyr_io_version}/plyr.css" />
-      <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.0/dist/${uiConfig.theme}/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-      <style>a{color:${uiConfig.css_a_tag_color};}p{color:${uiConfig.css_p_tag_color};}</style>
-   </head>
-   <body>
-      <header>
-         <div id="nav">
-            <nav class="navbar navbar-expand-lg${uiConfig.fixed_header ?' fixed-top': ''} ${uiConfig.header_style_class}">
-               <div class="container-fluid">
-                 <a class="navbar-brand" href="/">${uiConfig.logo_image ? '<img border="0" alt="'+uiConfig.company_name+'" src="'+uiConfig.logo_link_name+'" height="'+uiConfig.height+'" width="'+uiConfig.logo_width+'">' : uiConfig.logo_link_name}</a>
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                          <a class="nav-link" href="/">${uiConfig.nav_link_1}</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Current Path</a>
-                           <div class="dropdown-menu" aria-labelledby="navbarDropdown"><a class="dropdown-item" href="/">&gt; ${uiConfig.nav_link_1}</a></div>
-                        </li>
-                        <li class="nav-item">
-                           <a class="nav-link" href="${uiConfig.contact_link}" target="_blank">${uiConfig.nav_link_4}</a>
-                        </li>
-                        ${uiConfig.show_logout_button ?'<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>': ''}
-                     </ul>
-                     <form class="d-flex" method="get" action="/0:search">
-                        <input class="form-control me-2" name="q" type="search" placeholder="Search" aria-label="Search" value="" required="">
-                        <button class="btn btn btn-danger" onclick="if($('#search_bar_form>input').val()) $('#search_bar_form').submit();" type="submit">Search</button>
-                     </form>
-                  </div>
-               </div>
-            </nav>
-         </div>
-      </header>
-      <div>
-         <div id="content" style="padding-top: ${uiConfig.header_padding}px;">
-            <div class="container">
-               <div class="alert alert-primary d-flex align-items-center" role="alert" style="margin-bottom: 0; padding-bottom: 0rem;">
-                  <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                     <ol class="breadcrumb" id="folderne">
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                     </ol>
-                  </nav>
-               </div>
-               <div id="list" class="list-group text-break">
-
-               </div>
-               <div class="${uiConfig.file_count_alert_class} text-center" role="alert" id="count">Total <span id="n_drives" class="number text-center"></span> drives</div>
-            </div>
-         </div>
-         <div class="modal fade" id="SearchModel" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="SearchModelLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-               <div class="modal-content">
-                  <div class="modal-header">
-                     <h5 class="modal-title" id="SearchModelLabel"></h5>
-                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                     <span aria-hidden="true"></span>
-                     </button>
-                  </div>
-                  <div class="modal-body" id="modal-body-space">
-                  </div>
-                  <div class="modal-footer" id="modal-body-space-buttons">
-                  </div>
-               </div>
-            </div>
-         </div>
-         <br>
-         <footer class="footer mt-auto py-3 text-muted ${uiConfig.footer_style_class}" style="${uiConfig.fixed_footer ?'position: fixed; ': ''}left: 0; bottom: 0; width: 100%; color: white; z-index: 9999;${uiConfig.hide_footer ? ' display:none;': ' display:block;'}"> <div class="container" style="width: auto; padding: 0 10px;"> <p class="float-end"> <a href="#">Back to top</a> </p> ${uiConfig.credit ? '<p>Redesigned with <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="red" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" /> </svg> by <a href="https://www.npmjs.com/package/@googledrive/index" target="_blank">TheFirstSpeedster</a>, based on Open Source Softwares.</p>' : ''} <p>© ${uiConfig.copyright_year} - <a href=" ${uiConfig.company_link}" target="_blank"> ${uiConfig.company_name}</a>, All Rights Reserved.</p> </div> </footer>
-      </div>
-   </body>
-  <script src="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/assets/homepage.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
 </html>`
 
 const unauthorized = `<html>
@@ -546,310 +486,21 @@ const JSONWebToken = {
     }
 };
 
-// auth0.com functions
-const AUTH0_DOMAIN  = auth0.domain
-const AUTH0_CLIENT_ID  = auth0.clientId
-const AUTH0_CLIENT_SECRET = auth0.clientSecret
-const AUTH0_CALLBACK_URL = auth0.callbackUrl
-const AUTH0_LOGOUT_URL = auth0.logoutUrl
-const SALT = `keys565`
-
-const cookieKey = 'AUTH0-AUTH'
-
-const generateStateParam = async () => {
-  if(authConfig['enable_auth0_com']){
-    const resp = await fetch('https://csprng.xyz/v1/api')
-    const { Data: state } = await resp.json()
-    await AUTH_STORE.put(`state-${state}`, true, { expirationTtl: 60 })
-    return state
-  }
-}
-
-const exchangeCode = async code => {
-  const body = JSON.stringify({
-    grant_type: 'authorization_code',
-    client_id: auth0.clientId,
-    client_secret: auth0.clientSecret,
-    code,
-    redirect_uri: auth0.callbackUrl,
-  })
-
-  return persistAuth(
-    await fetch(AUTH0_DOMAIN  + '/oauth/token', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body,
-    }),
-  )
-}
-
-// https://github.com/pose/webcrypto-jwt/blob/master/index.js
-const decodeJWT = function(token) {
-  var output = token
-    .split('.')[1]
-    .replace(/-/g, '+')
-    .replace(/_/g, '/')
-  switch (output.length % 4) {
-    case 0:
-      break
-    case 2:
-      output += '=='
-      break
-    case 3:
-      output += '='
-      break
-    default:
-      throw 'Illegal base64url string!'
-  }
-
-  const result = atob(output)
-
-  try {
-    return decodeURIComponent(escape(result))
-  } catch (err) {
-    console.log(err)
-    return result
-  }
-}
-
-const validateToken = token => {
-  try {
-    const dateInSecs = d => Math.ceil(Number(d) / 1000)
-    const date = new Date()
-
-    let iss = token.iss
-
-    // ISS can include a trailing slash but should otherwise be identical to
-    // the AUTH0_DOMAIN, so we should remove the trailing slash if it exists
-    iss = iss.endsWith('/') ? iss.slice(0, -1) : iss
-
-    if (iss !== AUTH0_DOMAIN) {
-      throw new Error(
-        `Token iss value (${iss}) doesn't match AUTH0_DOMAIN (${AUTH0_DOMAIN})`,
-      )
-    }
-
-    if (token.aud !== AUTH0_CLIENT_ID) {
-      throw new Error(
-        `Token aud value (${token.aud}) doesn't match AUTH0_CLIENT_ID (${AUTH0_CLIENT_ID})`,
-      )
-    }
-
-    if (token.exp < dateInSecs(date)) {
-      throw new Error(`Token exp value is before current time`)
-    }
-
-    // Token should have been issued within the last day
-    date.setDate(date.getDate() - 1)
-    if (token.iat < dateInSecs(date)) {
-      throw new Error(`Token was issued before one day ago and is now invalid`)
-    }
-
-    return true
-  } catch (err) {
-    console.log(err.message)
-    return false
-  }
-}
-
-const persistAuth = async exchange => {
-  const body = await exchange.json()
-
-  if (body.error) {
-    throw new Error(body.error)
-  }
-
-  const date = new Date()
-  date.setDate(date.getDate() + 1)
-
-  const decoded = JSON.parse(decodeJWT(body.id_token))
-  const validToken = validateToken(decoded)
-  if (!validToken) {
-    return { status: 401 }
-  }
-
-  const text = new TextEncoder().encode(`${SALT}-${decoded.sub}`)
-  const digest = await crypto.subtle.digest({ name: 'SHA-256' }, text)
-  const digestArray = new Uint8Array(digest)
-  const id = btoa(String.fromCharCode.apply(null, digestArray))
-
-  await AUTH_STORE.put(id, JSON.stringify(body))
-
-  const headers = {
-    Location: '/',
-    'Set-cookie': `${cookieKey}=${id}; Secure; HttpOnly; SameSite=Lax; Expires=${date.toUTCString()}`,
-  }
-
-  return { headers, status: 302 }
-}
-
-const redirectUrl = state =>
-  `${auth0.domain}/authorize?response_type=code&client_id=${
-    auth0.clientId
-  }&redirect_uri=${
-    auth0.callbackUrl
-  }&scope=openid%20profile%20email&state=${encodeURIComponent(state)}`
-
-const handleRedirect = async event => {
-  const url = new URL(event.request.url)
-
-  const state = url.searchParams.get('state')
-  if (!state) {
-    return null
-  }
-
-  const storedState = await AUTH_STORE.get(`state-${state}`)
-  if (!storedState) {
-    return null
-  }
-
-  const code = url.searchParams.get('code')
-  if (code) {
-    return exchangeCode(code)
-  }
-
-  return null
-}
-
-function getCookie(cookie,name) {
-    var nameEQ = name + "=";
-    var ca = cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-    }
-    return null;
-}
-
-async function getAssetFromKV(event){
-  return null
-}
-const verify = async event => {
-  const cookieHeader = event.request.headers.get('Cookie')
-
-  if (cookieHeader && cookieHeader.includes(cookieKey)) {
-    // cookieHeader.includes(cookieKey)
-    // throw new Error(getCookie(cookieHeader,cookieKey))
-    // const cookies = cookie.parse(cookieHeader)
-    if (!getCookie(cookieHeader,cookieKey)) return {}
-    const sub = getCookie(cookieHeader,cookieKey)
-
-    const kvData = await AUTH_STORE.get(sub)
-    if (!kvData) {
-      return {}
-      //throw new Error('Unable to find authorization data')
-    }
-
-    let kvStored
-    try {
-      kvStored = JSON.parse(kvData)
-    } catch (err) {
-      throw new Error('Unable to parse auth information from Workers KV')
-    }
-
-    const { access_token: accessToken, id_token: idToken } = kvStored
-    const userInfo = JSON.parse(decodeJWT(idToken))
-    return { accessToken, idToken, userInfo }
-  }
-  return {}
-}
-
-const authorize = async event => {
-  const authorization = await verify(event)
-  if (authorization.accessToken) {
-    return [true, { authorization }]
-  } else {
-    const state = await generateStateParam()
-    return [false, { redirectUrl: redirectUrl(state) }]
-  }
-}
-
-// const logout = event => {
-//   const cookieHeader = event.request.headers.get('Cookie')
-//   if (cookieHeader && cookieHeader.includes(cookieKey)) {
-//     return {
-//       headers: {
-//         'Set-cookie': `${cookieKey}=""; HttpOnly; Secure; SameSite=Lax;`,
-//       },
-//     }
-//   }
-//   return {}
-// }
-
-const hydrateState = (state = {}) => ({
-  element: el => {
-    el.setInnerContent(JSON.stringify(state))
-  },
-})
-
-
-// addEventListener('fetch', event => event.respondWith(handleRequest(event)))
-
-// see the readme for more info on what these config options do!
-const config = {
-  // opt into automatic authorization state hydration
-  hydrateState: true,
-  // return responses at the edge
-  originless: true,
-}
-
-async function loginHandleRequest(event) {
-  try {
-    let request = event.request
-
-    const [authorized, { authorization, redirectUrl }] = await authorize(event)
-
-    const url = new URL(event.request.url)
-    if (url.pathname === '/auth') {
-      const authorizedResponse = await handleRedirect(event)
-      if (!authorizedResponse) {
-        let redirectHeaders = new Headers()
-        redirectHeaders.set('Refresh', `1; url=${auth0.logoutUrl}`)
-        redirectHeaders.set('Set-cookie', `${cookieKey}=""; HttpOnly; Secure; SameSite=Lax;`)
-        return new Response('Unauthorized - Redirecting', { status: 302, headers: redirectHeaders })
-
-      }
-      response = new Response(request.body, {
-        request,
-        ...authorizedResponse,
-      })
-      return response
-    }
-
-    if (!authorized) {
-      return Response.redirect(redirectUrl)
-    }
-
-    if (url.pathname === '/logout') {
-
-      let redirectHeaders = new Headers()
-      redirectHeaders.set('Location', `${auth0.domain}/v2/logout?client_id=${auth0.clientId}&returnTo=${auth0.logoutUrl}`)
-      redirectHeaders.set('Set-cookie', `${cookieKey}=""; HttpOnly; Secure; SameSite=Lax;`)
-
-      return new Response('', {
-          status: 302,
-          headers: redirectHeaders
-        })
-    }
-
-    return null
-
-  } catch (err) {
-    return new Response(err.toString())
-  }
-}
-//end auth0.com function
-
 addEventListener('fetch', event => {
     event.respondWith(handleRequest(event.request, event));
 });
 
 async function handleRequest(request, event) {
-    var loginCheck = await loginHandleRequest(event)
-    if(authConfig['enable_auth0_com'] && loginCheck != null){return loginCheck}
+    //var loginCheck = await loginHandleRequest(event)
+    //if(authConfig['enable_auth0_com'] && loginCheck != null){return loginCheck}
     const region = request.headers.get('cf-ipcountry').toUpperCase();
+    const asn_servers = '';
+    try {
     const asn_servers = request.cf.asn;
+    }
+    catch {
+    const asn_servers = 111;
+    }
     const referer = request.headers.get("Referer");
     if (gds.length === 0) {
         for (let i = 0; i < authConfig.roots.length; i++) {
@@ -875,7 +526,8 @@ async function handleRequest(request, event) {
         return new Response('', {
             status: 307,
             headers: {
-                'Location': `${url.origin}/0:/`
+                'Location': authConfig.cors_domain,
+                "Access-Control-Allow-Origin": authConfig.cors_domain,
             }
         });
     }
@@ -885,22 +537,33 @@ async function handleRequest(request, event) {
             status: 200,
             headers: {
                 "content-type": "text/html;charset=UTF-8",
+                "Access-Control-Allow-Origin": authConfig.cors_domain,
             },
         })
     }
-    if (path.toLowerCase() == '/admin') {
+    if (path.toLowerCase() == '/config.js') {
+        return new Response(configjs, {
+            status: 200,
+            headers: {
+                "content-type": "text/javascript;charset=UTF-8",
+                "Access-Control-Allow-Origin": authConfig.cors_domain,
+            },
+        })
+    } if (path.toLowerCase() == '/admin') {
         return Response.redirect("https://www.npmjs.com/package/@googledrive/index", 301)
     } else if (blocked_region.includes(region)) {
         return new Response(asn_blocked, {
             status: 403,
             headers: {
                 "content-type": "text/html;charset=UTF-8",
+                "Access-Control-Allow-Origin": authConfig.cors_domain,
             },
         })
     } else if (blocked_asn.includes(asn_servers)) {
         return new Response(asn_blocked, {
                 headers: {
-                    'content-type': 'text/html;charset=UTF-8'
+                    'content-type': 'text/html;charset=UTF-8',
+                    "Access-Control-Allow-Origin": authConfig.cors_domain,
                 },
                 status: 401
             });
@@ -910,7 +573,8 @@ async function handleRequest(request, event) {
       if (referer == null){
           return new Response(directlink, {
                   headers: {
-                      'content-type': 'text/html;charset=UTF-8'
+                      'content-type': 'text/html;charset=UTF-8',
+                      "Access-Control-Allow-Origin": authConfig.cors_domain,
                   },
                   status: 401
               });
@@ -920,7 +584,8 @@ async function handleRequest(request, event) {
       } else {
           return new Response(directlink, {
                   headers: {
-                      'content-type': 'text/html;charset=UTF-8'
+                      'content-type': 'text/html;charset=UTF-8',
+                      "Access-Control-Allow-Origin": authConfig.cors_domain,
                   },
                   status: 401
               });
@@ -946,13 +611,14 @@ async function handleRequest(request, event) {
             } else {
                 const params = url.searchParams;
                 return new Response(html(gd.order, {
-                    q: params.get("q").replace(/'/g, "").replace(/"/g, "") || '',
+                    //q: params.get("q").replace(/'/g, "").replace(/"/g, "") || '',
                     is_search_page: true,
                     root_type: gd.root_type
                 }), {
                     status: 200,
                     headers: {
-                        'Content-Type': 'text/html; charset=utf-8'
+                        'Content-Type': 'text/javascript; charset=utf-8',
+                        "Access-Control-Allow-Origin": authConfig.cors_domain,
                     }
                 });
             }
@@ -992,7 +658,8 @@ async function handleRequest(request, event) {
         }), {
             status: 200,
             headers: {
-                'Content-Type': 'text/html; charset=utf-8'
+                'Content-Type': 'text/javascript; charset=utf-8',
+                "Access-Control-Allow-Origin": authConfig.cors_domain,
             }
         });
     } else {
@@ -1013,6 +680,7 @@ async function handleRequest(request, event) {
                   status: 404,
                   headers: {
                       "content-type": "text/html;charset=UTF-8",
+                      "Access-Control-Allow-Origin": authConfig.cors_domain,
                   },
               })
       }
@@ -1055,7 +723,9 @@ async function apiRequest(request, gd) {
     let option = {
         status: 200,
         headers: {
-            'Access-Control-Allow-Origin': '*'
+            "Access-Control-Allow-Origin": authConfig.cors_domain,
+            "Access-Control-Allow-Methods": "GET,HEAD,POST,OPTIONS",
+            "Access-Control-Max-Age": "86400",
         }
     }
 
@@ -1073,11 +743,25 @@ async function apiRequest(request, gd) {
         }
 
         let list_result = await deferred_list_result;
-        return new Response(rewrite(gdiencode(JSON.stringify(list_result), option)));
+        return new Response(rewrite(gdiencode(JSON.stringify(list_result), option)), {
+            status: 200,
+            headers: {
+                "Access-Control-Allow-Origin": authConfig.cors_domain,
+                "Access-Control-Allow-Methods": "GET,HEAD,POST,OPTIONS",
+                "Access-Control-Max-Age": "86400",
+            }
+        });
     } else {
         let file = await gd.file(path);
         let range = request.headers.get('Range');
-        return new Response(rewrite(gdiencode(JSON.stringify(file))));
+        return new Response(rewrite(gdiencode(JSON.stringify(file))), {
+            status: 200,
+            headers: {
+                "Access-Control-Allow-Origin": authConfig.cors_domain,
+                "Access-Control-Allow-Methods": "GET,HEAD,POST,OPTIONS",
+                "Access-Control-Max-Age": "86400",
+            }
+        });
     }
 }
 
@@ -1086,20 +770,31 @@ async function handleSearch(request, gd) {
     const option = {
         status: 200,
         headers: {
-            'Access-Control-Allow-Origin': '*'
+            "Access-Control-Allow-Origin": authConfig.cors_domain,
+            "Access-Control-Allow-Methods": "GET,HEAD,POST,OPTIONS",
+            "Access-Control-Max-Age": "86400",
         }
     };
     let form = await request.formData();
     let search_result = await
     gd.search(form.get('q') || '', form.get('page_token'), Number(form.get('page_index')));
-    return new Response(rewrite(gdiencode(JSON.stringify(search_result), option)));
+        return new Response(rewrite(gdiencode(JSON.stringify(search_result), option)), {
+            status: 200,
+            headers: {
+                "Access-Control-Allow-Origin": authConfig.cors_domain,
+                "Access-Control-Allow-Methods": "GET,HEAD,POST,OPTIONS",
+                "Access-Control-Max-Age": "86400",
+            }
+        });
 }
 
 async function handleId2Path(request, gd) {
     const option = {
         status: 200,
         headers: {
-            'Access-Control-Allow-Origin': '*'
+            "Access-Control-Allow-Origin": authConfig.cors_domain,
+            "Access-Control-Allow-Methods": "GET,HEAD,POST,OPTIONS",
+            "Access-Control-Max-Age": "86400",
         }
     };
     let form = await request.formData();
@@ -1147,7 +842,8 @@ class googleDrive {
             _401 = new Response(unauthorized, {
                 headers: {
                     'WWW-Authenticate': `Basic realm="goindex:drive:${this.order}"`,
-                    'content-type': 'text/html;charset=UTF-8'
+                    'content-type': 'text/html;charset=UTF-8',
+                    "Access-Control-Allow-Origin": authConfig.cors_domain,
                 },
                 status: 401
             });
@@ -1190,6 +886,7 @@ class googleDrive {
             return new Response(await res.text(), {
                 headers: {
                     "content-type": "text/html;charset=UTF-8",
+                    "Access-Control-Allow-Origin": authConfig.cors_domain,
                 },
             })
         }
@@ -1206,6 +903,7 @@ class googleDrive {
                 status: 404,
                 headers: {
                     "content-type": "text/html;charset=UTF-8",
+                    "Access-Control-Allow-Origin": authConfig.cors_domain,
                 },
             })
         }
@@ -1214,6 +912,7 @@ class googleDrive {
             return new Response(await res.text(), {
                 headers: {
                     "content-type": "text/html;charset=UTF-8",
+                    "Access-Control-Allow-Origin": authConfig.cors_domain,
                 },
             })
         }
@@ -1246,12 +945,17 @@ class googleDrive {
         let response;
         for (let i = 0; i < 3; i++) {
             response = await fetch(url, requestOption);
+            console.log(response.status, "API Trying, Try " , i);
             if (response.status === 200) {
+                console.log(response.status, "API Success, Try " , i);
                 break;
             }
             await this.sleep(800 * (i + 1));
         }
         let obj = await response.json();
+        if (obj.files[0] == undefined) {
+           return null;
+        }
         // console.log(obj);
         return obj.files[0];
     }
@@ -1315,7 +1019,9 @@ class googleDrive {
         let response;
         for (let i = 0; i < 3; i++) {
             response = await fetch(url, requestOption);
+            console.log(response.status, "API Trying, Try " , i);
             if (response.status === 200) {
+                console.log(response.status, "API Success, Try " , i);
                 break;
             }
             await this.sleep(800 * (i + 1));
@@ -1351,7 +1057,7 @@ class googleDrive {
         const types = DriveFixedTerms.gd_root_type;
         const is_user_drive = this.root_type === types.user_drive;
         const is_share_drive = this.root_type === types.share_drive;
-        const search_all_drives = `${uiConfig.search_all_drives}`
+        const modified_function_no_use = `${uiConfig.modified_function_no_use}`
         const empty_result = {
             nextPageToken: null,
             curPageIndex: page_index,
@@ -1369,7 +1075,7 @@ class googleDrive {
         let name_search_str = `name contains '${words.join("' AND name contains '")}'`;
         let params = {};
         if (is_user_drive) {
-            if (search_all_drives == 'true') {
+            if (modified_function_no_use == 'true') {
                 params.corpora = 'allDrives';
                 params.includeItemsFromAllDrives = true;
                 params.supportsAllDrives = true;
@@ -1379,12 +1085,13 @@ class googleDrive {
             }
         }
         if (is_share_drive) {
-            if (search_all_drives == 'true') {
+            if (modified_function_no_use == 'true') {
                 params.corpora = 'allDrives';
             }
             else {
-                params.corpora = 'drive';
-                params.driveId = this.root.id;
+                params.corpora = 'allDrives';
+                //params.corpora = 'drive';
+                //params.driveId = this.root.id;
             }
             params.includeItemsFromAllDrives = true;
             params.supportsAllDrives = true;
@@ -1403,7 +1110,9 @@ class googleDrive {
         let response;
         for (let i = 0; i < 3; i++) {
             response = await fetch(url, requestOption);
+            console.log(response.status, "API Trying, Try " , i);
             if (response.status === 200) {
+                console.log(response.status, "API Success, Try " , i);
                 break;
             }
             await this.sleep(800 * (i + 1));
@@ -1529,25 +1238,33 @@ class googleDrive {
         let response;
         for (let i = 0; i < 3; i++) {
             response = await fetch(url, requestOption);
+            console.log(response.status, "API Trying, Try " , i);
             if (response.status === 200) {
+                console.log(response.status, "API Success, Try " , i);
                 break;
             }
             await this.sleep(800 * (i + 1));
         }
         let obj = await response.json();
         if (obj.files[0] == undefined) {
-            return null;
+           return null;
         }
         return obj.files[0].id;
     }
 
     async accessToken() {
-        console.log("accessToken");
+        //console.log("accessToken");
         if (this.authConfig.expires == undefined || this.authConfig.expires < Date.now()) {
             const obj = await this.fetchAccessToken();
             if (obj.access_token != undefined) {
                 this.authConfig.accessToken = obj.access_token;
                 this.authConfig.expires = Date.now() + 3500 * 1000;
+            } else {
+                const obj = await this.fetchAccessToken();
+                if (obj.access_token != undefined) {
+                    this.authConfig.accessToken = obj.access_token;
+                    this.authConfig.expires = Date.now() + 3500 * 1000;
+                }
             }
         }
         return this.authConfig.accessToken;
@@ -1584,7 +1301,9 @@ class googleDrive {
         let response;
         for (let i = 0; i < 3; i++) {
             response = await fetch(url, requestOption);
+            console.log(response.status, "API Trying, Try " , i);
             if (response.status === 200) {
+                console.log(response.status, "API Success, Try " , i);
                 break;
             }
             await this.sleep(800 * (i + 1));
@@ -1593,14 +1312,16 @@ class googleDrive {
     }
 
     async fetch200(url, requestOption) {
-      let response;
-      for (let i = 0; i < 3; i++) {
-          response = await fetch(url, requestOption);
-          if (response.status === 200) {
-              break;
-          }
-          await this.sleep(800 * (i + 1));
-      }
+        let response;
+        for (let i = 0; i < 3; i++) {
+            response = await fetch(url, requestOption);
+            console.log(response.status, "API Trying, Try " , i);
+            if (response.status === 200) {
+                console.log(response.status, "API Success, Try " , i);
+                break;
+            }
+            await this.sleep(800 * (i + 1));
+        }
         return response;
     }
 

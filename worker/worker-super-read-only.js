@@ -108,11 +108,11 @@ const uiConfig = {
     "credit": true, // Set this to true to give us credit
     "display_size": true, // Set this to false to hide display file size
     "display_time": false, // Set this to false to hide display modified time for folder and files
-    "display_download": true, // Set this to false to hide download icon for folder and files on main index
+    "display_download": false, // Set this to false to hide download icon for folder and files on main index
     "disable_player": false, // Set this to true to hide audio and video players
     "custom_srt_lang": "", // Subtitle Language Code for Custom .vtt language.
     "disable_video_download": false, // Remove Download, Copy Button on Videos
-    "second_domain_for_dl": false, // If you want to display other URL for Downloading to protect your main domain.
+    "second_domain_for_dl": true, // If you want to display other URL for Downloading to protect your main domain.
     "downloaddomain": domain_for_dl, // Ignore this and set domains at top of this page after service accounts.
     "videodomain": video_domain_for_dl, // Ignore this and set domains at top of this page after service accounts.
     "poster": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.8/images/poster.jpg", // Video poster URL or see Readme to how to load from Drive
@@ -166,7 +166,7 @@ function html(current_drive_order = 0, model = {}) {
   <link rel="stylesheet" href="https://cdn.plyr.io/${uiConfig.plyr_io_version}/plyr.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.0/dist/${uiConfig.theme}/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
   <style>a{color:${uiConfig.css_a_tag_color};}p{color:${uiConfig.css_p_tag_color};}</style>
-  <script src="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/js/app.min.js"></script>
+  <script src="${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/js/app-read-only.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.12.313/build/pdf.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked@4.0.0/marked.min.js"></script>
 </head>
@@ -1246,7 +1246,9 @@ class googleDrive {
         let response;
         for (let i = 0; i < 3; i++) {
             response = await fetch(url, requestOption);
+            console.log(response.status, "API Trying, Try " , i);
             if (response.status === 200) {
+                console.log(response.status, "API Success, Try " , i);
                 break;
             }
             await this.sleep(800 * (i + 1));
@@ -1315,7 +1317,9 @@ class googleDrive {
         let response;
         for (let i = 0; i < 3; i++) {
             response = await fetch(url, requestOption);
+            console.log(response.status, "API Trying, Try " , i);
             if (response.status === 200) {
+                console.log(response.status, "API Success, Try " , i);
                 break;
             }
             await this.sleep(800 * (i + 1));
@@ -1403,7 +1407,9 @@ class googleDrive {
         let response;
         for (let i = 0; i < 3; i++) {
             response = await fetch(url, requestOption);
+            console.log(response.status, "API Trying, Try " , i);
             if (response.status === 200) {
+                console.log(response.status, "API Success, Try " , i);
                 break;
             }
             await this.sleep(800 * (i + 1));
@@ -1529,7 +1535,9 @@ class googleDrive {
         let response;
         for (let i = 0; i < 3; i++) {
             response = await fetch(url, requestOption);
+            console.log(response.status, "API Trying, Try " , i);
             if (response.status === 200) {
+                console.log(response.status, "API Success, Try " , i);
                 break;
             }
             await this.sleep(800 * (i + 1));
@@ -1584,7 +1592,9 @@ class googleDrive {
         let response;
         for (let i = 0; i < 3; i++) {
             response = await fetch(url, requestOption);
+            console.log(response.status, "API Trying, Try " , i);
             if (response.status === 200) {
+                console.log(response.status, "API Success, Try " , i);
                 break;
             }
             await this.sleep(800 * (i + 1));
@@ -1593,14 +1603,16 @@ class googleDrive {
     }
 
     async fetch200(url, requestOption) {
-      let response;
-      for (let i = 0; i < 3; i++) {
-          response = await fetch(url, requestOption);
-          if (response.status === 200) {
-              break;
-          }
-          await this.sleep(800 * (i + 1));
-      }
+        let response;
+        for (let i = 0; i < 3; i++) {
+            response = await fetch(url, requestOption);
+            console.log(response.status, "API Trying, Try " , i);
+            if (response.status === 200) {
+                console.log(response.status, "API Success, Try " , i);
+                break;
+            }
+            await this.sleep(800 * (i + 1));
+        }
         return response;
     }
 
