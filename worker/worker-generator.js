@@ -7,7 +7,7 @@ const clientId = '746508046283-m2viej9ibc2umfhtve1hldr8da1amqlj.apps.googleuserc
 const clientSecret = 'iiC8G8u93OazY3-huOsbfuhi';
 const grantType = 'authorization_code';
 const redirectURI = 'urn:ietf:wg:oauth:2.0:oob';
-const jsURL = 'https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.8/worker/worker-super.js';
+const jsURL = 'https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/worker/worker-super.js';
 
 async function handleRequest(request) {
     let title = getParameterByName(request.url, 'site_name') || 'Bhadoo GDIndex';

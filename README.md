@@ -16,13 +16,13 @@
 
 * [Getting-Started-with-Google-Drive-Index](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/wikis/Getting-Started-with-Google-Drive-Index)
 
-[![Screenshot](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.8/images/themes/vapor.png)](https://youtu.be/Ihk4Gm3DPvg)
+[![Screenshot](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/images/themes/vapor.png)](https://youtu.be/Ihk4Gm3DPvg)
 
-[![Screenshot](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.8/images/themes/darkly.png)](https://youtu.be/Ihk4Gm3DPvg)
+[![Screenshot](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/images/themes/darkly.png)](https://youtu.be/Ihk4Gm3DPvg)
 
 ## How to
 
-* Stable Release `2.1.8`
+* Stable Release `2.1.9-alpha`
 * Latest Index is faster than before, but backup before making new, and report if I missed something in issues. :)
 * Beta Version (Latest) - [bdi-generator](https://bhadoogen.phantomzone.workers.dev) (For Dark Theme use darkly)
 * If you want to deploy main drive leave the option ROOT as it is.
@@ -44,17 +44,17 @@
 ## Use Case and Workers needs to be used
 
 * If you're new and noob, just use [this](https://bhadoogen.phantomzone.workers.dev). Search doesn't support FOLDER ID, use root or Shared Drive ID.
-* [worker-super.js](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.8/worker/worker-super.js) is Current and Main Workers File, use this if you have one or more drives. This can also be used to display drive links while searching all drives your account is associated with (optional, recommended for closed index).
+* [worker-super.js](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/worker/worker-super.js) is Current and Main Workers File, use this if you have one or more drives. This can also be used to display drive links while searching all drives your account is associated with (optional, recommended for closed index).
 
 ### More Options
 
-* [workers-legacy.js](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.8/worker/workers-legacy.js) is older version, less fast because of API requests it makes to check drive types, if you've too many drives, don't use this one.
-* [worker-multiple-drives.js](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.8/worker/worker-multiple-drives.js) should be used when you have more than one shared drives and you want to search in all of them and get index links in search.
-* [worker-second-domain-non-video.js](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.8/worker/worker-second-domain-non-video.js) is for using as second domain but doesn't support video files, instead it'll redirect to main index. Good to avoid video streaming ban by cloudflare.
-* [worker-second-domain.js](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.8/worker/worker-second-domain.js) is for using in second domain worker.
-* [worker-super-api.js](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.8/worker/worker-super-api.js) is just API for Static Site. You can host API on Cloudflare as Backend, and serve Frontend on any platform, protects your workers account from being suspended as this one works in background and doesn't consume much resources.
-* [worker-super-read-only.js](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.8/worker/worker-super-read-only.js) is for making a read only Index site. This can be used to showcase your drive files, disabling download or streaming permanently.
-* [worker-generator.js](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.8/worker/worker-generator.js) is the code used on our Index Generation Site mentioned above.
+* [workers-legacy.js](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/worker/workers-legacy.js) is older version, less fast because of API requests it makes to check drive types, if you've too many drives, don't use this one.
+* [worker-multiple-drives.js](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/worker/worker-multiple-drives.js) should be used when you have more than one shared drives and you want to search in all of them and get index links in search.
+* [worker-second-domain-non-video.js](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/worker/worker-second-domain-non-video.js) is for using as second domain but doesn't support video files, instead it'll redirect to main index. Good to avoid video streaming ban by cloudflare.
+* [worker-second-domain.js](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/worker/worker-second-domain.js) is for using in second domain worker.
+* [worker-super-api.js](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/worker/worker-super-api.js) is just API for Static Site. You can host API on Cloudflare as Backend, and serve Frontend on any platform, protects your workers account from being suspended as this one works in background and doesn't consume much resources.
+* [worker-super-read-only.js](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/worker/worker-super-read-only.js) is for making a read only Index site. This can be used to showcase your drive files, disabling download or streaming permanently.
+* [worker-generator.js](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/worker/worker-generator.js) is the code used on our Index Generation Site mentioned above.
 
 ## Drive ID Types
 

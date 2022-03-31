@@ -1,6 +1,6 @@
 {
   "name": "rokibhasansagar/BhadooGDIndex",
-  "version": "2.1.8",
+  "version": "2.1.9-alpha",
   "description": "A Google Drive Index to List, Watch and Download Files using a Beautiful UI.",
   "main": "README.md",
   "keywords": [
