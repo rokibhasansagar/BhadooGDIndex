@@ -152,7 +152,8 @@ function html(current_drive_order = 0, model = {}) {
 if (path.includes(":search")) { window.MODEL = JSON.parse('{"is_search_page":true,"root_type":1}'); } else { window.MODEL = JSON.parse('{"is_search_page":false,"root_type":1}'); };
 window.drive_names = JSON.parse('${JSON.stringify(authConfig.roots.map(it => it.name))}');
 window.current_drive_order = ${current_drive_order};
-window.UI = JSON.parse('${JSON.stringify(uiConfig)}');};
+window.UI = JSON.parse('${JSON.stringify(uiConfig)}');`
+}
 
 const homepage = `<html>
 <head>
