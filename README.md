@@ -5,7 +5,7 @@
 [![Month](https://data.jsdelivr.com/v1/package/gh/rokibhasansagar/BhadooGDIndex/badge/month)](https://www.jsdelivr.com/package/gh/rokibhasansagar/BhadooGDIndex)
 [![Week](https://data.jsdelivr.com/v1/package/gh/rokibhasansagar/BhadooGDIndex/badge/week)](https://www.jsdelivr.com/package/gh/rokibhasansagar/BhadooGDIndex)
 [![Day](https://data.jsdelivr.com/v1/package/gh/rokibhasansagar/BhadooGDIndex/badge/day)](https://www.jsdelivr.com/package/gh/rokibhasansagar/BhadooGDIndex)
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/ParveenBhadooOfficial/Google-Drive-Index&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=NPM%20Hits&edge_flat=false)](https://www.npmjs.com/package/@googledrive/index)
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/rokibhasansagar/BhadooGDIndex&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=NPM%20Hits&edge_flat=false)](https://www.npmjs.com/package/@googledrive/index)
 
 ## Full White label and Customizable Index | One of a kind
 
@@ -259,11 +259,24 @@
 * Beta Version is redesigned using Bootstrap from Alpha Version by [Parveen Bhadoo](https://twitter.com/ParveenBhadoo).
 * This Repo was imported from [yanzai](https://github.com/yanzai/goindex) and then modified for personal use.
 
-## Support this Project
+## Legal Disclaimer
+
+* [Hash Hackers](https://gitlab.com/HashHackers) or Bhadoo Cloud or [Parveen Bhadoo](https://gitlab.com/ParveenBhadooOfficial) or [I](https://github.com/rokibhasansagar) do not own the websites created using this software. The Software is under MIT License and Free to use for everyone personally or commercially. If any site is found using the name in title as the project or related names, shouldn't be assumed to be associated with us. The Software provides full configuration to the user to update and change the names of title, contact information for the published website using this software.
+* As an open-source Software, it can be used by good and bad actors both, eg. the use of [YT-DL](https://youtube-dl.org), read full post [here](https://github.blog/2020-11-16-standing-up-for-developers-youtube-dl-is-back/).
+
+## Sponsors for Original Project
+
+<a href="https://www.browserstack.com"><img src="https://i.imgur.com/UMYceGo.png" alt="drawing" width="300" /></a>
+
+## Support the Original Project
 
 [![Support](https://cdn.buymeacoffee.com/buttons/v2/default-white.png)](https://www.buymeacoffee.com/bhadoo)
 
 * Contribute to this project or improve this README.
+
+## License
+
+* [MIT License](https://github.com/rokibhasansagar/BhadooGDIndex/blob/master/LICENSE)
 
 ### Donate by Crpto
 

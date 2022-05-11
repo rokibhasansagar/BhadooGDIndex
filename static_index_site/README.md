@@ -2,7 +2,7 @@
 
 ### How?
 
-* Deploy on Github Pages or cPanel or Any Hosting that supports HTML Pages.
+* Deploy on GitHub Pages or cPanel or Any Hosting that supports HTML Pages.
 * Rename `404.html` according to your host, eg. `404.shtml` for cPanel Hosts, `404.html` works on most hosts without any extra config eg. GitHub Pages, Cloudflare Pages and Netlify.
 * Edit `index.html` and `404.html` as per your needs, don't remove important terms or links.
 * Deploy `worker-super-api.js` on Cloudflare Workers and add API URL in config at Line 74. Also add your Static Site in config for `cors_domain` at Line 31.
@@ -17,4 +17,4 @@
 ### Advice
 
 * Use API on your Cloudflare account. It isn't downloading through Cloudflare so It'll not receive any ban from Cloudflare.
-* Deploy Static Site Pages on your favorite host, Cloudflare Pages is recommended.
+* Deploy Static Site Pages on your favorite host, either GitHub Pages or Cloudflare Pages is recommended.
