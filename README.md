@@ -1,11 +1,11 @@
 # Google Personal/Shared Drive Index
 
-[![Year](https://data.jsdelivr.com/v1/package/gh/rokibhasansagar/BhadooGDIndex/badge/rank)](https://www.jsdelivr.com/package/gh/rokibhasansagar/BhadooGDIndex)
-[![Year](https://data.jsdelivr.com/v1/package/gh/rokibhasansagar/BhadooGDIndex/badge/year)](https://www.jsdelivr.com/package/gh/rokibhasansagar/BhadooGDIndex)
-[![Month](https://data.jsdelivr.com/v1/package/gh/rokibhasansagar/BhadooGDIndex/badge/month)](https://www.jsdelivr.com/package/gh/rokibhasansagar/BhadooGDIndex)
-[![Week](https://data.jsdelivr.com/v1/package/gh/rokibhasansagar/BhadooGDIndex/badge/week)](https://www.jsdelivr.com/package/gh/rokibhasansagar/BhadooGDIndex)
-[![Day](https://data.jsdelivr.com/v1/package/gh/rokibhasansagar/BhadooGDIndex/badge/day)](https://www.jsdelivr.com/package/gh/rokibhasansagar/BhadooGDIndex)
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/rokibhasansagar/BhadooGDIndex&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=NPM%20Hits&edge_flat=false)](https://www.npmjs.com/package/@googledrive/index)
+[![Year](https://data.jsdelivr.com/v1/package/gh/rokibhasansagar/BhadooGDIndex/badge/rank)](#)
+[![Year](https://data.jsdelivr.com/v1/package/gh/rokibhasansagar/BhadooGDIndex/badge/year)](#)
+[![Month](https://data.jsdelivr.com/v1/package/gh/rokibhasansagar/BhadooGDIndex/badge/month)](#)
+[![Week](https://data.jsdelivr.com/v1/package/gh/rokibhasansagar/BhadooGDIndex/badge/week)](#)
+[![Day](https://data.jsdelivr.com/v1/package/gh/rokibhasansagar/BhadooGDIndex/badge/day)](#)
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/rokibhasansagar/BhadooGDIndex&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=NPM%20Hits&edge_flat=false)](https://www.jsdelivr.com/package/gh/rokibhasansagar/BhadooGDIndex)
 
 ## Full White label and Customizable Index | One of a kind
 
@@ -16,13 +16,13 @@
 
 * [Getting-Started-with-Google-Drive-Index](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/wikis/Getting-Started-with-Google-Drive-Index)
 
-[![Screenshot](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/images/themes/vapor.png)](https://youtu.be/Ihk4Gm3DPvg)
+[![Screenshot](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha.2/images/themes/vapor.png)](https://youtu.be/Ihk4Gm3DPvg)
 
-[![Screenshot](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/images/themes/darkly.png)](https://youtu.be/Ihk4Gm3DPvg)
+[![Screenshot](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha.2/images/themes/darkly.png)](https://youtu.be/Ihk4Gm3DPvg)
 
 ## How to
 
-* Stable Release `2.1.9-alpha`
+* Stable Release `2.1.9-alpha.2`
 * Latest Index is faster than before, but backup before making new, and report if I missed something in issues. :)
 * Beta Version (Latest) - [bdi-generator](https://bhadoogen.phantomzone.workers.dev) (For Dark Theme use darkly)
 * If you want to deploy main drive leave the option ROOT as it is.
@@ -44,17 +44,17 @@
 ## Use Case and Workers needs to be used
 
 * If you're new and noob, just use [this](https://bhadoogen.phantomzone.workers.dev). Search doesn't support FOLDER ID, use root or Shared Drive ID.
-* [worker-super.js](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/worker/worker-super.js) is Current and Main Workers File, use this if you have one or more drives. This can also be used to display drive links while searching all drives your account is associated with (optional, recommended for closed index).
+* [worker-super.js](https://github.com/rokibhasansagar/BhadooGDIndex/blob/2.1.9-alpha.2/worker/worker-super.js) is Current and Main Workers File, use this if you have one or more drives. This can also be used to display drive links while searching all drives your account is associated with (optional, recommended for closed index).
 
 ### More Options
 
-* [workers-legacy.js](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/worker/workers-legacy.js) is older version, less fast because of API requests it makes to check drive types, if you've too many drives, don't use this one.
-* [worker-multiple-drives.js](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/worker/worker-multiple-drives.js) should be used when you have more than one shared drives and you want to search in all of them and get index links in search.
-* [worker-second-domain-non-video.js](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/worker/worker-second-domain-non-video.js) is for using as second domain but doesn't support video files, instead it'll redirect to main index. Good to avoid video streaming ban by cloudflare.
-* [worker-second-domain.js](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/worker/worker-second-domain.js) is for using in second domain worker.
-* [worker-super-api.js](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/worker/worker-super-api.js) is just API for Static Site. You can host API on Cloudflare as Backend, and serve Frontend on any platform, protects your workers account from being suspended as this one works in background and doesn't consume much resources.
-* [worker-super-read-only.js](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/worker/worker-super-read-only.js) is for making a read only Index site. This can be used to showcase your drive files, disabling download or streaming permanently.
-* [worker-generator.js](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/worker/worker-generator.js) is the code used on our Index Generation Site mentioned above.
+* [workers-legacy.js](https://github.com/rokibhasansagar/BhadooGDIndex/blob/2.1.9-alpha.2/worker/workers-legacy.js) is older version, less fast because of API requests it makes to check drive types, if you've too many drives, don't use this one.
+* [worker-multiple-drives.js](https://github.com/rokibhasansagar/BhadooGDIndex/blob/2.1.9-alpha.2/worker/worker-multiple-drives.js) should be used when you have more than one shared drives and you want to search in all of them and get index links in search.
+* [worker-second-domain-non-video.js](https://github.com/rokibhasansagar/BhadooGDIndex/blob/2.1.9-alpha.2/worker/worker-second-domain-non-video.js) is for using as second domain but doesn't support video files, instead it'll redirect to main index. Good to avoid video streaming ban by cloudflare.
+* [worker-second-domain.js](https://github.com/rokibhasansagar/BhadooGDIndex/blob/2.1.9-alpha.2/worker/worker-second-domain.js) is for using in second domain worker.
+* [worker-super-api.js](https://github.com/rokibhasansagar/BhadooGDIndex/blob/2.1.9-alpha.2/worker/worker-super-api.js) is just API for Static Site. You can host API on Cloudflare as Backend, and serve Frontend on any platform, protects your workers account from being suspended as this one works in background and doesn't consume much resources.
+* [worker-super-read-only.js](https://github.com/rokibhasansagar/BhadooGDIndex/blob/2.1.9-alpha.2/worker/worker-super-read-only.js) is for making a read only Index site. This can be used to showcase your drive files, disabling download or streaming permanently.
+* [worker-generator.js](https://github.com/rokibhasansagar/BhadooGDIndex/blob/2.1.9-alpha.2/worker/worker-generator.js) is the code used on our Index Generation Site mentioned above.
 
 ## Drive ID Types
 
@@ -140,30 +140,11 @@
 * The password is stored inside the Google Drive Folder, not the index and the `.password` file is hidden an cannot be accessed using Index.
 * Example use https://bit.ly/3tBxXJN and password is `thispassword`
 
+## Auth0 Integration [REMOVED]
+
 ## Brand Customization
 
 * In Latest Release, you can rebrand the Index as per your needs. Read the workers file to change UI and config.
-
-## Auth0 Integration  
-
-* Please Note that auth0.com Free Plan allows 7000 active members per month only. Active members are those who have logged in once in that particular month.
-* Cloudflare KV is used by this method, in Free Workers Plan, it's very limited and you cannot use it much, to avoid this ask your users to login and not clear the site cookies unless important. We suggest you upgrade to 5 USD plan of Workers if you face quota exceeded error on Cloudflare.
-* Make a auth0.com account and while signup select advanced settings so you can edit the tenant name.
-* Tenant Name looks like this `hashhackers.auth0.com` where you can have your own sub-domain on auth0.com, then verify your email.
-* In Applications, Make New App, and select `Regular Web Applications`.
-* In the app, go to settings and from there you can copy your client id and secret to be used on Cloudflare.
-* Scroll down and see option `Allowed Callback URLs`, enter your website or workers URL that you will use for Index in following manner.
-* `https://example.com/auth`, make sure you enter `https://` and `/auth`.
-* Scroll down and see option `Allowed Logout URLs`, enter your website address where you would like to redirect when user logs out.
-* Now In Authentication, Go to Database and open the Database that is shown there, You will see option `Disable Sign Ups` to stop username and password signup option when needed.
-* In Authentication, you can go to `Social` and setup social login.
-* To disable signup using Social Networks, if you wish to do that one day, go to `Auth Pipeline` and then `Rules`. Create New Rule, and find the Rule Template for `Disable social signups`. Add your App Client ID in the line number 2, then save it.
-* Now come back to Cloudflare, and in Index code, enable auth0 with option true.
-* Now enter Tenant Domain, make sure to use `https://` eg. `https://example.auth0.com`
-* Enter your Client Id, Secret, Index Callback URL with `/auth` and Logout URL.
-* Now in Cloudflare, there is a option for `Workers KV`, Create Namespace with any name, suggested is `AUTH_STORE_NS`.
-* Now go to your worker for index, Click on Settings, then Click on Variables, at the end of the page you'll see `KV Namespace Bindings`, Enter variable name `AUTH_STORE` and then select the Name Space you created and Save it.
-* It's done. If you face any problem, Go to [Index Discussion Group](https://t.me/+u-KpgiLT4r82Yzhh) and ask your question with full details, where you're stuck. Before that please try doing this yourself.
 
 ## Second Domain Systems
 
@@ -206,7 +187,7 @@
 * use `params.orderBy = 'folder,modifiedTime desc,name';` to sort by Modified Time.
 * A comma-separated list of sort keys. Valid keys are 'createdTime', 'folder', 'modifiedByMeTime', 'modifiedTime', 'name', 'name_natural', 'quotaBytesUsed', 'recency', 'sharedWithMeTime', 'starred', and 'viewedByMeTime'. Each key sorts ascending by default, but may be reversed with the 'desc' modifier. Example usage: ?orderBy=folder,modifiedTime desc,name. Please note that there is a current limitation for users with approximately one million files in which the requested sort order is ignored.
 
-## Get Google_Client_ID and Secret and Generate Token
+## Get Google Client_ID & Client_Secret and Generate Token
 
 * Open [Google Dev Credentials Site](https://console.developers.google.com/apis/credentials).
 * Create a Project, name as you like.
@@ -220,7 +201,7 @@
 * Proceed with Save and Continue.
 * Add your email id you want to use as test user, up to 100 emails maximum. (Because you are not verified)
 * In [Credentials Page](https://console.developers.google.com/apis/credentials) Click `Create Credentials` and then Click `OAuth Client ID`.
-* Select Desktop App.
+* Select Web App.
 * Now you have your own CLIENT ID and CLIENT SECRET.
 * Copy your details and save for future use.
 * Copy `worker-generator.js` code.

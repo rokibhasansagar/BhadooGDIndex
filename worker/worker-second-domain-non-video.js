@@ -4,8 +4,8 @@
     ██║░░╚██╗██║░░██║██║░░░██╗░░██║░╚═══██╗░░░██║░░██║██╔══██╗██║░░╚██╗
     ╚██████╔╝██████╔╝██║██╗╚█████╔╝██████╔╝██╗╚█████╔╝██║░░██║╚██████╔╝
     ░╚═════╝░╚═════╝░╚═╝╚═╝░╚════╝░╚═════╝░╚═╝░╚════╝░╚═╝░░╚═╝░╚═════╝░
-                             v 2.1.9-alpha
-A Script Redesigned by Parveen Bhadoo from GOIndex at https://www.npmjs.com/package/@googledrive/index */
+                             v 2.1.9-alpha.2
+A Script Redesigned by Parveen Bhadoo from GOIndex at https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index */
 
 // NOTE: THIS REDIRECT VIDEO LINKS TO MAIN INDEX, USE THIS TO DIVIDE VIDEO FILES TRAFFIC FROM NORMAL FILES TRAFFIC.
 
@@ -14,23 +14,16 @@ const serviceaccounts = [
 {}
 ];
 const redirectindexsite = ""; // add site to redirect video links to main index view page.
-const randomserviceaccount = serviceaccounts[Math.floor(Math.random()*serviceaccounts.length)];
-const blocked_region = ['']; // add regional codes seperated by comma, eg. ['IN', 'US', 'PK']
-const blocked_asn = ['']; // add ASN numbers from http://www.bgplookingglass.com/list-of-autonomous-system-numbers, eg. [16509, 12345]
+const randomserviceaccount = serviceaccounts[Math.floor(Math.random()*serviceaccounts.length)]; // DO NOT TOUCH THIS
 const authConfig = {
-    "siteName": "Bhadoo GDIndex", // Website name
-    "client_id": "746508046283-m2viej9ibc2umfhtve1hldr8da1amqlj.apps.googleusercontent.com", // Client id from Google Cloud Console
-    "client_secret": "iiC8G8u93OazY3-huOsbfuhi", // Client Secret from Google Cloud Console
+    "client_id": "", // Client id from Google Cloud Console
+    "client_secret": "", // Client Secret from Google Cloud Console
     "refresh_token": "", // Authorize token
     "service_account": false, // true if you're using Service Account instead of user account
     "service_account_json": randomserviceaccount, // don't touch this one
     "files_list_page_size": 50,
     "search_result_list_page_size": 50,
-    "enable_cors_file_down": true,
-    "enable_password_file_verify": true, // support for .password file
-    "direct_link_protection": false, // protects direct links with Display UI
-    "lock_folders": false, // keeps folders and search locked if auth in on, and allows individual file view
-    "enable_auth0_com": false, // follow guide to add auth0.com to secure index with powerful login based system
+    "enable_cors_file_down": false,
     "roots":[
       {
           "id": "root",
@@ -46,13 +39,25 @@ const authConfig = {
       },
     ]};
 
-    const auth0 = {
-          domain: "", // Tenent Domain from auth0.com website
-          clientId: "", // App Client ID from auth0.com website
-          clientSecret: "", // App Client Secret from auth0.com website
-          callbackUrl: "", // your domain with /auth at the end. eg. https://example.com/auth, add this in auth0.com too
-          logoutUrl: "", // your domain logout page eg. https://example.com, add this in auth0.com too
-    }
+/*
+███████╗██████╗░██╗████████╗  ████████╗██╗░░██╗███████╗░██████╗███████╗
+██╔════╝██╔══██╗██║╚══██╔══╝  ╚══██╔══╝██║░░██║██╔════╝██╔════╝██╔════╝
+█████╗░░██║░░██║██║░░░██║░░░  ░░░██║░░░███████║█████╗░░╚█████╗░█████╗░░
+██╔══╝░░██║░░██║██║░░░██║░░░  ░░░██║░░░██╔══██║██╔══╝░░░╚═══██╗██╔══╝░░
+███████╗██████╔╝██║░░░██║░░░  ░░░██║░░░██║░░██║███████╗██████╔╝███████╗
+╚══════╝╚═════╝░╚═╝░░░╚═╝░░░  ░░░╚═╝░░░╚═╝░░╚═╝╚══════╝╚═════╝░╚══════╝
+
+██╗░░░██╗░█████╗░██╗░░░░░██╗░░░██╗███████╗░██████╗
+██║░░░██║██╔══██╗██║░░░░░██║░░░██║██╔════╝██╔════╝
+╚██╗░██╔╝███████║██║░░░░░██║░░░██║█████╗░░╚█████╗░
+░╚████╔╝░██╔══██║██║░░░░░██║░░░██║██╔══╝░░░╚═══██╗
+░░╚██╔╝░░██║░░██║███████╗╚██████╔╝███████╗██████╔╝
+░░░╚═╝░░░╚═╝░░╚═╝╚══════╝░╚═════╝░╚══════╝╚═════╝░*/
+
+const uiConfig = {
+    "version": "2.1.9-alpha.2", // don't touch this one. get latest code using generator at https://bhadoogen.phantomzone.workers.dev
+    "jsdelivr_cdn_src": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex", // If Project is Forked, then enter your GitHub repo
+};
 
 /*
 ██████╗░░█████╗░  ███╗░░██╗░█████╗░████████╗  ███████╗██████╗░██╗████████╗
@@ -69,11 +74,6 @@ const authConfig = {
 ██████╦╝███████╗███████╗╚█████╔╝░░╚██╔╝░╚██╔╝░
 ╚═════╝░╚══════╝╚══════╝░╚════╝░░░░╚═╝░░░╚═╝░░*/
 
-const uiConfig = {
-    "version": "2.1.9-alpha", // don't touch this one. get latest code using generator at https://bhadoogen.phantomzone.workers.dev
-    "jsdelivr_cdn_src": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex", // If Project is Forked, then enter your GitHub repo
-};
-
 // DON'T TOUCH BELOW THIS UNLESS YOU KNOW WHAT YOU'RE DOING
 var gds = [];
 
@@ -81,115 +81,8 @@ function html(current_drive_order = 0, model = {}) {
     return ``;
 };
 
-const unauthorized = ``
+const deaderror = `<h2>Retrying...</h2><br><p>This page will keep refreshing if the URL you're trying to reach is incorrect.</p><meta http-equiv="refresh" content="0;url=?retry"/>`
 
-const not_found = `<!DOCTYPE html>
-<html lang=en>
-  <meta charset=utf-8>
-  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
-  <title>Error 404 (Not Found)!!1</title>
-  <style>
-    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat;-webkit-background-size:100% 100%}}#logo{display:inline-block;height:54px;width:150px}
-  </style>
-  <a href=//www.google.com/><span id=logo aria-label=Google></span></a>
-  <p><b>404.</b> <ins>That’s an error.</ins>
-  <p id="status"></p>
-
-  <script>
-  document.getElementById("status").innerHTML =
-"The requested URL <code>" + window.location.pathname + "</code> was not found on this server.  <ins>That’s all we know.</ins>";
-  </script>`
-
-  const asn_blocked = `<html>
-  <head>
-  <title>Access Denied</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
-  <style>
-  body{
-      margin:0;
-      padding:0;
-      width:100%;
-      height:100%;
-      color:#b0bec5;
-      display:table;
-      font-weight:100;
-      font-family:Lato
-  }
-  .container{
-      text-align:center;
-      display:table-cell;
-      vertical-align:middle
-  }
-  .content{
-      text-align:center;
-      display:inline-block
-  }
-  .message{
-      font-size:80px;
-      margin-bottom:40px
-  }
-  a{
-      text-decoration:none;
-      color:#3498db
-  }
-
-  </style>
-  </head>
-  <body>
-  <div class="container">
-  <div class="content">
-  <div class="message">Access Denied</div>
-  </div>
-  </div>
-  </body>
-  </html>`
-
-  const directlink = `
-  <html>
-  <head>
-  <title>Direct Link - Access Denied</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
-  <style>
-  body{
-      margin:0;
-      padding:0;
-      width:100%;
-      height:100%;
-      color:#b0bec5;
-      display:table;
-      font-weight:100;
-      font-family:Lato
-  }
-  .container{
-      text-align:center;
-      display:table-cell;
-      vertical-align:middle
-  }
-  .content{
-      text-align:center;
-      display:inline-block
-  }
-  .message{
-      font-size:80px;
-      margin-bottom:40px
-  }
-  a{
-      text-decoration:none;
-      color:#3498db
-  }
-
-  </style>
-  </head>
-  <body>
-  <div class="container">
-  <div class="content">
-  <div class="message">Access Denied</div>
-  <center><a href=""><button id="goto">Click Here to Proceed!</button></a></center>
-  </div>
-  </div>
-  </body>
-  </html>
-  `
 
 const SearchFunction = {
     formatSearchKeyword: function(keyword) {
@@ -273,311 +166,11 @@ const JSONWebToken = {
     }
 };
 
-// auth0.com functions
-const AUTH0_DOMAIN  = auth0.domain
-const AUTH0_CLIENT_ID  = auth0.clientId
-const AUTH0_CLIENT_SECRET = auth0.clientSecret
-const AUTH0_CALLBACK_URL = auth0.callbackUrl
-const AUTH0_LOGOUT_URL = auth0.logoutUrl
-const SALT = `keys565`
-
-const cookieKey = 'AUTH0-AUTH'
-
-const generateStateParam = async () => {
-  if(authConfig['enable_auth0_com']){
-    const resp = await fetch('https://csprng.xyz/v1/api')
-    const { Data: state } = await resp.json()
-    await AUTH_STORE.put(`state-${state}`, true, { expirationTtl: 60 })
-    return state
-  }
-}
-
-const exchangeCode = async code => {
-  const body = JSON.stringify({
-    grant_type: 'authorization_code',
-    client_id: auth0.clientId,
-    client_secret: auth0.clientSecret,
-    code,
-    redirect_uri: auth0.callbackUrl,
-  })
-
-  return persistAuth(
-    await fetch(AUTH0_DOMAIN  + '/oauth/token', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body,
-    }),
-  )
-}
-
-// https://github.com/pose/webcrypto-jwt/blob/master/index.js
-const decodeJWT = function(token) {
-  var output = token
-    .split('.')[1]
-    .replace(/-/g, '+')
-    .replace(/_/g, '/')
-  switch (output.length % 4) {
-    case 0:
-      break
-    case 2:
-      output += '=='
-      break
-    case 3:
-      output += '='
-      break
-    default:
-      throw 'Illegal base64url string!'
-  }
-
-  const result = atob(output)
-
-  try {
-    return decodeURIComponent(escape(result))
-  } catch (err) {
-    console.log(err)
-    return result
-  }
-}
-
-const validateToken = token => {
-  try {
-    const dateInSecs = d => Math.ceil(Number(d) / 1000)
-    const date = new Date()
-
-    let iss = token.iss
-
-    // ISS can include a trailing slash but should otherwise be identical to
-    // the AUTH0_DOMAIN, so we should remove the trailing slash if it exists
-    iss = iss.endsWith('/') ? iss.slice(0, -1) : iss
-
-    if (iss !== AUTH0_DOMAIN) {
-      throw new Error(
-        `Token iss value (${iss}) doesn't match AUTH0_DOMAIN (${AUTH0_DOMAIN})`,
-      )
-    }
-
-    if (token.aud !== AUTH0_CLIENT_ID) {
-      throw new Error(
-        `Token aud value (${token.aud}) doesn't match AUTH0_CLIENT_ID (${AUTH0_CLIENT_ID})`,
-      )
-    }
-
-    if (token.exp < dateInSecs(date)) {
-      throw new Error(`Token exp value is before current time`)
-    }
-
-    // Token should have been issued within the last day
-    date.setDate(date.getDate() - 1)
-    if (token.iat < dateInSecs(date)) {
-      throw new Error(`Token was issued before one day ago and is now invalid`)
-    }
-
-    return true
-  } catch (err) {
-    console.log(err.message)
-    return false
-  }
-}
-
-const persistAuth = async exchange => {
-  const body = await exchange.json()
-
-  if (body.error) {
-    throw new Error(body.error)
-  }
-
-  const date = new Date()
-  date.setDate(date.getDate() + 1)
-
-  const decoded = JSON.parse(decodeJWT(body.id_token))
-  const validToken = validateToken(decoded)
-  if (!validToken) {
-    return { status: 401 }
-  }
-
-  const text = new TextEncoder().encode(`${SALT}-${decoded.sub}`)
-  const digest = await crypto.subtle.digest({ name: 'SHA-256' }, text)
-  const digestArray = new Uint8Array(digest)
-  const id = btoa(String.fromCharCode.apply(null, digestArray))
-
-  await AUTH_STORE.put(id, JSON.stringify(body))
-
-  const headers = {
-    Location: '/',
-    'Set-cookie': `${cookieKey}=${id}; Secure; HttpOnly; SameSite=Lax; Expires=${date.toUTCString()}`,
-  }
-
-  return { headers, status: 302 }
-}
-
-const redirectUrl = state =>
-  `${auth0.domain}/authorize?response_type=code&client_id=${
-    auth0.clientId
-  }&redirect_uri=${
-    auth0.callbackUrl
-  }&scope=openid%20profile%20email&state=${encodeURIComponent(state)}`
-
-const handleRedirect = async event => {
-  const url = new URL(event.request.url)
-
-  const state = url.searchParams.get('state')
-  if (!state) {
-    return null
-  }
-
-  const storedState = await AUTH_STORE.get(`state-${state}`)
-  if (!storedState) {
-    return null
-  }
-
-  const code = url.searchParams.get('code')
-  if (code) {
-    return exchangeCode(code)
-  }
-
-  return null
-}
-
-function getCookie(cookie,name) {
-    var nameEQ = name + "=";
-    var ca = cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-    }
-    return null;
-}
-
-async function getAssetFromKV(event){
-  return null
-}
-const verify = async event => {
-  const cookieHeader = event.request.headers.get('Cookie')
-
-  if (cookieHeader && cookieHeader.includes(cookieKey)) {
-    // cookieHeader.includes(cookieKey)
-    // throw new Error(getCookie(cookieHeader,cookieKey))
-    // const cookies = cookie.parse(cookieHeader)
-    if (!getCookie(cookieHeader,cookieKey)) return {}
-    const sub = getCookie(cookieHeader,cookieKey)
-
-    const kvData = await AUTH_STORE.get(sub)
-    if (!kvData) {
-      return {}
-      //throw new Error('Unable to find authorization data')
-    }
-
-    let kvStored
-    try {
-      kvStored = JSON.parse(kvData)
-    } catch (err) {
-      throw new Error('Unable to parse auth information from Workers KV')
-    }
-
-    const { access_token: accessToken, id_token: idToken } = kvStored
-    const userInfo = JSON.parse(decodeJWT(idToken))
-    return { accessToken, idToken, userInfo }
-  }
-  return {}
-}
-
-const authorize = async event => {
-  const authorization = await verify(event)
-  if (authorization.accessToken) {
-    return [true, { authorization }]
-  } else {
-    const state = await generateStateParam()
-    return [false, { redirectUrl: redirectUrl(state) }]
-  }
-}
-
-// const logout = event => {
-//   const cookieHeader = event.request.headers.get('Cookie')
-//   if (cookieHeader && cookieHeader.includes(cookieKey)) {
-//     return {
-//       headers: {
-//         'Set-cookie': `${cookieKey}=""; HttpOnly; Secure; SameSite=Lax;`,
-//       },
-//     }
-//   }
-//   return {}
-// }
-
-const hydrateState = (state = {}) => ({
-  element: el => {
-    el.setInnerContent(JSON.stringify(state))
-  },
-})
-
-
-// addEventListener('fetch', event => event.respondWith(handleRequest(event)))
-
-// see the readme for more info on what these config options do!
-const config = {
-  // opt into automatic authorization state hydration
-  hydrateState: true,
-  // return responses at the edge
-  originless: true,
-}
-
-async function loginHandleRequest(event) {
-  try {
-    let request = event.request
-
-    const [authorized, { authorization, redirectUrl }] = await authorize(event)
-
-    const url = new URL(event.request.url)
-    if (url.pathname === '/auth') {
-      const authorizedResponse = await handleRedirect(event)
-      if (!authorizedResponse) {
-        let redirectHeaders = new Headers()
-        redirectHeaders.set('Refresh', `1; url=${auth0.logoutUrl}`)
-        redirectHeaders.set('Set-cookie', `${cookieKey}=""; HttpOnly; Secure; SameSite=Lax;`)
-        return new Response('Unauthorized - Redirecting', { status: 302, headers: redirectHeaders })
-
-      }
-      response = new Response(request.body, {
-        request,
-        ...authorizedResponse,
-      })
-      return response
-    }
-
-    if (!authorized) {
-      return Response.redirect(redirectUrl)
-    }
-
-    if (url.pathname === '/logout') {
-
-      let redirectHeaders = new Headers()
-      redirectHeaders.set('Location', `${auth0.domain}/v2/logout?client_id=${auth0.clientId}&returnTo=${auth0.logoutUrl}`)
-      redirectHeaders.set('Set-cookie', `${cookieKey}=""; HttpOnly; Secure; SameSite=Lax;`)
-
-      return new Response('', {
-          status: 302,
-          headers: redirectHeaders
-        })
-    }
-
-    return null
-
-  } catch (err) {
-    return new Response(err.toString())
-  }
-}
-//end auth0.com function
-
 addEventListener('fetch', event => {
     event.respondWith(handleRequest(event.request, event));
 });
 
 async function handleRequest(request, event) {
-    var loginCheck = await loginHandleRequest(event)
-    if(authConfig['enable_auth0_com'] && loginCheck != null){return loginCheck}
-    const region = request.headers.get('cf-ipcountry').toUpperCase();
-    const asn_servers = request.cf.asn;
-    const referer = request.headers.get("Referer");
     if (gds.length === 0) {
         for (let i = 0; i < authConfig.roots.length; i++) {
             const gd = new googleDrive(authConfig, i);
@@ -597,63 +190,47 @@ async function handleRequest(request, event) {
     let url = new URL(request.url);
     let path = url.pathname;
     let hostname = url.hostname;
+    let find_dot = path.substr(path.length - 4, 1);
 
     function redirectToIndexPage() {
         return new Response('', {
             status: 307,
             headers: {
-                'Location': `${url.origin}/0:/`
+                'Location': url
             }
         });
     }
 
-    if (path == '/') return redirectToIndexPage();
     if ("|mp4|webm|avi|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|".indexOf(`|${ext}|`) >= 0) {
-        return new Response('', {
-            status: 307,
-            headers: {
-                'Location': `${redirectindexsite}${path}`
-            }
-        });
-    }
-    if (path.toLowerCase() == '/admin') {
-        return Response.redirect("https://www.npmjs.com/package/@googledrive/index", 301)
-    } else if (blocked_region.includes(region)) {
-        return new Response(asn_blocked, {
+            return new Response('', {
+                status: 307,
+                headers: {
+                    'Location': `${redirectindexsite}${path}`
+                }
+            });
+        }
+    else if (request.method === 'POST') {
+        return new Response('{"message":"Method Not Allowed."}', {
             status: 403,
             headers: {
-                "content-type": "text/html;charset=UTF-8",
+                "content-type": "application/json;",
             },
         })
-    } else if (blocked_asn.includes(asn_servers)) {
-        return new Response(asn_blocked, {
-                headers: {
-                    'content-type': 'text/html;charset=UTF-8'
-                },
-                status: 401
-            });
     }
-
-    if (authConfig['direct_link_protection']) {
-      if (referer == null){
-          return new Response(directlink, {
-                  headers: {
-                      'content-type': 'text/html;charset=UTF-8'
-                  },
-                  status: 401
-              });
-          console.log("Refer Null");
-      } else if (referer.includes(hostname)) {
-          console.log("Refer Detected");
-      } else {
-          return new Response(directlink, {
-                  headers: {
-                      'content-type': 'text/html;charset=UTF-8'
-                  },
-                  status: 401
-              });
-          console.log("Wrong Refer URL");
-      }
+    else if (path.endsWith('/')){
+        return new Response('{"message":"Content Not Found"}', {
+            status: 403,
+            headers: {
+                "content-type": "application/json;",
+            },
+        })
+    } else if (find_dot != '.'){
+        return new Response('{"message":"Content Not Found"}', {
+            status: 403,
+            headers: {
+                "content-type": "application/json;",
+            },
+        })
     }
 
     const command_reg = /^\/(?<num>\d+):(?<command>[a-zA-Z0-9]+)(\/.*)?$/g;
@@ -737,7 +314,7 @@ async function handleRequest(request, event) {
       return gd.down(file?.id, range, inline_down);
       }
       catch {
-              return new Response(not_found, {
+              return new Response(deaderror, {
                   status: 404,
                   headers: {
                       "content-type": "text/html;charset=UTF-8",
@@ -746,93 +323,6 @@ async function handleRequest(request, event) {
       }
 
     }
-}
-
-function gdiencode(str) {
-    var gdijsorg_0x40df = ['1KzJBAK', '1697708zMrtEu', '295396TasIvj', '21011Eyuayv', '1217593CxovUD', 'fromCharCode', '143062xekFCR', 'replace', '74bcHwvq', '73939wlqHSM', '2CBdqkc', '1712527AcNPoP'];
-    var gdijsorg_0x5556bb = gdijsorg_0x56b1;
-    (function(_0x3f3911, _0x38bce9) {
-        var _0x32440e = gdijsorg_0x56b1;
-        while (!![]) {
-            try {
-                var _0x2cab6f = -parseInt(_0x32440e(0xb3)) + -parseInt(_0x32440e(0xb7)) * -parseInt(_0x32440e(0xb6)) + -parseInt(_0x32440e(0xaf)) * -parseInt(_0x32440e(0xad)) + -parseInt(_0x32440e(0xb1)) + parseInt(_0x32440e(0xae)) + parseInt(_0x32440e(0xac)) + parseInt(_0x32440e(0xb0)) * -parseInt(_0x32440e(0xb5));
-                if (_0x2cab6f === _0x38bce9) break;
-                else _0x3f3911['push'](_0x3f3911['shift']());
-            } catch (_0x34d506) {
-                _0x3f3911['push'](_0x3f3911['shift']());
-            }
-        }
-    }(gdijsorg_0x40df, 0xe5038));
-
-    function gdijsorg_0x56b1(_0x1ccc20, _0x1596c4) {
-        _0x1ccc20 = _0x1ccc20 - 0xac;
-        var _0x40df0f = gdijsorg_0x40df[_0x1ccc20];
-        return _0x40df0f;
-    }
-    return btoa(encodeURIComponent(str)[gdijsorg_0x5556bb(0xb4)](/%([0-9A-F]{2})/g, function toSolidBytes(_0xe8cc7f, _0x12410f) {
-        var _0x1cce23 = gdijsorg_0x5556bb;
-        return String[_0x1cce23(0xb2)]('0x' + _0x12410f);
-    }));
-}
-
-async function apiRequest(request, gd) {
-    let url = new URL(request.url);
-    let path = url.pathname;
-    path = path.replace(gd.url_path_prefix, '') || '/';
-
-    let option = {
-        status: 200,
-        headers: {
-            'Access-Control-Allow-Origin': '*'
-        }
-    }
-
-    if (path.substr(-1) == '/') {
-        let form = await request.formData();
-        let deferred_list_result = gd.list(path, form.get('page_token'), Number(form.get('page_index')));
-
-        if (authConfig['enable_password_file_verify']) {
-            let password = await gd.password(path);
-            // console.log("dir password", password);
-            if (password && password.replace("\n", "") !== form.get('password')) {
-                let html = `Y29kZWlzcHJvdGVjdGVk=0Xfi4icvJnclBCZy92dzNXYwJCI6ISZnF2czVWbiwSMwQDI6ISZk92YisHI6IicvJnclJyeYmFzZTY0aXNleGNsdWRlZA==`;
-                return new Response(html, option);
-            }
-        }
-
-        let list_result = await deferred_list_result;
-        return new Response(rewrite(gdiencode(JSON.stringify(list_result), option)));
-    } else {
-        let file = await gd.file(path);
-        let range = request.headers.get('Range');
-        return new Response(rewrite(gdiencode(JSON.stringify(file))));
-    }
-}
-
-// deal with search
-async function handleSearch(request, gd) {
-    const option = {
-        status: 200,
-        headers: {
-            'Access-Control-Allow-Origin': '*'
-        }
-    };
-    let form = await request.formData();
-    let search_result = await
-    gd.search(form.get('q') || '', form.get('page_token'), Number(form.get('page_index')));
-    return new Response(rewrite(gdiencode(JSON.stringify(search_result), option)));
-}
-
-async function handleId2Path(request, gd) {
-    const option = {
-        status: 200,
-        headers: {
-            'Access-Control-Allow-Origin': '*'
-        }
-    };
-    let form = await request.formData();
-    let path = await gd.findPathById(form.get('id'));
-    return new Response(path || '', option);
 }
 
 class googleDrive {
@@ -872,26 +362,13 @@ class googleDrive {
         let url = new URL(request.url);
         let path = url.pathname;
         const auth = this.root.auth || '',
-            _401 = new Response(not_found, {
+            _401 = new Response(deaderror, {
                 headers: {
                     //'WWW-Authenticate': `Basic realm="goindex:drive:${this.order}"`,
                     'content-type': 'text/html;charset=UTF-8'
                 },
                 status: 401
             });
-        if (authConfig['lock_folders']) {
-            if (auth && path.endsWith("/") || path.endsWith("search")) {
-                const _auth = request.headers.get('Authorization')
-                if (_auth) {
-                    const [received_user, received_pass] = atob(_auth.split(' ').pop()).split(':');
-                    if (auth.hasOwnProperty(received_user)) {
-                        if (auth[received_user] == received_pass) {
-                            return null;
-                        } else return _401;
-                    } else return _401;
-                }
-            } else return null;
-        } else {
                 if (auth) {
                     const _auth = request.headers.get('Authorization')
                     if (_auth) {
@@ -903,7 +380,7 @@ class googleDrive {
                         } else return _401;
                     }
                 } else return null;
-        }
+
         return _401;
     }
 
@@ -911,26 +388,25 @@ class googleDrive {
         let url = `https://www.googleapis.com/drive/v3/files/${id}?alt=media`;
         let requestOption = await this.requestOption();
         requestOption.headers['Range'] = range;
-        let res = await fetch(url, requestOption);
-        const second_domain_for_dl = `${uiConfig.second_domain_for_dl}`
-        if (second_domain_for_dl == 'true') {
-            const res = await fetch(`${uiConfig.jsdelivr_cdn_src}@${uiConfig.version}/assets/disable_download.html`);
-            return new Response(await res.text(), {
-                headers: {
-                    "content-type": "text/html;charset=UTF-8",
-                },
-            })
+        //let res = await fetch(url, requestOption);
+        let res;
+        //console.log(res);
+        for (let i = 0; i < 3; i++) {
+            res = await fetch(url, requestOption);
+            if (res.ok) {
+                const {
+                    headers
+                } = res = new Response(res.body, res)
+                this.authConfig.enable_cors_file_down && headers.append('Access-Control-Allow-Origin', '*');
+                inline === true && headers.set('Content-Disposition', 'inline');
+                return res;
+                break;
+            }
+            await this.sleep(100 * (i + 1));
+            console.log(res);
         }
-        else if (res.ok) {
-            const {
-                headers
-            } = res = new Response(res.body, res)
-            this.authConfig.enable_cors_file_down && headers.append('Access-Control-Allow-Origin', '*');
-            inline === true && headers.set('Content-Disposition', 'inline');
-            return res;
-        }
-        else if(res.status == 404){
-            return new Response(not_found, {
+        if(res.status == 404){
+            return new Response(deaderror, {
                 status: 404,
                 headers: {
                     "content-type": "text/html;charset=UTF-8",
@@ -971,14 +447,7 @@ class googleDrive {
         params.fields = "files(id, name, mimeType, size ,createdTime, modifiedTime, iconLink, thumbnailLink)";
         url += '?' + this.enQuery(params);
         let requestOption = await this.requestOption();
-        let response;
-        for (let i = 0; i < 3; i++) {
-            response = await fetch(url, requestOption);
-            if (response.status === 200) {
-                break;
-            }
-            await this.sleep(800 * (i + 1));
-        }
+        let response = await fetch(url, requestOption);
         let obj = await response.json();
         // console.log(obj);
         return obj.files[0];
@@ -1040,14 +509,7 @@ class googleDrive {
         let url = 'https://www.googleapis.com/drive/v3/files';
         url += '?' + this.enQuery(params);
         let requestOption = await this.requestOption();
-        let response;
-        for (let i = 0; i < 3; i++) {
-            response = await fetch(url, requestOption);
-            if (response.status === 200) {
-                break;
-            }
-            await this.sleep(800 * (i + 1));
-        }
+        let response = await fetch(url, requestOption);
         obj = await response.json();
 
         return {
@@ -1129,14 +591,7 @@ class googleDrive {
         let url = 'https://www.googleapis.com/drive/v3/files';
         url += '?' + this.enQuery(params);
         let requestOption = await this.requestOption();
-        let response;
-        for (let i = 0; i < 3; i++) {
-            response = await fetch(url, requestOption);
-            if (response.status === 200) {
-                break;
-            }
-            await this.sleep(800 * (i + 1));
-        }
+        let response = await fetch(url, requestOption);
         let res_obj = await response.json();
 
         return {
@@ -1255,14 +710,7 @@ class googleDrive {
         params.fields = "nextPageToken, files(id, name, mimeType)";
         url += '?' + this.enQuery(params);
         let requestOption = await this.requestOption();
-        let response;
-        for (let i = 0; i < 3; i++) {
-            response = await fetch(url, requestOption);
-            if (response.status === 200) {
-                break;
-            }
-            await this.sleep(800 * (i + 1));
-        }
+        let response = await fetch(url, requestOption);
         let obj = await response.json();
         if (obj.files[0] == undefined) {
             return null;
@@ -1271,7 +719,7 @@ class googleDrive {
     }
 
     async accessToken() {
-        console.log("accessToken");
+        //console.log("accessToken");
         if (this.authConfig.expires == undefined || this.authConfig.expires < Date.now()) {
             const obj = await this.fetchAccessToken();
             if (obj.access_token != undefined) {
@@ -1283,7 +731,7 @@ class googleDrive {
     }
 
     async fetchAccessToken() {
-        console.log("fetchAccessToken");
+        //console.log("fetchAccessToken");
         const url = "https://www.googleapis.com/oauth2/v4/token";
         const headers = {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -1310,14 +758,7 @@ class googleDrive {
             'body': this.enQuery(post_data)
         };
 
-        let response;
-        for (let i = 0; i < 3; i++) {
-            response = await fetch(url, requestOption);
-            if (response.status === 200) {
-                break;
-            }
-            await this.sleep(800 * (i + 1));
-        }
+        const response = await fetch(url, requestOption);
         return await response.json();
     }
 
@@ -1325,7 +766,8 @@ class googleDrive {
         let response;
         for (let i = 0; i < 3; i++) {
             response = await fetch(url, requestOption);
-            if (response.status === 200) {
+            //console.log(response.status);
+            if (response.status != 403) {
                 break;
             }
             await this.sleep(800 * (i + 1));
@@ -1354,7 +796,7 @@ class googleDrive {
         return new Promise(function(resolve, reject) {
             let i = 0;
             setTimeout(function() {
-                console.log('sleep' + ms);
+                //console.log('sleep' + ms);
                 i++;
                 if (i >= 2) reject(new Error('i>=2'));
                 else resolve(i);
@@ -1397,3 +839,4 @@ String.prototype.trim = function(char) {
     }
     return this.replace(/^\s+|\s+$/g, '');
 };
+

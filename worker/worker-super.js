@@ -4,7 +4,7 @@
     ██║░░╚██╗██║░░██║██║░░░██╗░░██║░╚═══██╗░░░██║░░██║██╔══██╗██║░░╚██╗
     ╚██████╔╝██████╔╝██║██╗╚█████╔╝██████╔╝██╗╚█████╔╝██║░░██║╚██████╔╝
     ░╚═════╝░╚═════╝░╚═╝╚═╝░╚════╝░╚═════╝░╚═╝░╚════╝░╚═╝░░╚═╝░╚═════╝░
-                             v 2.1.9-alpha
+                             v 2.1.9-alpha.2
 A Script Redesigned by Parveen Bhadoo from GOIndex at https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index */
 
 // WARNING WARNING WARNING
@@ -23,8 +23,8 @@ const blocked_region = ['']; // add regional codes seperated by comma, eg. ['IN'
 const blocked_asn = ['']; // add ASN numbers from http://www.bgplookingglass.com/list-of-autonomous-system-numbers, eg. [16509, 12345]
 const authConfig = {
     "siteName": "Bhadoo GDIndex", // Website name
-    "client_id": "746508046283-m2viej9ibc2umfhtve1hldr8da1amqlj.apps.googleusercontent.com", // Client id from Google Cloud Console
-    "client_secret": "iiC8G8u93OazY3-huOsbfuhi", // Client Secret from Google Cloud Console
+    "client_id": "", // Client id from Google Cloud Console
+    "client_secret": "", // Client Secret from Google Cloud Console
     "refresh_token": "", // Authorize token
     "service_account": false, // true if you're using Service Account instead of user account
     "service_account_json": randomserviceaccount, // don't touch this one
@@ -34,7 +34,6 @@ const authConfig = {
     "enable_password_file_verify": true, // support for .password file
     "direct_link_protection": false, // protects direct links with Display UI
     "lock_folders": false, // keeps folders and search locked if auth in on, and allows individual file view
-    "enable_auth0_com": false, // follow guide to add auth0.com to secure index with powerful login based system
     "roots":[
       {
           "id": "root",
@@ -49,14 +48,6 @@ const authConfig = {
          // "auth": {"username":"password", "username1":"password1"} /* Remove double slash before "auth" to activate id password protection */
       },
     ]};
-
-    const auth0 = {
-          domain: "", // Tenent Domain from auth0.com website
-          clientId: "", // App Client ID from auth0.com website
-          clientSecret: "", // App Client Secret from auth0.com website
-          callbackUrl: "", // your domain with /auth at the end. eg. https://example.com/auth, add this in auth0.com too
-          logoutUrl: "", // your domain logout page eg. https://example.com, add this in auth0.com too
-    }
 
 /*
 ███████╗██████╗░██╗████████╗  ████████╗██╗░░██╗███████╗░██████╗███████╗
@@ -75,20 +66,19 @@ const authConfig = {
 
 const uiConfig = {
     "theme": "slate", // switch between themes, default set to slate, select from https://github.com/rokibhasansagar/BhadooGDIndex#themes
-    "version": "2.1.9-alpha", // don't touch this one. get latest code using generator at https://bhadoogen.phantomzone.workers.dev
+    "version": "2.1.9-alpha.2", // don't touch this one. get latest code using generator at https://bhadoogen.phantomzone.workers.dev
     // If you're using Image then set to true, If you want text then set it to false
     "logo_image": true, // true if you're using image link in next option.
     "logo_height": "", // only if logo_image is true
     "logo_width": "100px", // only if logo_image is true
-    "favicon": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/images/favicon.ico",
+    "favicon": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha.2/images/favicon.ico",
     // if logo is true then link otherwise just text for name
-    "logo_link_name": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/images/bhadoo-cloud-logo-white.svg",
+    "logo_link_name": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha.2/images/bhadoo-cloud-logo-white.svg",
     "fixed_header": true, // If you want the footer to be flexible or fixed.
     "header_padding": "80", // Value 80 for fixed header, Value 20 for flexible header. Required to be changed accordingly in some themes.
     "nav_link_1": "Home", // change navigation link name
     "nav_link_3": "Current Path", // change navigation link name
     "nav_link_4": "Contact", // change navigation link name
-    "show_logout_button": false, // shows logout button if auth0.com is active
     "fixed_footer": false, // If you want the footer to be flexible or fixed.
     "hide_footer": true, // hides the footer from site entirely.
     "header_style_class": "navbar-dark bg-primary", // navbar-dark bg-primary || navbar-dark bg-dark || navbar-light bg-light
@@ -115,8 +105,8 @@ const uiConfig = {
     "second_domain_for_dl": false, // If you want to display other URL for Downloading to protect your main domain.
     "downloaddomain": domain_for_dl, // Ignore this and set domains at top of this page after service accounts.
     "videodomain": video_domain_for_dl, // Ignore this and set domains at top of this page after service accounts.
-    "poster": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/images/poster.jpg", // Video poster URL or see Readme to how to load from Drive
-    "audioposter": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/images/music.jpg", // Video poster URL or see Readme to how to load from Drive
+    "poster": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha.2/images/poster.jpg", // Video poster URL or see Readme to how to load from Drive
+    "audioposter": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha.2/images/music.jpg", // Video poster URL or see Readme to how to load from Drive
     "jsdelivr_cdn_src": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex", // If Project is Forked, then enter your GitHub repo
     "render_head_md": true, // Render Head.md
     "render_readme_md": true, // Render Readme.md
@@ -215,7 +205,6 @@ const homepage = `<!DOCTYPE html>
                         <li class="nav-item">
                            <a class="nav-link" href="${uiConfig.contact_link}" target="_blank">${uiConfig.nav_link_4}</a>
                         </li>
-                        ${uiConfig.show_logout_button ?'<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>': ''}
                      </ul>
                      <form class="d-flex" method="get" action="/0:search">
                         <input class="form-control me-2" name="q" type="search" placeholder="Search" aria-label="Search" value="" required="">
@@ -283,10 +272,7 @@ const unauthorized = `<html>
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Palette+Mosaic&display=swap" rel="stylesheet">
       <style>
-         .logo {
-         font-family: 'Orbitron', sans-serif;
-         color: #007bff;
-         }
+        .logo{font-family:'Orbitron', sans-serif;color:#007bff}
       </style>
       <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
       <script>
@@ -378,34 +364,7 @@ const not_found = `<!DOCTYPE html>
   <title>Access Denied</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
   <style>
-  body{
-      margin:0;
-      padding:0;
-      width:100%;
-      height:100%;
-      color:#b0bec5;
-      display:table;
-      font-weight:100;
-      font-family:Lato
-  }
-  .container{
-      text-align:center;
-      display:table-cell;
-      vertical-align:middle
-  }
-  .content{
-      text-align:center;
-      display:inline-block
-  }
-  .message{
-      font-size:80px;
-      margin-bottom:40px
-  }
-  a{
-      text-decoration:none;
-      color:#3498db
-  }
-
+    body{margin:0;padding:0;width:100%;height:100%;color:#b0bec5;display:table;font-weight:100;font-family:Lato}.container{text-align:center;display:table-cell;vertical-align:middle}.content{text-align:center;display:inline-block}.message{font-size:80px;margin-bottom:40px}a{text-decoration:none;color:#3498db}
   </style>
   </head>
   <body>
@@ -423,34 +382,7 @@ const not_found = `<!DOCTYPE html>
   <title>Direct Link - Access Denied</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
   <style>
-  body{
-      margin:0;
-      padding:0;
-      width:100%;
-      height:100%;
-      color:#b0bec5;
-      display:table;
-      font-weight:100;
-      font-family:Lato
-  }
-  .container{
-      text-align:center;
-      display:table-cell;
-      vertical-align:middle
-  }
-  .content{
-      text-align:center;
-      display:inline-block
-  }
-  .message{
-      font-size:80px;
-      margin-bottom:40px
-  }
-  a{
-      text-decoration:none;
-      color:#3498db
-  }
-
+    body{margin:0;padding:0;width:100%;height:100%;color:#b0bec5;display:table;font-weight:100;font-family:Lato}.container{text-align:center;display:table-cell;vertical-align:middle}.content{text-align:center;display:inline-block}.message{font-size:80px;margin-bottom:40px}a{text-decoration:none;color:#3498db}
   </style>
   </head>
   <body>
@@ -546,308 +478,11 @@ const JSONWebToken = {
     }
 };
 
-// auth0.com functions
-const AUTH0_DOMAIN  = auth0.domain
-const AUTH0_CLIENT_ID  = auth0.clientId
-const AUTH0_CLIENT_SECRET = auth0.clientSecret
-const AUTH0_CALLBACK_URL = auth0.callbackUrl
-const AUTH0_LOGOUT_URL = auth0.logoutUrl
-const SALT = `keys565`
-
-const cookieKey = 'AUTH0-AUTH'
-
-const generateStateParam = async () => {
-  if(authConfig['enable_auth0_com']){
-    const resp = await fetch('https://csprng.xyz/v1/api')
-    const { Data: state } = await resp.json()
-    await AUTH_STORE.put(`state-${state}`, true, { expirationTtl: 60 })
-    return state
-  }
-}
-
-const exchangeCode = async code => {
-  const body = JSON.stringify({
-    grant_type: 'authorization_code',
-    client_id: auth0.clientId,
-    client_secret: auth0.clientSecret,
-    code,
-    redirect_uri: auth0.callbackUrl,
-  })
-
-  return persistAuth(
-    await fetch(AUTH0_DOMAIN  + '/oauth/token', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body,
-    }),
-  )
-}
-
-// https://github.com/pose/webcrypto-jwt/blob/master/index.js
-const decodeJWT = function(token) {
-  var output = token
-    .split('.')[1]
-    .replace(/-/g, '+')
-    .replace(/_/g, '/')
-  switch (output.length % 4) {
-    case 0:
-      break
-    case 2:
-      output += '=='
-      break
-    case 3:
-      output += '='
-      break
-    default:
-      throw 'Illegal base64url string!'
-  }
-
-  const result = atob(output)
-
-  try {
-    return decodeURIComponent(escape(result))
-  } catch (err) {
-    console.log(err)
-    return result
-  }
-}
-
-const validateToken = token => {
-  try {
-    const dateInSecs = d => Math.ceil(Number(d) / 1000)
-    const date = new Date()
-
-    let iss = token.iss
-
-    // ISS can include a trailing slash but should otherwise be identical to
-    // the AUTH0_DOMAIN, so we should remove the trailing slash if it exists
-    iss = iss.endsWith('/') ? iss.slice(0, -1) : iss
-
-    if (iss !== AUTH0_DOMAIN) {
-      throw new Error(
-        `Token iss value (${iss}) doesn't match AUTH0_DOMAIN (${AUTH0_DOMAIN})`,
-      )
-    }
-
-    if (token.aud !== AUTH0_CLIENT_ID) {
-      throw new Error(
-        `Token aud value (${token.aud}) doesn't match AUTH0_CLIENT_ID (${AUTH0_CLIENT_ID})`,
-      )
-    }
-
-    if (token.exp < dateInSecs(date)) {
-      throw new Error(`Token exp value is before current time`)
-    }
-
-    // Token should have been issued within the last day
-    date.setDate(date.getDate() - 1)
-    if (token.iat < dateInSecs(date)) {
-      throw new Error(`Token was issued before one day ago and is now invalid`)
-    }
-
-    return true
-  } catch (err) {
-    console.log(err.message)
-    return false
-  }
-}
-
-const persistAuth = async exchange => {
-  const body = await exchange.json()
-
-  if (body.error) {
-    throw new Error(body.error)
-  }
-
-  const date = new Date()
-  date.setDate(date.getDate() + 1)
-
-  const decoded = JSON.parse(decodeJWT(body.id_token))
-  const validToken = validateToken(decoded)
-  if (!validToken) {
-    return { status: 401 }
-  }
-
-  const text = new TextEncoder().encode(`${SALT}-${decoded.sub}`)
-  const digest = await crypto.subtle.digest({ name: 'SHA-256' }, text)
-  const digestArray = new Uint8Array(digest)
-  const id = btoa(String.fromCharCode.apply(null, digestArray))
-
-  await AUTH_STORE.put(id, JSON.stringify(body))
-
-  const headers = {
-    Location: '/',
-    'Set-cookie': `${cookieKey}=${id}; Secure; HttpOnly; SameSite=Lax; Expires=${date.toUTCString()}`,
-  }
-
-  return { headers, status: 302 }
-}
-
-const redirectUrl = state =>
-  `${auth0.domain}/authorize?response_type=code&client_id=${
-    auth0.clientId
-  }&redirect_uri=${
-    auth0.callbackUrl
-  }&scope=openid%20profile%20email&state=${encodeURIComponent(state)}`
-
-const handleRedirect = async event => {
-  const url = new URL(event.request.url)
-
-  const state = url.searchParams.get('state')
-  if (!state) {
-    return null
-  }
-
-  const storedState = await AUTH_STORE.get(`state-${state}`)
-  if (!storedState) {
-    return null
-  }
-
-  const code = url.searchParams.get('code')
-  if (code) {
-    return exchangeCode(code)
-  }
-
-  return null
-}
-
-function getCookie(cookie,name) {
-    var nameEQ = name + "=";
-    var ca = cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-    }
-    return null;
-}
-
-async function getAssetFromKV(event){
-  return null
-}
-const verify = async event => {
-  const cookieHeader = event.request.headers.get('Cookie')
-
-  if (cookieHeader && cookieHeader.includes(cookieKey)) {
-    // cookieHeader.includes(cookieKey)
-    // throw new Error(getCookie(cookieHeader,cookieKey))
-    // const cookies = cookie.parse(cookieHeader)
-    if (!getCookie(cookieHeader,cookieKey)) return {}
-    const sub = getCookie(cookieHeader,cookieKey)
-
-    const kvData = await AUTH_STORE.get(sub)
-    if (!kvData) {
-      return {}
-      //throw new Error('Unable to find authorization data')
-    }
-
-    let kvStored
-    try {
-      kvStored = JSON.parse(kvData)
-    } catch (err) {
-      throw new Error('Unable to parse auth information from Workers KV')
-    }
-
-    const { access_token: accessToken, id_token: idToken } = kvStored
-    const userInfo = JSON.parse(decodeJWT(idToken))
-    return { accessToken, idToken, userInfo }
-  }
-  return {}
-}
-
-const authorize = async event => {
-  const authorization = await verify(event)
-  if (authorization.accessToken) {
-    return [true, { authorization }]
-  } else {
-    const state = await generateStateParam()
-    return [false, { redirectUrl: redirectUrl(state) }]
-  }
-}
-
-// const logout = event => {
-//   const cookieHeader = event.request.headers.get('Cookie')
-//   if (cookieHeader && cookieHeader.includes(cookieKey)) {
-//     return {
-//       headers: {
-//         'Set-cookie': `${cookieKey}=""; HttpOnly; Secure; SameSite=Lax;`,
-//       },
-//     }
-//   }
-//   return {}
-// }
-
-const hydrateState = (state = {}) => ({
-  element: el => {
-    el.setInnerContent(JSON.stringify(state))
-  },
-})
-
-
-// addEventListener('fetch', event => event.respondWith(handleRequest(event)))
-
-// see the readme for more info on what these config options do!
-const config = {
-  // opt into automatic authorization state hydration
-  hydrateState: true,
-  // return responses at the edge
-  originless: true,
-}
-
-async function loginHandleRequest(event) {
-  try {
-    let request = event.request
-
-    const [authorized, { authorization, redirectUrl }] = await authorize(event)
-
-    const url = new URL(event.request.url)
-    if (url.pathname === '/auth') {
-      const authorizedResponse = await handleRedirect(event)
-      if (!authorizedResponse) {
-        let redirectHeaders = new Headers()
-        redirectHeaders.set('Refresh', `1; url=${auth0.logoutUrl}`)
-        redirectHeaders.set('Set-cookie', `${cookieKey}=""; HttpOnly; Secure; SameSite=Lax;`)
-        return new Response('Unauthorized - Redirecting', { status: 302, headers: redirectHeaders })
-
-      }
-      response = new Response(request.body, {
-        request,
-        ...authorizedResponse,
-      })
-      return response
-    }
-
-    if (!authorized) {
-      return Response.redirect(redirectUrl)
-    }
-
-    if (url.pathname === '/logout') {
-
-      let redirectHeaders = new Headers()
-      redirectHeaders.set('Location', `${auth0.domain}/v2/logout?client_id=${auth0.clientId}&returnTo=${auth0.logoutUrl}`)
-      redirectHeaders.set('Set-cookie', `${cookieKey}=""; HttpOnly; Secure; SameSite=Lax;`)
-
-      return new Response('', {
-          status: 302,
-          headers: redirectHeaders
-        })
-    }
-
-    return null
-
-  } catch (err) {
-    return new Response(err.toString())
-  }
-}
-//end auth0.com function
-
 addEventListener('fetch', event => {
     event.respondWith(handleRequest(event.request, event));
 });
 
 async function handleRequest(request, event) {
-    var loginCheck = await loginHandleRequest(event)
-    if(authConfig['enable_auth0_com'] && loginCheck != null){return loginCheck}
     const region = request.headers.get('cf-ipcountry').toUpperCase();
     const asn_servers = request.cf.asn;
     const referer = request.headers.get("Referer");
@@ -875,7 +510,7 @@ async function handleRequest(request, event) {
         return new Response('', {
             status: 307,
             headers: {
-                'Location': `${url.origin}/0:/`
+                'Location': url
             }
         });
     }
@@ -888,9 +523,7 @@ async function handleRequest(request, event) {
             },
         })
     }
-    if (path.toLowerCase() == '/admin') {
-        return Response.redirect("https://www.npmjs.com/package/@googledrive/index", 301)
-    } else if (blocked_region.includes(region)) {
+    if (blocked_region.includes(region)) {
         return new Response(asn_blocked, {
             status: 403,
             headers: {

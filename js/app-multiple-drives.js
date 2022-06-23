@@ -1,5 +1,5 @@
 // Redesigned by telegram.dog/TheFirstSpeedster at https://www.npmjs.com/package/@googledrive/index which was written by someone else, credits are given on Source Page.
-// v2.1.9-alpha
+// v2.1.9-alpha.2
 // Initialize the page
 function init() {
     document.siteName = $('title').html();
@@ -180,7 +180,7 @@ function nav(path) {
 
     html += `</div></li><li class="nav-item">
     <a class="nav-link" href="${UI.contact_link}" target="_blank">${UI.nav_link_4}</a>
-  </li>${UI.show_logout_button ?'<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>': ''}`;
+  </li>`;
 
     var search_text = model.is_search_page ? (model.q || '') : '';
     const isMobile = Os.isMobile;

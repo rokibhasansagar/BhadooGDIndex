@@ -4,7 +4,7 @@
     ██║░░╚██╗██║░░██║██║░░░██╗░░██║░╚═══██╗░░░██║░░██║██╔══██╗██║░░╚██╗
     ╚██████╔╝██████╔╝██║██╗╚█████╔╝██████╔╝██╗╚█████╔╝██║░░██║╚██████╔╝
     ░╚═════╝░╚═════╝░╚═╝╚═╝░╚════╝░╚═════╝░╚═╝░╚════╝░╚═╝░░╚═╝░╚═════╝░
-                             v 2.1.9-alpha
+                             v 2.1.9-alpha.2
 A Script Redesigned by Parveen Bhadoo from GOIndex at https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index */
 
 // add multiple serviceaccounts as {}, {}, {}, random account will be selected by each time app is opened.
@@ -20,8 +20,8 @@ const blocked_region = ['']; // add regional codes seperated by comma, eg. ['IN'
 const blocked_asn = ['']; // add ASN numbers from http://www.bgplookingglass.com/list-of-autonomous-system-numbers, eg. [16509, 12345]
 const authConfig = {
     "siteName": "Bhadoo GDIndex", // Website name
-    "client_id": "746508046283-m2viej9ibc2umfhtve1hldr8da1amqlj.apps.googleusercontent.com", // Client id from Google Cloud Console
-    "client_secret": "iiC8G8u93OazY3-huOsbfuhi", // Client Secret from Google Cloud Console
+    "client_id": "", // Client id from Google Cloud Console
+    "client_secret": "", // Client Secret from Google Cloud Console
     "refresh_token": "", // Authorize token
     "service_account": false, // true if you're using Service Account instead of user account
     "service_account_json": randomserviceaccount, // don't touch this one
@@ -32,7 +32,6 @@ const authConfig = {
     "enable_password_file_verify": true, // support for .password file
     "direct_link_protection": false, // protects direct links with Display UI
     "lock_folders": false, // keeps folders and search locked if auth in on, and allows individual file view
-    //"enable_auth0_com": false, // follow guide to add auth0.com to secure index with powerful login based system
     "roots":[
         {
             "id": "root",
@@ -41,14 +40,6 @@ const authConfig = {
         // "auth": {"username":"password"} /* Remove double slash before "auth" to activate id password protection */
         },
     ]};
-
-    const auth0 = {
-          domain: "", // Tenent Domain from auth0.com website
-          clientId: "", // App Client ID from auth0.com website
-          clientSecret: "", // App Client Secret from auth0.com website
-          callbackUrl: "", // your domain with /auth at the end. eg. https://example.com/auth, add this in auth0.com too
-          logoutUrl: "", // your domain logout page eg. https://example.com, add this in auth0.com too
-    }
 
 /*
 ███████╗██████╗░██╗████████╗  ████████╗██╗░░██╗███████╗░██████╗███████╗
@@ -67,21 +58,20 @@ const authConfig = {
 
 const uiConfig = {
     "theme": "slate", // switch between themes, default set to slate, select from https://github.com/rokibhasansagar/BhadooGDIndex#themes
-    "version": "2.1.9-alpha", // don't touch this one. get latest code using generator at https://bhadoogen.phantomzone.workers.dev
+    "version": "2.1.9-alpha.2", // don't touch this one. get latest code using generator at https://bhadoogen.phantomzone.workers.dev
     "api_url": "https://REPLACE_WITH_API_SITE_WHERE_YOU_ARE_DEPLOYING_THIS_CODE",
     // If you're using Image then set to true, If you want text then set it to false
     "logo_image": true, // true if you're using image link in next option.
     "logo_height": "", // only if logo_image is true
     "logo_width": "100px", // only if logo_image is true
-    "favicon": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/images/favicon.ico",
+    "favicon": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha.2/images/favicon.ico",
     // if logo is true then link otherwise just text for name
-    "logo_link_name": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/images/bhadoo-cloud-logo-white.svg",
+    "logo_link_name": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha.2/images/bhadoo-cloud-logo-white.svg",
     "fixed_header": false, // If you want the footer to be flexible or fixed.
     "header_padding": "60", // Value 60 for fixed header, Value 20 for flexible header. Required to be changed accordingly in some themes.
     "nav_link_1": "Home", // change navigation link name
     "nav_link_3": "Current Path", // change navigation link name
     "nav_link_4": "Contact", // change navigation link name
-    "show_logout_button": true, // shows logout button if auth0.com is active
     "fixed_footer": false, // If you want the footer to be flexible or fixed.
     "hide_footer": true, // hides the footer from site entirely.
     "header_style_class": "navbar-dark bg-primary", // navbar-dark bg-primary || navbar-dark bg-dark || navbar-light bg-light
@@ -108,8 +98,8 @@ const uiConfig = {
     "second_domain_for_dl": true, // If you want to display other URL for Downloading to protect your main domain.
     "downloaddomain": domain_for_dl, // Ignore this and set domains at top of this page after service accounts.
     "videodomain": video_domain_for_dl, // Ignore this and set domains at top of this page after service accounts.
-    "poster": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/images/poster.jpg", // Video poster URL or see Readme to how to load from Drive
-    "audioposter": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha/images/music.jpg", // Video poster URL or see Readme to how to load from Drive
+    "poster": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha.2/images/poster.jpg", // Video poster URL or see Readme to how to load from Drive
+    "audioposter": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha.2/images/music.jpg", // Video poster URL or see Readme to how to load from Drive
     "jsdelivr_cdn_src": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex", // If Project is Forked, then enter your GitHub repo
     "render_head_md": true, // Render Head.md
     "render_readme_md": true, // Render Readme.md
@@ -224,10 +214,7 @@ const unauthorized = `<html>
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Palette+Mosaic&display=swap" rel="stylesheet">
       <style>
-         .logo {
-         font-family: 'Orbitron', sans-serif;
-         color: #007bff;
-         }
+        .logo{font-family:'Orbitron', sans-serif;color:#007bff}
       </style>
       <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
       <script>
@@ -314,39 +301,12 @@ const not_found = `<!DOCTYPE html>
 "The requested URL <code>" + window.location.pathname + "</code> was not found on this server.  <ins>That’s all we know.</ins>";
   </script>`
 
-  const asn_blocked = `<html>
+const asn_blocked = `<html>
   <head>
   <title>Access Denied</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
   <style>
-  body{
-      margin:0;
-      padding:0;
-      width:100%;
-      height:100%;
-      color:#b0bec5;
-      display:table;
-      font-weight:100;
-      font-family:Lato
-  }
-  .container{
-      text-align:center;
-      display:table-cell;
-      vertical-align:middle
-  }
-  .content{
-      text-align:center;
-      display:inline-block
-  }
-  .message{
-      font-size:80px;
-      margin-bottom:40px
-  }
-  a{
-      text-decoration:none;
-      color:#3498db
-  }
-
+    body{margin:0;padding:0;width:100%;height:100%;color:#b0bec5;display:table;font-weight:100;font-family:Lato}.container{text-align:center;display:table-cell;vertical-align:middle}.content{text-align:center;display:inline-block}.message{font-size:80px;margin-bottom:40px}a{text-decoration:none;color:#3498db}
   </style>
   </head>
   <body>
@@ -358,40 +318,13 @@ const not_found = `<!DOCTYPE html>
   </body>
   </html>`
 
-  const directlink = `
+const directlink = `
   <html>
   <head>
   <title>Direct Link - Access Denied</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
   <style>
-  body{
-      margin:0;
-      padding:0;
-      width:100%;
-      height:100%;
-      color:#b0bec5;
-      display:table;
-      font-weight:100;
-      font-family:Lato
-  }
-  .container{
-      text-align:center;
-      display:table-cell;
-      vertical-align:middle
-  }
-  .content{
-      text-align:center;
-      display:inline-block
-  }
-  .message{
-      font-size:80px;
-      margin-bottom:40px
-  }
-  a{
-      text-decoration:none;
-      color:#3498db
-  }
-
+    body{margin:0;padding:0;width:100%;height:100%;color:#b0bec5;display:table;font-weight:100;font-family:Lato}.container{text-align:center;display:table-cell;vertical-align:middle}.content{text-align:center;display:inline-block}.message{font-size:80px;margin-bottom:40px}a{text-decoration:none;color:#3498db}
   </style>
   </head>
   <body>
@@ -492,8 +425,6 @@ addEventListener('fetch', event => {
 });
 
 async function handleRequest(request, event) {
-    //var loginCheck = await loginHandleRequest(event)
-    //if(authConfig['enable_auth0_com'] && loginCheck != null){return loginCheck}
     const region = request.headers.get('cf-ipcountry').toUpperCase();
     const asn_servers = '';
     try {
@@ -550,9 +481,8 @@ async function handleRequest(request, event) {
                 "Access-Control-Allow-Origin": authConfig.cors_domain,
             },
         })
-    } if (path.toLowerCase() == '/admin') {
-        return Response.redirect("https://www.npmjs.com/package/@googledrive/index", 301)
-    } else if (blocked_region.includes(region)) {
+    }
+    if (blocked_region.includes(region)) {
         return new Response(asn_blocked, {
             status: 403,
             headers: {
