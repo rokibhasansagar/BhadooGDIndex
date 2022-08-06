@@ -14,15 +14,15 @@
 
 ## Read Wiki of Index before asking How to Do What...
 
-* [Getting-Started-with-Google-Drive-Index](https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index/-/wikis/Getting-Started-with-Google-Drive-Index)
+* [Getting-Started-with-Google-Drive-Index](https://gitlab.com/GoogleDriveIndex/Google-Drive-Index/-/wikis/Getting-Started-with-Google-Drive-Index)
 
-[![Screenshot](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha.2/images/themes/vapor.png)](https://youtu.be/Ihk4Gm3DPvg)
+[![Screenshot](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.2.0/images/themes/vapor.png)](https://youtu.be/Ihk4Gm3DPvg)
 
-[![Screenshot](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha.2/images/themes/darkly.png)](https://youtu.be/Ihk4Gm3DPvg)
+[![Screenshot](https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.2.0/images/themes/darkly.png)](https://youtu.be/Ihk4Gm3DPvg)
 
 ## How to
 
-* Stable Release `2.1.9-alpha.2`
+* Stable Release `2.2.0`
 * Latest Index is faster than before, but backup before making new, and report if I missed something in issues. :)
 * Beta Version (Latest) - [bdi-generator](https://bhadoogen.phantomzone.workers.dev) (For Dark Theme use darkly)
 * If you want to deploy main drive leave the option ROOT as it is.
@@ -44,17 +44,17 @@
 ## Use Case and Workers needs to be used
 
 * If you're new and noob, just use [this](https://bhadoogen.phantomzone.workers.dev). Search doesn't support FOLDER ID, use root or Shared Drive ID.
-* [worker-super.js](https://github.com/rokibhasansagar/BhadooGDIndex/blob/2.1.9-alpha.2/worker/worker-super.js) is Current and Main Workers File, use this if you have one or more drives. This can also be used to display drive links while searching all drives your account is associated with (optional, recommended for closed index).
+* [worker-super.js](https://github.com/rokibhasansagar/BhadooGDIndex/blob/2.2.0/worker/worker-super.js) is Current and Main Workers File, use this if you have one or more drives. This can also be used to display drive links while searching all drives your account is associated with (optional, recommended for closed index).
 
 ### More Options
 
-* [workers-legacy.js](https://github.com/rokibhasansagar/BhadooGDIndex/blob/2.1.9-alpha.2/worker/workers-legacy.js) is older version, less fast because of API requests it makes to check drive types, if you've too many drives, don't use this one.
-* [worker-multiple-drives.js](https://github.com/rokibhasansagar/BhadooGDIndex/blob/2.1.9-alpha.2/worker/worker-multiple-drives.js) should be used when you have more than one shared drives and you want to search in all of them and get index links in search.
-* [worker-second-domain-non-video.js](https://github.com/rokibhasansagar/BhadooGDIndex/blob/2.1.9-alpha.2/worker/worker-second-domain-non-video.js) is for using as second domain but doesn't support video files, instead it'll redirect to main index. Good to avoid video streaming ban by cloudflare.
-* [worker-second-domain.js](https://github.com/rokibhasansagar/BhadooGDIndex/blob/2.1.9-alpha.2/worker/worker-second-domain.js) is for using in second domain worker.
-* [worker-super-api.js](https://github.com/rokibhasansagar/BhadooGDIndex/blob/2.1.9-alpha.2/worker/worker-super-api.js) is just API for Static Site. You can host API on Cloudflare as Backend, and serve Frontend on any platform, protects your workers account from being suspended as this one works in background and doesn't consume much resources.
-* [worker-super-read-only.js](https://github.com/rokibhasansagar/BhadooGDIndex/blob/2.1.9-alpha.2/worker/worker-super-read-only.js) is for making a read only Index site. This can be used to showcase your drive files, disabling download or streaming permanently.
-* [worker-generator.js](https://github.com/rokibhasansagar/BhadooGDIndex/blob/2.1.9-alpha.2/worker/worker-generator.js) is the code used on our Index Generation Site mentioned above.
+* [worker-legacy.js](https://github.com/rokibhasansagar/BhadooGDIndex/blob/2.2.0/worker/worker-legacy.js) is older version, less fast because of API requests it makes to check drive types, if you've too many drives, don't use this one.
+* [worker-multiple-drives.js](https://github.com/rokibhasansagar/BhadooGDIndex/blob/2.2.0/worker/worker-multiple-drives.js) should be used when you have more than one shared drives and you want to search in all of them and get index links in search.
+* [worker-second-domain-non-video.js](https://github.com/rokibhasansagar/BhadooGDIndex/blob/2.2.0/worker/worker-second-domain-non-video.js) is for using as second domain but doesn't support video files, instead it'll redirect to main index. Good to avoid video streaming ban by cloudflare.
+* [worker-second-domain.js](https://github.com/rokibhasansagar/BhadooGDIndex/blob/2.2.0/worker/worker-second-domain.js) is for using in second domain worker.
+* [worker-super-api.js](https://github.com/rokibhasansagar/BhadooGDIndex/blob/2.2.0/worker/worker-super-api.js) is just API for Static Site. You can host API on Cloudflare as Backend, and serve Frontend on any platform, protects your workers account from being suspended as this one works in background and doesn't consume much resources.
+* [worker-super-read-only.js](https://github.com/rokibhasansagar/BhadooGDIndex/blob/2.2.0/worker/worker-super-read-only.js) is for making a read only Index site. This can be used to showcase your drive files, disabling download or streaming permanently.
+* [worker-generator.js](https://github.com/rokibhasansagar/BhadooGDIndex/blob/2.2.0/worker/worker-generator.js) is the code used on our Index Generation Site mentioned above.
 
 ## Drive ID Types
 
@@ -140,8 +140,6 @@
 * The password is stored inside the Google Drive Folder, not the index and the `.password` file is hidden an cannot be accessed using Index.
 * Example use https://bit.ly/3tBxXJN and password is `thispassword`
 
-## Auth0 Integration [REMOVED]
-
 ## Brand Customization
 
 * In Latest Release, you can rebrand the Index as per your needs. Read the workers file to change UI and config.
@@ -153,8 +151,6 @@
 * then make separate index on different Cloudflare account with second-domain workers code.
 * change only `refresh_token` or SA and Drive IDs, don't touch anything else.
 * It's done.
-
-## arc.io Integration [REMOVED]
 
 ## Themes
 
@@ -245,10 +241,6 @@
 * [Hash Hackers](https://gitlab.com/HashHackers) or Bhadoo Cloud or [Parveen Bhadoo](https://gitlab.com/ParveenBhadooOfficial) or [I](https://github.com/rokibhasansagar) do not own the websites created using this software. The Software is under MIT License and Free to use for everyone personally or commercially. If any site is found using the name in title as the project or related names, shouldn't be assumed to be associated with us. The Software provides full configuration to the user to update and change the names of title, contact information for the published website using this software.
 * As an open-source Software, it can be used by good and bad actors both, eg. the use of [YT-DL](https://youtube-dl.org), read full post [here](https://github.blog/2020-11-16-standing-up-for-developers-youtube-dl-is-back/).
 
-## Sponsors for Original Project
-
-<a href="https://www.browserstack.com"><img src="https://i.imgur.com/UMYceGo.png" alt="drawing" width="300" /></a>
-
 ## Support the Original Project
 
 [![Support](https://cdn.buymeacoffee.com/buttons/v2/default-white.png)](https://www.buymeacoffee.com/bhadoo)
@@ -259,7 +251,7 @@
 
 * [MIT License](https://github.com/rokibhasansagar/BhadooGDIndex/blob/master/LICENSE)
 
-### Donate by Crpto
+### Donate by Crpto to the Original Author
 
 * ETH `0xaf25cdc7967213172a745453a64e8a0b59686729`
 * BTC `3BgSznxLB5u4WiuVERb1dKWeTqSSwK9NPW`

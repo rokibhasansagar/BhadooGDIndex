@@ -8,7 +8,7 @@ const clientSecret = '';
 const grantType = 'authorization_code';
 // Use your generator workers.dev address as redirectURI and add on Google Project's OAuth Page too
 const redirectURI = 'https://example.com';
-const jsURL = 'https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha.2/worker/worker-super.js';
+const jsURL = 'https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.2.0/worker/worker-super.js';
 
 async function handleRequest(request) {
     let title = getParameterByName(request.url, 'site_name') || 'Bhadoo GDIndex';
@@ -57,7 +57,7 @@ async function handleRequest(request) {
 <body">
 <div class="container">
     <br>
-    <a href="/"><img border="0" alt="Bhadoo Cloud" src="https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.1.9-alpha.2/images/bhadoo-cloud-logo-white.svg" height="" width="150px"></a>
+    <a href="/"><img border="0" alt="Bhadoo Cloud" src="https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.2.0/images/bhadoo-cloud-logo-white.svg" height="" width="150px"></a>
     <a href="https://github.com/rokibhasansagar/BhadooGDIndex"><h5>Bhadoo GDIndex - Generator</h5></a>
     <br>
         <div id="loginuser" style="display:block;">
