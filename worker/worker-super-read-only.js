@@ -4,11 +4,11 @@
     ██║░░╚██╗██║░░██║██║░░░██╗░░██║░╚═══██╗░░░██║░░██║██╔══██╗██║░░╚██╗
     ╚██████╔╝██████╔╝██║██╗╚█████╔╝██████╔╝██╗╚█████╔╝██║░░██║╚██████╔╝
     ░╚═════╝░╚═════╝░╚═╝╚═╝░╚════╝░╚═════╝░╚═╝░╚════╝░╚═╝░░╚═╝░╚═════╝░
-                             v 2.2.0
+                             v 2.2.3
 A Script Redesigned by Parveen Bhadoo from GOIndex at https://gitlab.com/GoogleDriveIndex/Google-Drive-Index */
 
 // WARNING WARNING WARNING
-// This Script doesn't support Folder ID, use root or Shared Drive ID only
+// This Script doesn't fully support Folder ID (search won't work), use root or Shared Drive ID only
 
 // add multiple serviceaccounts as {}, {}, {}, random account will be selected by each time app is opened.
 const serviceaccounts = [
@@ -43,7 +43,7 @@ const authConfig = {
          // "auth": {"username":"password"} /* Remove double slash before "auth" to activate id password protection */
       },
       {
-          "id": "root",
+          "id": "",
           "name": "Drive Two",
           "protect_file_link": false,
          // "auth": {"username":"password", "username1":"password1"} /* Remove double slash before "auth" to activate id password protection */
@@ -67,14 +67,14 @@ const authConfig = {
 
 const uiConfig = {
     "theme": "slate", // switch between themes, default set to slate, select from https://github.com/rokibhasansagar/BhadooGDIndex#themes
-    "version": "2.2.0", // don't touch this one. get latest code using generator at https://bhadoogen.phantomzone.workers.dev
+    "version": "2.2.3", // don't touch this one. get latest code using generator at https://bhadoogen.phantomzone.workers.dev
     // If you're using Image then set to true, If you want text then set it to false
     "logo_image": true, // true if you're using image link in next option.
     "logo_height": "", // only if logo_image is true
     "logo_width": "100px", // only if logo_image is true
-    "favicon": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.2.0/images/favicon.ico",
+    "favicon": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.2.3/images/favicon.ico",
     // if logo is true then link otherwise just text for name
-    "logo_link_name": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.2.0/images/bhadoo-cloud-logo-white.svg",
+    "logo_link_name": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.2.3/images/bhadoo-cloud-logo-white.svg",
     "fixed_header": true, // If you want the footer to be flexible or fixed.
     "header_padding": "80", // Value 80 for fixed header, Value 20 for flexible header. Required to be changed accordingly in some themes.
     "nav_link_1": "Home", // change navigation link name
@@ -106,17 +106,17 @@ const uiConfig = {
     "second_domain_for_dl": true, // If you want to display other URL for Downloading to protect your main domain.
     "downloaddomain": domain_for_dl, // Ignore this and set domains at top of this page after service accounts.
     "videodomain": video_domain_for_dl, // Ignore this and set domains at top of this page after service accounts.
-    "poster": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.2.0/images/poster.jpg", // Video poster URL or see Readme to how to load from Drive
-    "audioposter": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.2.0/images/music.jpg", // Video poster URL or see Readme to how to load from Drive
+    "poster": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.2.3/images/poster.jpg", // Video poster URL or see Readme to how to load from Drive
+    "audioposter": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex@2.2.3/images/music.jpg", // Video poster URL or see Readme to how to load from Drive
     "jsdelivr_cdn_src": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex", // If Project is Forked, then enter your GitHub repo
     "render_head_md": true, // Render Head.md
     "render_readme_md": true, // Render Readme.md
     "display_drive_link": false, // This will add a Link Button to Google Drive of that particular file.
-    "plyr_io_version": "3.6.4", // Change plyr.io version in future when needed.
+    "plyr_io_version": "3.7.3", // Change plyr.io version in future when needed.
     "plyr_io_video_resolution": "16:9", // For reference, visit: https://github.com/sampotts/plyr#options
     "unauthorized_owner_link": "https://telegram.dog/Telegram", // Unauthorized Error Page Link to Owner
     "unauthorized_owner_email": "abuse@telegram.org", // Unauthorized Error Page Owner Email
-    "search_all_drives": false // gives gdrive links on search and searches all drives on that account, doesn't require adding
+    "convert_search_to_google_drive_app": false // gives gdrive links on search and searches all drives on that account, doesn't require adding
 };
 
 
@@ -480,7 +480,10 @@ const JSONWebToken = {
 };
 
 addEventListener('fetch', event => {
-    event.respondWith(handleRequest(event.request, event));
+    event.respondWith(handleRequest(event.request, event).catch(
+      (err) => new Response("GDI Error Handler Version : 1.0\nReport this Error to Email : admin@hashhackers.com\nInclude : Full details, including screenshot and links\n\n\n" + err.stack, { status: 500 })
+    )
+    );
 });
 
 async function handleRequest(request, event) {
@@ -989,7 +992,7 @@ class googleDrive {
         const types = DriveFixedTerms.gd_root_type;
         const is_user_drive = this.root_type === types.user_drive;
         const is_share_drive = this.root_type === types.share_drive;
-        const search_all_drives = `${uiConfig.search_all_drives}`
+        const convert_search_to_google_drive_app = `${uiConfig.convert_search_to_google_drive_app}`
         const empty_result = {
             nextPageToken: null,
             curPageIndex: page_index,
@@ -1007,7 +1010,7 @@ class googleDrive {
         let name_search_str = `name contains '${words.join("' AND name contains '")}'`;
         let params = {};
         if (is_user_drive) {
-            if (search_all_drives == 'true') {
+            if (convert_search_to_google_drive_app == 'true') {
                 params.corpora = 'allDrives';
                 params.includeItemsFromAllDrives = true;
                 params.supportsAllDrives = true;
@@ -1017,7 +1020,7 @@ class googleDrive {
             }
         }
         if (is_share_drive) {
-            if (search_all_drives == 'true') {
+            if (convert_search_to_google_drive_app == 'true') {
                 params.corpora = 'allDrives';
             }
             else {

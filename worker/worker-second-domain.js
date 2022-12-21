@@ -4,7 +4,7 @@
     ██║░░╚██╗██║░░██║██║░░░██╗░░██║░╚═══██╗░░░██║░░██║██╔══██╗██║░░╚██╗
     ╚██████╔╝██████╔╝██║██╗╚█████╔╝██████╔╝██╗╚█████╔╝██║░░██║╚██████╔╝
     ░╚═════╝░╚═════╝░╚═╝╚═╝░╚════╝░╚═════╝░╚═╝░╚════╝░╚═╝░░╚═╝░╚═════╝░
-                             v 2.2.0
+                             v 2.2.3
 A Script Redesigned by Parveen Bhadoo from GOIndex at https://gitlab.com/GoogleDriveIndex/Google-Drive-Index */
 
 // add multiple serviceaccounts as {}, {}, {}, random account will be selected by each time app is opened.
@@ -29,7 +29,7 @@ const authConfig = {
           "auth": {"username":"password"} /* Remove double slash before "auth" to activate id password protection */
       },
       {
-          "id": "root",
+          "id": "",
           "name": "Drive Two",
           "protect_file_link": false,
           "auth": {"username":"password", "username1":"password1"} /* Remove double slash before "auth" to activate id password protection */
@@ -52,7 +52,7 @@ const authConfig = {
 ░░░╚═╝░░░╚═╝░░╚═╝╚══════╝░╚═════╝░╚══════╝╚═════╝░*/
 
 const uiConfig = {
-    "version": "2.2.0", // don't touch this one. get latest code using generator at https://bhadoogen.phantomzone.workers.dev
+    "version": "2.2.3", // don't touch this one. get latest code using generator at https://bhadoogen.phantomzone.workers.dev
     "jsdelivr_cdn_src": "https://cdn.jsdelivr.net/gh/rokibhasansagar/BhadooGDIndex", // If Project is Forked, then enter your GitHub repo
 };
 
@@ -164,7 +164,10 @@ const JSONWebToken = {
 };
 
 addEventListener('fetch', event => {
-    event.respondWith(handleRequest(event.request, event));
+    event.respondWith(handleRequest(event.request, event).catch(
+      (err) => new Response("GDI Error Handler Version : 1.0\nReport this Error to Email : admin@hashhackers.com\nInclude : Full details, including screenshot and links\n\n\n" + err.stack, { status: 500 })
+    )
+    );
 });
 
 async function handleRequest(request, event) {
