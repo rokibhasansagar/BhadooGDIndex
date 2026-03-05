@@ -352,12 +352,10 @@ If you still needs anything, see the Original/Official Wiki page before asking f
 
 - Contribute to this project or improve this README.
 
-## License
+## License and Privacy Policy
 
 - [MIT License](https://github.com/rokibhasansagar/BhadooGDIndex/blob/master/LICENSE)
-
-## Privacy Policy
-- [Privacy](https://github.com/rokibhasansagar/BhadooGDIndex/blob/master/privacy/readme.md)
+- [Privacy Policy](https://rokibhasansagar.github.io/BhadooGDIndex/privacy/)
 
 ## Credits
 
