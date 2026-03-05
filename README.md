@@ -356,6 +356,9 @@ If you still needs anything, see the Original/Official Wiki page before asking f
 
 - [MIT License](https://github.com/rokibhasansagar/BhadooGDIndex/blob/master/LICENSE)
 
+## Privacy Policy
+- [Privacy](https://github.com/rokibhasansagar/BhadooGDIndex/blob/master/privacy/readme.md)
+
 ## Credits
 
 - Base Source: [maple3142](https://github.com/maple3142/GDIndex) and [yanzai](https://github.com/yanzai/goindex)
